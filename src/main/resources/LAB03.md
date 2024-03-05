@@ -1,11 +1,10 @@
 # LABORATORIUM 03
 
-Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w zrozumieniu frameworka Spring oraz mają pomóc w
-przygotowaniu do Egzaminu.
+Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring.
 
 #### Wymagane zadania:
 
-Zaleca się orzed przystąpieniem do Laboratorium 03 studenci wykonanie zadań z Laboratorium 01 oraz 02.
+Zaleca się przed przystąpieniem do Laboratorium 03 studenci wykonanie zadań z Laboratorium 01 oraz 02.
 
 ## ZADANIE 1. API sieciowe do wysyłania wiadomości projektowych. Kontynuacja LABORATORIUM 02 (dla osób, którym nie udało się skończyć).
 

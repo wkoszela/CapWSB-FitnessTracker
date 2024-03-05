@@ -1,7 +1,11 @@
 # LABORATORIUM 01
 
-Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w zrozumieniu frameworka Spring oraz mają pomóc w
-przygotowaniu do Egzaminu.
+Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring.
+
+## ZADANIE 0
+- Konfiguracja środowiska, wdrożenie do projektu.
+- Konfiguracja prywatnego repozytorium (udostępnienie dostępu prowadzącemu do prywatnego repozytorium z projektem (link) i bieżącym postępem). 
+- Hosting: Rekomendacja Github.com
 
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
