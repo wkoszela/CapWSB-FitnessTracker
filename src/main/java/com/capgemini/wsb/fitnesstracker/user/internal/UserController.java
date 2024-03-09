@@ -1,9 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
+import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +23,16 @@ class UserController {
                           .stream()
                           .map(userMapper::toDto)
                           .toList();
+    }
+
+    @PostMapping
+    public User addUser(@RequestBody UserDto userDto) {
+
+        // Demonstracja how to use @RequestBody
+        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
+
+        // TODO: saveUser with Service and return User
+        return null;
     }
 
 }
