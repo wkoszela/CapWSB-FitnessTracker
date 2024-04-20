@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 class UserController {
 
+
     private final UserServiceImpl userService;
 
     private final UserMapper userMapper;
@@ -23,6 +24,7 @@ class UserController {
                           .stream()
                           .map(userMapper::toDto)
                           .toList();
+
     }
 
     @PostMapping
@@ -30,9 +32,12 @@ class UserController {
 
         // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
+        return userService.createUser(userMapper.toEntity(userDto));
 
-        // TODO: saveUser with Service and return User
-        return null;
+
+
+
     }
+
 
 }
