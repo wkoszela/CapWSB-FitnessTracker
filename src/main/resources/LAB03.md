@@ -28,15 +28,37 @@ Stworzone API powinno pozwalać na:
   znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
 - [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
-- [ ] rozwiązanie powinno być pokryte za pomocą testów integracyjnych stworzonego API - powinny one sprawdzać, że
-  wymagania funkcjonalne są spełnione
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] rozwiązanie powinno wykorzystywać mechanizm zdarzeń aplikacji (application events) do publikowania zdarzenia, że
   informacja o aktywności ma zostać wysłana. Odbiorca wiadomości oraz logikę związaną z jej wysyłaniem obsłuż kodem
   wywoływanym przez pojawienie się odpowiedniego zdarzenia.
 
-## ZADANIE 2. API sieciowe do wysyłania wiadomości projektowych (Opcjonalne))
+## ZADANIE 2. Programowanie aspektowe.
+
+### Potrzeba biznesowa
+
+Jako pracownik utrzymania, chcę mieć możliwość kontroli wykonania się kodu programu za pomocą logów aplikacji.
+
+### Wymagania funkcjonalne
+
+- [ ] być uruchomiony podczas wywoływania metod publicznych serwisów (klas adnotowanych `@Service`)
+- [ ] przed wywołaniem metody logować o niej informację w
+  formacie (`typ zwracany nazwaKlasy.nazwaMetody(typParametru1 nazwaParametru1, ...)`),
+  np. `void MyService.myMethod(String param1, Boolean param2)`
+- [ ] po wywołaniu metody logować informację o metodzie (w tym samym formacie co przed wywołaniem) wraz z informacją na
+  temat zwróconej wartości (wystarczy jej toString())
+
+### Wymagania techniczne
+
+- [ ] aspekt powinien zostać zaimplementowany z użyciem biblioteki AspectJ
+- [ ] rozwiązanie powinno spełniać zasady SOLID
+- [ ] testy jednostkowe rozwiązania nie są wymagane
+- [ ] testy integracyjne rozwiązania nie są wymagane
+- [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
+- [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
+
+## ZADANIE 3. API sieciowe do wysyłania wiadomości projektowych (Opcjonalne))
 
 ### Potrzeba biznesowa
 

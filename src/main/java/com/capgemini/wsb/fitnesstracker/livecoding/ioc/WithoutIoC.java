@@ -1,13 +1,8 @@
-package com.capgemini.wsb.fitnesstracker.example.ioc;
+package com.capgemini.wsb.fitnesstracker.livecoding.ioc;
 
-public class IoC {
-
+public class WithoutIoC {
     public static void main(String[] args) {
-        // Instance created outside
-        Bar bar = new Bar();
-
-        // Foo constructed with Bar (from outside)
-        Foo foo = new Foo(bar);
+        Foo foo = new Foo();
         foo.useBar();
     }
 
@@ -20,9 +15,8 @@ public class IoC {
     static class Foo {
         private Bar bar;
 
-        // Dependency injected from Outside
-        public Foo(Bar bar) {
-            this.bar = bar;
+        public Foo() {
+            this.bar = new Bar(); // Direct dependency!
         }
 
         public void useBar() {
