@@ -26,6 +26,14 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(user);
     }
 
+    public void deleteUser(final long id) {
+        if (userRepository.existsById(id)) {
+            User user = userRepository.getReferenceById(id);
+            userRepository.delete(user);
+        } else {
+            throw new RuntimeException("User with id " + id + " not found");
+        }
+    }
     @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
@@ -34,6 +42,15 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public Optional<User> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public List<User> getOlderThen(final int age) {
+        return userRepository.findOlderThen(age);
+    }
+
+    public void updateUser(long id, String newName) {
+        User user = userRepository.getReferenceById(id);
+        user.setName(newName);
     }
 
     @Override
