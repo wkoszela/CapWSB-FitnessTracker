@@ -32,7 +32,7 @@ Stworzone API powinno pozwalać na:
   tylko
   ID oraz e-mail użytkowników)
 - [x] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
-- [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
+- [x] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
 
 ### Wymagania techniczne
 
