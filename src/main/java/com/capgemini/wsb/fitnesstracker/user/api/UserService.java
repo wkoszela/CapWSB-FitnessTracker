@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserService {
 
     User createUser(User user) throws UserAlreadyExistException ;
-    public User getUser(final Long userId);
+    public Optional<User> getUser(final Long userId);
     public User getUserMail(final String email);
     public List<User> findAllUser();
     public User userUpdate(Long id, User newUserData);

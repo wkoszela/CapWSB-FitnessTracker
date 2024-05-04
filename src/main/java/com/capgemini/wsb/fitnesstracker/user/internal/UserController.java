@@ -53,8 +53,9 @@ private final UserService userService;
 
     }
     @PostMapping("user/add")
-    public ResponseEntity<User> addUser(@RequestBody UserDto userDro)throws UserAlreadyExistException{
+    public ResponseEntity<User> addUser(@RequestBody UserDto userDto)throws UserAlreadyExistException{
         User user = userMapper.toEntity(userDto);
+        return ResponseEntity.ok(userService.createUser(user));
     }
 
 }
