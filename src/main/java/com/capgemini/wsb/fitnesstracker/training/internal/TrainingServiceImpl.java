@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // TODO: Provide Impl
 @Service
@@ -28,5 +29,9 @@ public class TrainingServiceImpl implements TrainingProvider {
         return trainingRepository.findAll();
     }
 
+    @Override
+    public List<Training> getAllTrainingsForUser(long userId) {
+        return trainingRepository.findAll().stream().filter(training -> training.getUser().getId().equals(userId)).collect(Collectors.toList());
+    }
 
 }

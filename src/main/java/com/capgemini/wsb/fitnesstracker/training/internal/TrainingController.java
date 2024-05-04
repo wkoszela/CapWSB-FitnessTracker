@@ -1,10 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.internal.UserDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +16,18 @@ public class TrainingController {
 
     private  final TrainingMapper trainingMapper;
 
-    @GetMapping
+    @GetMapping("all")
     public List<TrainingDto> getAllTrainings() {
         return trainingService.getAllTrainings().stream().map(trainingMapper::toDto).toList();
+    }
+
+    @GetMapping("{userId}")
+    public List<TrainingDto> getUserTrainings(@PathVariable long userId) {
+        return trainingService.getAllTrainingsForUser(userId).stream().map(trainingMapper::toDto).toList();
+    }
+
+    @PostMapping("add_training")
+    public User addUser(@RequestBody TrainingDto trainingDto) {
+        return null;
     }
 }
