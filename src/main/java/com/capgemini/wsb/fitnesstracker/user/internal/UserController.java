@@ -36,6 +36,11 @@ class UserController {
 
 
 
+        User user = userMapper.toEntity(userDto);
+        return userService.createUser(user);
+
+
+
 
     }
 
