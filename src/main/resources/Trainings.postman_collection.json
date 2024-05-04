@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "f6edfc55-1c3b-4c0c-ac05-a1f18ea27850",
+		"name": "Trainings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34705213"
+	},
+	"item": [
+		{
+			"name": "Trainings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trainings by user id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings/getByUser/1",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"getByUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trainings ending after date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings/endAfter/2024-01-15",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"endAfter",
+						"2024-01-15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get.by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings/byType/RUNNING",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"byType",
+						"RUNNING"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

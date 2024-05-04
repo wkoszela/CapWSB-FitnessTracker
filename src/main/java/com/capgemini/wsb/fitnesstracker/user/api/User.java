@@ -44,6 +44,5 @@ public class User {
         this.birthdate = birthdate;
         this.email = email;
     }
-
 }
 

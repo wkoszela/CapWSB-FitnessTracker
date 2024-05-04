@@ -20,12 +20,11 @@ public class UserMapper {
                                  user.getLastName());
     }
 
-    User toEntity(UserDto userDto) {
+    public User toEntity(UserDto userDto) {
         return new User(
                         userDto.firstName(),
                         userDto.lastName(),
                         userDto.birthdate(),
                         userDto.email());
     }
-
 }

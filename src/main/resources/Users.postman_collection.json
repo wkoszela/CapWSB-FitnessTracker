@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "87d383d8-3fb6-4f28-8b38-9d105309f550",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34705213"
+	},
+	"item": [
+		{
+			"name": "Users list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/users",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8080/v1/users/1",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
