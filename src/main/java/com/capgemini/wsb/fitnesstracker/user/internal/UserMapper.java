@@ -4,22 +4,22 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.stereotype.Component;
 
 @Component
-class UserMapper {
+public class UserMapper {
 
     UserDto toDto(User user) {
-        return new UserDto(user.getId(),
+        return new UserDto( user.getEmail(),
                            user.getFirstName(),
                            user.getLastName(),
                            user.getBirthdate(),
-                           user.getEmail());
+                           user.getId());
     }
 
     User toEntity(UserDto userDto) {
         return new User(
-                        userDto.firstName(),
-                        userDto.lastName(),
-                        userDto.birthdate(),
-                        userDto.email());
+                        userDto.getFirstName(),
+                        userDto.getLastName(),
+                        userDto.getBirtdate(),
+                        userDto.getEmail());
     }
 
 }

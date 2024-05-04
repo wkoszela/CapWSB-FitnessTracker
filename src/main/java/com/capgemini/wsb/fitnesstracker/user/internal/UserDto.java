@@ -14,19 +14,31 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-class UserDto{
+
+
+
+public class UserDto{
     private String email;
+
     private String lastName;
+
     private String firstName;
+
     private LocalDate birtdate;
+
+    private Long id;
+
     public UserDto(
             final String email,
             final String lastName,
             final String firstName,
-            final LocalDate birtdate){
+            final LocalDate birtdate)
+
+    {
         this.email=email;
         this.birtdate=birtdate;
         this.lastName=lastName;
-        this.firstName=lastName;
+        this.firstName=firstName;
     }
-}
+
+ }
