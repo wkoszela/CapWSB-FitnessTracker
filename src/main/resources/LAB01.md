@@ -23,9 +23,9 @@ Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami s
 
 Stworzone API powinno pozwalać na:
 
-- [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
+- [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   klienta)
-- [ ] pobranie szczegółów dotyczących wybranego użytkownika (ID, imię, nazwisko, datę urodzenia, e-mail)
+- [x] pobranie szczegółów dotyczących wybranego użytkownika (ID, imię, nazwisko, datę urodzenia, e-mail)
 - [ ] utworzenie nowego użytkownika
 - [ ] usunięcie użytkownika
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
