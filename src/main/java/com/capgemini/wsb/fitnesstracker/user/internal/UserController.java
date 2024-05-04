@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -14,16 +15,15 @@ import java.util.List;
 class UserController {
 
 
-    private final UserServiceImpl userService;
+private final UserService userService;
 
     private final UserMapper userMapper;
 
-    @GetMapping
-    public List<UserDto> getAllUsers() {
+    @GetMapping("/user/list")
+    public List<UserOverallDTO> getAllUsers() {
         return userService.findAllUsers()
                           .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .map(user -> new UserSummaryDto(user.getId(), user.getFirstName() + " " + user.getLastName()))                          .toList();
 
     }
 
@@ -33,11 +33,6 @@ class UserController {
         // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
         return userService.createUser(userMapper.toEntity(userDto));
-
-
-
-        User user = userMapper.toEntity(userDto);
-        return userService.createUser(user);
 
 
 
