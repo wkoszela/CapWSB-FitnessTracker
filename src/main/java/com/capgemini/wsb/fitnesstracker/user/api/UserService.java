@@ -11,10 +11,10 @@ public interface UserService {
 
     User createUser(User user) throws UserAlreadyExistException ;
     public Optional<User> getUser(final Long userId);
-    public User getUserMail(final String email);
+    public Optional<User> getUserMail(final String email);
     public List<User> findAllUser();
     public User userUpdate(Long id, User newUserData);
-    public List<User> findByMailCase(String emailFragmet);
+    public List<User> findByMailCase(String emailCase);
     public List<User> findUsersOld(int age);
     public boolean delete(Long userId);
 
