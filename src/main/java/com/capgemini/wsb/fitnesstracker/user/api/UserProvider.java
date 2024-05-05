@@ -29,5 +29,7 @@ public interface UserProvider {
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
+    List<User> findUsersByEmail(String email);
+    List<User> findUsersByMinAge(int minAge);
 
 }

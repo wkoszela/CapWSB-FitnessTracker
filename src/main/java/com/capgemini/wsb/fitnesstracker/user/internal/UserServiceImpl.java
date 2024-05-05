@@ -27,6 +27,11 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public void deleteUser(final User user) {
+        userRepository.delete(user);
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
@@ -39,6 +44,21 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findUsersByEmail(String email) {
+        return userRepository.findAllByEmail(email);
+    }
+
+    @Override
+    public List<User> findUsersByMinAge(int minAge) {
+        return userRepository.findAllByMinAge(minAge);
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
 }
