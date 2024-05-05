@@ -1,0 +1,10 @@
+com.capgemini.wsb
+com.capgemini.wsb.fitnesstracker.example.bean
+com.capgemini.wsb.fitnesstracker.example.ioc
+com.capgemini.wsb.fitnesstracker.exception.api
+com.capgemini.wsb.fitnesstracker.mail.api
+com.capgemini.wsb.fitnesstracker.statistics.api
+com.capgemini.wsb.fitnesstracker.training.api
+com.capgemini.wsb.fitnesstracker.training.internal
+com.capgemini.wsb.fitnesstracker.user.api
+com.capgemini.wsb.fitnesstracker.user.internal
