@@ -18,8 +18,8 @@ public interface TrainingProvider {
      */
     Optional<User> getTraining(Long trainingId);
     List<Training> getAllTrainings();
-    Training createTraining(Training training);
     List<Training> getTrainingsByUser(Long userId);
     List<Training> getTrainingsEndingAfter(Date date);
     List<Training> getTrainingsByType(ActivityType type);
+    Optional<Training> getById(Long id);
 }

@@ -1,6 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.internal.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/trainings")
@@ -19,6 +22,7 @@ class TrainingController {
 
     private final TrainingServiceImpl trainingService;
     private final TrainingMapper trainingMapper;
+    private final UserServiceImpl userService;
 
     @GetMapping
     public List<TrainingDto> getAllTrainings() {
@@ -54,10 +58,22 @@ class TrainingController {
     }
 
 
-    @PostMapping
+    @PostMapping("/user/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public TrainingDto createTraining(@RequestBody TrainingDto trainingDto) {
-        Training training = trainingService.createTraining(trainingMapper.toTraining(trainingDto));
+    public TrainingDto createTraining(@PathVariable Long userId, @RequestBody TrainingWithoutUserDto trainingDto) {
+        User user = userService.getUser(userId)
+                               .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Training training = trainingService.createTraining(trainingMapper.toTraining(trainingDto, user, null));
+        return trainingMapper.toDto(training);
+    }
+
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TrainingDto updateTraining(@PathVariable Long id, @RequestBody TrainingWithoutUserDto trainingDto) {
+        Training originalTraining = trainingService.getById(id)
+                                                   .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Training training = trainingService.updateTraining(trainingMapper.toTraining(trainingDto, originalTraining.getUser(), id));
         return trainingMapper.toDto(training);
     }
 }

@@ -8,3 +8,5 @@ import java.util.Date;
 
 record TrainingDto(@Nullable Long id, UserDto user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
 }
+
+record TrainingWithoutUserDto(@Nullable Long id, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {}

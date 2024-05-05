@@ -99,6 +99,71 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Update training",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"startTime\": \"2024-01-19T07:00:00.000+00:00\",\n        \"endTime\": \"2024-01-19T08:30:00.000+00:00\",\n        \"activityType\": \"RUNNING\",\n        \"distance\": 10.5,\n        \"averageSpeed\": 18.2\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings/1",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create training",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"startTime\": \"2024-01-19T07:00:00.000+00:00\",\n        \"endTime\": \"2024-01-19T08:30:00.000+00:00\",\n        \"activityType\": \"RUNNING\",\n        \"distance\": 100.5,\n        \"averageSpeed\": 80.2\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "0.0.0.0:8080/v1/trainings/user/1",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
