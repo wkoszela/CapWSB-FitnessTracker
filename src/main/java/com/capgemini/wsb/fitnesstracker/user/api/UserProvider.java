@@ -29,7 +29,21 @@ public interface UserProvider {
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
+
+    /**
+     * Finds and returns a list of users with the specified email.
+     *
+     * @param  email  the email address of the users to search for
+     * @return        a list of users with the specified email
+     */
     List<User> findUsersByEmail(String email);
+
+    /**
+     * Finds and returns a list of users with the specified minimum age.
+     *
+     * @param  minAge  the minimum age of the users to search for
+     * @return        a list of users with the specified minimum age
+     */
     List<User> findUsersByMinAge(int minAge);
 
 }

@@ -21,6 +21,12 @@ interface UserRepository extends JpaRepository<User, Long> {
                         .findFirst();
     }
 
+    /**
+     * Query searching users by email address in a case-insensitive manner.
+     *
+     * @param  email email to search for in user emails
+     * @return          list of users whose email contains the specified email (case-insensitive)
+     */
     default List<User> findAllByEmail(String email) {
         // part of email and insensitive
         return findAll().stream()
@@ -28,6 +34,12 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .toList();
     }
 
+    /**
+     * Finds and returns a list of users with an age greater than or equal to the specified minimum age.
+     *
+     * @param  minAge  the minimum age of the users to search for
+     * @return        a list of users whose age is greater than or equal to the specified minimum age
+     */
     default List<User> findAllByMinAge(int minAge) {
         int currentYear = java.time.LocalDate.now().getYear();
         return findAll().stream()
