@@ -65,11 +65,11 @@ Jako administrator systemu, chcę zabezpieczyć API, z którego mogą korzystać
 
 Zabezpieczenia, powinny zagwarantować:
 
-- [ ] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
+- [x] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
   uprawnień
-- [ ] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
-- [ ] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
-- [ ] lista użytkowników i ich ról jest statyczna (nie zmienia się)
+- [x] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
+- [x] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
+- [x] lista użytkowników i ich ról jest statyczna (nie zmienia się)
 
 ### Wymagania techniczne
 
