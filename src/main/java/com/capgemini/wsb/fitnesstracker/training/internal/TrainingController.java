@@ -24,6 +24,11 @@ class TrainingController {
     private final TrainingMapper trainingMapper;
     private final UserServiceImpl userService;
 
+    /**
+     * Retrieves all trainings and maps them to a list of TrainingDto objects.
+     *
+     * @return  a list of TrainingDto objects representing all trainings
+     */
     @GetMapping
     public List<TrainingDto> getAllTrainings() {
         return trainingService.getAllTrainings()
@@ -32,6 +37,12 @@ class TrainingController {
                               .toList();
     }
 
+    /**
+     * Retrieves a list of trainings associated with the given user ID.
+     *
+     * @param  userId  the ID of the user
+     * @return         a list of TrainingDto objects representing the trainings associated with the user
+     */
     @GetMapping("/getByUser/{userId}")
     public List<TrainingDto> getTrainingsByUser(@PathVariable Long userId) {
         return trainingService.getTrainingsByUser(userId)
@@ -40,6 +51,12 @@ class TrainingController {
                               .toList();
     }
 
+    /**
+     * Retrieves a list of trainings that end after the specified date.
+     *
+     * @param  date  the date to compare against the end time of trainings
+     * @return       a list of trainings that end after the specified date
+     */
     @GetMapping("/endAfter/{date}")
     public List<TrainingDto> getTrainingsEndingAfter(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         return trainingService.getTrainingsEndingAfter(date)
@@ -48,6 +65,12 @@ class TrainingController {
                               .toList();
     }
 
+    /**
+     * Retrieves a list of TrainingDto objects based on the specified activity type.
+     *
+     * @param  type  the activity type to filter the trainings by
+     * @return       a list of TrainingDto objects matching the specified activity type
+     */
     @GetMapping("/byType/{type}")
     public List<TrainingDto> getTrainingsByType(@PathVariable("type") String type) {
         ActivityType activityType = ActivityType.valueOf(type);
@@ -57,7 +80,13 @@ class TrainingController {
                               .toList();
     }
 
-
+    /**
+     * Creates a new training entity for a specific user.
+     *
+     * @param  userId         the ID of the user for whom the training is created
+     * @param  trainingDto    the TrainingWithoutUserDto object containing training details
+     * @return                the created TrainingDto object
+     */
     @PostMapping("/user/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
     public TrainingDto createTraining(@PathVariable Long userId, @RequestBody TrainingWithoutUserDto trainingDto) {
@@ -67,6 +96,13 @@ class TrainingController {
         return trainingMapper.toDto(training);
     }
 
+    /**
+     * Updates a training entity with the given ID.
+     *
+     * @param  id          the ID of the training entity to update
+     * @param  trainingDto the TrainingWithoutUserDto object containing the updated training details
+     * @return             the updated TrainingDto object
+     */
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TrainingDto updateTraining(@PathVariable Long id, @RequestBody TrainingWithoutUserDto trainingDto) {

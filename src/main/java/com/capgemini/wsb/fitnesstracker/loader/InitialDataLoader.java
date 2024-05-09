@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.loader;
 
+import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
@@ -37,6 +38,9 @@ class InitialDataLoader {
     @Autowired
     private JpaRepository<Training, Long> trainingRepository;
 
+    @Autowired
+    private JpaRepository<Statistics, Long> statisticsRepository;
+
     @EventListener
     @Transactional
     @SuppressWarnings({"squid:S1854", "squid:S1481", "squid:S1192", "unused"})
@@ -47,7 +51,7 @@ class InitialDataLoader {
 
         List<User> sampleUserList = generateSampleUsers();
         List<Training> sampleTrainingList = generateTrainingData(sampleUserList);
-
+        List<Statistics> sampleStatisticsList = generateStatisticsData(sampleUserList);
 
         log.info("Finished loading initial data");
     }
@@ -75,6 +79,30 @@ class InitialDataLoader {
         users.add(generateUser("Oliver", "Swift", 29));
 
         return users;
+    }
+
+    private List<Statistics> generateStatisticsData(List<User> users) {
+        List<Statistics> statisticsData = new ArrayList<>();
+
+        for (User user : users) {
+            int randomTrainings = (int) (Math.random() * 10) + 1;
+            double randomDistance = (Math.random() * 100) + 1;
+            int randomCaloriesBurned = (int) (Math.random() * 100) + 1;
+
+            Statistics statistics = new Statistics(
+                    user,
+                    randomTrainings,
+                    randomDistance,
+                    randomCaloriesBurned
+            );
+
+            statisticsData.add(statistics);
+        }
+
+        statisticsRepository.saveAll(statisticsData);
+
+        return statisticsData;
+
     }
 
     private List<Training> generateTrainingData(List<User> users) {
