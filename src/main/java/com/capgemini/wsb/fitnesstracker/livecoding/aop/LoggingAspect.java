@@ -1,11 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.livecoding.aop;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 @Aspect
 @Component
@@ -27,10 +30,23 @@ public class LoggingAspect {
         // this is a Pointcut for all methods annotated with @GetMapping
     }
 
+    /*
     @Before("getMappingPointcut()")
     public void logControllerMethod() {
         log.info("Do something before controller method is called");
     }
+    */
+
+    @Before("getMappingPointcut()")
+    public void logBeforeGetMapping(JoinPoint joinPoint) {
+        log.info("Method with @GetMapping called: " + joinPoint.getSignature()
+                                                               .getName());
+        log.info("Arguments passed: " + Arrays.toString(joinPoint.getArgs()));
+        log.info("Target class: " + joinPoint.getTarget()
+                                             .getClass()
+                                             .getName());
+    }
+
 
 }
 
