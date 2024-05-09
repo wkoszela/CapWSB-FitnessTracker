@@ -1,14 +1,9 @@
 package com.capgemini.wsb.fitnesstracker.livecoding.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 @Aspect
 @Component
@@ -35,7 +30,7 @@ public class LoggingAspect {
     public void logControllerMethod() {
         log.info("Do something before controller method is called");
     }
-    */
+
 
     @Before("getMappingPointcut()")
     public void logBeforeGetMapping(JoinPoint joinPoint) {
@@ -46,7 +41,25 @@ public class LoggingAspect {
                                              .getClass()
                                              .getName());
     }
+    */
 
+    @Around("getMappingPointcut()")
+    public Object logAroundGetMapping(ProceedingJoinPoint joinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+
+        log.info("Method with @GetMapping called: " + joinPoint.getSignature()
+                                                               .getName());
+
+        // Proceed to the target method
+        Object result = joinPoint.proceed();
+
+        long elapsedTime = System.currentTimeMillis() - start;
+        log.info("Method with @GetMapping finished: " + joinPoint.getSignature()
+                                                                 .getName());
+        log.info("Execution time: " + elapsedTime + " milliseconds.");
+
+        return result;
+    }
 
 }
 
