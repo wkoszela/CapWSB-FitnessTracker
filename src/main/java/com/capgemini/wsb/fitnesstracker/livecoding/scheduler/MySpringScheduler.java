@@ -1,57 +1,37 @@
 package com.capgemini.wsb.fitnesstracker.livecoding.scheduler;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
-@EnableScheduling
 @Component
 @Slf4j
 public class MySpringScheduler {
 
-    /*
-    @Scheduled(fixedRate = 10000)
+    public MySpringScheduler(@Qualifier("mainSchedulerPool") final TaskScheduler mainScheduler,
+                             @Qualifier("additionalSchedulerPool") final TaskScheduler additionalScheduler) {
+        this.mainScheduler = mainScheduler;
+        this.additionalScheduler = additionalScheduler;
+    }
+
+    private final TaskScheduler mainScheduler;
+
+    private final TaskScheduler additionalScheduler;
+
+    @PostConstruct
+    public void startScheduling() {
+        mainScheduler.scheduleAtFixedRate(this::scheduleTask1, 5000);
+        additionalScheduler.scheduleAtFixedRate(this::scheduleTask2, 3000);
+    }
+
     public void scheduleTask1() {
         log.info("Scheduled task: 1");
     }
 
-    @Scheduled(fixedRate = 30, timeUnit = TimeUnit.SECONDS)
     public void scheduleTask2() {
         log.info("Scheduled task: 2");
     }
-    */
-    @Scheduled(cron = "* * * * * *")
-    public void scheduleTask5() {
-        log.info("Scheduled task: 5");
-    }
 
 }
-    /*
-    @Scheduled(fixedDelay = 3, timeUnit = TimeUnit.SECONDS)
-    public void scheduleTask3() {
-        try {
-            log.info("Scheduled task: 3");
-            log.info("Sleeping for 5 seconds");
-            Thread.sleep(5000);
-            log.info("Woke up");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    @Scheduled(fixedRate = 3, timeUnit = TimeUnit.SECONDS)
-    public void scheduleTask4() {
-        try {
-            log.info("Scheduled task: 4");
-            log.info("Sleeping for 5 seconds");
-            Thread.sleep(5000);
-            log.info("Woke up");
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    */
-
-
