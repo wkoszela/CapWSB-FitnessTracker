@@ -5,11 +5,13 @@ import com.capgemini.wsb.fitnesstracker.livecoding.email.JavaMailEmailSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
+@Profile("listener")
 class MySpringEventListener implements ApplicationListener<MySpringEvent> {
 
     private final JavaMailEmailSender javaEmailSender;

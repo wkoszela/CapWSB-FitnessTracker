@@ -11,14 +11,14 @@ spring:
     # For testing (why process of e-mail sending should by asynchronous - change different port and wait for timeout ;)"
     #    host: 'sandbox.smtp.mailtrap.io'
     #    port: 2525
-    host: 'smtp.mailtrap.io'
-    port: 587
-    username: ''
-    password: ''
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+#    host: 'smtp.mailtrap.io'
+#    port: 587
+#    username: ''
+#    password: ''
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
 

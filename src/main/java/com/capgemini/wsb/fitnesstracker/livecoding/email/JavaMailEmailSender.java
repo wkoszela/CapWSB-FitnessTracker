@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.livecoding.email;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+@Profile("email")
 public class JavaMailEmailSender implements EmailSender {
 
     private final JavaMailSender javaMailSender;
