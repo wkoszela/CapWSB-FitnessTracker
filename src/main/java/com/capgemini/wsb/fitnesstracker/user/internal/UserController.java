@@ -2,8 +2,6 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,13 +23,16 @@ class UserController {
                           .toList();
     }
 
+    @GetMapping("/basic")
+    public List<UserBasicDto> getAllBasicInformationAboutUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toBasicDto)
+                .toList();
+    }
+
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
-
-        // TODO: saveUser with Service and return User
+    public User addUser(@RequestBody UserDto userDto) {
         return null;
     }
 

@@ -3,6 +3,10 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.stereotype.Component;
 
+/**
+ * UserMapper is a class that is responsible for mapping User objects to UserDto, UserBasicDto objects and vice versa.
+ *
+ */
 @Component
 class UserMapper {
 
@@ -12,6 +16,12 @@ class UserMapper {
                            user.getLastName(),
                            user.getBirthdate(),
                            user.getEmail());
+    }
+
+    UserBasicDto toBasicDto(User user) {
+        return new UserBasicDto(user.getId(),
+                                user.getFirstName(),
+                                user.getLastName());
     }
 
     User toEntity(UserDto userDto) {
