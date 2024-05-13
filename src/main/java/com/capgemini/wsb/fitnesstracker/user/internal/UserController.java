@@ -18,9 +18,9 @@ class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/basic")
@@ -30,6 +30,13 @@ class UserController {
                 .map(userMapper::toBasicDto)
                 .toList();
     }
+
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable long id) {
+        User user = userService.getUserById(id).get();
+        return userMapper.toDto(user);
+    }
+
 
     @PostMapping
     public User addUser(@RequestBody UserDto userDto) {

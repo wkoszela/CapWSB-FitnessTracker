@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
@@ -27,13 +28,19 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<User> getUser(final Long userId) {
-        return userRepository.findById(userId);
+    public Optional<User> getUserByEmail(final String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public Optional<User> getUserByEmail(final String email) {
-        return userRepository.findByEmail(email);
+    public Optional<User> getUserById(Long userId) {
+
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) {
+            throw new NotFoundException("User with given ID not found");
+        }
+
+        return user;
     }
 
     @Override
