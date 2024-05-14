@@ -23,11 +23,11 @@ class UserController {
                 .toList();
     }
 
-    @GetMapping("/basic")
-    public List<UserBasicDto> getAllBasicInformationAboutUsers() {
+    @GetMapping("/simple")
+    public List<UserSimpleDto> getAllBasicInformationAboutUsers() {
         return userService.findAllUsers()
                 .stream()
-                .map(userMapper::toBasicDto)
+                .map(userMapper::toSimpleDto)
                 .toList();
     }
 

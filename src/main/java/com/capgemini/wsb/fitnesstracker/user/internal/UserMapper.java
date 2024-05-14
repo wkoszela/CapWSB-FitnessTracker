@@ -18,8 +18,8 @@ class UserMapper {
                            user.getEmail());
     }
 
-    UserBasicDto toBasicDto(User user) {
-        return new UserBasicDto(user.getId(),
+    UserSimpleDto toSimpleDto(User user) {
+        return new UserSimpleDto(user.getId(),
                                 user.getFirstName(),
                                 user.getLastName());
     }
