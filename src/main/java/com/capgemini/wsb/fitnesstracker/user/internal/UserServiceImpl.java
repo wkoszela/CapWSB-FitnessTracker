@@ -21,10 +21,17 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public User createUser(final User user) {
         log.info("Creating User {}", user);
-        if (user.getId() != null) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
         }
         return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User with given ID not found"));
+        this.userRepository.delete(user);
     }
 
     @Override
