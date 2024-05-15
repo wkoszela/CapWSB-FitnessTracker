@@ -1,15 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.livecoding.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 @Slf4j
 public class LoggingAspect {
-
+    /*
     @Before("execution(public String getName())")
     public void getNameAdvice() {
         log.info("Do something before getName is called");
@@ -25,7 +24,7 @@ public class LoggingAspect {
         // this is a Pointcut for all methods annotated with @GetMapping
     }
 
-    /*
+
     @Before("getMappingPointcut()")
     public void logControllerMethod() {
         log.info("Do something before controller method is called");
@@ -41,7 +40,7 @@ public class LoggingAspect {
                                              .getClass()
                                              .getName());
     }
-    */
+
 
     @Around("getMappingPointcut()")
     public Object logAroundGetMapping(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -60,6 +59,7 @@ public class LoggingAspect {
 
         return result;
     }
+     */
 
 }
 

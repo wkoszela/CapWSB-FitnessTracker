@@ -1,6 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.livecoding.scheduler;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.TaskScheduler;
@@ -20,13 +19,16 @@ public class MySpringScheduler {
 
     private final TaskScheduler additionalScheduler;
 
+    /*
     @PostConstruct
     public void startScheduling() {
+
         mainScheduler.scheduleAtFixedRate(this::scheduleTask1, 5000);
         additionalScheduler.scheduleAtFixedRate(this::scheduleTask2, 3000);
         mainScheduler.scheduleWithFixedDelay(this::scheduleTask3, 5000);
 
     }
+    */
 
     public void scheduleTask1() {
         log.info("Scheduled task: 1");

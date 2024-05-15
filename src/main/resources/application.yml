@@ -7,10 +7,14 @@ spring:
   h2:
     console:
       enabled: true
+server:
+  port: 9090
   mail:
     # For testing (why process of e-mail sending should by asynchronous - change different port and wait for timeout ;)"
     #    host: 'sandbox.smtp.mailtrap.io'
     #    port: 2525
+  error:
+    include-message: always
 #    host: 'smtp.mailtrap.io'
 #    port: 587
 #    username: ''
@@ -21,4 +25,3 @@ spring:
 #          auth: true
 #          starttls:
 #            enable: true
-
