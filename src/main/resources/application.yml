@@ -2,7 +2,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health, info, copyright, wlasna-metryka
 
 spring:
   datasource:
