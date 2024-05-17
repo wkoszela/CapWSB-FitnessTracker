@@ -11,26 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/v1/users")
-@RequiredArgsConstructor
-class UserController {
-
-
-private final UserService userService;
-
-    private final UserMapper userMapper;
-
-    @GetMapping("/user/list")
-    public List<UserOverallDTO> getAllUsers() {
-        return userService.findAllUser()
-                          .stream()
-                .map(user -> new UserOverallDTO(user.getId(),
-                        user.getFirstName() + " " + user.getLastName()))
-                .toList();
-
-    }
-
 //   @GetMapping
 //    public User addUser(@RequestBody UserDto userDto) {
 //
@@ -42,20 +22,36 @@ private final UserService userService;
 
 
 //    }
+@RestController
+@RequestMapping("/v1/users")
+@RequiredArgsConstructor
+public class UserController {
 
+    private final UserService userService;
 
+    private final UserMapper userMapper;
 
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        return userService.getUser(id)
-                .map(user -> ResponseEntity.ok(userMapper.toDto(user))).orElse(ResponseEntity.notFound().build());
-
+    @GetMapping("/user/list")
+    public List<UserSummDto> getAllUsersSummary() {
+        return userService.findAllUser()
+                .stream()
+                .map(user -> new UserSummDto(user.getFirstName() + " " + user.getLastName(), user.getId()))
+                .toList();
     }
-    @PostMapping("user/add")
-    public ResponseEntity<User> addUser(@RequestBody UserDto userDto)throws UserAlreadyExistException{
-        User user = userMapper.toEntity(userDto);
-        return ResponseEntity.ok(userService.createUser(user));
-    }
+@GetMapping("/user/{id}")
+public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    return userService.getUser(id)
+            .map(user -> ResponseEntity.ok(userMapper.toDto(user))).orElse(ResponseEntity.notFound().build());
 
 }
+@PostMapping("user/add")
+public ResponseEntity<User> addUser(@RequestBody UserDto userDto)throws UserAlreadyExistException{
+    User user = userMapper.toEntity(userDto);
+    return ResponseEntity.ok(userService.createUser(user));
+}
+@GetMapping("/user/search")
+public List<UserSummDto> searchUsersByEmail(@RequestParam String email) {return userService.findByMailCase(email)
+                .stream()
+                .map(user -> new UserSummDto(user.getEmail(), user.getId()))
+                .toList();
+    }}

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(classes = FitnessTracker.class)
-@Transactional
+
 public class UserServiceTest {
     @Autowired
     private UserService userService;
@@ -23,6 +23,7 @@ public class UserServiceTest {
     @Autowired
 
     private UserRepository userRepository;
+
 
     @Test
     void createUser() throws UserAlreadyExistException {
@@ -48,7 +49,7 @@ public class UserServiceTest {
     @Test
     void getUserMail() {
         User user = userRepository.save(new User("MailUser", "User", LocalDate.of(1996,06,21),"blabla@blabla.com"));
-        Optional<User> found = userService.getUserMail(user.getEmail());
+        Optional<User> found = userService.getUserByEmail(user.getEmail());
         assertTrue(found.isPresent());
         assertEquals(user.getEmail(),found.get().getEmail());
     }
@@ -65,30 +66,29 @@ public class UserServiceTest {
 
     @Test
     void userUpdate() {
-        User user = userRepository.save(new User("UpdateUser","Lukasz",LocalDate.of(1996,6,21),"testowz@gmail.com"));
-        User user1 = new User("UpdatedUser","LukaszUpdate", user.getBirthdate(),user.getEmail());
-        User updateUs = userService.userUpdate(user.getId(), user1);
-        assertNotNull(updateUs);
-        assertEquals("UpdatedUser", updateUs.getFirstName());
-        assertEquals("User1", updateUs.getLastName());
-
+        User user = userRepository.save(new User("UpdateUser", "Lukasz", LocalDate.of(1996, 6, 21), "testowz@gmail.com"));
+        User user1 = new User("UpdatedUser", "LukaszUpdate", user.getBirthdate(), user.getEmail());
+        User updatedUser = userService.userUpdate(user.getId(), user1);
+        assertNotNull(updatedUser);
+        assertEquals("UpdatedUser", updatedUser.getFirstName());
+        assertEquals("LukaszUpdate", updatedUser.getLastName());
     }
-
 
     @Test
     void findByMailCase() {
         User user = userRepository.save(new User("Email", "Case", LocalDate.of(1996,6,21),"emailtofound@gmail.com"));
-        List<User> users = userService.findByMailCase("emailtofound");
+        List<User> users = userService.findByMailCase("Emailtofound@gmail.com");
         assertFalse(users.isEmpty());
         assertTrue(users.stream().anyMatch(user1 -> user1.getEmail().equalsIgnoreCase(user.getEmail())));
-
     }
+
 
     @Test
     void findUsersOld() {
-        User old = userRepository.save(new User("olduser", "Lukasz", LocalDate.now().minusYears(50),"ttetete@gmail.com"));
-        User yng = userRepository.save(new User("Younguser", "Lukasz", LocalDate.now().minusYears(3),"tteteteYOUNG@gmail.com"));
-        List<User> users = userService.findUsersOld(3);
+        User old = userRepository.save(new User("olduser", "Lukasz", LocalDate.of(1995,2,21),"ttetete@gmail.com"));
+        User yng = userRepository.save(new User("Younguser", "Lukasz", LocalDate.of(1994,2,22),"tteteteYOUNG@gmail.com"));
+
+        List<User> users = userService.findUsersOld(10);
         assertTrue(users.contains(old));
         assertFalse(users.contains(yng));
     }

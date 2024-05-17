@@ -23,7 +23,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     }
 
 
-    List<User> findByMailCase(String mailCase);
-    List<User> findAllByBDay(LocalDate date);
 
+    List<User> findAllByBirthdate(LocalDate birthdate);
+
+    List<User> findByEmailIgnoreCase(String email);
 }

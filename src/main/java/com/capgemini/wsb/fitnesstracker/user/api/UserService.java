@@ -11,7 +11,7 @@ public interface UserService {
 
     User createUser(User user) throws UserAlreadyExistException ;
     public Optional<User> getUser(final Long userId);
-    public Optional<User> getUserMail(final String email);
+    public Optional<User> getUserByEmail(final String email);
     public List<User> findAllUser();
     public User userUpdate(Long id, User newUserData);
     public List<User> findByMailCase(String emailCase);

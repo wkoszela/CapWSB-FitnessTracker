@@ -27,7 +27,7 @@ class UserServiceImpl implements UserService, UserProvider {
         if (user.getId() != null) {
             throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
         }
-        Optional<User> userSameMail=this.getUserByEmail(user.getEmail());
+        Optional<User> userSameMail =this.getUserByEmail(user.getEmail());
         if (userSameMail.isPresent()){
             throw new UserAlreadyExistException(user.getEmail());
         }
@@ -40,7 +40,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<User> getUserMail(String email) {
+    public Optional<User> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -73,12 +73,11 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findUsersOld(int age) {
         LocalDate oldDate = LocalDate.now().minusYears(age);
-
-        return userRepository.findAllByBDay(oldDate);
+        return userRepository.findAllByBirthdate(oldDate);
     }
     @Override
     public List<User> findByMailCase(String emailCase) {
-        return userRepository.findByMailCase(emailCase);
+        return userRepository.findByEmailIgnoreCase(emailCase);
     }
 
 
@@ -90,11 +89,6 @@ class UserServiceImpl implements UserService, UserProvider {
          return true;
      }
      return false;
-    }
-
-    @Override
-    public Optional<User> getUserByEmail(final String email) {
-        return userRepository.findByEmail(email);
     }
 
     @Override

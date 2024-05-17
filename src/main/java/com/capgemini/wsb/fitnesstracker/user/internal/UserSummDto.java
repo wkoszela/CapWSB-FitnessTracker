@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter@NoArgsConstructor@AllArgsConstructor
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class UserSummDto {
     private String name;
