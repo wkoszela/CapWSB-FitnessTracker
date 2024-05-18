@@ -20,7 +20,6 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Override
     public User createUser(final User user) {
