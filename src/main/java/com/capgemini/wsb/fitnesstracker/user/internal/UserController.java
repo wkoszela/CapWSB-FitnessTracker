@@ -18,7 +18,7 @@ class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers() {
-        return userService.findAllUsers()
+        return userService.getAllUsers()
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
@@ -26,7 +26,7 @@ class UserController {
 
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllBasicInformationAboutUsers() {
-        return userService.findAllUsers()
+        return userService.getAllUsers()
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
@@ -36,6 +36,14 @@ class UserController {
     public UserDto getUserById(@PathVariable long id) {
         User user = userService.getUserById(id).get();
         return userMapper.toDto(user);
+    }
+
+    @GetMapping("/email")
+    public List<UserEmailDto> getAllBasicInformationAboutUsers(@RequestParam String email) {
+        return userService.getUserByEmail(email)
+                .stream()
+                .map(userMapper::toEmailDto)
+                .toList();
     }
 
     @DeleteMapping("/{id}")
