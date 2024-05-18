@@ -5,5 +5,5 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
  * It is used to transfer data between the controller and the service.
  *
  */
-public record UserSimpleDto(long id, String firstName, String lastName){}
+record UserSimpleDto(long id, String firstName, String lastName){}
 

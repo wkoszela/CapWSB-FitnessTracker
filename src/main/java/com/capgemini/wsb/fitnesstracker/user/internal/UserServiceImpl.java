@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +20,7 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User createUser(final User user) {
@@ -35,6 +36,27 @@ class UserServiceImpl implements UserService, UserProvider {
         User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User with given ID not found"));
         this.userRepository.delete(user);
+    }
+
+    @Override
+    public User updateUser(long userIdToBeUpdated, UserDto userDetailsToBeUpdated) {
+        Optional<User> foundUser = userRepository.findById(userIdToBeUpdated);
+
+        if (foundUser.isPresent()) {
+            User user = updateUserAttributes(userDetailsToBeUpdated, foundUser);
+            return userRepository.saveAndFlush(user);
+        } else {
+            throw new NotFoundException("User with given ID not found");
+        }
+    }
+
+    private User updateUserAttributes(UserDto userDetailsToBeUpdated, Optional<User> foundUser) {
+        User user = foundUser.get();
+        user.setFirstName(userDetailsToBeUpdated.firstName());
+        user.setLastName(userDetailsToBeUpdated.lastName());
+        user.setBirthdate(userDetailsToBeUpdated.birthdate());
+        user.setEmail(userDetailsToBeUpdated.email());
+        return user;
     }
 
     @Override

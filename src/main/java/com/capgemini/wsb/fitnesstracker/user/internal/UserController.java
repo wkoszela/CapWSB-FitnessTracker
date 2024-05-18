@@ -1,14 +1,13 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 
 @RestController
@@ -70,6 +69,11 @@ class UserController {
         return userMapper.toDto(userService.createUser(userMapper.toEntity(userDto)));
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{userId}")
+    public UserDto updateUser(@PathVariable long userId, @RequestBody UserDto userDto) {
 
+        return userMapper.toDto(userService.updateUser(userId, userDto));
+    }
 
 }
