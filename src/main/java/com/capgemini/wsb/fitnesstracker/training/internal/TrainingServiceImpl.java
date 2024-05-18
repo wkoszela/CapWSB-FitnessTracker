@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
@@ -7,6 +8,9 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,4 +42,15 @@ class TrainingServiceImpl implements TrainingProvider {
         return this.trainingRepository.findTrainingByUser_Id(userId);
     }
 
+    @Override
+    public List<Training> getAllTrainingsFinishedAfter(Date afterTime) {
+        List<Training> allTrainings = trainingRepository.findAll().stream()
+                .filter(training -> training.getEndTime().after(afterTime)).toList();
+
+        if (allTrainings.isEmpty()) {
+            throw new NotFoundException("No trainings finished after given time found");
+        }
+
+        return allTrainings;
+    }
 }

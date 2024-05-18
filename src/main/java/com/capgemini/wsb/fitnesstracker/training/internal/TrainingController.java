@@ -1,11 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +33,14 @@ class TrainingController {
     private List<TrainingDto> getAllTrainingsForDedicatedUser(@PathVariable long userId) {
         return trainingService.getTrainingsByUser(userId)
                 .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/finished/{afterTime}")
+    public List<TrainingDto> getAllFinishedTrainingsAfterTime(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date afterTime) {
+        java.sql.Date sqlAfterTime = new java.sql.Date(afterTime.getTime());
+        return trainingService.getAllTrainingsFinishedAfter(sqlAfterTime).stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
