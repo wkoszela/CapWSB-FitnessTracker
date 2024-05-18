@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,11 +48,24 @@ class UserServiceImpl implements UserService, UserProvider {
     public Optional<User> getUserById(Long userId) {
 
         Optional<User> user = userRepository.findById(userId);
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             throw new NotFoundException("User with given ID not found");
         }
 
         return user;
+    }
+
+    @Override
+    public List<User> getAllUsersOlderThen(LocalDate time) {
+        List<User> users = userRepository.findAll().stream()
+                .filter(user -> user.getBirthdate().isBefore(ChronoLocalDate.from(time)))
+                .toList();
+
+        if (users.isEmpty()) {
+            throw new NotFoundException("No users older than given time found");
+        }
+
+        return users;
     }
 
     @Override
