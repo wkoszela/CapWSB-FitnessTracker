@@ -18,4 +18,6 @@ public interface TrainingProvider {
 
     List<Training> getAllTrainings();
 
+    List<Training> getTrainingsByUser(long userId);
+
 }
