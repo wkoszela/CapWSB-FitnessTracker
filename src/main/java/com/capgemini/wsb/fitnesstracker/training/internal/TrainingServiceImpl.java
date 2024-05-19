@@ -7,6 +7,7 @@ import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,43 @@ class TrainingServiceImpl implements TrainingService, TrainingProvider {
 
         Training newTraining = trainingMapper.toEntity(trainingRequest, user);
         return trainingRepository.save(newTraining);
+    }
+
+    @Override
+    public Training updateTraining(long trainingId, CreateTrainingRequest createTrainingRequest) {
+
+        Optional<Training> foundTraining = trainingRepository.findById(trainingId);
+
+        if (foundTraining.isPresent()) {
+            Training training = updateTrainingAttributes(createTrainingRequest, foundTraining);
+            return trainingRepository.saveAndFlush(training);
+        } else {
+            throw new NotFoundException("Training with given ID not found");
+        }
+
+    }
+
+    @Override
+    public void deleteTraining(long trainingId) {
+
+        Optional<Training> foundTraining = trainingRepository.findById(trainingId);
+
+       if (foundTraining.isPresent()) {
+    trainingRepository.delete(foundTraining.get());
+} else {
+    throw new NotFoundException("Training with given ID not found");
+}
+    }
+
+    private Training updateTrainingAttributes(CreateTrainingRequest createTrainingRequest, Optional<Training> foundTraining) {
+
+        Training training = foundTraining.get();
+        training.setActivityType(createTrainingRequest.getActivityType());
+        training.setStartTime(createTrainingRequest.getStartTime());
+        training.setEndTime(createTrainingRequest.getEndTime());
+        training.setDistance(createTrainingRequest.getDistance());
+        training.setAverageSpeed(createTrainingRequest.getAverageSpeed());
+        return training;
+
     }
 }

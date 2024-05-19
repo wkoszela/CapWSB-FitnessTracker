@@ -366,6 +366,250 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "LAB02 - Trainings",
+			"item": [
+				{
+					"name": "GetAllTrainings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsForDedicatedUser - positiv",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsForDedicatedUser - negativ Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsAfterTime - negativ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/finished/2024-02-19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"finished",
+								"2024-02-19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsAfterTime - positiv",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/finished/2023-02-19",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"finished",
+								"2023-02-19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsAfterTime - positiv Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/activityType?activityType=RUNNING",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"activityType"
+							],
+							"query": [
+								{
+									"key": "activityType",
+									"value": "RUNNING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsAfterTime - negativ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/trainings/activityType?activityType=TENNIS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"activityType"
+							],
+							"query": [
+								{
+									"key": "activityType",
+									"value": "TENNIS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTraining - positiv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"userId\":1,\n    \"startTime\": \"2022-04-01T10:00:00\",\n    \"endTime\": \"2022-04-01T11:00:00\",\n    \"activityType\": \"RUNNING\",\n    \"distance\": 5.0,\n    \"averageSpeed\": 10.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trainings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTraining - positiv",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"userId\":1,\n    \"startTime\": \"2022-04-01T10:00:00\",\n    \"endTime\": \"2022-04-01T11:00:00\",\n    \"activityType\": \"RUNNING\",\n    \"distance\": 10.0,\n    \"averageSpeed\": 11.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trainings/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTraining - negative",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"userId\":1,\n    \"startTime\": \"2022-04-01T10:00:00\",\n    \"endTime\": \"2022-04-01T11:00:00\",\n    \"activityType\": \"RUNNING\",\n    \"distance\": 10.0,\n    \"averageSpeed\": 11.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/trainings/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"trainings",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
