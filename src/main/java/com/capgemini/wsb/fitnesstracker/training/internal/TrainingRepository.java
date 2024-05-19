@@ -9,4 +9,6 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
 
     List<Training> findTrainingByUser_Id(long userId);
 
+    List<Training> findByActivityType(ActivityType activityType);
+
 }

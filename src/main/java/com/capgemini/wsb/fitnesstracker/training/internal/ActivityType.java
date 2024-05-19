@@ -1,6 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-// TODO : JavaDoc
+/**
+ * ActivityType is an enum class that represents the type of activity that can be performed during a training.
+ * It is used to store the type of activity in the database.
+ *
+ */
 public enum ActivityType {
 
     RUNNING("Running"),

@@ -53,4 +53,15 @@ class TrainingServiceImpl implements TrainingProvider {
 
         return allTrainings;
     }
+
+    @Override
+    public List<Training> getAllTrainingsByActivityType(ActivityType activityType) {
+
+        List<Training> allTrainings = trainingRepository.findByActivityType(activityType);
+        if (allTrainings.isEmpty()) {
+            throw new NotFoundException("No trainings with given activity type found");
+        }
+        return allTrainings;
+    }
+
 }
