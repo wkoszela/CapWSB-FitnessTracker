@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.training.internal;
+package com.capgemini.wsb.fitnesstracker.training.api;
 
 /**
  * ActivityType is an enum class that represents the type of activity that can be performed during a training.

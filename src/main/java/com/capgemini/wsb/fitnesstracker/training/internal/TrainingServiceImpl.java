@@ -1,13 +1,9 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
-import com.capgemini.wsb.fitnesstracker.training.api.CreateTrainingRequest;
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
+import com.capgemini.wsb.fitnesstracker.training.api.*;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
-import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
-import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
