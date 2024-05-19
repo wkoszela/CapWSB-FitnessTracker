@@ -1,8 +1,9 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
+import com.capgemini.wsb.fitnesstracker.training.api.CreateTrainingRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -48,5 +49,11 @@ class TrainingController {
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public TrainingDto addUser(@RequestBody CreateTrainingRequest createTrainingRequest) {
+        return trainingMapper.toDto(trainingService.createTraining(createTrainingRequest));
     }
 }

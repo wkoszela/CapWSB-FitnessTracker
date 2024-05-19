@@ -20,7 +20,7 @@ Stworzone API powinno pozwalać na:
 - [X] wyszukiwanie treningów dla określonego Użytkownika:
 - [X] wyszukiwanie wszystkich treningów zakończonych (po konkretnej zdefiniowanej dacie)
 - [X] wyszukiwanie wszystkich treningów dla konkretnej aktywności (np. wszystkie treningi biegowe)
-- [ ] utworzenie nowego treningu
+- [X] utworzenie nowego treningu
 - [ ] aktualizacja treningu (dowolnie wybrane pole np. dystans)
 
 ### Wymagania techniczne

@@ -1,24 +1,25 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
+import com.capgemini.wsb.fitnesstracker.training.api.CreateTrainingRequest;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
+import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-class TrainingServiceImpl implements TrainingProvider {
+class TrainingServiceImpl implements TrainingService, TrainingProvider {
 
     private final TrainingRepository trainingRepository;
+    private final TrainingMapper trainingMapper;
 
     private UserProvider userProvider;
 
@@ -64,4 +65,12 @@ class TrainingServiceImpl implements TrainingProvider {
         return allTrainings;
     }
 
+    public Training createTraining(CreateTrainingRequest trainingRequest) {
+
+        User user = userProvider.getUserById(trainingRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException("User with given ID not found"));
+
+        Training newTraining = trainingMapper.toEntity(trainingRequest, user);
+        return trainingRepository.save(newTraining);
+    }
 }
