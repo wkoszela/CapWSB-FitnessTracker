@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 
-    List<User> findAllByBirthdate(LocalDate birthdate);
+    List<User> findAllByBirthdateBefore(LocalDate date);
 
     List<User> findByEmailIgnoreCase(String email);
 }

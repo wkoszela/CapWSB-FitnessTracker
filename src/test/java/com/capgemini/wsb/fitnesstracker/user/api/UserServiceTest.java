@@ -84,15 +84,29 @@ public class UserServiceTest {
 
 
     @Test
-    void findUsersOld() {
-        User old = userRepository.save(new User("olduser", "Lukasz", LocalDate.of(1995,2,21),"ttetete@gmail.com"));
-        User yng = userRepository.save(new User("Younguser", "Lukasz", LocalDate.of(1994,2,22),"tteteteYOUNG@gmail.com"));
+    void findUsersOlderThan_ShouldFindUsers() {
+        // GIVEN
+        User olderUser = userRepository.save(new User("Older", "User", LocalDate.now().minusYears(30), "olderuser@example.com"));
+        User youngerUser = userRepository.save(new User("Younger", "User", LocalDate.now().minusYears(10), "youngeruser@example.com"));
 
-        List<User> users = userService.findUsersOld(10);
-        assertTrue(users.contains(old));
-        assertFalse(users.contains(yng));
+        // WHEN
+        List<User> users = userService.findUsersOlderThan(20);
+
+        // THEN
+        boolean foundedOlderUser = false;
+        boolean foundedYoungerUser = false;
+        for (User user : users){
+            if(user.getFirstName() == olderUser.getFirstName() && user.getEmail() == olderUser.getEmail()){
+                foundedOlderUser = true;
+            }
+            if(user.getFirstName() == youngerUser.getFirstName() && user.getEmail() == youngerUser.getEmail()){
+                foundedYoungerUser= true;
+            }
+        }
+
+        assertTrue(foundedOlderUser);
+        assertFalse(foundedYoungerUser);
     }
-
     @Test
     void delete() {
         User user = userRepository.save(new User("LukaszToDelete", "Trash", LocalDate.of(1996,6,21),"ToDelete@gmail.com"));

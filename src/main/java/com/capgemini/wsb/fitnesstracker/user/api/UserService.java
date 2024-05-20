@@ -15,7 +15,7 @@ public interface UserService {
     public List<User> findAllUser();
     public User userUpdate(Long id, User newUserData);
     public List<User> findByMailCase(String emailCase);
-    public List<User> findUsersOld(int age);
+    public List<User> findUsersOlderThan(int age);
     public boolean delete(Long userId);
 
 

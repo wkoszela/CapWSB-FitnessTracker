@@ -70,11 +70,19 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
 
-    @Override
-    public List<User> findUsersOld(int age) {
-        LocalDate oldDate = LocalDate.now().minusYears(age);
-        return userRepository.findAllByBirthdate(oldDate);
+
+    /**
+     * Finds all users who are older than the specified age.
+     *
+     * @param age The age threshold.
+     * @return A list of {@link User} entities who are older than the specified age.
+     */
+    public List<User> findUsersOlderThan(int age) {
+        LocalDate thresholdDate = LocalDate.now().minusYears(age);
+        return userRepository.findAllByBirthdateBefore(thresholdDate);
     }
+
+
     @Override
     public List<User> findByMailCase(String emailCase) {
         return userRepository.findByEmailIgnoreCase(emailCase);
