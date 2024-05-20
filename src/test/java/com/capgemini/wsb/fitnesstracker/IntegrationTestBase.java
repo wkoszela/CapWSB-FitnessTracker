@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,8 +23,16 @@ public abstract class IntegrationTestBase {
 
     @AfterEach
     void cleanUpDB() {
-        userRepository.deleteAll();
         trainingRepository.deleteAll();
+        userRepository.deleteAll();
+
+    }
+
+    @Before
+    public void setUp() {
+        trainingRepository.deleteAll();
+        userRepository.deleteAll();
+
     }
 
     protected Training persistTraining(Training training) {
