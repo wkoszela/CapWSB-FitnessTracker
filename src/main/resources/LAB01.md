@@ -4,15 +4,15 @@ Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w pr
 
 ## ZADANIE 0
 - Konfiguracja środowiska, wdrożenie do projektu.
-- Konfiguracja prywatnego repozytorium (udostępnienie dostępu prowadzącemu do 
-- prywatnego repozytorium z projektem (link) i bieżącym postępem). 
+- Konfiguracja prywatnego repozytorium (udostępnienie dostępu prowadzącemu do
+- prywatnego repozytorium z projektem (link) i bieżącym postępem).
 - Hosting: Rekomendacja Github.com
 
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
 ### Potrzeba biznesowa
 
-Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami 
+Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami
 serwisu FitnessTracker:
 
 - móc ich wyszukiwać, pobierać
