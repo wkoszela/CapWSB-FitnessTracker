@@ -33,10 +33,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
@@ -85,11 +81,72 @@
             <artifactId>org.eclipse.jdt.annotation</artifactId>
             <version>2.2.600</version>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.networknt</groupId>
+                    <artifactId>json-schema-validator</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>2.1.12</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.5</version>
+        </dependency>
 
     </dependencies>
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>6.4.0</version>
+                <executions>
+
+                    <execution>
+                        <id>interface</id>
+
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/test.yaml
+                            </inputSpec>
+                            <generatorName>java</generatorName>
+                            <library>webclient</library>
+                            <apiPackage>payload.sections.api</apiPackage>
+                            <modelPackage>payload.sections.model</modelPackage>
+                            <invokerPackage>sections.invoker</invokerPackage>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <configOptions>
+                                <useBeanValidation>false</useBeanValidation>
+                                <performBeanValidation>true</performBeanValidation>
+                                <skipValidateSpec>false</skipValidateSpec>
+                                <useSwaggerAnnotations>true</useSwaggerAnnotations>
+                                <useJakartaEe>true</useJakartaEe>
+                            </configOptions>
+                            <addCompileSourceRoot>true</addCompileSourceRoot>
+                            <skipOverwrite>false</skipOverwrite>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
