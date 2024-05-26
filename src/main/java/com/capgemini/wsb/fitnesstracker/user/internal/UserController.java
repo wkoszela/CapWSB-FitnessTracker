@@ -24,6 +24,20 @@ class UserController {
                           .map(userMapper::toDto)
                           .toList();
     }
+    @GetMapping("/basic")
+    public List<BasicUserDto> getAllBasicUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::basicToDto)
+                .toList();
+    }
+    @GetMapping("/{userid}")
+    public List<UserDto> getSingleUserById(@PathVariable Long userid) {
+        return userService.getUser(userid)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
 
     @PostMapping
     public User addUser(@RequestBody UserDto userDto) {
@@ -32,7 +46,8 @@ class UserController {
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
 
         // TODO: saveUser with Service and return User
-        return null;
+        return userService.createUser(userMapper::toDto);
     }
+
 
 }
