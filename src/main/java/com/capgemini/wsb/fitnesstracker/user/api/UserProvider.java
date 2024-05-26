@@ -24,10 +24,22 @@ public interface UserProvider {
     Optional<User> getUserByEmail(String email);
 
     /**
+     * Retrieves a list of users whose email address contains the specified partial email.
+     * The search is case-insensitive.
+     *
+     * @param email the partial email address to search for
+     * @return a list of {@link User} objects whose email address contains the specified partial email,
+     *         or an empty list if no users match the search criteria
+     */
+    List<User> getUserByPartialEmail(String email);
+
+    /**
      * Retrieves all users.
      *
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
+
+    List<User> searchUsersByAgeGreaterThan(int age);
 
 }

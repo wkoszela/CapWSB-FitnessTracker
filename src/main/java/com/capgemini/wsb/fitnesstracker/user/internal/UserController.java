@@ -57,13 +57,24 @@ class UserController {
         userService.deleteUser(userid);
     }
 
-    @GetMapping("/basic/email")
-    public List<BasicUserDto> getSingleUserByEmail(@RequestParam String email) {
+    @GetMapping("/basic/")
+    public List<BasicUserDto> getUsersByPartialEmail(@RequestParam String email) {
         return userService.getUserByPartialEmail(email)
                 .stream()
                 .map(userMapper::basicToDto)
                 .toList();
     }
 
+    @GetMapping("/")
+    public List<UserDto> getUserOlderThan(@RequestParam Integer age) {
+        return userService.searchUsersByAgeGreaterThan(age)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
 
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        return userService.updateUser(id, userDto);
+    }
 }
