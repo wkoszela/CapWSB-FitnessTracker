@@ -13,6 +13,7 @@ class UserMapper {
                            user.getBirthdate(),
                            user.getEmail());
     }
+
     BasicUserDto basicToDto(User user) {
         return new BasicUserDto(user.getId(),
                 user.getFirstName());

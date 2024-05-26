@@ -1,9 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
+import com.capgemini.wsb.fitnesstracker.training.internal.TrainingServiceImpl;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,16 +13,18 @@ import java.util.List;
 class UserController {
 
     private final UserServiceImpl userService;
+    private final TrainingServiceImpl trainingService;
 
     private final UserMapper userMapper;
 
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
+
     @GetMapping("/basic")
     public List<BasicUserDto> getAllBasicUsers() {
         return userService.findAllUsers()
@@ -31,6 +32,7 @@ class UserController {
                 .map(userMapper::basicToDto)
                 .toList();
     }
+
     @GetMapping("/{userid}")
     public List<UserDto> getSingleUserById(@PathVariable Long userid) {
         return userService.getUser(userid)
@@ -45,8 +47,22 @@ class UserController {
         // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
 
-        // TODO: saveUser with Service and return User
-        return userService.createUser(userMapper::toDto);
+        User user = userMapper.toEntity(userDto);
+        return userService.createUser(user);
+    }
+
+    @DeleteMapping("/{userid}")
+    public void deleteUserById(@PathVariable Long userid) {
+        trainingService.deleteTrainingByUserId(userid);
+        userService.deleteUser(userid);
+    }
+
+    @GetMapping("/basic/email")
+    public List<BasicUserDto> getSingleUserByEmail(@RequestParam String email) {
+        return userService.getUserByPartialEmail(email)
+                .stream()
+                .map(userMapper::basicToDto)
+                .toList();
     }
 
 
