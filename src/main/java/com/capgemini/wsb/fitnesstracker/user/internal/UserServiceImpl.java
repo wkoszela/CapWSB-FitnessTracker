@@ -30,20 +30,18 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public void deleteUser(Long id) {
-
         userRepository.deleteById(id);
     }
 
     @Override
     public User updateUser(Long id, UserDto userDto) {
-        User user = userRepository.findById(id)
+        User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        user.setFirstName(userDto.firstName());
-        user.setLastName(userDto.lastName());
-        user.setBirthdate(userDto.birthdate());
-        user.setEmail(userDto.email());
-        return userRepository.save(user);
-
+        existingUser.setFirstName(userDto.firstName());
+        existingUser.setLastName(userDto.lastName());
+        existingUser.setBirthdate(userDto.birthdate());
+        existingUser.setEmail(userDto.email());
+        return userRepository.save(existingUser);
     }
 
     @Override

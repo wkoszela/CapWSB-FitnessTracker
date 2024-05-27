@@ -40,6 +40,16 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
+    /**
+     * Retrieves a list of users whose age is greater than the specified age.
+     *
+     * This method filters all users in the repository and returns only those whose age,
+     * calculated based on their birthdate, is greater than the given age.
+     *
+     * @param age the minimum age of the users to be retrieved
+     * @return a list of {@link User} objects whose age is greater than the specified age,
+     *         or an empty list if no users match the search criteria
+     */
     List<User> searchUsersByAgeGreaterThan(int age);
 
 }

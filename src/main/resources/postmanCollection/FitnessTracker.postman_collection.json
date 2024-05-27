@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "da6b4561-5a95-4478-bbe0-3f9a69207aec",
+		"name": "FitnessTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18011270"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetBasicUsers(Id and name)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/users/basic",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"basic"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserDetails(By ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/users/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsersWithAgeGreaterThan(By age)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/users/?age=70",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "70"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBasicUsers(By partial Email)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/users/basic/?email=an",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"basic",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "an"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser(By ID)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/users/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostBasicUserDetails(By ID) Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Tomek\",\r\n    \"lastName\": \"Testowy\",\r\n    \"birthdate\": \"1980-05-26\",\r\n    \"email\": \"Tomek.Testowy@wp.pl.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Tomek\",\r\n    \"lastName\": \"Testowy\",\r\n    \"birthdate\": \"1980-05-26\",\r\n    \"email\": \"Tomek.Testowy@wp.pl.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/users/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trainings",
+			"item": [
+				{
+					"name": "GetAllTrainings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/trainings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsByUserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/trainings/user/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings",
+								"user",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllFinishedTrainingsByDate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/trainings/completed?date=2024-01-17",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings",
+								"completed"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-01-17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingsByActivity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/trainings/activity?activityType=WALKING",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "activityType",
+									"value": "WALKING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewTraining",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n        \"userId\": 10,\r\n        \"startTime\": \"2024-02-11T06:15:00\",\r\n        \"endTime\": \"2024-02-11T07:30:00\",\r\n        \"activityType\": \"WALKING\",\r\n        \"distance\": 2.2,\r\n        \"averageSpeed\": 3.5\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/trainings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTrainingByID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n        \"startTime\": \"2024-02-11T06:15:00\",\r\n        \"endTime\": \"2024-02-11T07:30:00\",\r\n        \"activityType\": \"WALKING\",\r\n        \"distance\": 2.2,\r\n        \"averageSpeed\": 3.5\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/trainings/11",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"trainings",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8081",
+			"type": "string"
+		}
+	]
+}

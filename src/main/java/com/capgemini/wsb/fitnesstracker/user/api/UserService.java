@@ -1,7 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface (API) for modifying operations on {@link User} entities through the API.
