@@ -162,7 +162,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
         Training training1 = persistTraining(generateTrainingWithActivityType(user1, ActivityType.RUNNING));
         String requestBody = """
                 {
-                "userId": "%s"
+                "userId": "%s",
                 "startTime": "2022-04-01T10:00:00",
                 "endTime": "2022-04-01T11:00:00",
                 "activityType": "TENNIS",
