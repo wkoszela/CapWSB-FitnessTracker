@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-abstract
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
@@ -26,7 +25,6 @@ class UserServiceImpl implements UserService, UserProvider {
         }
         return userRepository.save(user);
     }
-
 
     @Override
     public Optional<User> getUser(final Long userId) {
@@ -43,8 +41,4 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
-
-    public Optional<User> findUserById(Long userId){
-        return userRepository.findById(userId);
-    }
 }
