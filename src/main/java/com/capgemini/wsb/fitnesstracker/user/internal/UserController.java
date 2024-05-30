@@ -44,6 +44,7 @@ class UserController {
         return userService.createUser(user);
     }
 
+
     @DeleteMapping("delete/{id}")
     public void deleteUser(@PathVariable long id) {
         if(userService.getUser(id).isPresent()) {
