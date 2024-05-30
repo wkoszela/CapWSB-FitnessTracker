@@ -6,7 +6,6 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -41,4 +40,17 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    @Override
+    public Optional<User> findUserById(Long userId){
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    public  void removeUser(final User user){
+        log.info("User {} removed", user.getId());
+        if(user.getId() == null){
+            throw new IllegalArgumentException("This user doesn't exist");
+        }
+        userRepository.delete(user);
+    }
 }

@@ -1,14 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
-
+import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
+import java.util.List;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 @Entity
 @Table(name = "users")
 @Getter
@@ -33,6 +33,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Training> trainings;
+
     public User(
             final String firstName,
             final String lastName,
@@ -43,6 +46,7 @@ public class User {
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.email = email;
+        this.trainings = new ArrayList<>();
     }
 
 }
