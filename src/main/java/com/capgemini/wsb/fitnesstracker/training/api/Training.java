@@ -40,6 +40,10 @@ public class Training {
     @Column(name = "average_speed")
     private double averageSpeed;
 
+    public void setActivityType(ActivityType activityType) {
+        this.activityType = activityType;
+    }
+
     public Training(
             final User user,
             final Date startTime,

@@ -40,7 +40,6 @@ class UserController {
 
     @PostMapping("add")
     public User addUser(@RequestBody UserDto userDto) {
-
         User user = userMapper.toEntity(userDto);
         return userService.createUser(user);
     }

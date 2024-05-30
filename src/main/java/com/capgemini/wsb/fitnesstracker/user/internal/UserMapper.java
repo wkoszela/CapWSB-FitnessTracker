@@ -19,7 +19,7 @@ public class UserMapper {
                 user.getFirstName());
     }
 
-    User toEntity(UserDto userDto) {
+    public User toEntity(UserDto userDto) {
         return new User(
                         userDto.firstName(),
                         userDto.lastName(),
