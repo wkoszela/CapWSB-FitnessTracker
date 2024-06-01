@@ -74,7 +74,7 @@ public class User {
         this.email = email;
         this.trainings = new ArrayList<>();
     }
-    
+
     public Integer getUserAge(){
         LocalDate today = LocalDate.now();
         long daysBetween = birthdate.toEpochDay() - today.toEpochDay();

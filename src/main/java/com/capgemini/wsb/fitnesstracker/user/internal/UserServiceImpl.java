@@ -5,8 +5,9 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -75,5 +76,16 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public Collection<User> findUserOlderThanX(Integer age) {
         return userRepository.findUserOlderThanX(age);
+    }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "This user not found!"));
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setBirthdate(user.getBirthdate());
+        existingUser.setEmail(user.getEmail());
+        return userRepository.save(existingUser);
     }
 }

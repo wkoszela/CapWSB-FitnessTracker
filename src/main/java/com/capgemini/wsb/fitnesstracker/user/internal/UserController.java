@@ -79,4 +79,10 @@ class UserController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        User updatedUser = userService.updateUser(id, userMapper.toEntity(userDto));
+        return ResponseEntity.ok(userMapper.toDto(updatedUser));
+    }
 }
