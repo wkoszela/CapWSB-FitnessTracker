@@ -1,9 +1,9 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
-import java.util.Comparator;
-import org.springframework.stereotype.Repository;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,8 +24,14 @@ interface UserRepository extends JpaRepository<User, Long> {
 
     default Collection<User> findUserOlderThanX(int age) {
         return findAll().stream()
-                .filter(user -> Objects.compare(user.getUserAge(), age, Comparator.naturalOrder()) > 0)
+                .filter(user -> {
+                    LocalDate birthdate = user.getBirthdate();
+                    if (birthdate == null) {
+                        return false;
+                    }
+                    int userAge = Period.between(birthdate, LocalDate.now()).getYears();
+                    return userAge > age;
+                })
                 .collect(Collectors.toList());
     }
-
 }

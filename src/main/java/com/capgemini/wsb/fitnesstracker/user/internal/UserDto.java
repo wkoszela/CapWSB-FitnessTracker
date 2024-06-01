@@ -17,6 +17,6 @@ record UserSimpleDto(@Nullable Long id,
 record UserAgeDto(Integer age){
 
 }
-record UserEmailDto(String email){
+record UserEmailDto(@Nullable Long id, String email){
 
 }

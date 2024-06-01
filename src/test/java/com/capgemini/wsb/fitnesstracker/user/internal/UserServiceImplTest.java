@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Collection;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,6 +82,27 @@ class UserServiceImplTest {
         assertEquals("Tyler", foundUser.getLastName());
         assertEquals(LocalDate.of(1948, 3, 26), foundUser.getBirthdate());
         assertEquals("steven.tyler@aerosmith.com", foundUser.getEmail());
+    }
+
+    @Test
+    @Transactional
+    public void shouldFindUsersOlderThanX() {
+        UserDto userDto1 = new UserDto(null, "Steven", "Tyler", LocalDate.of(1948, 3, 26), "steven.tyler@aerosmith.com");
+        UserDto userDto2 = new UserDto(null, "Mick", "Jagger", LocalDate.of(1943, 7, 26), "mick.jagger@rollingstones.com");
+        UserDto userDto3 = new UserDto(null, "Small", "Baby", LocalDate.of(2023, 1, 1), "young.user@example.com");
+
+        userService.createUser(userMapper.toEntity(userDto1));
+        userService.createUser(userMapper.toEntity(userDto2));
+        userService.createUser(userMapper.toEntity(userDto3));
+
+        int ageThreshold = 70;
+        Collection<User> olderUsers = userService.findUserOlderThanX(ageThreshold);
+
+        assertTrue(olderUsers.stream().allMatch(user -> {
+            int userAge = Period.between(user.getBirthdate(), LocalDate.now()).getYears();
+            return userAge > ageThreshold;
+        }));
+        assertEquals(2, olderUsers.size()); // Should only return Steven Tyler and Mick Jagger
     }
 }
 

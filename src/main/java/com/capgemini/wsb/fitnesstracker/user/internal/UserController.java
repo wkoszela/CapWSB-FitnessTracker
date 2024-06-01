@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import java.util.Optional;
 import java.util.List;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -44,42 +43,43 @@ class UserController {
         return user.map(userMapper::toDto);
     }
 
-//     @PostMapping
-//     public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-
-
     @PostMapping("/{id}")
-    //public User addUser(@RequestBody UserDto userDto) {
     public ResponseEntity<User> addUser(@RequestBody UserDto userDto){
-        // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
         User addingUser = userService.createUser(userMapper.toEntity(userDto));
         // TODO: saveUser with Service and return User
-        //return userService.createUser(userMapper.toEntity(userDto));
         return ResponseEntity.ok().body(addingUser);
     }
 
-    @PostMapping("/findUser/age")
-    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@RequestParam int age) {
+
+    @GetMapping("/findUser/{age}")
+    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("age") int age) {
         List<UserDto> users = userService.findUserOlderThanX(age).stream().map(userMapper::toDto).toList();
-        return ResponseEntity.ok().body(users);
+        if (users.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found older than " + age);
+        } else {
+            return ResponseEntity.ok().body(users);
+        }
     }
 
-    @PostMapping("/findUser/email")
-    public User findUserByEmail(@RequestBody UserEmailDto mail) {
-        return userService.findUserByEmail(mail.email()).orElseThrow(
-                ()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    @GetMapping("/findEmail/{email}")
+    public ResponseEntity<UserDto> findUserByEmail(@PathVariable("email") String email) {
+        User user = userService.findUserByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        UserDto userDto = userMapper.toDto(user);
+        return ResponseEntity.ok().body(userDto);
     }
+
 
 
     @DeleteMapping("/{id}")
-    public Optional<UserDto> removeUser(@PathVariable Long id) {
+    public ResponseEntity<UserDto> removeUser(@PathVariable Long id) {
         Optional<User> user =  userService.findUserById(id);
         if(user.isPresent())
         {
             userService.removeUser(user.get());
-            return user.map(userMapper::toDto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }

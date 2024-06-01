@@ -37,6 +37,7 @@ class UserServiceImpl implements UserService, UserProvider {
     public Optional<User> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
+    //up jeśli zmiany w UserRepository to jest do zakomentowania
 
     @Override
     public List<User> findAllUsers() {
@@ -69,9 +70,11 @@ class UserServiceImpl implements UserService, UserProvider {
 
     }
     @Override
-    public Optional<User> findUserByEmail(String email){
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    //wtedy List
+
 
     @Override
     public Collection<User> findUserOlderThanX(Integer age) {
