@@ -44,6 +44,10 @@ class UserController {
         return user.map(userMapper::toDto);
     }
 
+//     @PostMapping
+//     public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+
+
 
     @PostMapping("/{id}")
     //public User addUser(@RequestBody UserDto userDto) {
