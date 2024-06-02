@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,6 @@ class UserController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(users);
     }
-
-
 
     @GetMapping("/simple")
     public ResponseEntity<List<UserSimpleDto>> getAllSimpleUsers() {
@@ -59,18 +58,21 @@ class UserController {
         return ResponseEntity.ok().body(addingUser);
     }
 
-
     @GetMapping("/older/{time}")
-    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("time") int age) {
-        List<UserDto> users = userService.findUserOlderThanX(age).stream().map(UserMapper::toDto).toList();
+    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("time") String dateString) {
+        LocalDate birthdate = LocalDate.parse(dateString);
+
+        List<UserDto> users = userService.findAllUsers().stream()
+                .filter(user -> user.getBirthdate().isBefore(birthdate))
+                .map(user -> userMapper.toDto(user))
+                .collect(Collectors.toList());
+
         if (users.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found older than " + age);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found older than " + birthdate);
         } else {
-            return ResponseEntity.ok().body(users);
+            return ResponseEntity.ok(users);
         }
     }
-
-
 
     @GetMapping("/email")
     public ResponseEntity<List<UserDto>> findUserByEmail(@RequestParam String email) {
@@ -83,9 +85,6 @@ class UserController {
         }
     }
 
-
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> removeUser(@PathVariable Long id) {
         Optional<User> user =  userService.findUserById(id);
@@ -96,12 +95,6 @@ class UserController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-//        User updatedUser = userService.updateUser(id, userMapper.toEntity(userDto));
-//        return ResponseEntity.ok(userMapper.toDto(updatedUser));
-//    }
 
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(
