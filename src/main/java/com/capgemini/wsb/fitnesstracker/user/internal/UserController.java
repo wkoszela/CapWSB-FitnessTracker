@@ -37,6 +37,21 @@ class UserController {
                 .toList();
     }
 
+    @GetMapping("/simple")
+    public ResponseEntity<List<UserSimpleDto>> getAllSimpleUsers() {
+        List<UserSimpleDto> users = userService.findAllUsers()
+                .stream()
+                .map(userMapper::toSimpleDto)
+                .toList();
+        return ResponseEntity.ok().body(users);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        User createdUser = userService.createUser(userMapper.toEntity(userDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDto(createdUser));
+    }
+
     @GetMapping("/user/{id}")
     public Optional<UserDto> getAllUsers(@PathVariable Long id) {
         Optional<User> user = Optional.ofNullable(userService.findUserById(id).orElseThrow(
