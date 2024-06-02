@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.List;
 
@@ -51,8 +53,8 @@ class UserController {
     }
 
 
-    @GetMapping("/findUser/{age}")
-    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("age") int age) {
+    @GetMapping("/older/{time}")
+    public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("time") int age) {
         List<UserDto> users = userService.findUserOlderThanX(age).stream().map(UserMapper::toDto).toList();
         if (users.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found older than " + age);
@@ -62,14 +64,17 @@ class UserController {
     }
 
 
-    @GetMapping("/findEmail/{email}")
-    public ResponseEntity<UserDto> findUserByEmail(@PathVariable("email") String email) {
-        User user = userService.findUserByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "This user not found"));
-        UserDto userDto = userMapper.toDto(user);
-        return ResponseEntity.ok().body(userDto);
-    }
 
+    @GetMapping("/email")
+    public ResponseEntity<List<UserDto>> findUserByEmail(@RequestParam String email) {
+        Optional<User> user = userService.findUserByEmail(email);
+        if (user.isPresent()) {
+            List<UserDto> userDtoList = List.of(userMapper.toDto(user.get()));
+            return ResponseEntity.ok(userDtoList);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
     @DeleteMapping("/{id}")
