@@ -1,5 +1,4 @@
 package com.capgemini.wsb.fitnesstracker.training;
-
 import com.capgemini.wsb.fitnesstracker.IntegrationTest;
 import com.capgemini.wsb.fitnesstracker.IntegrationTestBase;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
@@ -11,10 +10,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import static java.time.LocalDate.now;
 import static java.util.UUID.randomUUID;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

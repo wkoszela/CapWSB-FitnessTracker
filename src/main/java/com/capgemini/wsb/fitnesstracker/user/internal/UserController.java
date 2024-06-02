@@ -37,10 +37,9 @@ class UserController {
 
     @GetMapping("/user/{id}")
     public Optional<UserDto> getAllUsers(@PathVariable Long id) {
-        // return userService.findUserById(id).map(userMapper::toDto);
         Optional<User> user = Optional.ofNullable(userService.findUserById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
-        return user.map(userMapper::toDto);
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND,  "This user not found")));
+        return user.map(UserMapper::toDto);
     }
 
     @PostMapping("/{id}")
@@ -54,7 +53,7 @@ class UserController {
 
     @GetMapping("/findUser/{age}")
     public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("age") int age) {
-        List<UserDto> users = userService.findUserOlderThanX(age).stream().map(userMapper::toDto).toList();
+        List<UserDto> users = userService.findUserOlderThanX(age).stream().map(UserMapper::toDto).toList();
         if (users.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No users found older than " + age);
         } else {
@@ -66,7 +65,7 @@ class UserController {
     @GetMapping("/findEmail/{email}")
     public ResponseEntity<UserDto> findUserByEmail(@PathVariable("email") String email) {
         User user = userService.findUserByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "This user not found"));
         UserDto userDto = userMapper.toDto(user);
         return ResponseEntity.ok().body(userDto);
     }

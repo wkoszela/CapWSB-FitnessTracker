@@ -1,21 +1,21 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
-
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import org.springframework.web.server.ResponseStatusException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
+import com.capgemini.wsb.fitnesstracker.user.api.User;
+import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class UserServiceImpl implements UserService, UserProvider {
+public class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
@@ -23,7 +23,7 @@ class UserServiceImpl implements UserService, UserProvider {
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+            throw new IllegalArgumentException("User with existing ID!");
         }
         return userRepository.save(user);
     }
@@ -37,8 +37,6 @@ class UserServiceImpl implements UserService, UserProvider {
     public Optional<User> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
-    //up jeśli zmiany w UserRepository to jest do zakomentowania
-
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
