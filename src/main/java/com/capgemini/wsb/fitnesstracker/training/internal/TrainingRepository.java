@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import java.util.stream.Collectors;
 import java.util.*;
-
+/**
+ * Repozytorium JPA dla encji Training, zadaje operacje dostępu do danych z treningów użytkowników.
+ */
 interface TrainingRepository extends JpaRepository<Training, Long> {
     default List<Training> getFinishedAfterX(Date date)
     {

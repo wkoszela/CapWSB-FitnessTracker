@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
+/**
+ * Kontroler obsługujący operacje związane z użytkownikami.
+ */
 
 @RestController
 @RequestMapping("/v1/users")
@@ -19,7 +22,11 @@ class UserController {
 
     private final UserMapper userMapper;
 
-
+    /**
+     * Pobiera wszystkich użytkowników.
+     *
+     * @return ResponseEntity<List<UserDto>> czyli lista użytkowników w ResponseEntity
+     */
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.findAllUsers().stream()
@@ -28,6 +35,11 @@ class UserController {
         return ResponseEntity.ok(users);
     }
 
+    /**
+     * Pobiera wszystkich użytkowników w prostym formacie.
+     *
+     * @return ResponseEntity<List<UserSimpleDto>> czyli lista użytkowników w ResponseEntity
+     */
     @GetMapping("/simple")
     public ResponseEntity<List<UserSimpleDto>> getAllSimpleUsers() {
         List<UserSimpleDto> users = userService.findAllUsers()
@@ -36,12 +48,18 @@ class UserController {
                 .toList();
         return ResponseEntity.ok().body(users);
     }
-
+    /**
+     * Tworzy nowego użytkownika.
+     *
+     * @param userDto Dane nowego użytkownika w formacie Dto
+     * @return ResponseEntity<UserDto> Utworzony jest nowy użytkownik aplikacji w ResponseEntity
+     */
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User createdUser = userService.createUser(userMapper.toEntity(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDto(createdUser));
     }
+
 
     @GetMapping("/user/{id}")
     public Optional<UserDto> getAllUsers(@PathVariable Long id) {
@@ -50,14 +68,27 @@ class UserController {
         return user.map(UserMapper::toDto);
     }
 
+    /**
+     * Dodaje nowego użytkownika do bazy.
+     *
+     * @param userDto to dane nowego użytkownika
+     * @return ResponseEntity<User> Obiekt ResponseEntity zawierający dodanego użytkownika
+     */
     @PostMapping("/{id}")
     public ResponseEntity<User> addUser(@RequestBody UserDto userDto){
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
         User addingUser = userService.createUser(userMapper.toEntity(userDto));
-        // TODO: saveUser with Service and return User
         return ResponseEntity.ok().body(addingUser);
     }
 
+    /**
+
+     Znajduje użytkowników starszych niż podana data urodzenia.
+
+     @param dateString Data w formacie "yyyy-MM-dd"
+
+     @return ResponseEntity<List<UserDto>> Obiekt ResponseEntity zawierający listę użytkowników starszych niż wpisana data
+     */
     @GetMapping("/older/{time}")
     public ResponseEntity<List<UserDto>> findUsersOlderThanX(@PathVariable("time") String dateString) {
         LocalDate birthdate = LocalDate.parse(dateString);
@@ -74,6 +105,12 @@ class UserController {
         }
     }
 
+    /**
+     * Znajduje użytkownika na podstawie podanego adresu email
+     *
+     * @param email Adres e-mail użytkownika
+     * @return ResponseEntity<List<UserDto>> Obiekt ResponseEntity posiada listę użytkowników znalezionych na podstawie adresu emailowego
+     */
     @GetMapping("/email")
     public ResponseEntity<List<UserDto>> findUserByEmail(@RequestParam String email) {
         Optional<User> user = userService.findUserByEmail(email);
@@ -84,6 +121,12 @@ class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    /**
+
+     Usuwa użytkownika o podanym identyfikatorze ID.
+     @param id Identyfikator użytkownika do usunięcia
+     @return ResponseEntity<UserDto> Obiekt ResponseEntity daje odpowiedź na usunięcie użytkownika
+     */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> removeUser(@PathVariable Long id) {
@@ -96,11 +139,15 @@ class UserController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Aktualizuje dane użytkownika o podanym identyfikatorze id
+     *
+     * @param id  Identyfikator użytkownika
+     * @param userDto Dane użytkownika są zaakutualizowane
+     * @return ResponseEntity<UserDto> to obiekt ResponseEntity zawierający zaktualizowane dane użytkownika
+     */
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(
-            @PathVariable("userId") Long id,
-            @RequestBody UserDto userDto
-    ) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable("userId") Long id, @RequestBody UserDto userDto) {
         Optional<User> optionalUser = userService.getUser(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -115,6 +162,12 @@ class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    /**
+     * Pobiera użytkownika o podanym identyfikatorze id,
+     *
+     * @param id Identyfikator użytkownika
+     * @return ResponseEntity<UserDto> Obiekt ResponseEntity zawierający dane tego użytkownika
+     */
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         Optional<User> optionalUser = userService.findUserById(id);

@@ -11,7 +11,10 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * Implementacja interfejsów TrainingProvider oraz TrainingService
+ * dla metod związanych z treningami.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -29,6 +32,13 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findById(trainingId);
     }
 
+    /**
+     * tworzy nowy trening.
+     *
+     * @param training nowy trening do utworzenia
+     * @return Utworzony trening
+     * @throws IllegalArgumentException Jeśli identyfikator id treningu jest już zajęty
+     */
     @Override
     public Training createTraining(Training training)
     {
