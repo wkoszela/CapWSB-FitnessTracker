@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.user.api;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 
 public interface UserProvider {
 
@@ -29,5 +30,8 @@ public interface UserProvider {
      * @return An {@link Optional} containing the all users,
      */
     List<User> findAllUsers();
+    Optional<User> findUserById(Long userId);
+    Optional<User> findUserByEmail(String email);
+    Collection<User> findUserOlderThanX(Integer age);
 
 }

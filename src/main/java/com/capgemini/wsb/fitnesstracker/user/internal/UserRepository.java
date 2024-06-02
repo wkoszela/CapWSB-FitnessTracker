@@ -1,13 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
-
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * Query searching users by email address. It matches by exact match.
@@ -21,4 +22,16 @@ interface UserRepository extends JpaRepository<User, Long> {
                         .findFirst();
     }
 
+    default Collection<User> findUserOlderThanX(int age) {
+        return findAll().stream()
+                .filter(user -> {
+                    LocalDate birthdate = user.getBirthdate();
+                    if (birthdate == null) {
+                        return false;
+                    }
+                    int userAge = Period.between(birthdate, LocalDate.now()).getYears();
+                    return userAge > age;
+                })
+                .collect(Collectors.toList());
+    }
 }

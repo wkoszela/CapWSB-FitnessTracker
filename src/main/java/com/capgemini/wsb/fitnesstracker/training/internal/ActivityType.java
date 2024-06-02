@@ -7,7 +7,7 @@ public enum ActivityType {
     CYCLING("Cycling"),
     WALKING("Walking"),
     SWIMMING("Swimming"),
-    TENNIS("Tenis");
+    TENNIS("Tennis");
 
     private final String displayName;
 
