@@ -80,13 +80,16 @@ public class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "This user not found!"));
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setBirthdate(user.getBirthdate());
-        existingUser.setEmail(user.getEmail());
-        return userRepository.save(existingUser);
+    public User updateUser(User user) {
+        User userToUpdate = userRepository.findById(user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + user.getId()));
+
+        // Update the user fields
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setBirthdate(user.getBirthdate());
+        userToUpdate.setEmail(user.getEmail());
+
+        return userRepository.save(userToUpdate);
     }
 }

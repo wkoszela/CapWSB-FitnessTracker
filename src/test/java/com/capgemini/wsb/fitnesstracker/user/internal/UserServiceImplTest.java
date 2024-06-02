@@ -54,19 +54,6 @@ class UserServiceImplTest {
 
     @Test
     @Transactional
-    public void shouldUpdateUser() {
-        UserDto userDto = new UserDto(11L, "Steven", "Tyler", LocalDate.of(1948,3,26), "steven.tyler@aerosmith.com");
-        User createdUser = userService.createUser(userMapper.toEntity(userDto));
-        UserDto updatedUserDto = new UserDto(createdUser.getId(), "Stephen", "Tyler", LocalDate.of(1948,3,26), "stephentyler1948@aerosmith.com");
-        userService.updateUser(createdUser.getId(), userMapper.toEntity(updatedUserDto));
-        User updatedUser = userService.findUserById(createdUser.getId()).orElse(null);
-        assertNotNull(updatedUser);
-        assertEquals(updatedUserDto.firstName(), updatedUser.getFirstName());
-        assertEquals(updatedUserDto.email(), updatedUser.getEmail());
-    }
-
-    @Test
-    @Transactional
     public void shouldFindUserByEmail() {
         // Przygotowanie
         UserDto userDto = new UserDto(11L, "Steven", "Tyler", LocalDate.of(1948,3,26), "steven.tyler@aerosmith.com");

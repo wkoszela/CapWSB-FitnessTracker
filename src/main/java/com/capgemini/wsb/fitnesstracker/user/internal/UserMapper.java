@@ -41,7 +41,7 @@ public class UserMapper {
         this.userRepository = userRepository;
     }
 
-    UserEmailDto toEmailDto(User user) {
+    static UserEmailDto toEmailDto(User user) {
         return new UserEmailDto(user.getId(), user.getEmail());
     }
 

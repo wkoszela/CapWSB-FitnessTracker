@@ -1,17 +1,13 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
-
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -22,20 +18,16 @@ class UserController {
 
     private final UserMapper userMapper;
 
-    @GetMapping("/simple/{id}")
-//    public List<UserDto> getAllUsers() {
-//        return userService.findAllUsers()
-//                          .stream()
-//                          .map(userMapper::toDto)
-//                          .toList();
-//    }
 
-    public List<UserSimpleDto> getAllUsers() {
-        return userService.findAllUsers()
-                .stream()
-                .map(userMapper::toSimpleDto)
-                .toList();
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.findAllUsers().stream()
+                .map(user -> userMapper.toDto(user)) // wywołanie metody toDto() na instancji userMapper
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
+
+
 
     @GetMapping("/simple")
     public ResponseEntity<List<UserSimpleDto>> getAllSimpleUsers() {
@@ -92,6 +84,8 @@ class UserController {
     }
 
 
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDto> removeUser(@PathVariable Long id) {
         Optional<User> user =  userService.findUserById(id);
@@ -103,9 +97,40 @@ class UserController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        User updatedUser = userService.updateUser(id, userMapper.toEntity(userDto));
-        return ResponseEntity.ok(userMapper.toDto(updatedUser));
+//    @PutMapping("/{id}")
+//    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+//        User updatedUser = userService.updateUser(id, userMapper.toEntity(userDto));
+//        return ResponseEntity.ok(userMapper.toDto(updatedUser));
+//    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(
+            @PathVariable("userId") Long id,
+            @RequestBody UserDto userDto
+    ) {
+        Optional<User> optionalUser = userService.getUser(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setFirstName(userDto.firstName());
+            user.setLastName(userDto.lastName());
+            user.setBirthdate(userDto.birthdate());
+            user.setEmail(userDto.email());
+
+            User updatedUser = userService.updateUser(user);
+            return ResponseEntity.ok().body(userMapper.toDto(updatedUser));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        Optional<User> optionalUser = userService.findUserById(id);
+        if (optionalUser.isPresent()) {
+            UserDto userDto = userMapper.toDto(optionalUser.get());
+            return ResponseEntity.ok(userDto);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+    }
+
 }
