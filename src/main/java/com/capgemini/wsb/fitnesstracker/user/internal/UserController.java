@@ -1,12 +1,19 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserBasicDto;
+import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
+import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -17,22 +24,117 @@ class UserController {
 
     private final UserMapper userMapper;
 
-    @GetMapping
-    public List<UserDto> getAllUsers() {
+    private final UserBasicMapper userBasicMapper;
+
+    private final UserEmailMapper userEmailMapper;
+
+    /**
+     * Retrieves all users with basic information.
+     *
+     * @return a list of {@link UserBasicDto}
+     */
+    @GetMapping("/simple")
+    public List<UserBasicDto> getAllUsersSimple() {
         return userService.findAllUsers()
                           .stream()
-                          .map(userMapper::toDto)
+                          .map(userBasicMapper::toDto)
                           .toList();
     }
+    /**
+     * Retrieves all users with detailed information.
+     *
+     * @return a list of {@link UserDto}
+     */
+    @GetMapping()
+    public List<UserDto> getAllUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
 
+    /**
+     * Retrieves a user by ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return the {@link UserDto} of the user
+     * @throws UserNotFoundException if the user with the specified ID is not found
+     */
+    @GetMapping("/{userID}")
+    public UserDto getUserById (@PathVariable("userID") final Long id){
+        Optional<User> user = userService.getUser(id);
+        if(user.isPresent()){
+            return userMapper.toDto(user.get());
+        }
+        throw new UserNotFoundException(id);
+    }
+    /**
+     * Creates a new user.
+     *
+     * @param userDto the DTO of the user to create
+     * @return the created {@link User}
+     * @throws InterruptedException if the creation process is interrupted
+     */
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+        User createduser = userService.createUser(userMapper.toEntity(userDto));
+        return createduser;
+    }
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id the ID of the user to delete
+     * @return the deleted {@link User}
+     * @throws UserNotFoundException if the user with the specified ID is not found
+     */
+    @DeleteMapping("/{userID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public User deleteUser(@PathVariable("userID") final Long id){
+        Optional<User> user = userService.getUser(id);
+        if(user.isPresent()){
+            return userService.deleteUser(user.get());
+        }
+        throw new UserNotFoundException(id);
+    }
 
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
+    /**
+     * Searches for users by email fragment (case-insensitive).
+     *
+     * @param emailFragment the fragment of the email to search for
+     * @return a list of {@link UserBasicDto} with ID and email only
+     */
+    @GetMapping("/email")
+    public List<UserEmailDto> searchUsersByEmailFragment(@RequestParam("emailFragment") String emailFragment) {
+        return userService.findUsersByEmailFragment(emailFragment)
+                .stream()
+                .map(userEmailMapper::toDto)
+                .toList();
+    }
+    /**
+     * Finds users older than a specified date.
+     *
+     * @param time the date to compare against
+     * @return a list of {@link UserDto}
+     */
+    @GetMapping("/older/{time}")
+    public List<UserDto> findUsersOlder(@PathVariable("time")LocalDate time){
+        return userService.findUsersOlder(time)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
 
-        // TODO: saveUser with Service and return User
-        return null;
+    /**
+     * Updates a user by ID.
+     *
+     * @param userId the ID of the user to update
+     * @param upUser the updated user data
+     * @return the updated {@link UserDto}
+     */
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> uptadeUser (@PathVariable("userId") Long userId, @RequestBody UserDto upUser){
+        return new ResponseEntity<>(userService.updateUser(userId, userMapper.toEntity(upUser)));
     }
 
 }

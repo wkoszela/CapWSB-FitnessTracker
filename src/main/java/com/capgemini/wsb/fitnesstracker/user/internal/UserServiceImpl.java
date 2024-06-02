@@ -1,14 +1,20 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +33,20 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public User deleteUser(User user) {
+        if(user!=null){
+            userRepository.delete(user);
+            return user;
+        }
+        throw new UserNotFoundException(user.getId());
+    }
+
+    @Override
+    public List<User> findUsersByEmailFragment(String emailFragment) {
+       return userRepository.findByEmailFragment(emailFragment);
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
@@ -41,4 +61,12 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    public List<User> findUsersOlder(LocalDate time) { return userRepository.findAllByBirthdateBefore(time);
+    }
+
+    public HttpStatusCode updateUser(Long userId, User entity) {
+        entity.setId(userId);
+        userRepository.save(entity);
+        return OK;
+    }
 }
