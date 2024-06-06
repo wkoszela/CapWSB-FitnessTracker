@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "cc6f2c01-f2b1-4c7f-a2f2-9f37c534ddb0",
+		"name": "Fitness Tracker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35949478"
+	},
+	"item": [
+		{
+			"name": "all trainings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/trainings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all trainings to user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/trainings/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ends training about date",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/trainings/finished/2024-01-19?=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings",
+						"finished",
+						"2024-01-19"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new training",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 11,\r\n    \"startTime\": \"2024-04-01T11:00:00\",\r\n    \"endTime\": \"2024-04-01T12:00:00\",\r\n    \"activityType\": \"RUNNING\",\r\n    \"distance\": 10.52,\r\n    \"averageSpeed\": 8.2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/trainings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"trainings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

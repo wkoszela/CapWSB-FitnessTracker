@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
+import com.capgemini.wsb.fitnesstracker.training.api.Training;
+import com.capgemini.wsb.fitnesstracker.training.api.TrainingDTO;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserBasicDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -36,10 +40,11 @@ class UserController {
     @GetMapping("/simple")
     public List<UserBasicDto> getAllUsersSimple() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userBasicMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userBasicMapper::toDto)
+                .toList();
     }
+
     /**
      * Retrieves all users with detailed information.
      *
@@ -61,13 +66,14 @@ class UserController {
      * @throws UserNotFoundException if the user with the specified ID is not found
      */
     @GetMapping("/{userID}")
-    public UserDto getUserById (@PathVariable("userID") final Long id){
+    public UserDto getUserById(@PathVariable("userID") final Long id) {
         Optional<User> user = userService.getUser(id);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return userMapper.toDto(user.get());
         }
         throw new UserNotFoundException(id);
     }
+
     /**
      * Creates a new user.
      *
@@ -81,6 +87,7 @@ class UserController {
         User createduser = userService.createUser(userMapper.toEntity(userDto));
         return createduser;
     }
+
     /**
      * Deletes a user by ID.
      *
@@ -90,9 +97,9 @@ class UserController {
      */
     @DeleteMapping("/{userID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public User deleteUser(@PathVariable("userID") final Long id){
+    public User deleteUser(@PathVariable("userID") final Long id) {
         Optional<User> user = userService.getUser(id);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             return userService.deleteUser(user.get());
         }
         throw new UserNotFoundException(id);
@@ -111,6 +118,7 @@ class UserController {
                 .map(userEmailMapper::toDto)
                 .toList();
     }
+
     /**
      * Finds users older than a specified date.
      *
@@ -118,23 +126,16 @@ class UserController {
      * @return a list of {@link UserDto}
      */
     @GetMapping("/older/{time}")
-    public List<UserDto> findUsersOlder(@PathVariable("time")LocalDate time){
+    public List<UserDto> findUsersOlder(@PathVariable("time") LocalDate time) {
         return userService.findUsersOlder(time)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
     }
 
-    /**
-     * Updates a user by ID.
-     *
-     * @param userId the ID of the user to update
-     * @param upUser the updated user data
-     * @return the updated {@link UserDto}
-     */
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> uptadeUser (@PathVariable("userId") Long userId, @RequestBody UserDto upUser){
-        return new ResponseEntity<>(userService.updateUser(userId, userMapper.toEntity(upUser)));
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserDto user) {
+        User updateUser = userService.updateUser(userId, user);
+        return ResponseEntity.ok(updateUser);
     }
-
 }
