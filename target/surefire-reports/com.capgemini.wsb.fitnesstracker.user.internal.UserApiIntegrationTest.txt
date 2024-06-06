@@ -1,0 +1,82 @@
+-------------------------------------------------------------------------------
+Test set: com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.273 s <<< FAILURE! -- in com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllSimpleUsers_whenGettingAllUsers -- Time elapsed: 0.012 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllSimpleUsers_whenGettingAllUsers(UserApiIntegrationTest.java:60)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldPersistUser_whenCreatingUser -- Time elapsed: 0.081 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<200>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldPersistUser_whenCreatingUser(UserApiIntegrationTest.java:157)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserByEmail -- Time elapsed: 0.010 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserByEmail(UserApiIntegrationTest.java:92)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserById -- Time elapsed: 0.012 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnDetailsAboutUser_whenGettingUserById(UserApiIntegrationTest.java:77)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldUpdateUser_whenUpdatingUser -- Time elapsed: 0.067 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+expected: "Mike"
+ but was: "0fc0f8bb-6cda-4307-a1e1-34349339ebe4"
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldUpdateUser_whenUpdatingUser(UserApiIntegrationTest.java:200)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllUsersOlderThan_whenGettingAllUsersOlderThan -- Time elapsed: 0.010 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldReturnAllUsersOlderThan_whenGettingAllUsersOlderThan(UserApiIntegrationTest.java:106)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldRemoveUserFromRepository_whenDeletingClient -- Time elapsed: 0.009 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<204> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.user.internal.UserApiIntegrationTest.shouldRemoveUserFromRepository_whenDeletingClient(UserApiIntegrationTest.java:123)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

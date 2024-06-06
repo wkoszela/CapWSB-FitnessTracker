@@ -1,0 +1,70 @@
+-------------------------------------------------------------------------------
+Test set: com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 1.279 s <<< FAILURE! -- in com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllTrainings_whenGettingAllTrainings -- Time elapsed: 0.224 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllTrainings_whenGettingAllTrainings(TrainingApiIntegrationTest.java:42)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldPersistTraining_whenCreatingNewTraining -- Time elapsed: 0.012 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldPersistTraining_whenCreatingNewTraining(TrainingApiIntegrationTest.java:148)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllFinishedTrainingsAfterTime_whenGettingAllFinishedTrainingsAfterTime -- Time elapsed: 0.015 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllFinishedTrainingsAfterTime_whenGettingAllFinishedTrainingsAfterTime(TrainingApiIntegrationTest.java:92)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.getAllTrainingByActivityType_whenGettingAllTrainingByActivityType -- Time elapsed: 0.012 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.getAllTrainingByActivityType_whenGettingAllTrainingByActivityType(TrainingApiIntegrationTest.java:115)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldUpdateTraining_whenUpdatingTraining -- Time elapsed: 0.011 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldUpdateTraining_whenUpdatingTraining(TrainingApiIntegrationTest.java:175)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllTrainingsForDedicatedUser_whenGettingAllTrainingsForDedicatedUser -- Time elapsed: 0.010 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.capgemini.wsb.fitnesstracker.training.TrainingApiIntegrationTest.shouldReturnAllTrainingsForDedicatedUser_whenGettingAllTrainingsForDedicatedUser(TrainingApiIntegrationTest.java:67)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -1,0 +1,5 @@
+# Created at 2024-06-02T17:16:27.654
+Boot Manifest-JAR contains absolute paths in classpath 'D:\studia\Wprowadzenie do technologii backendowych\spring\CapWSB-FitnessTracker-master Adrian\CapWSB-FitnessTracker-master\CapWSB-FitnessTracker-master\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
