@@ -45,17 +45,15 @@ Stworzone API powinno pozwalać na:
 
 Stworzone API powinno pozwalać na:
 
-- [ ] wylistowanie podstawowych informacji o wszystkich statystykach zapisanych w systemie
 - [ ] utworzenie nowych statystyk
 - [ ] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
   użytkownika.
 - [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
 - [ ] usunięcie statystyk
-- [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
-  tylko ID oraz e-mail użytkowników)
-- [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
+- [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
 
-### Wymagania techniczne
+
+### Wymagania techniczneĪ
 
 - [ ] przygotowanie danych wejściowych (uzupełnienie skryptu ładującego dane przy starcie aplikacji)
 - [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
