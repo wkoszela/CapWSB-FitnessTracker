@@ -1,27 +1,33 @@
 # LABORATORIUM 02
 
-## Kontynuacja LABORATORIUM 01 oraz stworzenie aspekt logującego wywołania metod serwisów
+Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring.
+Termin upływa na 7 dni po rozpoczęciu laboratorium.
 
-## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów)
+## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
 ### Potrzeba biznesowa
 
-Jako użytkownik, chce mieć możliwość dostępu do panelu z treningami:
+Jako użytkownik systemu, chcę mieć możliwość zarządzania użytkownikami
+serwisu FitnessTracker:
 
-- tworzenie nowych,
-- wyświetlanie swoich treningów,
-- aktualizacji trenigów
+- móc ich wyszukiwać, pobierać
+- móc wprowadzać nowych użytkowników do systemu
+- móc usuwać użytkowników z systemu
+- móc aktualizować użytkowników
 
 ### Wymagania funkcjonalne
 
 Stworzone API powinno pozwalać na:
 
-- [ ] wyszukiwanie wszystkich treningów
-- [ ] wyszukiwanie treningów dla określonego Użytkownika:
-- [ ] wyszukiwanie wszystkich treningów zakończonych (po konkretnej zdefiniowanej dacie)
-- [ ] wyszukiwanie wszystkich treningów dla konkretnej aktywności (np. wszystkie treningi biegowe)
-- [ ] utworzenie nowego treningu
-- [ ] aktualizacja treningu (dowolnie wybrane pole np. dystans)
+- [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
+  uzytkownika)
+- [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
+- [ ] utworzenie nowego użytkownika
+- [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
+- [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
+  tylko ID oraz e-mail użytkowników)
+- [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
+- [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
 
 ### Wymagania techniczne
 
@@ -30,40 +36,39 @@ Stworzone API powinno pozwalać na:
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
+- [ ] (OPCJONALNIE) rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
-- [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
+- [ ] rozwiązanie powinno wykorzystywać rekordy (Java 16+) do definicji obiektów transferu danych (DTO)
 
-## ZADANIE 2 (opcjonalne). Sieciowe API do operacji typu CRUD na Statistics (bez użycia rekordów)
+## ZADANIE 2: Zabezpieczenie API (Opcjonalnie)
 
-### Potrzeba biznesowa
+### Potrzeba biznesowa:
+
+Jako administrator systemu, chcę zabezpieczyć API, z którego mogą korzystać różne systemy
+
+- API potrzebne do zbierania metryk powinno być dostępne dla narzędzi monitorujących
+- API, które nie modyfikuje danych, powinno być dostępne dla znanych użytkowników
+- API, które może modyfikować dane, powinno być zabezpieczone przed nieuprawnionym dostępem
 
 ### Wymagania funkcjonalne
 
-Stworzone API powinno pozwalać na:
+Zabezpieczenia, powinny zagwarantować:
 
-- [ ] utworzenie nowych statystyk
-- [ ] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
-  użytkownika.
-- [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
-- [ ] usunięcie statystyk
-- [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
+- [ ] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
+  uprawnień
+- [ ] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
+- [ ] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
+- [ ] lista użytkowników i ich ról jest statyczna (nie zmienia się)
 
+### Wymagania techniczne
 
-### Wymagania techniczneĪ
-
-- [ ] przygotowanie danych wejściowych (uzupełnienie skryptu ładującego dane przy starcie aplikacji)
-- [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
-- [ ] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
-  domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
-  znaleźć można w `UserRepository`
+- [ ] zabezpieczenie powinno wykorzystywać bibliotekę Spring Security
+- [ ] użytkownik może uwierzytelnić się jedynie za pomocą Basic Auth
 - [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
-  stworzone API
-- [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
+  rozwiązanie

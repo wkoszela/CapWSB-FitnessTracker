@@ -1,37 +1,70 @@
-## ZADANIE 1. API sieciowe do generowania raportów treningowych
+# LABORATORIUM 03
+
+## Kontynuacja LABORATORIUM 01 oraz stworzenie aspekt logującego wywołania metod serwisów
+Termin upływa na 7 dni po rozpoczęciu laboratorium.
+
+## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów)
 
 ### Potrzeba biznesowa
 
-Jako użytkownik systemu, chcę mieć możliwość otrzymywania wiadomości e-mailowych z podsumowaniem treningów w każdym
-tygodniu.
+Jako użytkownik, chce mieć możliwość dostępu do panelu z treningami:
+
+- tworzenie nowych,
+- wyświetlanie swoich treningów,
+- aktualizacji trenigów
 
 ### Wymagania funkcjonalne
 
-- [ ] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
-  danego tygodnia
-- [ ] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
+Stworzone API powinno pozwalać na:
 
-
-## ZADANIE 2. Programowanie aspektowe (opcjonalnie, proszę zerknąć w Lab branch (livecoding pakiet)
-
-### Potrzeba biznesowa
-
-Jako pracownik utrzymania, chcę mieć możliwość kontroli wykonania się kodu programu za pomocą logów aplikacji.
-
-### Wymagania funkcjonalne
-
-- [ ] być uruchomiony podczas wywoływania metod publicznych serwisów (klas adnotowanych `@Service`)
-- [ ] przed wywołaniem metody logować o niej informację w
-  formacie (`typ zwracany nazwaKlasy.nazwaMetody(typParametru1 nazwaParametru1, ...)`),
-  np. `void MyService.myMethod(String param1, Boolean param2)`
-- [ ] po wywołaniu metody logować informację o metodzie (w tym samym formacie co przed wywołaniem) wraz z informacją na
-  temat zwróconej wartości (wystarczy jej toString())
+- [ ] wyszukiwanie wszystkich treningów
+- [ ] wyszukiwanie treningów dla określonego Użytkownika:
+- [ ] wyszukiwanie wszystkich treningów zakończonych (po konkretnej zdefiniowanej dacie)
+- [ ] wyszukiwanie wszystkich treningów dla konkretnej aktywności (np. wszystkie treningi biegowe)
+- [ ] utworzenie nowego treningu
+- [ ] aktualizacja treningu (dowolnie wybrane pole np. dystans)
 
 ### Wymagania techniczne
 
-- [ ] aspekt powinien zostać zaimplementowany z użyciem biblioteki AspectJ
+- [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
+- [ ] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
+  domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
+  znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] testy jednostkowe rozwiązania nie są wymagane
-- [ ] testy integracyjne rozwiązania nie są wymagane
+- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
+- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
+  stworzone API
+- [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
+
+## ZADANIE 2 (opcjonalne). Sieciowe API do operacji typu CRUD na Statistics (bez użycia rekordów)
+
+### Potrzeba biznesowa
+
+### Wymagania funkcjonalne
+
+Stworzone API powinno pozwalać na:
+
+- [ ] utworzenie nowych statystyk
+- [ ] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
+  użytkownika.
+- [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
+- [ ] usunięcie statystyk
+- [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
+
+
+### Wymagania techniczneĪ
+
+- [ ] przygotowanie danych wejściowych (uzupełnienie skryptu ładującego dane przy starcie aplikacji)
+- [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
+- [ ] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
+  domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
+  znaleźć można w `UserRepository`
+- [ ] rozwiązanie powinno spełniać zasady SOLID
+- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
+- [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
+- [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
+- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
+  stworzone API
+- [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
