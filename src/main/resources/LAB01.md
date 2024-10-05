@@ -15,4 +15,4 @@ Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w pr
 10. Znajdź i uruchom testy jednostkowe
 11. Udostępnij prowadzącemu link do repozytorium (wrzuć link do Excela, jedna osoba z pary).
 
-Termin upływa na 7 dni po rozpoczęciu laboratorium.
+Termin upływa po 7 dniach od rozpoczęciu laboratorium.

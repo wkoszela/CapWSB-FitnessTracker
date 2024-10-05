@@ -1,8 +1,7 @@
 # LABORATORIUM 03
 
 ## Kontynuacja LABORATORIUM 01 oraz stworzenie aspekt logującego wywołania metod serwisów
-Termin upływa na 7 dni po rozpoczęciu laboratorium.
-
+Termin upływa po 7 dniach od rozpoczęciu laboratorium.
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów)
 
 ### Potrzeba biznesowa

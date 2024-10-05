@@ -4,8 +4,7 @@
 
 Jako użytkownik systemu, chcę mieć możliwość otrzymywania wiadomości e-mailowych z podsumowaniem treningów w każdym
 tygodniu.
-Termin upływa na 7 dni po rozpoczęciu laboratorium.
-
+Termin upływa po 7 dniach od rozpoczęciu laboratorium.
 ### Wymagania funkcjonalne
 
 - [ ] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
