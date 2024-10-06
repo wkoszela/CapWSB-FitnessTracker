@@ -7,6 +7,4 @@ import java.time.LocalDate;
 
 record UserDto(@Nullable Long Id, String firstName, String lastName,
                @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
-               String email) {
-
-}
+               String email) {}
