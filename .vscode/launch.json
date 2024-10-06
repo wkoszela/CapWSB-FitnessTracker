@@ -1,36 +1,36 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "FitnessTracker",
-            "request": "launch",
-            "mainClass": "com.capgemini.wsb.FitnessTracker",
-            "projectName": "CapWSB-FitnessTracker",
-            "args": ["--server.port=8081"]
-        },
-        {
-            "type": "java",
-            "name": "IoC",
-            "request": "launch",
-            "mainClass": "com.capgemini.wsb.fitnesstracker.livecoding.ioc.IoC",
-            "projectName": "CapWSB-FitnessTracker"
-        },
-        {
-            "type": "java",
-            "name": "WithoutIoC",
-            "request": "launch",
-            "mainClass": "com.capgemini.wsb.fitnesstracker.livecoding.ioc.WithoutIoC",
-            "projectName": "CapWSB-FitnessTracker"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "FitnessTracker",
+      "request": "launch",
+      "mainClass": "com.capgemini.wsb.FitnessTracker",
+      "projectName": "CapWSB-FitnessTracker",
+      "args": ["--server.port=8081"]
+    },
+    {
+      "type": "java",
+      "name": "IoC",
+      "request": "launch",
+      "mainClass": "com.capgemini.wsb.fitnesstracker.livecoding.ioc.IoC",
+      "projectName": "CapWSB-FitnessTracker"
+    },
+    {
+      "type": "java",
+      "name": "WithoutIoC",
+      "request": "launch",
+      "mainClass": "com.capgemini.wsb.fitnesstracker.livecoding.ioc.WithoutIoC",
+      "projectName": "CapWSB-FitnessTracker"
+    }
+  ]
 }
