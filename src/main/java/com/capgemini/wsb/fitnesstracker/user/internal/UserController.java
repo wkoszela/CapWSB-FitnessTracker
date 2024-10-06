@@ -62,4 +62,12 @@ class UserController {
                 .toList();
     }
 
+    @GetMapping("/older/{date}")
+    public List<UserDto> getUsersOlderThan(@PathVariable String date) {
+        return userService.findOlderThan(date)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
 }
