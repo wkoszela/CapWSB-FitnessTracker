@@ -41,6 +41,7 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    @Override
     public List<User> findOlderThan(String birthDate) {
         return userRepository.findOlderThan(birthDate);
     }

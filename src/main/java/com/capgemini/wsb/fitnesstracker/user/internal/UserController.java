@@ -38,6 +38,11 @@ class UserController {
         return null;
     }
 
+    /**
+     * This method returns a list of all users in a simplified form.
+     * 
+     * @return List of all users in a simplified form
+     */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllUsersSimple() {
         return userService.findAllUsers()
@@ -46,6 +51,12 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * This method returns a user with a given ID.
+     * 
+     * @param userId ID of the user to be returned
+     * @return User with given ID
+     */
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable Long userId) {
         return userService.getUser(userId)
@@ -53,6 +64,12 @@ class UserController {
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
+    /**
+     * This method returns a user with a given e-mail address.
+     * 
+     * @param email E-mail address of the user to be returned
+     * @return User with given e-mail address
+     */
     @GetMapping("/email")
     public List<UserDto> getUserByEmail(@RequestParam String email) {
         System.out.println("User with e-mail: " + email + "passed to the request");
@@ -62,9 +79,15 @@ class UserController {
                 .toList();
     }
 
-    @GetMapping("/older/{date}")
-    public List<UserDto> getUsersOlderThan(@PathVariable String date) {
-        return userService.findOlderThan(date)
+    /**
+     * This method returns a list of users older than a given birth date.
+     * 
+     * @param birthDate Birth date to compare
+     * @return List of users older than given birth date
+     */
+    @GetMapping("/older/{birthDate}")
+    public List<UserDto> getUsersOlderThan(@PathVariable String birthDate) {
+        return userService.findOlderThan(birthDate)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
