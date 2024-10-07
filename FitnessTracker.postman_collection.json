@@ -56,6 +56,24 @@
 			"response": []
 		},
 		{
+			"name": "Get User Older By",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLv1}}users/older-then/30",
+					"host": [
+						"{{URLv1}}users"
+					],
+					"path": [
+						"older-then",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete User",
 			"request": {
 				"method": "DELETE",

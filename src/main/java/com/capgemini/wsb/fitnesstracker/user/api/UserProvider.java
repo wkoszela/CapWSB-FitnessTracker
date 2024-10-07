@@ -30,4 +30,5 @@ public interface UserProvider {
      */
     List<UserSummaryDto> findAllUsers();
 
+    List<UserDto> findUsersOlderThen(Integer age);
 }

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +51,15 @@ class UserServiceImpl implements UserService, UserProvider {
                 .map(userMapper::toSummaryDto)
                 .toList();
     }
+    @Override
+    public List<UserDto> findUsersOlderThen(Integer age) {
+        return userRepository.findAll()
+                .stream()
+                .filter(s -> isOlder(s, age))
+                .map(userMapper::toDto)
+                .toList();
+    }
+
 
     @Override
     public void deleteUser(final Long userId) {
@@ -57,5 +68,12 @@ class UserServiceImpl implements UserService, UserProvider {
             userRepository.deleteById(userId);
         }
         throw new NotFoundException("User not found");
+    }
+
+    private Boolean isOlder(User user, Integer age){
+        LocalDate today = LocalDate.now();
+        LocalDate userDate = user.getBirthdate();
+        int difference = userDate.until(today).getYears();
+        return difference > age;
     }
 }

@@ -17,7 +17,7 @@ class UserController {
     private final UserMapper userMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
         var user = userService.getUser(id);
         if(user.isPresent()){
             return ResponseEntity.ok(user);
@@ -27,7 +27,7 @@ class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
+    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
         var user = userService.getUserByEmail(email);
         if(user.isPresent()){
             return ResponseEntity.ok(user);
@@ -36,13 +36,18 @@ class UserController {
                 .body("No user found with this email");
     }
 
+    @GetMapping("/older-then/{age}")
+    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") Integer age) {
+        return ResponseEntity.ok(userService.findUsersOlderThen(age));
+    }
+
     @GetMapping
-    public ResponseEntity<?> getUsers() {
+    public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
     @PostMapping
-    public ResponseEntity<?> addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public ResponseEntity<Object> addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         if(userService.getUserByEmail(userDto.email()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
