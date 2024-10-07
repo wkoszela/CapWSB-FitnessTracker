@@ -1,10 +1,10 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -12,35 +12,36 @@ import java.util.Map;
 class UserController {
 
     private final UserServiceImpl userService;
+    private final UserMapper userMapper;
 
-    @GetMapping
-    public Object getUsers(@RequestParam Map<String, String> params) {
-        if (params.isEmpty()){
-            // Return all users if no params are provided
-            return userService.findAllUsers();
-        }
-        if (params.size() > 1){
-            return "Please provide only one parameter"; // REQUEST
-        }
-        return switch(params.keySet().toArray()[0].toString()) {
-            // Return the single user if id is provided
-            case "id" -> userService.getUser(Long.parseLong(params.get("id")));
-
-            // Bad param
-            default -> "No param found";
-        };
+    @GetMapping("/{id}")
+    public Object getUser(@PathVariable("id") long id) {
+        var user = userService.getUser(id);
+        return user.isPresent() ? user : new ResponseStatusException(404, "No user found with this id", null);
     }
 
-
+    @GetMapping
+    public Object getUsers() {
+        return userService.findAllUsers();
+    }
 
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public Object addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
+        if(userService.getUserByEmail(userDto.email()).isPresent()) {
+            return new ResponseStatusException(409, "User already exists", null);
+        }
 
-        // TODO: saveUser with Service and return User
-        return null;
+        System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
+
+
+        // saveUser with Service and return User or Exception
+        try{
+            return userService.createUser(userMapper.toEntity(userDto));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseStatusException(400, "Error creating new user", e);
+        }
     }
 
 }

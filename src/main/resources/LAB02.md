@@ -20,8 +20,8 @@ Stworzone API powinno pozwalać na:
 
 - [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   uzytkownika)
-- [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
-- [ ] utworzenie nowego użytkownika
+- [x] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
+- [x] utworzenie nowego użytkownika
 - [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
   tylko ID oraz e-mail użytkowników)
@@ -38,7 +38,7 @@ Stworzone API powinno pozwalać na:
 - [ ] (OPCJONALNIE) rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
-- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
+- [x] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
 - [ ] rozwiązanie powinno wykorzystywać rekordy (Java 16+) do definicji obiektów transferu danych (DTO)
 

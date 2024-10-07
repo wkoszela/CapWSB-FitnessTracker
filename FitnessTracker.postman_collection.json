@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "0b210880-9ce4-4076-93f6-ad0a5f9845b6",
+		"name": "FitnessTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26649691"
+	},
+	"item": [
+		{
+			"name": "Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLv1}}users",
+					"host": [
+						"{{URLv1}}users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLv1}}users/1",
+					"host": [
+						"{{URLv1}}users"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Jon\",\r\n    \"lastName\": \"Doe\",\r\n    \"birthdate\": \"1999-01-01\",\r\n    \"email\": \"Jon.Doe@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLv1}}users",
+					"host": [
+						"{{URLv1}}users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URLv1",
+			"value": "localhost:1010/v1/",
+			"type": "string"
+		}
+	]
+}
