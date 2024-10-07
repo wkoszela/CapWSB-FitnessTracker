@@ -38,17 +38,37 @@
 			"response": []
 		},
 		{
+			"name": "Get User By email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLv1}}users?email=Emma.Johnson@domain.com",
+					"host": [
+						"{{URLv1}}users"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "Emma.Johnson@domain.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete User",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URLv1}}users/10",
+					"raw": "{{URLv1}}users/1",
 					"host": [
 						"{{URLv1}}users"
 					],
 					"path": [
-						"10"
+						"1"
 					]
 				}
 			},
@@ -61,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Jon\",\r\n    \"lastName\": \"Doe\",\r\n    \"birthdate\": \"1999-01-01\",\r\n    \"email\": \"Jon.Doe@mail.com\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"Jon\",\r\n    \"lastName\": \"Doe\",\r\n    \"birthdate\": \"1999-01-01\",\r\n    \"email\": \"Jon.Dsoe@mail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -23,14 +23,14 @@ Stworzone API powinno pozwalać na:
 - [x] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
 - [x] utworzenie nowego użytkownika
 - [x] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
-- [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
+- [x] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
   tylko ID oraz e-mail użytkowników)
 - [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
 - [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
 
 ### Wymagania techniczne
 
-- [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
+- [x] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
 - [ ] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`

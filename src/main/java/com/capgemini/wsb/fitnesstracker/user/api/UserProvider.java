@@ -21,7 +21,7 @@ public interface UserProvider {
      * @param email The email of the user to be searched
      * @return An {@link Optional} containing the located user, or {@link Optional#empty()} if not found
      */
-    Optional<User> getUserByEmail(String email);
+    Optional<UserEmailDto> getUserByEmail(String email);
 
     /**
      * Retrieves all users.
