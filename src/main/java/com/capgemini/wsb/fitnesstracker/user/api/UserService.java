@@ -8,6 +8,6 @@ public interface UserService {
 
     User createUser(User user);
 
-    Boolean deleteUser(Long userId);
+    void deleteUser(Long userId);
 
 }

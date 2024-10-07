@@ -8,7 +8,6 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,11 +52,10 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Boolean deleteUser(final Long userId) {
+    public void deleteUser(final Long userId) {
         var user = userRepository.findById(userId);
         if(user.isPresent()) {
             userRepository.deleteById(userId);
-            return true;
         }
         throw new NotFoundException("User not found");
     }
