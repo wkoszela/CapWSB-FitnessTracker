@@ -7,9 +7,14 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -29,13 +34,14 @@ class UserController {
     }
 
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public ResponseEntity<User> addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
 
-        // TODO: saveUser with Service and return User
-        return null;
+        // return userService.createUser(userMapper.toEntity(userDto));
+        User createdUser = userService.createUser(userMapper.toEntity(userDto));
+        return new ResponseEntity<User>(createdUser, HttpStatus.CREATED);
     }
 
     /**
@@ -93,4 +99,15 @@ class UserController {
                 .toList();
     }
 
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        User updatedUser = userService.updateUser(userId, userMapper.toEntity(userDto));
+        return new ResponseEntity<>(userMapper.toDto(updatedUser), HttpStatus.OK);
+    }
 }

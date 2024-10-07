@@ -3,6 +3,11 @@ package com.capgemini.wsb.fitnesstracker.user.api;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface (API) for retrieving operations on {@link User} entities through
+ * the
+ * API.
+ */
 public interface UserProvider {
 
     /**
