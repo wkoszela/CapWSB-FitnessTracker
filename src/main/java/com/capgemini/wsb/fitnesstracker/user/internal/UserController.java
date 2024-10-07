@@ -99,15 +99,28 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * This method deletes a user with a given ID.
+     * 
+     * @param userId ID of the user to be deleted
+     * @return Response entity with status NO_CONTENT
+     */
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * This method updates a user with a given ID.
+     * 
+     * @param userId  ID of the user to be updated
+     * @param userDto User data to be updated
+     * @return Updated user
+     */
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+    public UserDto updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
         User updatedUser = userService.updateUser(userId, userMapper.toEntity(userDto));
-        return new ResponseEntity<>(userMapper.toDto(updatedUser), HttpStatus.OK);
+        return userMapper.toDto(updatedUser);
     }
 }
