@@ -43,15 +43,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URLv1}}users?email=Emma.Johnson@domain.com",
+					"raw": "{{URLv1}}users/email/Emma.Johnson@domain.com",
 					"host": [
 						"{{URLv1}}users"
 					],
-					"query": [
-						{
-							"key": "email",
-							"value": "Emma.Johnson@domain.com"
-						}
+					"path": [
+						"email",
+						"Emma.Johnson@domain.com"
 					]
 				}
 			},
