@@ -17,6 +17,7 @@ class UserController {
 
     private final UserMapper userMapper;
 
+    // Według wykładu poprawne mapowanie w serwisie powinno być
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
