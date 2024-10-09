@@ -61,7 +61,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public List<UserDto> findUsersOlderThen(Integer age) {
+    public List<UserDto> findUsersOlderThen(LocalDate age) {
         return userRepository.findAll()
                 .stream()
                 .filter(s -> isOlder(s, age))
@@ -79,10 +79,8 @@ class UserServiceImpl implements UserService, UserProvider {
         throw new NotFoundException("User not found");
     }
 
-    private Boolean isOlder(User user, Integer age){
-        LocalDate today = LocalDate.now();
+    private Boolean isOlder(User user, LocalDate age){
         LocalDate userDate = user.getBirthdate();
-        int difference = userDate.until(today).getYears();
-        return difference > age;
+        return age.isAfter(userDate);
     }
 }

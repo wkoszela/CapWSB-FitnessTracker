@@ -2,10 +2,16 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
+import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 
 @RestController
@@ -26,8 +32,8 @@ class UserController {
                 .body("No user found with this id");
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
+    @GetMapping("/email")
+    public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
         var user = userService.getUserByEmail(email);
         if(user.isPresent()){
             return ResponseEntity.ok(user);
@@ -36,8 +42,25 @@ class UserController {
                 .body("No user found with this email");
     }
 
-    @GetMapping("/older-then/{age}")
-    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") Integer age) {
+    // #################################################################################################################
+    // /email that passes the test, although I'm conflicted on whether it's correct. Saved for code review.
+    // #################################################################################################################
+
+//    @GetMapping("/email")
+//    public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
+//        var user = userService.getUserByEmail(email);
+//        var list = Collections.singletonList(user);
+//        if(user.isPresent()){
+//            return ResponseEntity.ok(list);
+//        }
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                .body("No user found with this email");
+//    }
+
+    // #################################################################################################################
+
+    @GetMapping("/older/{age}")
+    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") LocalDate age) {
         return ResponseEntity.ok(userService.findUsersOlderThen(age));
     }
 
