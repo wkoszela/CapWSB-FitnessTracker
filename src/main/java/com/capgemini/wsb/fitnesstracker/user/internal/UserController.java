@@ -41,6 +41,11 @@ class UserController {
         return ResponseEntity.ok(userService.findUsersOlderThen(age));
     }
 
+    @GetMapping("/simple")
+    public ResponseEntity<Object> getUsersSimple() {
+        return ResponseEntity.ok(userService.findAllUsersSimple());
+    }
+
     @GetMapping
     public ResponseEntity<Object> getUsers() {
         return ResponseEntity.ok(userService.findAllUsers());

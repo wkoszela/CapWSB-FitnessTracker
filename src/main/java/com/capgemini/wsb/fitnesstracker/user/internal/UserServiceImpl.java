@@ -45,12 +45,21 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public List<UserSummaryDto> findAllUsers() {
+    public List<UserDto> findAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<UserSummaryDto> findAllUsersSimple() {
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toSummaryDto)
                 .toList();
     }
+
     @Override
     public List<UserDto> findUsersOlderThen(Integer age) {
         return userRepository.findAll()

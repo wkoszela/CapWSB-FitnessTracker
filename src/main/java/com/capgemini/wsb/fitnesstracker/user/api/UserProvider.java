@@ -28,7 +28,9 @@ public interface UserProvider {
      *
      * @return An {@link Optional} containing the all users,
      */
-    List<UserSummaryDto> findAllUsers();
+    List<UserDto> findAllUsers();
+
+    List<UserSummaryDto> findAllUsersSimple();
 
     List<UserDto> findUsersOlderThen(Integer age);
 }
