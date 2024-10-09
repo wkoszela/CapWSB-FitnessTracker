@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 
 
 @RestController
@@ -37,26 +38,25 @@ class UserController {
                 .body("No user found with this email");
     }
 
-    // #################################################################################################################
-    // /email that passes the test, although I'm conflicted on whether it's correct. Saved for code review.
-    // #################################################################################################################
-
-//    @GetMapping("/email")
-//    public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
-//        var user = userService.getUserByEmail(email);
-//        var list = Collections.singletonList(user);
-//        if(user.isPresent()){
-//            return ResponseEntity.ok(list);
-//        }
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//                .body("No user found with this email");
-//    }
-
-    // #################################################################################################################
+    /**
+     * /email that passes the test, although I'm conflicted on whether it's correct. Saved for code review.
+     * --------------------------------------------------------------------------------------------
+     * \@GetMapping("/email")
+     *     public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
+     *         var user = userService.getUserByEmail(email);
+     *         var list = Collections.singletonList(user);
+     *         if(user.isPresent()){
+     *             return ResponseEntity.ok(list);
+     *         }
+     *         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+     *                 .body("No user found with this email");
+     *     }
+     * --------------------------------------------------------------------------------------------
+     */
 
     @GetMapping("/older/{age}")
-    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") LocalDate age) {
-        return ResponseEntity.ok(userService.findUsersOlderThen(age));
+    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") LocalDate date) {
+        return ResponseEntity.ok(userService.findUsersOlderThen(date));
     }
 
     @GetMapping("/simple")
@@ -70,7 +70,7 @@ class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public ResponseEntity<Object> addUser(@RequestBody UserDto userDto) {
 
         if(userService.getUserByEmail(userDto.email()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)

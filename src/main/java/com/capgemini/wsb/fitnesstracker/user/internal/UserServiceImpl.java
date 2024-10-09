@@ -60,11 +60,17 @@ class UserServiceImpl implements UserService, UserProvider {
                 .toList();
     }
 
+    /**
+     * Query all users based on whether Their birthdate was before the date provided
+     *
+     * @param date date to be compared to
+     * @return {@link List<UserDto>} with users born before the {@param date}
+     */
     @Override
-    public List<UserDto> findUsersOlderThen(final LocalDate age) {
+    public List<UserDto> findUsersOlderThen(final LocalDate date) {
         return userRepository.findAll()
                 .stream()
-                .filter(s -> isOlder(s, age))
+                .filter(s -> isOlder(s, date))
                 .map(userMapper::toDto)
                 .toList();
     }
@@ -83,24 +89,36 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public UserDto updateUser(final Long userId, UserDto userDto){
+
+        // Since email needs to be unique, query by email and throw error when found duplicate
         if(userRepository.findByEmail(userDto.email()).isPresent()) {
             throw new IllegalArgumentException("User with email " + userDto.email() + " already exists!");
         }
         var user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
+        // Create updated dto and update user based on it
         UserDto oldUserDto = userMapper.toDto(user);
         UserDto newUserDto = oldUserDto.update(userDto).addId(userId);
         User newUser = userMapper.toEntity(newUserDto);
         newUser.setId(userId);
+
         log.info("Updating User {}", newUserDto);
         userRepository.save(newUser);
         return newUserDto;
 
     }
 
-    private Boolean isOlder(User user, LocalDate age){
+    /**
+     * Check whether a user's birthdate is before the provided date
+     *
+     * @param user user from db to be compared
+     * @param date provided date
+     * @return {@link Boolean} true if {@param user} was born before {@param date}
+     */
+
+    private Boolean isOlder(User user, LocalDate date){
         LocalDate userDate = user.getBirthdate();
-        return age.isAfter(userDate);
+        return date.isAfter(userDate);
     }
 }
