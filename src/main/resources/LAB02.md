@@ -1,4 +1,4 @@
-# LABORATORIUM 02
+-# LABORATORIUM 02
 
 Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring.
 Termin upływa po 7 dniach od rozpoczęciu laboratorium.

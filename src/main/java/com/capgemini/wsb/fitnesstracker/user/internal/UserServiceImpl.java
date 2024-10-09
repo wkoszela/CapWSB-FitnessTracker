@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class UserServiceImpl implements UserService, UserProvider {
+class UserServiceImpl implements UserService, UserProvider{
 
     private final UserRepository userRepository;
 
@@ -32,7 +34,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<User> getUserByEmail(final String email) {
+    public List<User> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -41,4 +43,30 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    @Override
+    public List<UserBasicInfoDto> findAllBasicInfo() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserBasicInfoDto(user.getId(), user.getFirstName() + " " + user.getLastName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<User> findUserById(final Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    public void deleteUserById(final Long userId) {
+        userRepository.deleteUserById(userId);
+    }
+
+    public User updateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("{User ID not found: " + id));
+        user.setFirstName(userDetails.getFirstName());
+        user.setLastName(userDetails.getLastName());
+        user.setBirthdate(userDetails.getBirthdate());
+        user.setEmail(userDetails.getEmail());
+
+        return userRepository.save(user);
+    }
 }
