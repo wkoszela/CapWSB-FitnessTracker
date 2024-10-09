@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +22,13 @@ class UserServiceImpl implements UserService, UserProvider {
     private final UserMapper userMapper;
 
     @Override
-    public User createUser(final User user) {
-        log.info("Creating User {}", user);
+    public UserDto createUser(final UserDto userDto) {
+        log.info("Creating User {}", userDto);
+        User user = userMapper.toEntity(userDto);
         if (user.getId() != null) {
             throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
         }
-        return userRepository.save(user);
+        return userMapper.toDto(userRepository.save(user));
     }
 
 
@@ -61,7 +61,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public List<UserDto> findUsersOlderThen(LocalDate age) {
+    public List<UserDto> findUsersOlderThen(final LocalDate age) {
         return userRepository.findAll()
                 .stream()
                 .filter(s -> isOlder(s, age))
@@ -75,8 +75,28 @@ class UserServiceImpl implements UserService, UserProvider {
         var user = userRepository.findById(userId);
         if(user.isPresent()) {
             userRepository.deleteById(userId);
+        } else{
+            throw new NotFoundException("User not found");
         }
-        throw new NotFoundException("User not found");
+
+    }
+
+    @Override
+    public UserDto updateUser(final Long userId, UserDto userDto){
+        if(userRepository.findByEmail(userDto.email()).isPresent()) {
+            throw new IllegalArgumentException("User with email " + userDto.email() + " already exists!");
+        }
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        UserDto oldUserDto = userMapper.toDto(user);
+        UserDto newUserDto = oldUserDto.update(userDto).addId(userId);
+        User newUser = userMapper.toEntity(newUserDto);
+        newUser.setId(userId);
+        log.info("Updating User {}", newUserDto);
+        userRepository.save(newUser);
+        return newUserDto;
+
     }
 
     private Boolean isOlder(User user, LocalDate age){

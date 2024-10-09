@@ -3,12 +3,10 @@ package com.capgemini.wsb.fitnesstracker.user.api;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +16,7 @@ import java.util.List;
 @ToString
 public class User {
 
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
@@ -35,8 +34,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Training> trainings;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    private List<Training> trainings = new ArrayList<>();
 
     public User(
             final String firstName,

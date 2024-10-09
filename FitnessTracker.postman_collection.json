@@ -21,6 +21,23 @@
 			"response": []
 		},
 		{
+			"name": "Get All Users Simple",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLv1}}users/simple",
+					"host": [
+						"{{URLv1}}users"
+					],
+					"path": [
+						"simple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get User By Id",
 			"request": {
 				"method": "GET",
@@ -43,13 +60,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URLv1}}users/email/Emma.Johnson@domain.com",
+					"raw": "{{URLv1}}users/email?email=Emma.Johnson@domain.com",
 					"host": [
 						"{{URLv1}}users"
 					],
 					"path": [
-						"email",
-						"Emma.Johnson@domain.com"
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "Emma.Johnson@domain.com"
+						}
 					]
 				}
 			},
@@ -61,13 +83,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URLv1}}users/older-then/30",
+					"raw": "{{URLv1}}users/older/1990-10-01",
 					"host": [
 						"{{URLv1}}users"
 					],
 					"path": [
-						"older-then",
-						"30"
+						"older",
+						"1990-10-01"
 					]
 				}
 			},
@@ -79,12 +101,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URLv1}}users/1",
+					"raw": "{{URLv1}}users/2",
 					"host": [
 						"{{URLv1}}users"
 					],
 					"path": [
-						"1"
+						"2"
 					]
 				}
 			},
@@ -108,6 +130,32 @@
 					"raw": "{{URLv1}}users",
 					"host": [
 						"{{URLv1}}users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lastName\": \"Doe\",\r\n    \"birthdate\": \"1999-01-01\",\r\n    \"email\": \"John.Doe@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLv1}}users/1",
+					"host": [
+						"{{URLv1}}users"
+					],
+					"path": [
+						"1"
 					]
 				}
 			},

@@ -2,16 +2,12 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
 
 
 @RestController
@@ -20,7 +16,6 @@ import java.util.List;
 class UserController {
 
     private final UserServiceImpl userService;
-    private final UserMapper userMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
@@ -87,11 +82,11 @@ class UserController {
         // saveUser with Service and return User or Exception
         try{
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(userService.createUser(userMapper.toEntity(userDto)));
+                    .body(userService.createUser(userDto));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Error creating new user");
+                    .body(e.getMessage());
         }
     }
 
@@ -107,5 +102,19 @@ class UserController {
                     .body(e.getMessage());
         }
 
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+
+        try {
+            return ResponseEntity.ok(userService.updateUser(id, userDto));
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 }
