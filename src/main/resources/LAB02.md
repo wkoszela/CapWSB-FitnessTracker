@@ -56,18 +56,18 @@ Jako administrator systemu, chcę zabezpieczyć API, z którego mogą korzystać
 
 Zabezpieczenia, powinny zagwarantować:
 
-- [ ] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
+- [x] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
   uprawnień
-- [ ] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
-- [ ] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
-- [ ] lista użytkowników i ich ról jest statyczna (nie zmienia się)
+- [x] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
+- [x] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
+- [x] lista użytkowników i ich ról jest statyczna (nie zmienia się)
 
 ### Wymagania techniczne
 
-- [ ] zabezpieczenie powinno wykorzystywać bibliotekę Spring Security
-- [ ] użytkownik może uwierzytelnić się jedynie za pomocą Basic Auth
-- [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
-- [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
-- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
+- [x] zabezpieczenie powinno wykorzystywać bibliotekę Spring Security
+- [x] użytkownik może uwierzytelnić się jedynie za pomocą Basic Auth
+- [x] rozwiązanie powinno spełniać zasady SOLID
+- [x] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
+- [x] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
+- [x] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   rozwiązanie
