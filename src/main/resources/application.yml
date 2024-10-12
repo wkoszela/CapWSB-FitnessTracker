@@ -7,5 +7,7 @@ spring:
   h2:
     console:
       enabled: true
+  profiles:
+    active: loadInitialData
 server:
   port: 2137
