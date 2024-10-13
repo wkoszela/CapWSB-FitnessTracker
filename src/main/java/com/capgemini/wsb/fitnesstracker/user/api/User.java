@@ -34,9 +34,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<Training> trainings = new ArrayList<>();
-
     public User(
             final String firstName,
             final String lastName,
