@@ -8,23 +8,25 @@ import lombok.Setter;
 
 import java.util.Date;
 
+@Setter
+@Getter
 public class TrainingDto {
 
-    @Getter @Setter private Long id;
+    private Long id;
 
-    @Getter @Setter private User user;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Getter @Setter private Date startTime;
+    private User user;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Getter @Setter private Date endTime;
+    private Date startTime;
 
-    @Getter @Setter private ActivityType activityType;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
 
-    @Getter @Setter private double distance;
+    private ActivityType activityType;
 
-    @Getter @Setter private double averageSpeed;
+    private double distance;
+
+    private double averageSpeed;
 
     public TrainingDto(Long id, User user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
         this.id = id;
