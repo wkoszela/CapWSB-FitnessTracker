@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -9,4 +10,6 @@ import java.util.List;
 public interface TrainingService {
 
     List<TrainingDto> getTrainingsByUserId(Long userId);
+
+    List<TrainingDto> findTrainingsFinishedAfter(LocalDate date);
 }
