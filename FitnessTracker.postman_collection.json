@@ -317,6 +317,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Trainings by User Id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}trainings/1",
+							"host": [
+								"{{URLv1}}trainings"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

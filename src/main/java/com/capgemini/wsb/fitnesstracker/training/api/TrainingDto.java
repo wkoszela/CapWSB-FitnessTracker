@@ -2,7 +2,6 @@ package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +15,8 @@ public class TrainingDto {
 
     private User user;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private ActivityType activityType;
