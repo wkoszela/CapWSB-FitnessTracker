@@ -45,7 +45,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public List<UserDto> findAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toDto)
@@ -53,7 +53,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public List<UserSummaryDto> findAllUsersSimple() {
+    public List<UserSummaryDto> getAllUsersSimple() {
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toSummaryDto)
@@ -67,7 +67,7 @@ class UserServiceImpl implements UserService, UserProvider {
      * @return {@link List<UserDto>} with users born before the {@param date}
      */
     @Override
-    public List<UserDto> findUsersOlderThen(final LocalDate date) {
+    public List<UserDto> getUsersOlderThen(final LocalDate date) {
         return userRepository.findAll()
                 .stream()
                 .filter(s -> isOlder(s, date))

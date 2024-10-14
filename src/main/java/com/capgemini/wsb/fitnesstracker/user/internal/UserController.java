@@ -55,7 +55,7 @@ class UserController {
 
     @GetMapping("/older/{date}")
     public ResponseEntity<Object> getUsersOlderThen(@PathVariable("date") LocalDate date) {
-        var users = userService.findUsersOlderThen(date);
+        var users = userService.getUsersOlderThen(date);
         if (users.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found with this date");
@@ -65,7 +65,7 @@ class UserController {
 
     @GetMapping("/simple")
     public ResponseEntity<Object> getUsersSimple() {
-        var users = userService.findAllUsersSimple();
+        var users = userService.getAllUsersSimple();
         if (users.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found");
@@ -75,7 +75,7 @@ class UserController {
 
     @GetMapping
     public ResponseEntity<Object> getUsers() {
-        var users = userService.findAllUsers();
+        var users = userService.getAllUsers();
         if (users.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found");

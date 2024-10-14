@@ -16,7 +16,7 @@ public class TrainingController {
 
     @GetMapping
     public ResponseEntity<Object> getTrainings() {
-        var trainings = trainingService.findAllTrainings();
+        var trainings = trainingService.getAllTrainings();
         if (trainings.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No training found");
@@ -36,7 +36,7 @@ public class TrainingController {
 
     @GetMapping("/finished/{finished}")
     public ResponseEntity<Object> getTrainingsFinishedAfter(@PathVariable("finished") LocalDate date) {
-        var trainings = trainingService.findTrainingsFinishedAfter(date);
+        var trainings = trainingService.getTrainingsFinishedAfter(date);
         if (trainings.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No training found");
@@ -46,7 +46,7 @@ public class TrainingController {
 
     @GetMapping("/activityType")
     public ResponseEntity<Object> getUserByEmail(@RequestParam("activityType") String activityType) {
-        var trainings = trainingService.findTrainingsOfActivityType(activityType);
+        var trainings = trainingService.getTrainingsOfActivityType(activityType);
         if(trainings.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No trainings with provided activity type found");

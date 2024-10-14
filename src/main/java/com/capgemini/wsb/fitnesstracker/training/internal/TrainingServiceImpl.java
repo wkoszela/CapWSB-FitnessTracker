@@ -24,16 +24,11 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     private final TrainingMapper trainingMapper;
 
     @Override
-    public List<TrainingDto> findAllTrainings(){
+    public List<TrainingDto> getAllTrainings(){
         return trainingRepository.findAll()
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
-    }
-
-    @Override
-    public Optional<User> getTraining(final Long trainingId) {
-        throw new UnsupportedOperationException("Not finished yet");
     }
 
     @Override
@@ -45,7 +40,7 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     }
 
     @Override
-    public List<TrainingDto> findTrainingsFinishedAfter(LocalDate date) {
+    public List<TrainingDto> getTrainingsFinishedAfter(LocalDate date) {
         return trainingRepository.findAll()
                 .stream()
                 .filter(s -> isFinished(s, date))
@@ -54,7 +49,7 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     }
 
     @Override
-    public List<TrainingDto> findTrainingsOfActivityType(String activityType) {
+    public List<TrainingDto> getTrainingsOfActivityType(String activityType) {
         return trainingRepository.findAll()
                 .stream()
                 .filter(s -> activityType.equalsIgnoreCase(s.getActivityType().toString()))
