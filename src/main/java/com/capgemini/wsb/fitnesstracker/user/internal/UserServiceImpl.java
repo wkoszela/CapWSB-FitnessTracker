@@ -82,12 +82,10 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public void deleteUser(final Long userId) {
-        var user = userRepository.findById(userId);
-        if(user.isPresent()) {
-            userRepository.deleteById(userId);
-        } else{
-            throw new NotFoundException("User not found");
-        }
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        userRepository.deleteById(userId);
 
     }
 

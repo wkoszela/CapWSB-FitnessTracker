@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,4 +37,21 @@ public class TrainingDto {
         this.distance = distance;
         this.averageSpeed = averageSpeed;
     }
+
+    public TrainingDto updateTraining(TrainingDto trainingDto) {
+        return new TrainingDto(
+                trainingDto.id == null ? id : trainingDto.id,
+                trainingDto.getUser() == null ? user : trainingDto.getUser(),
+                trainingDto.getStartTime() == null ? startTime : trainingDto.getStartTime(),
+                trainingDto.getEndTime() == null ? endTime : trainingDto.getEndTime(),
+                trainingDto.getActivityType() == null ? activityType : trainingDto.getActivityType(),
+                trainingDto.getDistance() == 0 ? distance : trainingDto.getDistance(),
+                trainingDto.getAverageSpeed() == 0 ? averageSpeed : trainingDto.getAverageSpeed()
+        );
+    }
+
+    public TrainingDto addId(Long id) {
+        return new TrainingDto(id, user, startTime, endTime, activityType, distance, averageSpeed);
+    }
+
 }

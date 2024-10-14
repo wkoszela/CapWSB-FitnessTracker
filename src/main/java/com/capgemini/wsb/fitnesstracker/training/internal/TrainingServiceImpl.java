@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -61,11 +60,10 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     @Override
     public TrainingDto createTraining(TrainingInputDto trainingInputDto) {
         log.info("Creating Training {}", trainingInputDto);
-        var user = userProvider.getUserEntity(trainingInputDto.getUserId());
-        if(user.isEmpty()){
-            throw new NotFoundException("User not found");
-        }
-        TrainingDto trainingDto = trainingMapper.inputDtoToTrainingDto(user.get(), trainingInputDto);
+        var user = userProvider.getUserEntity(trainingInputDto.getUserId())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        TrainingDto trainingDto = trainingMapper.inputDtoToTrainingDto(user, trainingInputDto);
 
         Training training = trainingMapper.toEntity(trainingDto);
 
@@ -77,5 +75,27 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return date.isBefore(trainingDate);
     }
 
+    @Override
+    public TrainingDto updateTraining(final Long id, TrainingInputDto trainingInputDto){
+
+        var training = trainingRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Training not found"));
+
+        var user = userProvider.getUserEntity(trainingInputDto.getUserId())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        TrainingDto trainingDto = trainingMapper.inputDtoToTrainingDto(user, trainingInputDto);
+
+        // Create updated dto and update training based on it
+        TrainingDto oldTrainingDto = trainingMapper.toDto(training);
+        TrainingDto newTrainingDto = oldTrainingDto.updateTraining(trainingDto).addId(id);
+        Training newTraining = trainingMapper.toEntity(newTrainingDto);
+        newTraining.setId(id);
+
+        log.info("Updating Training {}", newTraining);
+        trainingRepository.save(newTraining);
+        return newTrainingDto;
+
+    }
 
 }

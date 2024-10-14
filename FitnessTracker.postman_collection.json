@@ -458,6 +458,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Training Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1\",\r\n    \"startTime\": \"2021-04-01T11:00:00\",\r\n    \"averageSpeed\": 15.6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URLv1}}trainings/10",
+							"host": [
+								"{{URLv1}}trainings"
+							],
+							"path": [
+								"10"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
