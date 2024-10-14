@@ -83,7 +83,7 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public void deleteUser(final Long userId) {
         var user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         userRepository.deleteById(userId);
 
@@ -97,7 +97,7 @@ class UserServiceImpl implements UserService, UserProvider {
             throw new IllegalArgumentException("User with email " + userDto.email() + " already exists!");
         }
         var user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         // Create updated dto and update user based on it
         UserDto oldUserDto = userMapper.toDto(user);

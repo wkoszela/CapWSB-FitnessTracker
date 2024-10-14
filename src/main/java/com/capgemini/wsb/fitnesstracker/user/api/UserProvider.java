@@ -29,11 +29,22 @@ public interface UserProvider {
     /**
      * Retrieves all users.
      *
-     * @return An {@link Optional} containing the all users,
+     * @return A {@link List<UserDto>} containing the all users
      */
     List<UserDto> getAllUsers();
 
+    /**
+     * Retrieves all users in simple format.
+     *
+     * @return A {@link List<UserSummaryDto>} containing the all users in simple format
+     */
     List<UserSummaryDto> getAllUsersSimple();
 
-    List<UserDto> getUsersOlderThen(LocalDate age);
+    /**
+     * Retrieves all users older than specified date.
+     *
+     * @param date date used to compare with user's birthdate
+     * @return A {@link List<UserDto>} containing the all users born before specified date
+     */
+    List<UserDto> getUsersOlderThen(LocalDate date);
 }
