@@ -1,0 +1,36 @@
+- [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
+  uzytkownika)
+
+GET http://localhost:8080/v1/users
+
+
+- [ ] utworzenie nowego użytkownika
+POST  http://localhost:8080/v1/users
+
+W HEADERS TRZEBA USTAWIC 
+Key: Content-Type
+Value: application/json
+
+
+
+W BODY TO WPISUJEMY:
+    {
+        "firstName": "123",
+        "lastName": "321",
+        "email": "admin@example.com",
+        "birthdate": "1990-05-15"
+    }
+
+
+
+- [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
+GET http://localhost:8080/v1/users/older-than/40
+
+
+- [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
+PUT http://localhost:8080/v1/users/2
+
+{
+    "firstName": "NoweImię",
+    "email": "nowyemail@example.com"
+}
