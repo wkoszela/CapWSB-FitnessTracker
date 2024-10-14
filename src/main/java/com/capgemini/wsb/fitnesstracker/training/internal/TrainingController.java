@@ -36,7 +36,7 @@ public class TrainingController {
 
     @GetMapping("/finished/{finished}")
     public ResponseEntity<Object> getTrainingsFinishedAfter(@PathVariable("finished") LocalDate date) {
-        var trainings = trainingService.findAllTrainings();
+        var trainings = trainingService.findTrainingsFinishedAfter(date);
         if (trainings.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No training found");
