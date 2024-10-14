@@ -1,14 +1,12 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/trainings")
@@ -23,7 +21,12 @@ public class TrainingController {
     }
 
     @GetMapping("/{userId}")
-    public List<Training> getTrainingByUserId(@PathVariable("userId") Long userId) {
-        return trainingService.getTrainingsByUserId(userId);
+    public ResponseEntity<Object> getTrainingByUserId(@PathVariable("userId") Long userId) {
+        var trainings = trainingService.getTrainingsByUserId(userId);
+        if (trainings.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No training found assigned to this user id");
+        }
+        return ResponseEntity.ok(trainingService.getTrainingsByUserId(userId));
     }
 }

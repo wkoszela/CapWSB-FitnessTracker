@@ -1,6 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
@@ -35,7 +34,10 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     }
 
     @Override
-    public List<Training> getTrainingsByUserId(Long userId) {
-        return trainingRepository.findByUserId(userId);
+    public List<TrainingDto> getTrainingsByUserId(Long userId) {
+        return trainingRepository.findByUserId(userId)
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
     }
 }

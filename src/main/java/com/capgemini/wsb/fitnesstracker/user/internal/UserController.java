@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
 
 
 @RestController
@@ -54,8 +53,8 @@ class UserController {
      * --------------------------------------------------------------------------------------------
      */
 
-    @GetMapping("/older/{age}")
-    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("age") LocalDate date) {
+    @GetMapping("/older/{date}")
+    public ResponseEntity<Object> getUsersOlderThen(@PathVariable("date") LocalDate date) {
         return ResponseEntity.ok(userService.findUsersOlderThen(date));
     }
 

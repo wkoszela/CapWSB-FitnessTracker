@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface TrainingService {
 
-    List<Training> getTrainingsByUserId(Long userId);
+    List<TrainingDto> getTrainingsByUserId(Long userId);
 }
