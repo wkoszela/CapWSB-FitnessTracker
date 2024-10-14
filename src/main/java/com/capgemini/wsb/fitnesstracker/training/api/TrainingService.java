@@ -1,7 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Interface (API) for modifying operations on {@link Training} entities through the API.
@@ -9,5 +7,5 @@ import java.util.List;
  */
 public interface TrainingService {
 
-
+    TrainingDto createTraining(TrainingInputDto trainingInputDto);
 }

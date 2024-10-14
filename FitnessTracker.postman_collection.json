@@ -420,6 +420,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Training",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1\",\r\n    \"startTime\": \"2024-04-01T11:00:00\",\r\n    \"endTime\": \"2024-04-02T11:00:00\",\r\n    \"activityType\": \"RUNNING\",\r\n    \"distance\": \"20.32\",\r\n    \"averageSpeed\": 5.6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URLv1}}trainings",
+							"host": [
+								"{{URLv1}}trainings"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

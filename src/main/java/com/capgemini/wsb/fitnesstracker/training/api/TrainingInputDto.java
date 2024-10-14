@@ -1,8 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
-import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +8,9 @@ import java.util.Date;
 
 @Setter
 @Getter
-public class TrainingDto {
+public class TrainingInputDto {
 
-    @Nullable
-    private Long id;
-
-    private User user;
+    private Long userId;
 
     private Date startTime;
 
@@ -27,9 +22,8 @@ public class TrainingDto {
 
     private double averageSpeed;
 
-    public TrainingDto(Long id, User user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
-        this.id = id;
-        this.user = user;
+    public TrainingInputDto(Long userId, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
+        this.userId = userId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.activityType = activityType;

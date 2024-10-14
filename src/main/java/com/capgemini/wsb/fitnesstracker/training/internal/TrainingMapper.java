@@ -2,6 +2,8 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
+import com.capgemini.wsb.fitnesstracker.training.api.TrainingInputDto;
+import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,5 +27,15 @@ public class TrainingMapper {
                 trainingDto.getActivityType(),
                 trainingDto.getDistance(),
                 trainingDto.getAverageSpeed());
+    }
+
+    TrainingDto inputDtoToTrainingDto(User user, TrainingInputDto trainingInputDto) {
+        return new TrainingDto(null,
+                user,
+                trainingInputDto.getStartTime(),
+                trainingInputDto.getEndTime(),
+                trainingInputDto.getActivityType(),
+                trainingInputDto.getDistance(),
+                trainingInputDto.getAverageSpeed());
     }
 }

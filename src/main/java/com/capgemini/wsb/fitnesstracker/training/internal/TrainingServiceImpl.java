@@ -1,10 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
+import com.capgemini.wsb.fitnesstracker.training.api.*;
+import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,9 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     private final TrainingRepository trainingRepository;
 
     private final TrainingMapper trainingMapper;
+
+    private final UserProvider userProvider;
+
 
     @Override
     public List<TrainingDto> getAllTrainings(){
@@ -57,8 +58,24 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
                 .toList();
     }
 
+    @Override
+    public TrainingDto createTraining(TrainingInputDto trainingInputDto) {
+        log.info("Creating Training {}", trainingInputDto);
+        var user = userProvider.getUserEntity(trainingInputDto.getUserId());
+        if(user.isEmpty()){
+            throw new NotFoundException("User not found");
+        }
+        TrainingDto trainingDto = trainingMapper.inputDtoToTrainingDto(user.get(), trainingInputDto);
+
+        Training training = trainingMapper.toEntity(trainingDto);
+
+        return trainingMapper.toDto(trainingRepository.save(training));
+    }
+
     private Boolean isFinished(Training training, LocalDate date){
         LocalDate trainingDate = training.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return date.isBefore(trainingDate);
     }
+
+
 }

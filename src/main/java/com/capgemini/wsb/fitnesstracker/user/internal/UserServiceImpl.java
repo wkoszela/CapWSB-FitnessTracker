@@ -31,6 +31,10 @@ class UserServiceImpl implements UserService, UserProvider {
         return userMapper.toDto(userRepository.save(user));
     }
 
+    @Override
+    public Optional<User> getUserEntity(Long userId) {
+        return userRepository.findById(userId);
+    }
 
     @Override
     public Optional<UserDto> getUser(final Long userId) {
@@ -108,6 +112,8 @@ class UserServiceImpl implements UserService, UserProvider {
         return newUserDto;
 
     }
+
+
 
     /**
      * Check whether a user's birthdate is before the provided date
