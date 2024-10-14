@@ -16,7 +16,12 @@ public class TrainingController {
 
     @GetMapping
     public ResponseEntity<Object> getTrainings() {
-        return ResponseEntity.ok(trainingService.findAllTrainings());
+        var trainings = trainingService.findAllTrainings();
+        if (trainings.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No training found");
+        }
+        return ResponseEntity.ok(trainings);
     }
 
     @GetMapping("/{userId}")
@@ -26,12 +31,17 @@ public class TrainingController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No training found assigned to this user id");
         }
-        return ResponseEntity.ok(trainingService.getTrainingsByUserId(userId));
+        return ResponseEntity.ok(trainings);
     }
 
     @GetMapping("/finished/{finished}")
     public ResponseEntity<Object> getTrainingsFinishedAfter(@PathVariable("finished") LocalDate date) {
-        return ResponseEntity.ok(trainingService.findTrainingsFinishedAfter(date));
+        var trainings = trainingService.findAllTrainings();
+        if (trainings.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No training found");
+        }
+        return ResponseEntity.ok(trainings);
     }
 
     @GetMapping("/activityType")
