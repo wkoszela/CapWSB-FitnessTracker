@@ -3,10 +3,7 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -35,5 +32,16 @@ public class TrainingController {
     @GetMapping("/finished/{finished}")
     public ResponseEntity<Object> getTrainingsFinishedAfter(@PathVariable("finished") LocalDate date) {
         return ResponseEntity.ok(trainingService.findTrainingsFinishedAfter(date));
+    }
+
+    @GetMapping("/activityType")
+    public ResponseEntity<Object> getUserByEmail(@RequestParam("activityType") String activityType) {
+        var trainings = trainingService.findTrainingsOfActivityType(activityType);
+        if(trainings.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No trainings with provided activity type found");
+        }
+        return ResponseEntity.ok(trainings);
+
     }
 }

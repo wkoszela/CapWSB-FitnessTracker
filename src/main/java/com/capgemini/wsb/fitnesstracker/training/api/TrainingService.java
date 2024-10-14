@@ -12,4 +12,6 @@ public interface TrainingService {
     List<TrainingDto> getTrainingsByUserId(Long userId);
 
     List<TrainingDto> findTrainingsFinishedAfter(LocalDate date);
+
+    List<TrainingDto> findTrainingsOfActivityType(String activityType);
 }

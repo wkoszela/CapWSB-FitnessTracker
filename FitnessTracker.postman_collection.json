@@ -382,6 +382,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Trainings By Activity Type",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}trainings/activityType?activityType=running",
+							"host": [
+								"{{URLv1}}trainings"
+							],
+							"path": [
+								"activityType"
+							],
+							"query": [
+								{
+									"key": "activityType",
+									"value": "running"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

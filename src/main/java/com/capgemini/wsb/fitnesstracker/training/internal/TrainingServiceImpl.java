@@ -53,6 +53,15 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
                 .toList();
     }
 
+    @Override
+    public List<TrainingDto> findTrainingsOfActivityType(String activityType) {
+        return trainingRepository.findAll()
+                .stream()
+                .filter(s -> activityType.equalsIgnoreCase(s.getActivityType().toString()))
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
     private Boolean isFinished(Training training, LocalDate date){
         LocalDate trainingDate = training.getEndTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return date.isBefore(trainingDate);
