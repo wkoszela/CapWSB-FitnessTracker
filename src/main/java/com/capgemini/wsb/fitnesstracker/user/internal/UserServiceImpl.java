@@ -1,6 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
-import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.*;
 import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
@@ -82,7 +81,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public void deleteUser(final Long userId) {
-        var user = userRepository.findById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
         userRepository.deleteById(userId);
