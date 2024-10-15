@@ -4,8 +4,11 @@ import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface TrainingProvider {
+
+    List<Training> getTrainingsEntityByUserId(Long userId);
 
     /**
      * Retrieves a {@link List<TrainingDto>} of all trainings.

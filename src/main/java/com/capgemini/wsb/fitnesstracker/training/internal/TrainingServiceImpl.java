@@ -23,6 +23,7 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     private final UserProvider userProvider;
 
 
+
     @Override
     public List<TrainingDto> getAllTrainings(){
         return trainingRepository.findAll()
@@ -36,6 +37,14 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         return trainingRepository.findByUserId(userId)
                 .stream()
                 .map(trainingMapper::toDto)
+                .toList();
+    }
+
+
+    @Override
+    public List<Training> getTrainingsEntityByUserId(Long userId) {
+        return trainingRepository.findByUserId(userId)
+                .stream()
                 .toList();
     }
 
