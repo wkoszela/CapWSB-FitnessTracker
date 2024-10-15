@@ -21,10 +21,10 @@ public class StatisticsMapper {
 
     Statistics toEntity(StatisticsDto statisticsDto) {
         return new Statistics(
-                statisticsDto.user(),
-                statisticsDto.totalTrainings(),
-                statisticsDto.totalDistance(),
-                statisticsDto.totalCaloriesBurned());
+                statisticsDto.getUser(),
+                statisticsDto.getTotalTrainings(),
+                statisticsDto.getTotalDistance(),
+                statisticsDto.getTotalCaloriesBurned());
     }
 
 }
