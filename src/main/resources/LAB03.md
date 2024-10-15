@@ -45,7 +45,7 @@ Stworzone API powinno pozwalać na:
 
 Stworzone API powinno pozwalać na:
 
-- [ ] utworzenie nowych statystyk
+- [x] utworzenie nowych statystyk
 - [ ] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
   użytkownika.
 - [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
@@ -57,13 +57,13 @@ Stworzone API powinno pozwalać na:
 
 - [ ] przygotowanie danych wejściowych (uzupełnienie skryptu ładującego dane przy starcie aplikacji)
 - [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
-- [ ] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
+- [x] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`
-- [ ] rozwiązanie powinno spełniać zasady SOLID
+- [x] rozwiązanie powinno spełniać zasady SOLID
 - [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
-- [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
+- [x] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
-- [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
+- [x] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)

@@ -56,6 +56,13 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public List<User> getAllUsersEntity() {
+        return userRepository.findAll()
+                .stream()
+                .toList();
+    }
+
+    @Override
     public List<UserSummaryDto> getAllUsersSimple() {
         return userRepository.findAll()
                 .stream()

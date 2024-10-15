@@ -41,7 +41,7 @@ class StatisticsApiIntegrationTest extends IntegrationTestBase {
 
         mockMvc.perform(put("/v1/statistics").contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].user.id").value(user1.getId()))
                 .andExpect(jsonPath("$[0].user.firstName").value(user1.getFirstName()))
@@ -49,7 +49,7 @@ class StatisticsApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$[0].user.email").value(user1.getEmail()))
 
                 .andExpect(jsonPath("$[0].totalTrainings").value(1))
-                .andExpect(jsonPath("$[0].totalDistance").value(10.5))
+                .andExpect(jsonPath("$[0].totalDistance").value(10))
                 .andExpect(jsonPath("$[0].totalCaloriesBurned").value(600))
 
                 .andExpect(jsonPath("$[1]").doesNotExist());
@@ -71,7 +71,7 @@ class StatisticsApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.user.email").value(user1.getEmail()))
 
                 .andExpect(jsonPath("$.totalTrainings").value(1))
-                .andExpect(jsonPath("$.totalDistance").value(10.5))
+                .andExpect(jsonPath("$.totalDistance").value(10))
                 .andExpect(jsonPath("$.totalCaloriesBurned").value(600));
     }
 

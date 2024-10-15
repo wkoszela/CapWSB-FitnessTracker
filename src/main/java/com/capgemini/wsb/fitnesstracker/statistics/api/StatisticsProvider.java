@@ -5,6 +5,11 @@ import java.util.Optional;
 
 public interface StatisticsProvider {
 
-    List<Statistics> getAllStatistics();
+    /**
+     * Retrieves all statistics
+     *
+     * @return {@link List<StatisticsDto>} of all statistics
+     */
+    List<StatisticsDto> getAllStatistics();
 
 }

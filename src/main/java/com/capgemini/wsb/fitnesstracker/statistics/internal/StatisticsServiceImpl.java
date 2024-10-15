@@ -1,6 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
+import com.capgemini.wsb.fitnesstracker.statistics.api.StatisticsDto;
 import com.capgemini.wsb.fitnesstracker.statistics.api.StatisticsProvider;
 import com.capgemini.wsb.fitnesstracker.statistics.api.StatisticsService;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
@@ -20,11 +22,34 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
     private final StatisticsRepository statisticsRepository;
     private final UserProvider userProvider;
     private final TrainingProvider trainingProvider;
+    private final StatisticsMapper statisticsMapper;
 
     @Override
-    public List<Statistics> getAllStatistics() {
+    public List<StatisticsDto> generateStatistics() {
+
+        //Clear the database of existing statistics
+        statisticsRepository.deleteAll();
+
+        var users = userProvider.getAllUsersEntity();
+        if (users.isEmpty()) {
+            throw new NotFoundException("No users found");
+        }
+
+        //Generate new statistics for every user
+        for (var user : users) {
+            assert user.getId() != null;
+            Statistics statistics = generateStatisticsForSpecifiedUser(user.getId());
+            statisticsRepository.save(statistics);
+        }
+
+        return getAllStatistics();
+    }
+
+    @Override
+    public List<StatisticsDto> getAllStatistics() {
         return statisticsRepository.findAll()
                 .stream()
+                .map(statisticsMapper::toDto)
                 .toList();
     }
 
@@ -35,19 +60,16 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
 
         var trainings = trainingProvider.getTrainingsEntityByUserId(userId);
 
-
         int noOfTrainings = trainings.size();
-
         double totalDistance = 0;
         double caloriesBurned = 0;
+
+        // Generate statistics for every training assigned to a user
         for (var training : trainings) {
             totalDistance += training.getDistance();
             caloriesBurned += training.getActivityType().getCaloriesPerUnitOfDistance() * training.getDistance();
         }
 
-
-        Statistics newStats = new Statistics(user, noOfTrainings, totalDistance, (int)caloriesBurned);
-
-        return statisticsRepository.save(newStats);
+        return new Statistics(user, noOfTrainings, totalDistance, (int)caloriesBurned);
     }
 }

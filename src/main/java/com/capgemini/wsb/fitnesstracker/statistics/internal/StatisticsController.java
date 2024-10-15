@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,18 +13,13 @@ public class StatisticsController {
 
     private final StatisticsServiceImpl statisticsService;
 
-    @GetMapping
-    public ResponseEntity<Object> getStatistics() {
-        var statistics = statisticsService.getAllStatistics();
-        if (statistics.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No statistics found");
+    @PutMapping
+    public ResponseEntity<Object> generateStatistics() {
+        try {
+            return ResponseEntity.ok(statisticsService.generateStatistics());
+        } catch (NotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                    body(e.getMessage());
         }
-        return ResponseEntity.ok(statistics);
-    }
-
-    @PostMapping("/{userId}")
-    public ResponseEntity<Object> generateStatistics(@PathVariable Long userId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(statisticsService.generateStatisticsForSpecifiedUser(userId));
     }
 }
