@@ -1,7 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.statistics.api;
 
 
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 
 import java.util.List;

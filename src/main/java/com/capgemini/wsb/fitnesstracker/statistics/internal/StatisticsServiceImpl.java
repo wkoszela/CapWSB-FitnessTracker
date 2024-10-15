@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +52,12 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
                 .stream()
                 .map(statisticsMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public Optional<StatisticsDto> getStatisticsForSpecifiedUser(Long userId) {
+        return statisticsRepository.findByUserId(userId)
+                .map(statisticsMapper::toDto);
     }
 
     @Override

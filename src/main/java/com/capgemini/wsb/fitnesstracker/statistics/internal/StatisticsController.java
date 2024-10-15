@@ -14,6 +14,18 @@ public class StatisticsController {
 
     private final StatisticsServiceImpl statisticsService;
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<Object> getStatisticsForSpecifiedUser(@PathVariable Long userId) {
+        var statistics = statisticsService.getStatisticsForSpecifiedUser(userId);
+
+        if (statistics.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                    body("No statistics found for specified user");
+        }
+        return ResponseEntity.ok().body(statistics);
+
+    }
+
     @PutMapping
     public ResponseEntity<Object> reGenerateStatistics() {
         try {

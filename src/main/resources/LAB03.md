@@ -48,7 +48,7 @@ Stworzone API powinno pozwalać na:
 - [x] utworzenie nowych statystyk
 - [x] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
   użytkownika.
-- [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
+- [x] pobranie szczegółów dotyczących statystyk dla danego użytkownika
 - [ ] usunięcie statystyk
 - [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
 

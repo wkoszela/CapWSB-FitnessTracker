@@ -460,7 +460,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Training Copy",
+					"name": "Update Training",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -553,6 +553,38 @@
 							]
 						},
 						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}statistics/1",
+							"host": [
+								"{{URLv1}}statistics"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Statistics For Specified user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "{{URLv1}}statistics/1",

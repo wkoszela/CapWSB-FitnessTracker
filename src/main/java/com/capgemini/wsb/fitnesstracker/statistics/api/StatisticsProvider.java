@@ -12,4 +12,12 @@ public interface StatisticsProvider {
      */
     List<StatisticsDto> getAllStatistics();
 
+    /**
+     * Retrieves statistics for specified user
+     *
+     * @param userId An id of a user whose statistics to get
+     * @return {@link Optional} of statistics. Returns {@link Optional#empty} when no statistics found
+     */
+    Optional<StatisticsDto> getStatisticsForSpecifiedUser(Long userId);
+
 }
