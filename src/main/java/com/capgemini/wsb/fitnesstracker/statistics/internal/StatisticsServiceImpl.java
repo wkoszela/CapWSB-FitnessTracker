@@ -61,6 +61,18 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
     }
 
     @Override
+    public List<StatisticsDto> getStatisticsWithCaloriesGreaterThen(double calories) throws NotFoundException {
+        var statistics = statisticsRepository.findAll();
+
+        statistics.removeIf(s -> s.getTotalCaloriesBurned() < calories);
+
+        return statistics
+                .stream()
+                .map(statisticsMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public Statistics generateStatisticsForSpecifiedUser(Long userId) {
         var user = userProvider.getUserEntity(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
@@ -106,5 +118,6 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
 
         statisticsRepository.deleteAll();
     }
+
 
 }

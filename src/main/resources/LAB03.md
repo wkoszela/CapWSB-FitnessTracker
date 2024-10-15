@@ -50,20 +50,20 @@ Stworzone API powinno pozwalać na:
   użytkownika.
 - [x] pobranie szczegółów dotyczących statystyk dla danego użytkownika
 - [x usunięcie statystyk
-- [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
+- [x] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
 
 
 ### Wymagania techniczneĪ
 
 - [ ] przygotowanie danych wejściowych (uzupełnienie skryptu ładującego dane przy starcie aplikacji)
-- [ ] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
+- [x] API sieciowe powinno wykorzystywać protokół HTTP oraz format JSON do transferu danych
 - [x] w repozytoriach rozwiązanie może wykorzystywać metody dostarczane przez interfejs JpaRepository oraz metody
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`
 - [x] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
+- [x] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [x] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
-- [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
-- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
+- [x] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
+- [x] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
 - [x] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)

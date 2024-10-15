@@ -108,13 +108,13 @@ class StatisticsApiIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
-    void shouldReturnStatisticsWithCaloriesGreaterThen_whenGettingAllStatisticsWithCaloriesGreaterThen() throws Exception {
+    void shouldReturnStatisticsWithCaloriesGreaterThan_whenGettingAllStatisticsWithCaloriesGreaterThan() throws Exception {
         User user1 = existingUser(generateUser());
         User user2 = existingUser(generateUser());
         Statistics statistics1 = persistStatistics(generateStatistics(user1, 15));
         Statistics statistics2 = persistStatistics(generateStatistics(user2, 5));
 
-        mockMvc.perform(get("/v1/statistics/caloriesGreaterThen/{caloriesFloor}", 10).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/statistics/caloriesGreaterThan/{caloriesFloor}", 10).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

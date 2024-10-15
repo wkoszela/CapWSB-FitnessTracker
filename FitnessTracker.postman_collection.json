@@ -599,6 +599,38 @@
 					"response": []
 				},
 				{
+					"name": "Get Statistics With Calories Greater Than",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}statistics/1",
+							"host": [
+								"{{URLv1}}statistics"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Statistics",
 					"request": {
 						"auth": {

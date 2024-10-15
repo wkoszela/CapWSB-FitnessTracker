@@ -26,6 +26,18 @@ public class StatisticsController {
 
     }
 
+    @GetMapping("/caloriesGreaterThan/{caloriesFloor}")
+    public ResponseEntity<Object> getStatisticsForCaloriesGreaterThan(@PathVariable double caloriesFloor) {
+        var statistics = statisticsService.getStatisticsWithCaloriesGreaterThen(caloriesFloor);
+
+        if (statistics.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                    body("No statistics found with calories greater than " + caloriesFloor);
+        }
+        return ResponseEntity.ok().body(statistics);
+
+    }
+
     @PutMapping
     public ResponseEntity<Object> reGenerateStatistics() {
         try {
