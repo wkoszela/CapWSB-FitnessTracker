@@ -597,6 +597,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Statistics",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}statistics",
+							"host": [
+								"{{URLv1}}statistics"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

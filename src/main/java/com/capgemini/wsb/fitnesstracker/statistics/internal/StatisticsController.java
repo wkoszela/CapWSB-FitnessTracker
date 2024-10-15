@@ -45,4 +45,16 @@ public class StatisticsController {
                     body(e.getMessage());
         }
     }
+
+    @DeleteMapping
+    public ResponseEntity<Object> deleteStatistics() {
+        try {
+            statisticsService.deleteStatistics();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body("Successfully deleted statistics");
+        } catch (NotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                    body(e.getMessage());
+        }
+    }
 }

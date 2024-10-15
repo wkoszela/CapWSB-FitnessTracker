@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.statistics.api;
 
 
+import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 
 import java.util.List;
@@ -37,4 +38,11 @@ public interface StatisticsService {
      * @throws UserNotFoundException When no user with specified id exists
      */
     StatisticsDto reGenerateStatisticsForSpecifiedUser(Long userId) throws UserNotFoundException;
+
+    /**
+     * Deletes all statistic
+     *
+     * @throws NotFoundException when no statistics are present
+     */
+    void deleteStatistics() throws NotFoundException;
 }

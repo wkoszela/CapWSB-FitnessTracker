@@ -95,4 +95,16 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
 
         return statisticsMapper.toDto(newStatistics);
     }
+
+    @Override
+    public void deleteStatistics() throws NotFoundException {
+        var statistics = statisticsRepository.findAll();
+
+        if (statistics.isEmpty()) {
+            throw new NotFoundException("No statistics found");
+        }
+
+        statisticsRepository.deleteAll();
+    }
+
 }
