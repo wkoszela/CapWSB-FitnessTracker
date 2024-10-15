@@ -25,7 +25,7 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
     private final StatisticsMapper statisticsMapper;
 
     @Override
-    public List<StatisticsDto> generateStatistics() {
+    public List<StatisticsDto> reGenerateStatistics() {
 
         //Clear the database of existing statistics
         statisticsRepository.deleteAll();
@@ -71,5 +71,21 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
         }
 
         return new Statistics(user, noOfTrainings, totalDistance, (int)caloriesBurned);
+    }
+
+    @Override
+    public StatisticsDto reGenerateStatisticsForSpecifiedUser(Long userId) {
+        var user = userProvider.getUserEntity(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        var oldStatistics = statisticsRepository.findById(userId);
+
+        oldStatistics.ifPresent(statisticsRepository::delete);
+
+        var newStatistics = generateStatisticsForSpecifiedUser(userId);
+
+        statisticsRepository.save(newStatistics);
+
+        return statisticsMapper.toDto(newStatistics);
     }
 }

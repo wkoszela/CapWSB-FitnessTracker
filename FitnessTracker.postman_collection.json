@@ -506,7 +506,7 @@
 			"name": "Statistics",
 			"item": [
 				{
-					"name": "Generate Statistics",
+					"name": "Generate New Statistics",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -529,6 +529,38 @@
 							"raw": "{{URLv1}}statistics",
 							"host": [
 								"{{URLv1}}statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate New Statistics For Specified user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{admin pass}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{admin username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URLv1}}statistics/1",
+							"host": [
+								"{{URLv1}}statistics"
+							],
+							"path": [
+								"1"
 							]
 						}
 					},

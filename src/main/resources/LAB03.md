@@ -46,7 +46,7 @@ Stworzone API powinno pozwalać na:
 Stworzone API powinno pozwalać na:
 
 - [x] utworzenie nowych statystyk
-- [ ] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
+- [x] aktualizacja Statystyk Użytkownika implementacja funkcjonalności do aktualizacji istniejących statystyk dla
   użytkownika.
 - [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
 - [ ] usunięcie statystyk
