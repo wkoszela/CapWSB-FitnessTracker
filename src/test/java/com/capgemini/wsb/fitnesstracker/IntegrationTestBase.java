@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker;
 
+import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.junit.Before;
@@ -21,22 +22,29 @@ public abstract class IntegrationTestBase {
     @Autowired
     private JpaRepository<Training, Long> trainingRepository;
 
+    @Autowired
+    private JpaRepository<Statistics, Long> statisticsRepository;
+
     @AfterEach
     void cleanUpDB() {
         trainingRepository.deleteAll();
         userRepository.deleteAll();
-
+        statisticsRepository.deleteAll();
     }
 
     @Before
     public void setUp() {
         trainingRepository.deleteAll();
         userRepository.deleteAll();
-
+        statisticsRepository.deleteAll();
     }
 
     protected Training persistTraining(Training training) {
         return trainingRepository.save(training);
+    }
+
+    protected Statistics persistStatistics(Statistics statistics) {
+        return statisticsRepository.save(statistics);
     }
 
     protected User existingUser(User user) {
@@ -46,6 +54,10 @@ public abstract class IntegrationTestBase {
 
     protected List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    protected List<Statistics> getAllStatistics() {
+        return statisticsRepository.findAll();
     }
 
     protected List<Training> createAllTrainings(List<Training> trainings) {

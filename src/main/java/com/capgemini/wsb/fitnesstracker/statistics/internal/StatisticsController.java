@@ -1,6 +1,5 @@
 package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
