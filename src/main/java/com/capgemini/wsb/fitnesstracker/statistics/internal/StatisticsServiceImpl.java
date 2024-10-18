@@ -77,6 +77,8 @@ class StatisticsServiceImpl implements StatisticsProvider, StatisticsService {
         var user = userProvider.getUserEntity(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
+        statisticsRepository.deleteByUserId(userId);
+
         var trainings = trainingProvider.getTrainingsEntityByUserId(userId);
 
         int noOfTrainings = trainings.size();

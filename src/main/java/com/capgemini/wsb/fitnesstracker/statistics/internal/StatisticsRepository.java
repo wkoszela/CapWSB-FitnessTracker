@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.statistics.internal;
 
 import com.capgemini.wsb.fitnesstracker.statistics.api.Statistics;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -15,4 +16,7 @@ interface StatisticsRepository extends JpaRepository<Statistics, Long> {
      * @return {@link Optional} of statistics. Returns {@link Optional#empty} when no statistics found
      */
     Optional<Statistics> findByUserId(Long userId);
+
+    @Transactional
+    void deleteByUserId(Long userId);
 }

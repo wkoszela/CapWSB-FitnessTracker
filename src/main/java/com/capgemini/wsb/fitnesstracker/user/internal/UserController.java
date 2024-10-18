@@ -1,8 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
-import com.capgemini.wsb.fitnesstracker.mail.api.EmailDto;
-import com.capgemini.wsb.fitnesstracker.mail.api.EmailService;
 import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +17,6 @@ class UserController {
 
     private final UserServiceImpl userService;
 
-    private final EmailService emailService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
@@ -84,8 +81,6 @@ class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found");
         }
-        emailService.sendMail(new EmailDto("tttt@test.com", "Test", "tstststtststtstts"));
-
         return ResponseEntity.ok(users);
     }
 
