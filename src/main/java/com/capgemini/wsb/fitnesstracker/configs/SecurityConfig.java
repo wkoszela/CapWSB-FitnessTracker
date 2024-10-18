@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker;
+package com.capgemini.wsb.fitnesstracker.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

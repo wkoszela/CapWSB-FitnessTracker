@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker;
+package com.capgemini.wsb.fitnesstracker.configs;
 
 import com.capgemini.wsb.fitnesstracker.mail.api.EmailService;
 import lombok.RequiredArgsConstructor;
