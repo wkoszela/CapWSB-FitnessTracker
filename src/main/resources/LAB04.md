@@ -7,9 +7,9 @@ tygodniu.
 Termin upływa po 7 dniach od rozpoczęciu laboratorium.
 ### Wymagania funkcjonalne
 
-- [ ] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
+- [x] w oparciu o ustalony zdefiniowany czas (co tydzień) generowany jest raport z treningami dla każdego użytkownika z
   danego tygodnia
-- [ ] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
+- [x] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
 
 
 ## ZADANIE 2. Programowanie aspektowe (opcjonalnie, proszę zerknąć w Lab branch (livecoding pakiet)
