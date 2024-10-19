@@ -22,4 +22,7 @@ class UserMapper {
                         userDto.email());
     }
 
+    UserBasicInfoDto toBasicInfoDto(User user) {
+        return new UserBasicInfoDto(user.getFirstName(), user.getLastName());
+    }
 }
