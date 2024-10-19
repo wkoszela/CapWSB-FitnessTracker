@@ -20,9 +20,9 @@ class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/simple")
