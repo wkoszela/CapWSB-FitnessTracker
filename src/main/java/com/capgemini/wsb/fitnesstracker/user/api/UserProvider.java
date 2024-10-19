@@ -30,4 +30,18 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
+    /**
+     * Deletes a user based on their ID.
+     *
+     * @param userId id of the user to be deleted
+     */
+    void deleteUser(Long userId);
+
+    /**
+     * Retrieves all users with email containing the given fragment.
+     *
+     * @param email The fragment of the email to be searched
+     * @return A {@link List} containing the located users
+     */
+    public List<User> getUsersByEmail(final String email);
 }

@@ -2,10 +2,11 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 interface UserRepository extends JpaRepository<User, Long> {
 
@@ -19,6 +20,19 @@ interface UserRepository extends JpaRepository<User, Long> {
         return findAll().stream()
                         .filter(user -> Objects.equals(user.getEmail(), email))
                         .findFirst();
+    }
+
+    /**
+     * Query searching users by a partial email match, ignoring case sensitivity.
+     *
+     * @param emailFragment part of the email to search
+     * @return {@link List} containing users with emails that match the given fragment
+     */
+    default List<User> findByEmailContainingIgnoreCase(String emailFragment) {
+        return findAll().stream()
+                .filter(user -> user.getEmail() != null &&
+                        user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
 }
