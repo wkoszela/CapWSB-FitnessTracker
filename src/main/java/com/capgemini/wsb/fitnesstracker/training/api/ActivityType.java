@@ -1,4 +1,4 @@
-package com.capgemini.wsb.fitnesstracker.training.internal;
+package com.capgemini.wsb.fitnesstracker.training.api;
 
 // TODO : JavaDoc
 public enum ActivityType {

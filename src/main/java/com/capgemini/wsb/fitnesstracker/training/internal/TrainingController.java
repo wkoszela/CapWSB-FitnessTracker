@@ -1,10 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingInputDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +12,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping("/v1/trainings")
 @RequiredArgsConstructor
-public class TrainingController {
+class TrainingController {
 
     private final TrainingServiceImpl trainingService;
 

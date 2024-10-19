@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class EmailServiceImpl implements EmailSender, EmailService {
+class EmailServiceImpl implements EmailSender, EmailService {
 
     private final JavaMailSender mailSender;
 

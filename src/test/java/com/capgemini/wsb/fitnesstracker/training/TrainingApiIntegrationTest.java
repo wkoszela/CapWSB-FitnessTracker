@@ -3,7 +3,7 @@ package com.capgemini.wsb.fitnesstracker.training;
 import com.capgemini.wsb.fitnesstracker.IntegrationTest;
 import com.capgemini.wsb.fitnesstracker.IntegrationTestBase;
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
+import com.capgemini.wsb.fitnesstracker.training.api.ActivityType;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

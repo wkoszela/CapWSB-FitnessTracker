@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/statistics")
 @RequiredArgsConstructor
-public class StatisticsController {
+class StatisticsController {
 
     private final StatisticsServiceImpl statisticsService;
 
