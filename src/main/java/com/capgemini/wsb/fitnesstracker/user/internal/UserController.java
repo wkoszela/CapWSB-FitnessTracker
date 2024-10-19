@@ -38,22 +38,6 @@ class UserController {
                 .body("No user found with this email");
     }
 
-    /**
-     * /email that passes the test, although I'm conflicted on whether it's correct. Saved for code review.
-     * --------------------------------------------------------------------------------------------
-     * \@GetMapping("/email")
-     *     public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
-     *         var user = userService.getUserByEmail(email);
-     *         var list = Collections.singletonList(user);
-     *         if(user.isPresent()){
-     *             return ResponseEntity.ok(list);
-     *         }
-     *         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-     *                 .body("No user found with this email");
-     *     }
-     * --------------------------------------------------------------------------------------------
-     */
-
     @GetMapping("/older/{date}")
     public ResponseEntity<Object> getUsersOlderThen(@PathVariable("date") LocalDate date) {
         var users = userService.getUsersOlderThen(date);

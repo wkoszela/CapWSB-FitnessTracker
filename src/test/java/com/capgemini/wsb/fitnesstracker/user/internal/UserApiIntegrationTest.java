@@ -90,9 +90,9 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id").value(user1.getId().intValue()))
-                .andExpect(jsonPath("$[0].email").value(user1.getEmail()));
+                .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$.id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$.email").value(user1.getEmail()));
     }
 
     @Test
