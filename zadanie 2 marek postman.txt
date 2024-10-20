@@ -1,7 +1,7 @@
 - [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   uzytkownika)
 
-GET http://localhost:8080/v1/users
+GET http://localhost:8080/v1/users/simple
 
 
 - [ ] utworzenie nowego użytkownika
@@ -17,14 +17,14 @@ W BODY TO WPISUJEMY:
     {
         "firstName": "123",
         "lastName": "321",
-        "email": "admin@example.com",
-        "birthdate": "1990-05-15"
+	"birthdate": "1990-05-15",
+        "email": "admin@example.com"
     }
 
 
 
 - [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
-GET http://localhost:8080/v1/users/older-than/40
+GET http://localhost:8080/v1/users/older/40
 
 
 - [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)

@@ -6,4 +6,4 @@ import jakarta.annotation.Nullable;
 import java.time.LocalDate;
 
 
-public record UserSummaryDto(Long id, String username) {}
+public record UserSummaryDto(String firstName, String lastName) {}

@@ -29,7 +29,7 @@ class UserServiceImpl implements UserService, UserProvider {
     public List<UserSummaryDto> getAllUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(user -> new UserSummaryDto(user.getId(), user.getFirstName()))
+                .map(user -> new UserSummaryDto(user.getFirstName(), user.getLastName()))
                 .collect(Collectors.toList());
     }
 
@@ -45,13 +45,11 @@ public UserSummaryDto createUser(CreateUserDto createUserDto) {
 
     // Zapis nowego użytkownika w bazie danych
     User savedUser = userRepository.save(newUser);
-
-    // Zwrócenie UserSummaryDto z zapisanym ID i username
-    return new UserSummaryDto(savedUser.getId(), savedUser.getFirstName());
+    return new UserSummaryDto(savedUser.getFirstName(), savedUser.getLastName());
 }
 
 @Override
-    public List<UserSummaryDto> getUsersOlderThan(int age) {
+    public List<UserOlderThanDto> getUsersOlderThan(int age) {
         LocalDate currentDate = LocalDate.now();
 
         return userRepository.findAll()
@@ -61,9 +59,23 @@ public UserSummaryDto createUser(CreateUserDto createUserDto) {
                     int userAge = Period.between(user.getBirthdate(), currentDate).getYears();
                     return userAge > age;
                 })
-                .map(user -> new UserSummaryDto(user.getId(), user.getFirstName()))
+                .map(user -> new UserOlderThanDto( user.getFirstName(), user.getLastName(), user.getBirthdate()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+public List<UserOlderThanDto> getUsersBornBefore(LocalDate date) {
+    return userRepository.findAll()
+            .stream()
+            .filter(user -> user.getBirthdate().isBefore(date))  // Filtrujemy użytkowników urodzonych przed podaną datą
+            .map(user -> new UserOlderThanDto(
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getBirthdate()
+            ))
+            .collect(Collectors.toList());
+}
+
 
     @Override
     public User createUser(final User user) {
@@ -98,7 +110,7 @@ public UserSummaryDto updateUser(Long id, UpdateUserDto updateUserDto) {
     User updatedUser = userRepository.save(user);
 
     // Zwrócenie zaktualizowanego użytkownika jako DTO
-    return new UserSummaryDto(updatedUser.getId(), updatedUser.getFirstName());
+    return new UserSummaryDto(updatedUser.getFirstName(), updatedUser.getLastName());
 }
 
     @Override

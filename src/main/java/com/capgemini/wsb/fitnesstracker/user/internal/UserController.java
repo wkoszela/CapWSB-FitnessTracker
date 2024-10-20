@@ -4,14 +4,17 @@ import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
+import com.capgemini.wsb.fitnesstracker.user.internal.UserOlderThanDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,26 +34,10 @@ class UserController {
      *
      * @return ResponseEntity zawierające listę użytkowników w postaci obiektów UserSummaryDto
      */
-    @GetMapping
+    @GetMapping("/simple")
     public ResponseEntity<List<UserSummaryDto>> getAllUsers() {
         List<UserSummaryDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
-    }
-
-    /**
-     * Dodaje nowego użytkownika do systemu.
-     * 
-     * @param userDto obiekt UserDto zawierający dane nowego użytkownika
-     * @return obiekt User utworzony w systemie
-     * @throws InterruptedException jeżeli wystąpi problem podczas przetwarzania
-     */
-    @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
-        // Demonstracja jak używać @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
-
-        // TODO: saveUser with Service and return User
-        return null;
     }
 
     /**
@@ -66,16 +53,16 @@ class UserController {
     }
 
     /**
-     * Pobiera listę użytkowników starszych niż określony wiek.
-     * 
-     * @param age wiek, który musi być przekroczony przez użytkowników
-     * @return ResponseEntity zawierające listę użytkowników starszych niż określony wiek
-     */
-    @GetMapping("/older-than/{age}")
-    public ResponseEntity<List<UserSummaryDto>> getUsersOlderThan(@PathVariable int age) {
-        List<UserSummaryDto> users = userService.getUsersOlderThan(age);
-        return ResponseEntity.ok(users);
-    }
+ * Pobiera listę użytkowników urodzonych przed określoną datą.
+ * 
+ * @param time data, przed którą użytkownicy muszą się urodzić
+ * @return ResponseEntity zawierające listę użytkowników urodzonych przed określoną datą
+ */
+@GetMapping("/older/{time}")
+public ResponseEntity<List<UserOlderThanDto>> getUsersBornBefore(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate time) {
+    List<UserOlderThanDto> users = userService.getUsersBornBefore(time);
+    return ResponseEntity.ok(users);
+}
 
     /**
      * Aktualizuje dane istniejącego użytkownika.
