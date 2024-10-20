@@ -17,8 +17,7 @@ serwisu FitnessTracker:
 ### Wymagania funkcjonalne
 
 Stworzone API powinno pozwalać na:
-
-- [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
+- [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   uzytkownika)
 - [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
 - [ ] utworzenie nowego użytkownika
