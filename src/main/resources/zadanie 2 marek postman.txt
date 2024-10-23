@@ -24,7 +24,7 @@ W BODY TO WPISUJEMY:
 
 
 - [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
-GET http://localhost:8080/v1/users/older/40
+GET http://localhost:8080/v1/users/older/2000-8-11
 
 
 - [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
