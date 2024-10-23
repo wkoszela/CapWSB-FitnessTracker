@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.annotation.Nullable;
 
-record UserDto(@Nullable Long Id, String firstName, String lastName,
-        @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate, String email) {
+public record UserOlderDto(@Nullable Long id,
+        String firstName,
+        String lastName,
+        @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate) {
 }
