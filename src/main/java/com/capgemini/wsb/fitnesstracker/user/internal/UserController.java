@@ -2,8 +2,6 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +21,13 @@ class UserController {
                           .stream()
                           .map(userMapper::toDto)
                           .toList();
+    }
+    @GetMapping("/simple")
+    public List<UserSimpleDto> getAllBasicInformationAboutUsers() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toSimpleDto)
+                .toList();
     }
 
     @PostMapping
