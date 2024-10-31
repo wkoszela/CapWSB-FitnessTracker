@@ -7,8 +7,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,24 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public User findUserById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return null;
+    }
+
+
+    @Override
+    public List<User> findUsersOlderThan(int age) {
+        return userRepository.findAll().stream()
+                .filter(user -> Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
@@ -41,4 +63,8 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+
+    public void deleteUser(long id) {
+        userRepository.deleteById(id);
+    }
 }
