@@ -1,5 +1,6 @@
 # LABORATORIUM 02
 
+
 Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu Frameworka Spring. Zadanie proszę przesłać na własne repozytorium.
 Termin upływa po 14 dniach od rozpoczęciu laboratorium.
 
@@ -43,3 +44,4 @@ Stworzone API powinno pozwalać na:
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
 - [ ] rozwiązanie powinno wykorzystywać rekordy (Java 16+) do definicji obiektów transferu danych (DTO)
+
