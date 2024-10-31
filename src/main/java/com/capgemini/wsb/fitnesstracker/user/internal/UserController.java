@@ -29,15 +29,29 @@ class UserController {
                 .map(userMapper::toSimpleDto)
                 .toList();
     }
-
-    @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
-
-        // TODO: saveUser with Service and return User
-        return null;
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable long id) {
+        return userMapper.toDto(userService.findUserById(id));
     }
 
+    @PostMapping
+    public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
+
+        // Demonstracja how to use @RequestBody
+        System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
+        User user = userMapper.toEntity(userDto);
+        return userMapper.toDto(userService.createUser(user));
+    }
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
+    }
+
+    @GetMapping("/search/age")
+    public List<UserDto> findUsersOlderThan(@RequestParam int age) {
+        return userService.findUsersOlderThan(age)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
 }
