@@ -8,12 +8,21 @@ import com.capgemini.wsb.fitnesstracker.exception.api.NotFoundException;
 @SuppressWarnings("squid:S110")
 public class UserNotFoundException extends NotFoundException {
 
-    private UserNotFoundException(String message) {
+    /**
+     * Constructs a new UserNotFoundException with the specified detail message.
+     *
+     * @param message the detail message describing the exception
+     */
+    public UserNotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * Constructs a new UserNotFoundException for a user with the specified ID.
+     *
+     * @param id the ID of the user that was not found
+     */
     public UserNotFoundException(Long id) {
         this("User with ID=%s was not found".formatted(id));
     }
-
 }
