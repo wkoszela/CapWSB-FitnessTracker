@@ -34,6 +34,7 @@ class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<User> addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // Demonstracja how to use @RequestBody
