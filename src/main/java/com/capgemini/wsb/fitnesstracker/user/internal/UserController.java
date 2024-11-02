@@ -95,4 +95,17 @@ class UserController {
                 .map(userMapper::toDto)
                 .toList();
     }
+
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        try {
+            User existingUser = userService
+                    .getUser(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("User ID: " + userId + " not found"));
+            User updatedUser = userMapper.toUpdateUser(userDto, existingUser);
+            return userService.updateUser(updatedUser);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error on ID: " + userId + " Error code: " + e.getMessage());
+        }
+    }
 }
