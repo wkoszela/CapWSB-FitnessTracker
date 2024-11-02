@@ -71,6 +71,8 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     @Test
     void shouldReturnDetailsAboutUser_whenGettingUserById() throws Exception {
         User user1 = existingUser(generateUser());
+        System.out.println("Checking id: " + user1.getId());
+        System.out.println("Checking email: " + user1.getEmail());
 
         mockMvc.perform(get("/v1/users/{id}", user1.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
@@ -86,7 +88,11 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     @Test
     void shouldReturnDetailsAboutUser_whenGettingUserByEmail() throws Exception {
         User user1 = existingUser(generateUser());
-
+        System.out.println("Checking id: " + user1.getId());
+        System.out.println("Checking first name: " + user1.getFirstName());
+        System.out.println("Checking last name: " + user1.getLastName());
+        System.out.println("Checking birthdate: " + user1.getBirthdate());
+        System.out.println("Checking email: " + user1.getEmail());
         mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())

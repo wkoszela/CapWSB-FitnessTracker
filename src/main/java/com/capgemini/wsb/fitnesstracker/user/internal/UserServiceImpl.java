@@ -45,11 +45,26 @@ class UserServiceImpl implements UserService, UserProvider {
 
 
     @Override
-    public List<User> findUsersOlderThan(int age) {
+    public List<User> findUsersOlderThan(LocalDate date) {
         return userRepository.findAll().stream()
-                .filter(user -> Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age)
+                .filter(user -> user.getBirthdate().isBefore(date))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<User> findUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailFragment(emailFragment);
+    }
+
+    @Override
+    public void deleteUser(long userId) { userRepository.deleteById(userId);
+
+    }
+//
+//    @Override
+//    public List<User> findUsersOlderThan(int age) {
+//        return null;
+//    }
 
     @Override
     public User updateUser(final User user) {
@@ -77,9 +92,6 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
 
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
 
 }
 

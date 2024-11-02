@@ -1,5 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public interface UserService {
      * @param age wiek, z którym porównywani są użytkownicy
      * @return lista użytkowników, którzy są starsi niż określony wiek
      */
-    List<User> findUsersOlderThan(int age);
+
 
     /**
      * Aktualizuje informacje istniejącego użytkownika.
@@ -48,4 +50,7 @@ public interface UserService {
      * @return zaktualizowany User po zastosowaniu zmian
      */
     User updateUser(User user);
+    List<User> findUsersOlderThan(LocalDate time);
+    List<User> findUsersByEmailFragment(String emailFragment);
+    void deleteUser(long userId);
 }

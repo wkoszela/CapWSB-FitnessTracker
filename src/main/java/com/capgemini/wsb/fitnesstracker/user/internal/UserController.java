@@ -4,8 +4,10 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
@@ -14,6 +16,7 @@ class UserController {
     private final UserServiceImpl userService;
 
     private final UserMapper userMapper;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /**
      * Pobiera listę wszystkich użytkowników z pełnymi informacjami.
@@ -34,6 +37,7 @@ class UserController {
      */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllBasicInformationAboutUsers() {
+        System.out.println("Listing users");
         return userService.findAllUsers()
                 .stream()
                 .map(userMapper::toSimpleDto)
@@ -48,6 +52,14 @@ class UserController {
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable long id) {
         return userMapper.toDto(userService.findUserById(id));
+    }
+
+    @GetMapping("/email")
+    public List<UserEmailDto> getUserByEmail(@RequestParam String email) {
+        return userService.findUsersByEmailFragment(email)
+                .stream()
+                .map(userMapper::toEmailDto)
+                .toList();
     }
 
     /**
@@ -73,17 +85,27 @@ class UserController {
         userService.deleteUser(id);
     }
 
-    /**
-     * Wyszukuje użytkowników starszych niż podany wiek.
-     *
-     * @param age minimalny wiek użytkowników do wyszukania
-     * @return lista UserDto zawierająca dane użytkowników starszych niż podany wiek
-     */
-    @GetMapping("/search/age")
-    public List<UserDto> findUsersOlderThan(@RequestParam int age) {
-        return userService.findUsersOlderThan(age)
+
+    @GetMapping("/older/{time}")
+    public List<UserDto> findUsersOlderThan(@PathVariable("time") LocalDate time) {
+//        logger.debug("Received request to find users older than: {}", time);
+        System.out.println("Received request to find users older than:" + time);
+        return userService.findUsersOlderThan(time)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
+    }
+
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        try {
+            User existingUser = userService
+                    .getUser(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("User ID: " + userId + " not found"));
+            User updatedUser = userMapper.toUpdateUser(userDto, existingUser);
+            return userService.updateUser(updatedUser);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error on ID: " + userId + " Error code: " + e.getMessage());
+        }
     }
 }

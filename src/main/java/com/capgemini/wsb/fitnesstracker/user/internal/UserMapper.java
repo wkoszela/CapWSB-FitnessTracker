@@ -46,4 +46,24 @@ class UserMapper {
                 user.getFirstName(),
                 user.getLastName());
     }
+
+    UserEmailDto toEmailDto(User user) {
+        return new UserEmailDto(user.getId(), user.getEmail());
+    }
+    User toUpdateUser(UserDto userDto, User user) {
+        if(userDto.firstName() != null) {
+            user.setFirstName(userDto.firstName());
+        }
+        if(userDto.lastName() != null) {
+            user.setLastName(userDto.lastName());
+        }
+        if(userDto.birthdate() != null) {
+            user.setBirthdate(userDto.birthdate());
+        }
+        if(userDto.email() != null) {
+            user.setEmail(userDto.email());
+        }
+        return user;
+    }
+
 }

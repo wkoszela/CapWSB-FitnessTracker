@@ -4,8 +4,10 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 interface UserRepository extends JpaRepository<User, Long> {
 
@@ -28,4 +30,9 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .findFirst();
     }
 
+    default List<User> findByEmailFragment(String emailFragment) {
+        return findAll().stream()
+                .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
