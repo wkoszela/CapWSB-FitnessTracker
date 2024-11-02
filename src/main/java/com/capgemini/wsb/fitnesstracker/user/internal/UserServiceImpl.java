@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(user);
     }
 
+
+
     @Override
     public User findUserById(long id) {
         return userRepository.findById(id).orElse(null);
@@ -47,6 +50,12 @@ class UserServiceImpl implements UserService, UserProvider {
                 .filter(user -> Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public User updateUser(long id, User updatedUserDetails) {
+        return null;
+    }
+
 
     @Override
     public Optional<User> getUser(final Long userId) {
@@ -67,4 +76,5 @@ class UserServiceImpl implements UserService, UserProvider {
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
+
 }

@@ -12,5 +12,6 @@ public interface UserService {
     User createUser(User user);
     User findUserById(long id);
     User findUserByEmail(String email);
-   // List<User> findUsersOlderThan(int age);
+    List<User> findUsersOlderThan(int age);
+    User updateUser(long id,User updatedUserDetails);
 }
