@@ -42,10 +42,15 @@ class UserServiceImpl implements UserService, UserProvider {
 
 
     @Override
-    public List<User> findUsersOlderThan(int age) {
+    public List<User> findUsersOlderThan(LocalDate date) {
         return userRepository.findAll().stream()
-                .filter(user -> Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age)
+                .filter(user -> user.getBirthdate().isBefore(date))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> findUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailFragment(emailFragment);
     }
 
     @Override

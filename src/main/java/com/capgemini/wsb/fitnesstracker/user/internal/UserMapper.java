@@ -28,4 +28,9 @@ class UserMapper {
         );
     }
 
+    UserEmailDto toEmailDto(User user) {
+        return new UserEmailDto(user.getId(), user.getEmail());
+    }
+
+
 }
