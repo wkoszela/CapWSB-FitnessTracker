@@ -2,9 +2,12 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -23,8 +26,6 @@ class UserController {
                           .toList();
     }
 
-
-
     @GetMapping(value = "/simple")
     public List<UserBasicInfoDto> getUserBasicInfo() {
         return userService.findAllUsers()
@@ -33,14 +34,59 @@ class UserController {
                 .toList();
     }
 
-    @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
-
-        // TODO: saveUser with Service and return User
-        return null;
+    @GetMapping(value = "/{id}")
+    public List<UserDto> getUserById(@PathVariable Long id) {
+        return userService.getUser(id)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
+    @GetMapping(value = "/email")
+    public List<UserDto> getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+
+    @GetMapping(value = "/partial-email")
+    public List<UserIdAndEmailDto> getUserByPartialEmail(@RequestParam String email) {
+        return userService.findUsersByPartialEmail(email)
+                .stream()
+                .map(userMapper::toIdAndEmailDto)
+                .toList();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody UserDto userDto) throws InterruptedException {
+        User user = new User(userDto.firstName(), userDto.lastName(), userDto.birthdate(), userDto.email());
+        return ResponseEntity.status(201).body(userService.createUser(user));
+    }
+
+    @GetMapping(value = "/older/{date}")
+    public List<UserDto> getUsersOlderThan(@PathVariable LocalDate date) {
+        return userService.findUsersByBirthdateGreaterThan(date)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto updatedUser) {
+        User updatedUserResponse = userService.updateUser(id, updatedUser);
+
+        if (updatedUserResponse == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(updatedUserResponse);
+    }
 }
