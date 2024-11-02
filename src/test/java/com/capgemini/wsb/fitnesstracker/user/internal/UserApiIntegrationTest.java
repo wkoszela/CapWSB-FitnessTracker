@@ -76,18 +76,28 @@ class UserApiIntegrationTest extends IntegrationTestBase {
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNotEmpty())
-                .andExpect(jsonPath("$.firstName").value(user1.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(user1.getLastName()))
-                .andExpect(jsonPath("$.birthdate").value(ISO_DATE.format(user1.getBirthdate())))
-                .andExpect(jsonPath("$.email").value(user1.getEmail()));
+                .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
+                .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
+                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()));
 
     }
 
     @Test
     void shouldReturnDetailsAboutUser_whenGettingUserByEmail() throws Exception {
         User user1 = existingUser(generateUser());
-
         mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].Id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()));
+    }
+
+    @Test
+    void shouldReturnDetailsAboutUser_whenGettingUserByPartialEmail() throws Exception {
+        User user1 = existingUser(generateUser());
+        mockMvc.perform(get("/v1/users/partial-email").param("email", user1.getEmail().substring(0, 5)).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -105,9 +115,9 @@ class UserApiIntegrationTest extends IntegrationTestBase {
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
-                .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
-                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user1.getBirthdate())))
+                .andExpect(jsonPath("$[0].firstName").value(user2.getFirstName()))
+                .andExpect(jsonPath("$[0].lastName").value(user2.getLastName()))
+                .andExpect(jsonPath("$[0].birthdate").value(ISO_DATE.format(user2.getBirthdate())))
 
                 .andExpect(jsonPath("$[1]").doesNotExist());
     }
