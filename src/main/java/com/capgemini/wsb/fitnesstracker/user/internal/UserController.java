@@ -66,9 +66,9 @@ class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws InterruptedException {
         User user = new User(userDto.firstName(), userDto.lastName(), userDto.birthdate(), userDto.email());
-        return ResponseEntity.status(201).body(userService.createUser(user));
+        return ResponseEntity.status(201).body(userMapper.toDto(userService.createUser(user)));
     }
 
     @GetMapping(value = "/older/{date}")
@@ -80,13 +80,13 @@ class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto updatedUser) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto updatedUser) {
         User updatedUserResponse = userService.updateUser(id, updatedUser);
 
         if (updatedUserResponse == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(updatedUserResponse);
+        return ResponseEntity.ok(userMapper.toDto(updatedUserResponse));
     }
 }
