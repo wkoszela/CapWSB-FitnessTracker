@@ -38,13 +38,6 @@ class UserController {
         return userMapper.toDto(userService.findUserById(id));
     }
 
-//    @GetMapping("/email")
-//    public List<UserSimpleDto> findUsersByEmail(@RequestParam String email) {
-//        return userService.findUsersByEmailFragment(email)
-//                .stream()
-//                .map(userMapper::toSimpleDto)
-//                .toList();
-//    }
     @GetMapping("/email")
     public List<UserEmailDto> getUserByEmail(@RequestParam String email) {
         return userService.findUsersByEmailFragment(email)

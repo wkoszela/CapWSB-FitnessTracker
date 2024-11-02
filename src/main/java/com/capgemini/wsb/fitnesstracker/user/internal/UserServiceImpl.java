@@ -54,6 +54,11 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public void deleteUser(long userId) { userRepository.deleteById(userId);
+
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
@@ -69,7 +74,4 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
 
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
 }

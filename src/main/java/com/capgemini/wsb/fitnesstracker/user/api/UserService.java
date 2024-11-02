@@ -16,4 +16,5 @@ public interface UserService {
     User findUserByEmail(String email);
     List<User> findUsersOlderThan(LocalDate time);
     List<User> findUsersByEmailFragment(String emailFragment);
+    void deleteUser(long userId);
 }
