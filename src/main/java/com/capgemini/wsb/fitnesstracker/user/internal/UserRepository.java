@@ -17,10 +17,17 @@ interface UserRepository extends JpaRepository<User, Long> {
      * @param email email of the user to search
      * @return {@link Optional} containing found user or {@link Optional#empty()} if none matched
      */
+    /**
+     * Wyszukuje użytkownika na podstawie adresu e-mail.
+     *
+     * @param email adres e-mail użytkownika, którego szukamy
+     * @return Optional zawierający użytkownika z podanym adresem e-mail,
+     *         lub Optional.empty(), jeśli użytkownik o takim adresie nie istnieje
+     */
     default Optional<User> findByEmail(String email) {
         return findAll().stream()
-                        .filter(user -> Objects.equals(user.getEmail(), email))
-                        .findFirst();
+                .filter(user -> Objects.equals(user.getEmail(), email))
+                .findFirst();
     }
 
     default List<User> findByEmailFragment(String emailFragment) {

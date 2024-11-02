@@ -26,7 +26,7 @@ Stworzone API powinno pozwalać na:
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
   tylko ID oraz e-mail użytkowników)
 - [x] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
-- [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
+- [x] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
 
 ### Wymagania techniczne
 
@@ -42,32 +42,4 @@ Stworzone API powinno pozwalać na:
   stworzone API
 - [x] rozwiązanie powinno wykorzystywać rekordy (Java 16+) do definicji obiektów transferu danych (DTO)
 
-## ZADANIE 2: Zabezpieczenie API (Opcjonalnie)
 
-### Potrzeba biznesowa:
-
-Jako administrator systemu, chcę zabezpieczyć API, z którego mogą korzystać różne systemy
-
-- API potrzebne do zbierania metryk powinno być dostępne dla narzędzi monitorujących
-- API, które nie modyfikuje danych, powinno być dostępne dla znanych użytkowników
-- API, które może modyfikować dane, powinno być zabezpieczone przed nieuprawnionym dostępem
-
-### Wymagania funkcjonalne
-
-Zabezpieczenia, powinny zagwarantować:
-
-- [ ] API Spring Boot Actuator są dostępne bez zabezpieczenia, tj. nie wymagają uwierzytelnienia ani dodatkowych
-  uprawnień
-- [ ] API dla HTTP metody GET jest dostępne dla wszystkich uwierzytelnionych użytkowników
-- [ ] API dla pozostałych metod jest dostępne dla użytkowników z rolą "ADMIN"
-- [ ] lista użytkowników i ich ról jest statyczna (nie zmienia się)
-
-### Wymagania techniczne
-
-- [ ] zabezpieczenie powinno wykorzystywać bibliotekę Spring Security
-- [ ] użytkownik może uwierzytelnić się jedynie za pomocą Basic Auth
-- [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
-- [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
-- [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
-  rozwiązanie

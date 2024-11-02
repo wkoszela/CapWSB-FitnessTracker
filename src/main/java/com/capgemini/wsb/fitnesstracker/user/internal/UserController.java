@@ -18,13 +18,23 @@ class UserController {
     private final UserMapper userMapper;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    /**
+     * Pobiera listę wszystkich użytkowników z pełnymi informacjami.
+     *
+     * @return lista UserDto zawierająca dane wszystkich użytkowników
+     */
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
+    /**
+     * Pobiera listę wszystkich użytkowników z podstawowymi informacjami (ID, imię, nazwisko).
+     *
+     * @return lista UserSimpleDto zawierająca podstawowe dane wszystkich użytkowników
+     */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllBasicInformationAboutUsers() {
         System.out.println("Listing users");
@@ -33,6 +43,12 @@ class UserController {
                 .map(userMapper::toSimpleDto)
                 .toList();
     }
+    /**
+     * Pobiera dane użytkownika na podstawie jego unikalnego ID.
+     *
+     * @param id unikalny identyfikator użytkownika
+     * @return UserDto zawierający dane użytkownika
+     */
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable long id) {
         return userMapper.toDto(userService.findUserById(id));
@@ -46,14 +62,24 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Dodaje nowego użytkownika na podstawie przesłanych danych w formie UserDto.
+     *
+     * @param userDto dane nowego użytkownika
+     * @return UserDto zawierający dane utworzonego użytkownika
+     * @throws InterruptedException jeśli wystąpi błąd podczas tworzenia użytkownika
+     */
     @PostMapping
     public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-        // Demonstracja how to use @RequestBody
         System.out.println("User with e-mail: " + userDto.email() + " passed to the request");
         User user = userMapper.toEntity(userDto);
         return userMapper.toDto(userService.createUser(user));
     }
+    /**
+     * Usuwa użytkownika na podstawie jego unikalnego ID.
+     *
+     * @param id unikalny identyfikator użytkownika do usunięcia
+     */
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
