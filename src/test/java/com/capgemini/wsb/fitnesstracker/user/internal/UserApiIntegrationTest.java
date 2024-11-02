@@ -96,6 +96,32 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     }
 
     @Test
+    void shouldReturnMatchedUsersEmails_whenGettingUserByEmailPartialMatch() throws Exception {
+        User user1 = existingUser(new User(randomUUID().toString(),
+                                           randomUUID().toString(),
+                                           LocalDate.now(),
+                                           "a.b@domain.com"));
+        User user2 = existingUser(new User(randomUUID().toString(),
+                                           randomUUID().toString(),
+                                           LocalDate.now(),
+                                           "c.d@domain.com"));
+        User user3 = existingUser(new User(randomUUID().toString(),
+                                           randomUUID().toString(),
+                                           LocalDate.now(),
+                                           "a.b@example.com"));
+
+        mockMvc.perform(get("/v1/users/email-partial-match")
+                        .param("emailFragment", "DoMaIn.").contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()))
+                .andExpect(jsonPath("$[1].id").value(user2.getId().intValue()))
+                .andExpect(jsonPath("$[1].email").value(user2.getEmail()));
+    }
+
+    @Test
     void shouldReturnAllUsersOlderThan_whenGettingAllUsersOlderThan() throws Exception {
         User user1 = existingUser(generateUserWithDate(LocalDate.of(2000, 8, 11)));
         User user2 = existingUser(generateUserWithDate(LocalDate.of(2024, 8, 11)));
