@@ -78,11 +78,10 @@ class UserController {
      * @return User with given e-mail address
      */
     @GetMapping("/email")
-    public List<UserDto> getUserByEmail(@RequestParam String email) {
-        System.out.println("User with e-mail: " + email + "passed to the request");
+    public List<UserSimpleDto> getUserByEmail(@RequestParam String email) {
         return userService.getUserByEmail(email)
                 .stream()
-                .map(userMapper::toDto)
+                .map(userMapper::toSimpleDto)
                 .toList();
     }
 
