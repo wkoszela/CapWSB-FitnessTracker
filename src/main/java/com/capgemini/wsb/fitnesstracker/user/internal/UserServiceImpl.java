@@ -31,7 +31,14 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(user);
     }
 
-
+//@Override
+//public User updateUser(final User user) {
+// log.info("Updating User {}", user);
+// if (user.getId() == null) {
+//     throw new IllegalArgumentException("User has no DB ID, create is not permitted!");
+//}
+// return userRepository.save(user);
+//
 
     @Override
     public User findUserById(long id) {
@@ -78,3 +85,12 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
 }
+
+//@Override
+//public User updateUser(final User user) {
+// log.info("Updating User {}", user);
+// if (user.getId() == null) {
+//     throw new IllegalArgumentException("User has no DB ID, create is not permitted!");
+//}
+// return userRepository.save(user);
+//
