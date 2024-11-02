@@ -1,12 +1,14 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,24 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
+    @Override
+    public User updateUser(Long userId, User updatedUser) {
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new UserNotFoundException(userId));
+
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        user.setBirthdate(updatedUser.getBirthdate());
+        user.setEmail(updatedUser.getEmail());
+
+        return userRepository.save(user);
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
@@ -37,8 +57,17 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public List<User> findByEmailPartialMatch(String emailFragment) {
+        return userRepository.findByEmailPartialMatch(emailFragment);
+    }
+
+    @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
+    @Override
+    public List<User> findUsersBornBefore(LocalDate date) {
+        return userRepository.findByBirthDateBefore(date);
+    }
 }

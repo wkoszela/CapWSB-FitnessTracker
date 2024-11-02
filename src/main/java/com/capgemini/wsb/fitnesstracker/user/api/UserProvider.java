@@ -1,5 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,4 +31,19 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
+    /**
+     * Retrieves users based on their email. It matches by a case-insensitive partial match.
+     *
+     * @param emailFragment email fragment to search by
+     * @return {@link List} containing found users
+     */
+    List<User> findByEmailPartialMatch(String emailFragment);
+
+    /**
+     * Retrieves users based on their birthdate. It matches all users born before the threshold date.
+     *
+     * @param date the birthdate threshold
+     * @return {@link List} containing found users
+     */
+    List<User> findUsersBornBefore(LocalDate date);
 }
