@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "6615c88e-ebb5-4dd3-900b-9dfbb632714f",
+		"name": "lab2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39450814"
+	},
+	"item": [
+		{
+			"name": "localhost:2137/v1/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"a\",\r\n    \"lastName\": \"b\",\r\n    \"birthdate\": \"2020-01-01\",\r\n    \"email\": \"a.b@domain.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2137/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/simple",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users/simple",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"simple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"c\",\r\n    \"lastName\": \"d\",\r\n    \"birthdate\": \"2021-01-01\",\r\n    \"email\": \"c.d@domain.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2137/v1/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"c\",\r\n    \"lastName\": \"d\",\r\n    \"birthdate\": \"2021-01-01\",\r\n    \"email\": \"c.d@domain.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2137/v1/users/11",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users/email?email=Emma.Johnson@domain.com",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "Emma.Johnson@domain.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/email-partial-match",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users/email-partial-match?emailFragment=@DoMaIn",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"email-partial-match"
+					],
+					"query": [
+						{
+							"key": "emailFragment",
+							"value": "@DoMaIn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:2137/v1/users/older/{date}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2137/v1/users/older/2000-01-01",
+					"host": [
+						"localhost"
+					],
+					"port": "2137",
+					"path": [
+						"v1",
+						"users",
+						"older",
+						"2000-01-01"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
