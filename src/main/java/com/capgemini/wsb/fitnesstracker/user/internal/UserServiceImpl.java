@@ -57,9 +57,9 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     /**
-     * 
+     * Retrieve user  data by user's email
      * @param email The email of the user to be searched
-     * @return
+     * @return user data as UserEmailDto object
      */
     @Override
     public Optional<UserEmailDto> getUserByEmail(final String email) {
