@@ -18,7 +18,7 @@ class UserController {
     private final UserServiceImpl userService;
 
     /**
-     * Retrive user by given ID as primary key
+     * Retrieve user by given ID as primary key
      * @param id primary key of user to be updated
      * @return userDto object
      */
@@ -33,7 +33,7 @@ class UserController {
     }
 
     /**
-     * Retrive user list by user's email
+     * Retrieve user list by user's email
      * @param email user email
      * @return list of UserEmailDto users
      */
@@ -47,14 +47,19 @@ class UserController {
                 .body("No user found with this email");
     }
 
+    /**
+     * Retrieve all users which are older than birthday date
+     * @param date user birthdate
+     * @return list of users older than given date
+     */
     @GetMapping("/older/{date}")
     public ResponseEntity<Object> getUsersOlderThen(@PathVariable("date") LocalDate date) {
-        var users = userService.getUsersOlderThen(date);
-        if (users.isEmpty()) {
+        var usersDto = userService.getUsersOlderThen(date);
+        if (usersDto.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found with this date");
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(usersDto);
     }
 
     @GetMapping("/simple")
