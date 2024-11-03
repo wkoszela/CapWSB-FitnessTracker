@@ -39,9 +39,9 @@ class UserController {
      */
     @GetMapping("/email")
     public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
-        var userEmailDto = userService.getUserByEmail(email);
-        if(userEmailDto.isPresent()){
-            return ResponseEntity.ok(userEmailDto);
+        var usersEmailDto = userService.getUserByEmail(email);
+        if(usersEmailDto.isPresent()){
+            return ResponseEntity.ok(usersEmailDto);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("No user found with this email");
