@@ -116,6 +116,11 @@ class UserController {
         }
     }
 
+    /**
+     * Delete user by user ID primary key
+     * @param id user primary key
+     * @return ResponseEntity indicating result of operation
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
 
