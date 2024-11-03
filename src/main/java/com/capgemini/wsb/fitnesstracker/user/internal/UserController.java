@@ -32,11 +32,16 @@ class UserController {
                 .body("No user found with this id");
     }
 
+    /**
+     * Retrive user list by user's email
+     * @param email user email
+     * @return list of UserEmailDto users
+     */
     @GetMapping("/email")
     public ResponseEntity<Object> getUserByEmail(@RequestParam("email") String email) {
-        var user = userService.getUserByEmail(email);
-        if(user.isPresent()){
-            return ResponseEntity.ok(user);
+        var userEmailDto = userService.getUserByEmail(email);
+        if(userEmailDto.isPresent()){
+            return ResponseEntity.ok(userEmailDto);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("No user found with this email");
