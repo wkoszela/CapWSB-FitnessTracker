@@ -76,14 +76,18 @@ class UserController {
         return ResponseEntity.ok(usersSummaryDto);
     }
 
+    /**
+     * Retrieve all users
+     * @return users list as UserDto object
+     */
     @GetMapping
     public ResponseEntity<Object> getUsers() {
-        var users = userService.getAllUsers();
-        if (users.isEmpty()) {
+        var usersDto = userService.getAllUsers();
+        if (usersDto.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found");
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(usersDto);
     }
 
     @PostMapping
