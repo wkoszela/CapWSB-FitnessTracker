@@ -35,17 +35,32 @@ class UserServiceImpl implements UserService, UserProvider {
         return userMapper.toDto(userRepository.save(user));
     }
 
+    /**
+     * Retrieve user by user's ID primary key
+     * @param userId id of the user to be searched
+     * @return Opttional object containing user entity
+     */
     @Override
     public Optional<User> getUserEntity(Long userId) {
         return userRepository.findById(userId);
     }
 
+    /**
+     * Retrieve user data
+     * @param userId id of the user to be searched
+     * @return user as UserDto object
+     */
     @Override
     public Optional<UserDto> getUser(final Long userId) {
         return userRepository.findById(userId)
                 .map(userMapper::toDto);
     }
 
+    /**
+     * 
+     * @param email The email of the user to be searched
+     * @return
+     */
     @Override
     public Optional<UserEmailDto> getUserByEmail(final String email) {
         return userRepository.findByEmail(email)
