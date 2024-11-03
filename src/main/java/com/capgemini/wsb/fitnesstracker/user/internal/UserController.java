@@ -62,14 +62,18 @@ class UserController {
         return ResponseEntity.ok(usersDto);
     }
 
+    /**
+     * Retrieve all users basic data like first name, last name
+     * @return list of UserSummaryDto objects
+     */
     @GetMapping("/simple")
     public ResponseEntity<Object> getUsersSimple() {
-        var users = userService.getAllUsersSimple();
-        if (users.isEmpty()) {
+        var usersSummaryDto = userService.getAllUsersSimple();
+        if (usersSummaryDto.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No users found");
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(usersSummaryDto);
     }
 
     @GetMapping
