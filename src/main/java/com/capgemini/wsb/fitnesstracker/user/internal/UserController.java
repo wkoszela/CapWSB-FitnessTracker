@@ -135,6 +135,12 @@ class UserController {
 
     }
 
+    /**
+     * Update user data
+     * @param id user primary key
+     * @param userDto user object with data to update
+     * @return ResponseEntity indicating result of operation and message
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
 
