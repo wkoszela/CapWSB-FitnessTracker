@@ -20,6 +20,11 @@ class UserServiceImpl implements UserService, UserProvider {
 
     private final UserMapper userMapper;
 
+    /**
+     * Create user from provided userDto object
+     * @param userDto user data to create a new user
+     * @return creted user as UserDto object
+     */
     @Override
     public UserDto createUser(final UserDto userDto) {
         log.info("Creating User {}", userDto);
