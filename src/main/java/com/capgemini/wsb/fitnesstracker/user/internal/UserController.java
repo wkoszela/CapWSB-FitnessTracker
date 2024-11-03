@@ -17,12 +17,16 @@ class UserController {
 
     private final UserServiceImpl userService;
 
-
+    /**
+     * Retrive user by given ID as primary key
+     * @param id primary key of user to be updated
+     * @return userDto object
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
-        var user = userService.getUser(id);
-        if(user.isPresent()){
-            return ResponseEntity.ok(user);
+        var userDto = userService.getUser(id);
+        if(userDto.isPresent()){
+            return ResponseEntity.ok(userDto);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("No user found with this id");
