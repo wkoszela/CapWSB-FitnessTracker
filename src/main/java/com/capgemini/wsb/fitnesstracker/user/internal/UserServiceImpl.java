@@ -67,6 +67,10 @@ class UserServiceImpl implements UserService, UserProvider {
                 .map(userMapper::toEmailDto);
     }
 
+    /**
+     * Retrieve all users
+     * @return list of all users data as UserDto objects
+     */
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
@@ -75,6 +79,10 @@ class UserServiceImpl implements UserService, UserProvider {
                 .toList();
     }
 
+    /**
+     * Retrieve all users
+     * @return all users as User objects
+     */
     @Override
     public List<User> getAllUsersEntity() {
         return userRepository.findAll()
@@ -82,6 +90,10 @@ class UserServiceImpl implements UserService, UserProvider {
                 .toList();
     }
 
+    /**
+     * Retrieve all users basic data like first name and last name
+     * @return list of users as UserSummaryDto objects
+     */
     @Override
     public List<UserSummaryDto> getAllUsersSimple() {
         return userRepository.findAll()
@@ -105,16 +117,23 @@ class UserServiceImpl implements UserService, UserProvider {
                 .toList();
     }
 
-
+    /**
+     * Delete user object
+     * @param userId user primary key
+     */
     @Override
     public void deleteUser(final Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
-
         userRepository.deleteById(userId);
-
     }
 
+    /**
+     * Update user data by given primary key and object
+     * @param userId user primary key
+     * @param userDto user data to update
+     * @return updated user as UserDto object
+     */
     @Override
     public UserDto updateUser(final Long userId, UserDto userDto){
 
@@ -137,8 +156,6 @@ class UserServiceImpl implements UserService, UserProvider {
 
     }
 
-
-
     /**
      * Check whether a user's birthdate is before the provided date
      *
@@ -146,7 +163,6 @@ class UserServiceImpl implements UserService, UserProvider {
      * @param date provided date
      * @return {@link Boolean} true if {@param user} was born before {@param date}
      */
-
     private Boolean isOlder(User user, LocalDate date){
         LocalDate userDate = user.getBirthdate();
         return date.isAfter(userDate);
