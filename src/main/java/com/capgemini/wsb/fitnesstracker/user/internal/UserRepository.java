@@ -4,6 +4,7 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,5 +21,11 @@ interface UserRepository extends JpaRepository<User, Long> {
                         .filter(user -> Objects.equals(user.getEmail(), email))
                         .findFirst();
     }
-
+    /**
+     * Query searching users by email fragment without case sensitivity.
+     *
+     * @param emailFragment fragment of the email to search
+     * @return list of users whose emails contain the specified fragment
+     */
+    List<User> findByEmailContainingIgnoreCase(String emailFragment);
 }

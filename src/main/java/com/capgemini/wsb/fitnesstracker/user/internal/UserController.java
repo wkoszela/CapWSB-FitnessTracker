@@ -5,6 +5,11 @@ import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
 import com.capgemini.wsb.fitnesstracker.user.internal.UserOlderThanDto;
+import com.capgemini.wsb.fitnesstracker.user.internal.UserEmailDto;
+
+
+
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 
 /**
  * Kontroler odpowiedzialny za operacje na użytkownikach, takie jak tworzenie, aktualizacja oraz 
@@ -39,6 +46,27 @@ class UserController {
         List<UserSummaryDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+    @GetMapping("/{id}")
+    public Optional<UserDetailsDto> getDetailsUserById(@PathVariable("id") Long id) {
+        return userService.getUser(id).map(userMapper::toDetailsDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable("id") Long id) {
+        boolean isDeleted = userService.deleteUserById(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/searchByEmail")
+    public List<UserEmailDto> searchUsersByEmail(@RequestParam("email") String emailFragment) {
+        return userService.findUsersByEmailFragment(emailFragment);
+    }
+
+
 
     /**
      * Tworzy nowego użytkownika w systemie.

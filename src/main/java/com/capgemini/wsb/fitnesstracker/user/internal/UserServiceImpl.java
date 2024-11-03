@@ -3,7 +3,6 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
@@ -21,16 +20,35 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+abstract
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
     @Override
+    public List<UserEmailDto> findUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailContainingIgnoreCase(emailFragment)
+                .stream()
+                .map(user -> new UserEmailDto(user.getId(), user.getEmail()))
+                .toList();
+    }
+
+    @Override
     public List<UserSummaryDto> getAllUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(user -> new UserSummaryDto(user.getFirstName(), user.getLastName()))
+                .map(user -> new UserSummaryDto(user.getId(), user.getFirstName(), user.getLastName()))
                 .collect(Collectors.toList());
+    }
+    @Override
+    public boolean deleteUserById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            userRepository.delete(userOptional.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -45,7 +63,7 @@ public UserSummaryDto createUser(CreateUserDto createUserDto) {
 
     // Zapis nowego użytkownika w bazie danych
     User savedUser = userRepository.save(newUser);
-    return new UserSummaryDto(savedUser.getFirstName(), savedUser.getLastName());
+    return new UserSummaryDto(user.getId(), savedUser.getFirstName(), savedUser.getLastName());
 }
 
 @Override
@@ -110,7 +128,7 @@ public UserSummaryDto updateUser(Long id, UpdateUserDto updateUserDto) {
     User updatedUser = userRepository.save(user);
 
     // Zwrócenie zaktualizowanego użytkownika jako DTO
-    return new UserSummaryDto(updatedUser.getFirstName(), updatedUser.getLastName());
+    return new UserSummaryDto(user.getId(), updatedUser.getFirstName(), updatedUser.getLastName());
 }
 
     @Override

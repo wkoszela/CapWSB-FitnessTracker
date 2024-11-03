@@ -1,6 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.user.api;
 import java.time.LocalDate;
 import java.util.List;
+
+import com.capgemini.wsb.fitnesstracker.user.internal.UserEmailDto;
 import com.capgemini.wsb.fitnesstracker.user.internal.UserOlderThanDto;
 /**
  * Interface (API) for modifying operations on {@link User} entities through the API.
@@ -14,4 +16,8 @@ public interface UserService {
     List<UserOlderThanDto> getUsersOlderThan(int age);
     UserSummaryDto updateUser(Long id, UpdateUserDto updateUserDto);
     List<UserOlderThanDto> getUsersBornBefore(LocalDate date);
+    List<UserEmailDto> findUsersByEmailFragment(String emailFragment);
+
+    boolean deleteUserById(Long id);
+
 }
