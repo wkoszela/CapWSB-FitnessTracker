@@ -90,6 +90,11 @@ class UserController {
         return ResponseEntity.ok(usersDto);
     }
 
+    /**
+     * Adding new user
+     * @param userDto object containing information about user
+     * @return ResponseEntity containing status of operation and massage
+     */
     @PostMapping
     public ResponseEntity<Object> addUser(@RequestBody UserDto userDto) {
 
