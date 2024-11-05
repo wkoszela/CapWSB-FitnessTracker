@@ -14,13 +14,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrainingController {
 
-    private final TrainingServiceImpl TrainingService;
+    private final TrainingServiceImpl trainingService;
     private final TrainingMapper trainingMapper;
 
 
 
     @GetMapping
-    public List<TrainingDto> getAllTrainings() {
+    public List<TrainingDto> findAllTrainings() {
         return trainingService.getAllTrainings()
                 .stream()
                 .map(trainingMapper::toDto)
