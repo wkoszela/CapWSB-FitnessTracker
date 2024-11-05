@@ -15,4 +15,17 @@ public class TrainingDto {
     private ActivityType activityType;
     private double distance;
     private double averageSpeed;
+
+    public TrainingDto() {}
+
+    public TrainingDto(Long id, Long userId, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
+        this.id = id;
+        this.userId = userId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.activityType = activityType;
+        this.distance = distance;
+        this.averageSpeed = averageSpeed;
+    }
+
 }
