@@ -5,6 +5,7 @@ import com.capgemini.wsb.fitnesstracker.user.api.User;
 
 import java.util.Optional;
 
+
 // TODO: Provide Impl
 public class TrainingServiceImpl implements TrainingProvider {
 
