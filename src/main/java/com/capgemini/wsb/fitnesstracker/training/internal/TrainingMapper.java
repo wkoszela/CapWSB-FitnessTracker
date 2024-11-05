@@ -6,7 +6,8 @@ import com.capgemini.wsb.fitnesstracker.training.api.Training;
 public class TrainingMapper {
 
     TrainingDto toDto(Training training) {
-        return new
+        return new TrainingDto(training.getDistance()
+        )
     }
 
 }
