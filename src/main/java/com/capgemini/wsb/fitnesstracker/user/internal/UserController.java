@@ -37,6 +37,11 @@ class UserController {
         List<UserSummaryDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping("/details")
     public ResponseEntity<List<UserDto>> getUserDetails(
