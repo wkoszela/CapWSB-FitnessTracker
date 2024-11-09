@@ -2,12 +2,10 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
-import com.capgemini.wsb.fitnesstracker.user.internal.UserOlderThanDto;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -39,6 +37,18 @@ class UserController {
         List<UserSummaryDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/details")
+    public ResponseEntity<List<UserDto>> getUserDetails(
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate,
+            @RequestParam(required = false) String email) {
+        List<com.capgemini.wsb.fitnesstracker.user.api.UserDto> userDetails = userService.getUserDetails(id, firstName, lastName, birthdate, email);
+        return ResponseEntity.ok(userDetails);
+    }
+
 
     /**
      * Tworzy nowego użytkownika w systemie.

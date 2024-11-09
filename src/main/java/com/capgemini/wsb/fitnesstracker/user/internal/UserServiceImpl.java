@@ -3,10 +3,10 @@ package com.capgemini.wsb.fitnesstracker.user.internal;
 import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.user.api.UserNotFoundException;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import com.capgemini.wsb.fitnesstracker.user.api.UserService;
 import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +24,22 @@ import java.util.stream.Collectors;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+
+
+    @Override
+    public List<UserDto> getUserDetails(Long id, String firstName, String lastName, LocalDate birthdate, String email) {
+        return userRepository.findUsersByParams(id, firstName, lastName, birthdate, email)
+                .stream()
+                .map(user -> new UserDto(
+                        user.getId(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getBirthdate(),
+                        user.getEmail()
+                ))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public List<UserSummaryDto> getAllUsers() {

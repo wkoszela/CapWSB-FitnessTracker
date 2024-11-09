@@ -20,7 +20,7 @@ Stworzone API powinno pozwalać na:
 
 - [X] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   uzytkownika)   - ZROBIONE MAREK
-- [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail)
+- [X] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/imię & nazwisko/datę urodzenia/ e-mail) SD.
 - [X] utworzenie nowego użytkownika  - ZROBIONE MAREK
 - [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
