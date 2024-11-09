@@ -1,6 +1,7 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -37,4 +38,10 @@ interface UserRepository extends JpaRepository<User, Long> {
                                  @Param("lastName") String lastName,
                                  @Param("birthdate") LocalDate birthdate,
                                  @Param("email") String email);
+
+
+    @Query("SELECT new com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto(u.id, u.email) " +
+            "FROM User u WHERE LOWER(u.email) LIKE LOWER(CONCAT('%', :emailFragment, '%'))")
+    List<UserEmailDto> findByEmailContainingIgnoreCase(@Param("emailFragment") String emailFragment);
+
 }

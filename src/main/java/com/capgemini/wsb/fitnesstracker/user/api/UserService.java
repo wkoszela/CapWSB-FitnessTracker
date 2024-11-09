@@ -18,6 +18,8 @@ public interface UserService {
     List<UserOlderThanDto> getUsersBornBefore(LocalDate date);
     List<UserDto> getUserDetails(Long id, String firstName, String lastName, LocalDate birthdate, String email);
     void deleteUserById(Long id);
+    List<UserEmailDto> findUsersByEmailFragment(String emailFragment);
+
 
 
 

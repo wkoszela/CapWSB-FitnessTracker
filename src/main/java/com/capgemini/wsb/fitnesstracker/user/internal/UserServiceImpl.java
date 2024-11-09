@@ -1,13 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
-import com.capgemini.wsb.fitnesstracker.user.api.UserService;
-import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
+import com.capgemini.wsb.fitnesstracker.user.api.*;
 
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +19,12 @@ import java.util.stream.Collectors;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+
+
+    @Override
+    public List<UserEmailDto> findUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailContainingIgnoreCase(emailFragment);
+    }
 
     @Override
     public void deleteUserById(Long id) {

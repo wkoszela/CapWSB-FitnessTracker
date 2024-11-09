@@ -1,10 +1,8 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
-import com.capgemini.wsb.fitnesstracker.user.api.CreateUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UpdateUserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
-import com.capgemini.wsb.fitnesstracker.user.api.UserSummaryDto;
+import com.capgemini.wsb.fitnesstracker.user.api.*;
 
+import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,6 +40,12 @@ class UserController {
         userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/searchByEmail")
+    public ResponseEntity<List<UserEmailDto>> searchUsersByEmail(@RequestParam("emailFragment") String emailFragment) {
+        List<UserEmailDto> users = userService.findUsersByEmailFragment(emailFragment);
+        return ResponseEntity.ok(users);
+    }
+
 
     @GetMapping("/details")
     public ResponseEntity<List<UserDto>> getUserDetails(
