@@ -2,7 +2,7 @@
 
 ## Kontynuacja LABORATORIUM 02
 Termin upływa po 14 dniach od rozpoczęciu laboratorium.
-## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów)
+## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów) (OCENA: 4.0)
 
 ### Potrzeba biznesowa
 
@@ -30,14 +30,15 @@ Stworzone API powinno pozwalać na:
   domyślne, pobierające dane za pomocą `findAll()` oraz przetwarzające je za pomocą strumieni (`Stream`). Przykład
   znaleźć można w `UserRepository`
 - [ ] rozwiązanie powinno spełniać zasady SOLID
-- [ ] rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
+- [ ] testy integracyjne powinny poprawnie się wykonywać TrainingApiIntegrationTest
+- [ ] (OPCJONALNIE) rozwiązanie powinno być pokryte testami jednostkowymi (>80%)
 - [ ] rozwiązanie powinno być odpowiednio zhermetyzowane (nie udostępniać funkcjonalności pozostałym pakietom programu)
 - [ ] kod powinien być odpowiednio udokumentowany za pomocą JavaDoc
 - [ ] do kodu powinna zostać dołączona wyeksportowana kolekcja zapytań z programu Postman, pozwalająca przetestować
   stworzone API
 - [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
 
-## ZADANIE 2. API sieciowe do generowania raportów treningowych 
+## ZADANIE 2. API sieciowe do generowania raportów treningowych (OCENA: 5.0)
 
 ### Potrzeba biznesowa
 
