@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,17 +32,21 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
     }
 
     @Override
-    public List<Training> getUserTraining(Long userid) {
-        return List.of();
+    public List<Training> getUserTraining(Long userId) {
+        return trainingRepository.findByUser_Id(userId);
     }
 
     @Override
-    public List<Training> getCompletedTraining(LocalDate endDate) {
-        return List.of();
+    public List<Training> getCompletedTraining(Date endDate) {
+        return trainingRepository.findByEndTimeAfter(endDate);
     }
 
     @Override
-    public List<Training> getTrainingByActivity(String activityType) {
-        return List.of();
+    public List<Training> getTrainingByActivityType(ActivityType activityType) {
+        return trainingRepository.findByActivityType(activityType);
+    }
+    @Override
+    public List<Training> getFinishedTrainingsAfter(Date afterTime) {
+        return trainingRepository.findByEndTimeAfter(afterTime);
     }
 }
