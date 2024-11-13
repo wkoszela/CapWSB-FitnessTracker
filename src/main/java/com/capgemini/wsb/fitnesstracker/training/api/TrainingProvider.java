@@ -2,7 +2,6 @@ package com.capgemini.wsb.fitnesstracker.training.api;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.List;
 public interface TrainingProvider {
@@ -16,4 +15,6 @@ public interface TrainingProvider {
      */
     Optional<User> getTraining(Long trainingId);
     List<Training> getAllTrainings();
+
+    List<Training> createTraining(TrainingDto training);
 }

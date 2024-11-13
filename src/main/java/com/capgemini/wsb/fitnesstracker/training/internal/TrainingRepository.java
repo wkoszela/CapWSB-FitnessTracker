@@ -13,4 +13,5 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
     List<Training> findByUser_Id(Long userId);
     List<Training> findByEndTimeAfter(Date endTime);
     List<Training> findByActivityType(@Param("activityType") ActivityType activityType);
+
 }
