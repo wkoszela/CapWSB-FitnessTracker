@@ -6,12 +6,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 interface TrainingRepository extends JpaRepository<Training, Long> {
 
     List<Training> findByUserId(Long userId);
 
-    List<Training> findByEndTimeAfter(Date afterTime);
+    default List<Training> findByEndTimeAfter(Date afterTime) {
+        return findAll().stream()
+                .filter(training -> training.getEndTime().after(afterTime))
+                .collect(Collectors.toList());
+    }
 
-    List<Training> findByActivityType(ActivityType activityType);
+    default List<Training> findByActivityType(ActivityType activityType) {
+        return findAll().stream()
+                .filter(training -> Objects.equals(training.getActivityType(), activityType))
+                .collect(Collectors.toList());
+    }
 }

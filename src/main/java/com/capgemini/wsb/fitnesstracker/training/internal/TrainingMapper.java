@@ -2,6 +2,7 @@ package com.capgemini.wsb.fitnesstracker.training.internal;
 
 import com.capgemini.wsb.fitnesstracker.training.api.Training;
 import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
+import com.capgemini.wsb.fitnesstracker.training.api.UpdateTrainingDto;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import com.capgemini.wsb.fitnesstracker.user.internal.UserMapper;
@@ -18,7 +19,7 @@ public class TrainingMapper {
         UserDto userDto = userMapper.toDto(training.getUser());
         return new TrainingDto(
                 training.getId(),
-                null, // userId is used only in requests
+                userDto.id(), // userId is used only in requests
                 userDto,
                 training.getStartTime(),
                 training.getEndTime(),
@@ -28,7 +29,7 @@ public class TrainingMapper {
         );
     }
 
-    public Training toEntity(TrainingDto trainingDto, User user) {
+    public Training toEntity(UpdateTrainingDto trainingDto, User user) {
         return new Training(
                 user,
                 trainingDto.startTime(),

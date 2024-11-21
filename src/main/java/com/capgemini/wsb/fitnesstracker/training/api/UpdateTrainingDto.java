@@ -5,16 +5,15 @@ import com.capgemini.wsb.fitnesstracker.user.api.UserDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Nullable;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public record TrainingDto(
+public record UpdateTrainingDto(
         @Nullable Long id,
         @Nullable Long userId,
         @Nullable UserDto user,
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS+00:00")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         Date startTime,
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS+00:00")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         Date endTime,
         ActivityType activityType,
         double distance,

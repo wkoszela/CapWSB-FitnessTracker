@@ -1,9 +1,6 @@
 package com.capgemini.wsb.fitnesstracker.training.internal;
 
-import com.capgemini.wsb.fitnesstracker.training.api.Training;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingDto;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingProvider;
-import com.capgemini.wsb.fitnesstracker.training.api.TrainingService;
+import com.capgemini.wsb.fitnesstracker.training.api.*;
 import com.capgemini.wsb.fitnesstracker.user.api.User;
 import com.capgemini.wsb.fitnesstracker.user.api.UserProvider;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +29,7 @@ public class TrainingServiceImpl implements TrainingService, TrainingProvider {
     }
 
     @Override
-    public Training updateTraining(Long id, TrainingDto trainingDto) {
+    public Training updateTraining(Long id, UpdateTrainingDto trainingDto) {
         Optional<Training> existingTrainingOpt = trainingRepository.findById(id);
         if (existingTrainingOpt.isEmpty()) {
             return null;

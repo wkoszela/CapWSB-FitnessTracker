@@ -22,7 +22,7 @@ public interface TrainingService {
      * @param training updated training data
      * @return Updated {@link Training}
      */
-    Training updateTraining(Long id, TrainingDto training);
+    Training updateTraining(Long id, UpdateTrainingDto training);
 
     /**
      * Deletes a training by id.

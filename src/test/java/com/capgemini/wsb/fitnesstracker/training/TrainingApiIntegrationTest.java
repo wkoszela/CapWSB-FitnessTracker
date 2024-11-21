@@ -37,7 +37,7 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
         Training training1 = persistTraining(generateTraining(user1));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+00:00");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
-        mockMvc.perform(get("/v1/trainings").contentType(MediaType.APPLICATION_JSON))
+        var result = mockMvc.perform(get("/v1/trainings").contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())

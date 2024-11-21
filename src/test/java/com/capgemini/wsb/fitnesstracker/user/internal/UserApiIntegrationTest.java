@@ -90,7 +90,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].Id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$[0].id").value(user1.getId().intValue()))
                 .andExpect(jsonPath("$[0].email").value(user1.getEmail()));
     }
 
