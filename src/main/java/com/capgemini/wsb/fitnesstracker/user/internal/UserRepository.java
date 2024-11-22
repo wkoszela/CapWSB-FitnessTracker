@@ -1,12 +1,18 @@
 package com.capgemini.wsb.fitnesstracker.user.internal;
 
 import com.capgemini.wsb.fitnesstracker.user.api.User;
+import com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Repository
 interface UserRepository extends JpaRepository<User, Long> {
 
     /**
@@ -17,8 +23,25 @@ interface UserRepository extends JpaRepository<User, Long> {
      */
     default Optional<User> findByEmail(String email) {
         return findAll().stream()
-                        .filter(user -> Objects.equals(user.getEmail(), email))
-                        .findFirst();
+                .filter(user -> Objects.equals(user.getEmail(), email))
+                .findFirst();
     }
+
+    @Query("SELECT u FROM User u WHERE " +
+            "(:id IS NULL OR u.id = :id) AND " +
+            "(:firstName IS NULL OR u.firstName LIKE %:firstName%) AND " +
+            "(:lastName IS NULL OR u.lastName LIKE %:lastName%) AND " +
+            "(:birthdate IS NULL OR u.birthdate = :birthdate) AND " +
+            "(:email IS NULL OR u.email LIKE %:email%)")
+    List<User> findUsersByParams(@Param("id") Long id,
+                                 @Param("firstName") String firstName,
+                                 @Param("lastName") String lastName,
+                                 @Param("birthdate") LocalDate birthdate,
+                                 @Param("email") String email);
+
+
+    @Query("SELECT new com.capgemini.wsb.fitnesstracker.user.api.UserEmailDto(u.id, u.email) " +
+            "FROM User u WHERE LOWER(u.email) LIKE LOWER(CONCAT('%', :emailFragment, '%'))")
+    List<UserEmailDto> findByEmailContainingIgnoreCase(@Param("emailFragment") String emailFragment);
 
 }

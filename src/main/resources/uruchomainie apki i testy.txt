@@ -1,0 +1,10 @@
+mvn spring-boot:run
+
+
+mvn test
+
+mvn -Dtest=UserApiIntegrationTest test
+mvn -Dtest=UserApiIntegrationTest#shouldReturnAllSimpleUsers_whenGettingAllUsers test
+mvn -Dtest=UserApiIntegrationTest#shouldPersistUser_whenCreatingUser test
+
+
