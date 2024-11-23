@@ -21,6 +21,7 @@ class UserController {
     private final UserMapper userMapper;
     private final UserSimpleMapper userSimpleMapper;
     private final UserEmailSimpleMapper userEmailSimpleMapper;
+
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()

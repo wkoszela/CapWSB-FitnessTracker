@@ -22,7 +22,7 @@ class UserServiceImpl implements UserService, UserProvider {
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+            throw new IllegalArgumentException("User has already DB ID, create is not permitted!");
         }
         return userRepository.save(user);
     }
@@ -31,7 +31,7 @@ class UserServiceImpl implements UserService, UserProvider {
     public User updateUser(final User user) {
         log.info("Updating User {}", user);
         if (user.getId() == null) {
-            throw new IllegalArgumentException("User has no DB ID, create is not permitted!");
+            throw new IllegalArgumentException("User has no DB ID, update is not permitted!");
         }
         return userRepository.save(user);
     }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * Query searching users by email address. It matches by exact match.
@@ -27,6 +27,7 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .filter(user -> user.getEmail().toLowerCase().contains(emailFragment.toLowerCase()))
                 .toList();
     }
+
     default List<User> findByBirthDateBefore(LocalDate date) {
         return findAll().stream()
                 .filter(user -> user.getBirthdate().isBefore(date))
