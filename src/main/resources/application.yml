@@ -10,5 +10,16 @@ spring:
       path: /h2-console
   profiles:
     active: loadInitialData
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: your_email@example.com
+    password: your_password
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 server:
   port: 8081
+logging:
+  level.com.capgemini.wsb.fitnesstracker: INFO
