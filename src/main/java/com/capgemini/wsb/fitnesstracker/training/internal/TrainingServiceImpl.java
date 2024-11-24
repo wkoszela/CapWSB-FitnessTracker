@@ -50,22 +50,24 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public Training createTraining(TrainingDto trainingDto) {
-        User user = userRepository.getReferenceById(trainingDto.userId());
+    public Training createTraining(TrainingDataDto createTrainingDto) {
+        User user = userRepository.getReferenceById(
+            createTrainingDto.userId()
+        );
 
         return trainingRepository.save(
-                trainingMapper.toEntity(trainingDto, user)
+            trainingMapper.toEntity(createTrainingDto, user)
         );
     }
 
     @Override
-    public Training updateTraining(Long trainingId, TrainingDto trainingDto) {
+    public Training updateTraining(Long trainingId, TrainingDataDto trainingDto) {
         User trainingUser = userRepository.getReferenceById(trainingDto.userId());
 
         Training updatedTraining = trainingMapper.toUpdateEntity(
-                trainingDto,
-                trainingRepository.getReferenceById(trainingId),
-                trainingUser
+            trainingDto,
+            trainingRepository.getReferenceById(trainingId),
+            trainingUser
         );
 
         return trainingRepository.save(updatedTraining);

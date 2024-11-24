@@ -27,41 +27,46 @@ public class TrainingController {
     public List<TrainingDto> getTrainingsForUser(@PathVariable Long userId) {
 
         return trainingService
-                .getTrainingsForUser(userId)
-                .stream()
-                .map(trainingMapper::toDto)
-                .toList();
+            .getTrainingsForUser(userId)
+            .stream()
+            .map(trainingMapper::toDto)
+            .toList();
     }
 
-    @GetMapping("/finished-after")
-    public List<TrainingDto> getTrainingsFinishedAfter(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date date) {
+    @GetMapping("/finished/{afterTime}")
+    public List<TrainingDto> getTrainingsFinishedAfter(
+        @PathVariable
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        Date afterTime
+    ) {
         return trainingService
-                .getTrainingsFinishedAfter(date)
-                .stream()
-                .map(trainingMapper::toDto)
-                .toList();
+            .getTrainingsFinishedAfter(afterTime)
+            .stream()
+            .map(trainingMapper::toDto)
+            .toList();
     }
 
-    @GetMapping("/by-activity/{activityName}")
-    public List<TrainingDto> getTrainingsByActivity(@PathVariable String activityName) {
-        return trainingService.getByActivityType(ActivityType.valueOf(activityName.toUpperCase()))
-                .stream()
-                .map(trainingMapper::toDto)
-                .toList();
+    @GetMapping("/activityType")
+    public List<TrainingDto> getTrainingsByActivity(@RequestParam String activityType) {
+        return trainingService
+            .getByActivityType(ActivityType.valueOf(activityType.toUpperCase()))
+            .stream()
+            .map(trainingMapper::toDto)
+            .toList();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TrainingDto addTraining(@RequestBody TrainingDto trainingDto) {
+    public TrainingDto addTraining(@RequestBody TrainingDataDto createTrainingDto) {
         return trainingMapper.toDto(
-                trainingService.createTraining(trainingDto)
+            trainingService.createTraining(createTrainingDto)
         );
     }
 
     @PutMapping("/{trainingId}")
-    public TrainingDto updateTraining(@PathVariable Long trainingId, @RequestBody TrainingDto trainingDto) {
+    public TrainingDto updateTraining(@PathVariable Long trainingId, @RequestBody TrainingDataDto trainingDataDto) {
         return trainingMapper.toDto(
-                trainingService.updateTraining(trainingId, trainingDto)
+            trainingService.updateTraining(trainingId, trainingDataDto)
         );
     }
 }
