@@ -91,11 +91,10 @@ class UserController {
      * @return UserDto
      */
     @GetMapping("/{userId}")
-    public List<UserDto> getUserByUserId(@PathVariable Long userId) {
+    public UserDto getUserByUserId(@PathVariable Long userId) {
         return userService.getUser(userId)
-                .stream()
                 .map(userMapper::toDto)
-                .toList();
+                .orElseThrow(() -> new IllegalArgumentException("User with ID: " + userId + " is not existing."));
     }
 
     /**

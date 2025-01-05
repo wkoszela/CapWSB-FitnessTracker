@@ -4,7 +4,6 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

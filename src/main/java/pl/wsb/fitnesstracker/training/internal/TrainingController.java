@@ -33,7 +33,7 @@ class TrainingController {
                 .toList();
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     List<TrainingDto> getTrainingsByUser(@PathVariable Long userId) {
         return trainingProvider.getTrainingsByUserId(userId).stream()
                 .map(trainingMapper::toTrainingDto)
