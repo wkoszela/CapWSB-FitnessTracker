@@ -1,6 +1,12 @@
+/*
+ ____            _            _____ _             _     _      ___ ___ ___ ___ ___
+|    \ ___ _____|_|___ ___   |   __| |_ ___ ___  |_|___| |_   | . | . | . |_  |  _|
+|  |  | .'|     | | .'|   |  |__   |  _|  _| . | | | -_| '_|  |_  |_  | . |_  | . |
+|____/|__,|_|_|_|_|__,|_|_|  |_____|_| |_| |___|_| |___|_,_|  |___|___|___|___|___|
+                                               |___|
+ */
 package pl.wsb.fitnesstracker.user.internal;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import pl.wsb.fitnesstracker.user.api.*;
@@ -10,7 +16,6 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
-import static org.springframework.http.ResponseEntity.ok;
 
 /**
  * Controller for users.
@@ -21,12 +26,10 @@ class UserController {
 
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
-    private final UserSimpleMapper userSimpleMapper;
     private final UserEmailSimpleMapper userEmailSimpleMapper;
 
-    UserController(UserServiceImpl userService, UserMapper userMapper, UserSimpleMapper userSimpleMapper, UserEmailSimpleMapper userEmailSimpleMapper) {
+    UserController(UserServiceImpl userService, UserMapper userMapper, UserEmailSimpleMapper userEmailSimpleMapper) {
         this.userService = userService;
-        this.userSimpleMapper = userSimpleMapper;
         this.userEmailSimpleMapper = userEmailSimpleMapper;
         this.userMapper = userMapper;
     }
