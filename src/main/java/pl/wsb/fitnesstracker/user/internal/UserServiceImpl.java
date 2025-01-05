@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.user.internal;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import pl.wsb.fitnesstracker.user.api.*;
@@ -38,40 +37,16 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     /**
-     * Update an existing User
-     * @param userUpdateDto userUpdateDto
+     * Update an existing User overwrite
      * @param user User
      * @return User
      */
-    private User updateUser(UserUpdateDto userUpdateDto, User user) {
-        if (userUpdateDto.firstName() != null) {
-            user.setFirstName(userUpdateDto.firstName());
-        }
-        if (userUpdateDto.lastName() != null) {
-            user.setLastName(userUpdateDto.lastName());
-        }
-        if (userUpdateDto.email() != null) {
-            user.setEmail(userUpdateDto.email());
-        }
-        if (userUpdateDto.birthDate() != null) {
-            user.setBirthdate(userUpdateDto.birthDate());
-        }
-
-        return user;
-    }
-
-    /**
-     * Update an existing User overwrite
-     * @param userId Long
-     * @param userUpdateDto userUpdateDto
-     * @return User
-     */
     @Override
-    @Transactional
-    public Optional<User> updateUser(Long userId, UserUpdateDto userUpdateDto) {
-        return userRepository.findById(userId)
-                .map(user -> updateUser(userUpdateDto, user))
-                .map(userRepository::save);
+    public User updateUser(final User user) {
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("User has NULL id.");
+        }
+        return userRepository.save(user);
     }
 
     /**

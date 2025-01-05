@@ -48,7 +48,6 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$[0].user.lastName").value(user1.getLastName()))
                 .andExpect(jsonPath("$[0].user.email").value(user1.getEmail()))
 
-
                 .andExpect(jsonPath("$[0].startTime").value(sdf.format(training1.getStartTime())))
                 .andExpect(jsonPath("$[0].endTime").value(sdf.format(training1.getEndTime())))
                 .andExpect(jsonPath("$[0].distance").value((training1.getDistance())))

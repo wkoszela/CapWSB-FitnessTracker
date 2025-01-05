@@ -1,5 +1,7 @@
 package pl.wsb.fitnesstracker;
 
+import org.springframework.transaction.annotation.Transactional;
+import pl.wsb.fitnesstracker.statistics.api.Statistics;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.user.api.User;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public abstract class IntegrationTestBase {
 
     @Autowired
@@ -21,26 +24,32 @@ public abstract class IntegrationTestBase {
     @Autowired
     private JpaRepository<Training, Long> trainingRepository;
 
+    @Autowired
+    private JpaRepository<Statistics, Long> statisticsRepository;
+
     @AfterEach
     void cleanUpDB() {
+        statisticsRepository.deleteAll();
         trainingRepository.deleteAll();
         userRepository.deleteAll();
-
     }
 
     @Before
     public void setUp() {
+        statisticsRepository.deleteAll();
         trainingRepository.deleteAll();
         userRepository.deleteAll();
-
     }
 
     protected Training persistTraining(Training training) {
         return trainingRepository.save(training);
     }
 
-    protected User existingUser(User user) {
+    protected Statistics persistStatistic(Statistics statistics) {
+        return statisticsRepository.save(statistics);
+    }
 
+    protected User existingUser(User user) {
         return userRepository.save(user);
     }
 
@@ -49,7 +58,6 @@ public abstract class IntegrationTestBase {
     }
 
     protected List<Training> createAllTrainings(List<Training> trainings) {
-
         trainings.forEach(training -> trainingRepository.save(training));
         return trainings;
     }
@@ -58,5 +66,8 @@ public abstract class IntegrationTestBase {
         return trainingRepository.findAll();
     }
 
+    protected List<Statistics> getAllStatistics() {
+        return statisticsRepository.findAll();
+    }
 
 }

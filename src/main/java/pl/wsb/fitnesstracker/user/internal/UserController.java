@@ -20,12 +20,14 @@ import static org.springframework.http.ResponseEntity.ok;
 class UserController {
 
     private final UserServiceImpl userService;
-    private final UserProvider userProvider;
     private final UserMapper userMapper;
+    private final UserSimpleMapper userSimpleMapper;
+    private final UserEmailSimpleMapper userEmailSimpleMapper;
 
-    UserController(UserServiceImpl userService, UserProvider userProvider, UserMapper userMapper) {
+    UserController(UserServiceImpl userService, UserMapper userMapper, UserSimpleMapper userSimpleMapper, UserEmailSimpleMapper userEmailSimpleMapper) {
         this.userService = userService;
-        this.userProvider = userProvider;
+        this.userSimpleMapper = userSimpleMapper;
+        this.userEmailSimpleMapper = userEmailSimpleMapper;
         this.userMapper = userMapper;
     }
 
@@ -49,7 +51,7 @@ class UserController {
      */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllSimpleUsers() {
-        return userProvider.getAllUsers()
+        return userService.getAllUsers()
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
@@ -62,7 +64,7 @@ class UserController {
      */
     @GetMapping("/details")
     public List<UserDetailsDto> getAllDetailedUsers() {
-        return userProvider.getAllUsers()
+        return userService.getAllUsers()
                 .stream()
                 .map(userMapper::toDetailsDto)
                 .toList();
@@ -75,10 +77,11 @@ class UserController {
      * @return List of UserEmailSimpleDto
      */
     @GetMapping("/email")
-    public ResponseEntity<UserDto> getUserByEmail(@RequestParam String email) {
-        return userProvider.getUserByEmail(email)
-                .map(user -> ok(userMapper.toDto(user)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public List<UserEmailSimpleDto> getUserByEmail(@RequestParam String email) {
+        return userService.getUsersByEmailPart(email)
+                .stream()
+                .map(userEmailSimpleMapper::toEmailSimpleDto)
+                .toList();
     }
 
     /**
@@ -88,10 +91,11 @@ class UserController {
      * @return UserDto
      */
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserByUserId(@PathVariable Long userId) {
-        return userProvider.getUser(userId)
-                .map(user -> ok(userMapper.toDto(user)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public List<UserDto> getUserByUserId(@PathVariable Long userId) {
+        return userService.getUser(userId)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     /**
@@ -102,7 +106,7 @@ class UserController {
      */
     @GetMapping("/older/{date}")
     public List<UserDto> findUsersBornBefore(@PathVariable LocalDate date) {
-        return userProvider.getUsersBornBefore(date).stream()
+        return userService.getUsersBornBefore(date).stream()
                 .map(userMapper::toDto)
                 .toList();
     }
@@ -130,24 +134,30 @@ class UserController {
     @DeleteMapping("/{userId}")
     @ResponseStatus(NO_CONTENT)
     public void deleteUser(@PathVariable Long userId) {
-
-        System.out.println("User with ID: " + userId + "deleted.");
-
-        userService.deleteUserById(userId);
+        try {
+            userService.deleteUserById(userId);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot delete user with ID: " + userId + " with error: " + e.getMessage());
+        }
     }
 
     /**
      * Update an existing user
      *
      * @param userId Long
-     * @param userUpdateDto UserUpdateDto
+     * @param userDto UserDto
      * @return User
      */
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userUpdateDto) {
-        return userService.updateUser(userId, userUpdateDto)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public User updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        try {
+            User foundUser = userService.getUser(userId).orElseThrow(() -> new IllegalArgumentException("User with ID: " + userId + " not found"));
+            User updatedUser = userMapper.toUpdateEntity(userDto, foundUser);
+
+            return userService.updateUser(updatedUser);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot update user with ID: " + userId + " with error: " + e.getMessage());
+        }
     }
 
 }
