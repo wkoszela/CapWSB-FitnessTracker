@@ -1,10 +1,8 @@
 package pl.wsb.fitnesstracker.user.internal;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.*;
 
 import java.time.LocalDate;
@@ -14,9 +12,11 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.ResponseEntity.ok;
 
+/**
+ * Controller for users.
+ */
 @RestController
 @RequestMapping("/v1/users")
-@RequiredArgsConstructor
 class UserController {
 
     private final UserServiceImpl userService;
@@ -29,6 +29,11 @@ class UserController {
         this.userMapper = userMapper;
     }
 
+    /**
+     * Get all users
+     *
+     * @return List of UserDto
+     */
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers()
@@ -37,6 +42,11 @@ class UserController {
                           .toList();
     }
 
+    /**
+     * Get all users in simple format
+     *
+     * @return List of UserSimpleDto
+     */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllSimpleUsers() {
         return userProvider.getAllUsers()
@@ -45,6 +55,11 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Get all users in detailed format
+     *
+     * @return List of UserSimpleDto
+     */
     @GetMapping("/details")
     public List<UserDetailsDto> getAllDetailedUsers() {
         return userProvider.getAllUsers()
@@ -53,6 +68,12 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Get user by email
+     *
+     * @param email String
+     * @return List of UserEmailSimpleDto
+     */
     @GetMapping("/email")
     public ResponseEntity<UserDto> getUserByEmail(@RequestParam String email) {
         return userProvider.getUserByEmail(email)
@@ -60,14 +81,40 @@ class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Get user by ID
+     *
+     * @param userId Long
+     * @return UserDto
+     */
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserByEmail(@PathVariable Long userId) {
+    public ResponseEntity<UserDto> getUserByUserId(@PathVariable Long userId) {
         return userProvider.getUser(userId)
                 .map(user -> ok(userMapper.toDto(user)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Get users born before a given date
+     *
+     * @param date LocalDate
+     * @return List of UserDto
+     */
+    @GetMapping("/older/{date}")
+    public List<UserDto> findUsersBornBefore(@PathVariable LocalDate date) {
+        return userProvider.getUsersBornBefore(date).stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Add a new user
+     *
+     * @param userDto UserDto
+     * @return User
+     */
     @PostMapping
+    @ResponseStatus(CREATED)
     public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         System.out.println("User with e-mail: " + userDto.email() + "passed to the request.");
@@ -75,6 +122,11 @@ class UserController {
         return userService.createUser(userMapper.toEntity(userDto));
     }
 
+    /**
+     * Delete an existing user
+     *
+     * @param userId Long
+     */
     @DeleteMapping("/{userId}")
     @ResponseStatus(NO_CONTENT)
     public void deleteUser(@PathVariable Long userId) {
@@ -84,20 +136,13 @@ class UserController {
         userService.deleteUserById(userId);
     }
 
-    @GetMapping("/search")
-    public List<UserIdEmailDto> findUsersByEmail(String emailPart) {
-        return userProvider.getUsersByEmailPart(emailPart).stream()
-                .map(userMapper::toUserIdEmailDto)
-                .toList();
-    }
-
-    @GetMapping("/older/{date}")
-    public List<UserDto> findUsersBornBefore(@PathVariable LocalDate date) {
-        return userProvider.getUsersBornBefore(date).stream()
-                .map(userMapper::toDto)
-                .toList();
-    }
-
+    /**
+     * Update an existing user
+     *
+     * @param userId Long
+     * @param userUpdateDto UserUpdateDto
+     * @return User
+     */
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserUpdateDto userUpdateDto) {
         return userService.updateUser(userId, userUpdateDto)

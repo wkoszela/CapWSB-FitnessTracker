@@ -5,6 +5,9 @@ import jakarta.annotation.Nullable;
 
 import java.time.LocalDate;
 
+/**
+ * UserDto is a representation of User entity.
+ */
 public record UserDto(@Nullable Long id, String firstName, String lastName,
                       @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
                       String email) {

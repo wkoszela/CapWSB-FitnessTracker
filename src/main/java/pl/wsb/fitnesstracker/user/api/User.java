@@ -11,7 +11,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
@@ -46,7 +45,6 @@ public class User {
     }
 
     // Getters and setters
-
     public Long getId() {
         return this.id;
     }

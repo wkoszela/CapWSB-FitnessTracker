@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 
 import static java.time.LocalDate.now;
 import static java.util.UUID.randomUUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -187,35 +189,35 @@ class TrainingApiIntegrationTest extends IntegrationTestBase {
     }
 
     private static Training generateTraining(User user) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return new Training(
                 user,
-                sdf.parse("2024-01-19 08:00:00"),
-                sdf.parse("2024-01-19 09:30:00"),
+                LocalDateTime.parse("2024-01-19 08:00:00", formatter),
+                LocalDateTime.parse("2024-01-19 09:30:00", formatter),
                 ActivityType.RUNNING,
                 10.5,
                 8.2);
     }
 
     private static Training generateTrainingWithActivityType(User user, ActivityType activityType) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return new Training(
                 user,
-                sdf.parse("2024-01-19 08:00:00"),
-                sdf.parse("2024-01-19 09:30:00"),
+                LocalDateTime.parse("2024-01-19 08:00:00", formatter),
+                LocalDateTime.parse("2024-01-19 09:30:00", formatter),
                 activityType,
                 0, 0);
     }
 
     private static Training generateTrainingWithDetails(User user, String startTime, String endTime, ActivityType activityType, double distance, double averageSpeed) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return new Training(
                 user,
-                sdf.parse(startTime),
-                sdf.parse(endTime),
+                LocalDateTime.parse(startTime, formatter),
+                LocalDateTime.parse(endTime, formatter),
                 activityType,
                 distance,
                 averageSpeed);

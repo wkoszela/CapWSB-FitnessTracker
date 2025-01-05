@@ -1,6 +1,6 @@
-package com.capgemini.wsb.fitnesstracker.training.api;
+package pl.wsb.fitnesstracker.training.api;
 
-import com.capgemini.wsb.fitnesstracker.training.internal.TrainingUpdateDto;
+import pl.wsb.fitnesstracker.training.internal.TrainingUpdateDto;
 
 public interface TrainingService {
 

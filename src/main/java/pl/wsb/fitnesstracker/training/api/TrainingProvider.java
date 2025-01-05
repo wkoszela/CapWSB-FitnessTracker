@@ -1,7 +1,7 @@
 package pl.wsb.fitnesstracker.training.api;
 
 import pl.wsb.fitnesstracker.user.api.User;
-import com.capgemini.wsb.fitnesstracker.training.internal.ActivityType;
+import pl.wsb.fitnesstracker.training.internal.ActivityType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
