@@ -15,11 +15,11 @@ public class MyBean {
 
     @PostConstruct
     public void init() {
-        System.out.println("Initializing..");
+        System.out.println("Initializing...");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("Destroying..");
+        System.out.println("Destroying...");
     }
 }

@@ -45,5 +45,42 @@ public class User {
         this.email = email;
     }
 
+    // Getters and setters
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public LocalDate getBirthdate() {
+        return this.birthdate;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setFirstName(String s) {
+        this.firstName = s;
+    }
+
+    public void setLastName(String s) {
+        this.lastName = s;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBirthdate(LocalDate localDate) {
+        this.birthdate = localDate;
+    }
 }
 
