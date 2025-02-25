@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.user.internal;
 
-import pl.wsb.fitnesstracker.user.api.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,18 +17,18 @@ class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                          .stream()
-                          .map(userMapper::toDto)
-                          .toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @PostMapping
-    public User addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
-        // Demonstracja how to use @RequestBody
-        System.out.println("User with e-mail: " + userDto.email() + "passed to the request");
+        // TODO: Implement the method to add a new user.
+        //  You can use the @RequestBody annotation to map the request body to the UserDto object.
 
-        // TODO: saveUser with Service and return User
+
         return null;
     }
 

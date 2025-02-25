@@ -1,13 +1,13 @@
 package pl.wsb.fitnesstracker;
 
-import pl.wsb.fitnesstracker.training.api.Training;
-import pl.wsb.fitnesstracker.user.api.User;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.wsb.fitnesstracker.training.api.Training;
+import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.List;
 
@@ -22,16 +22,20 @@ public abstract class IntegrationTestBase {
     private JpaRepository<Training, Long> trainingRepository;
 
     @AfterEach
-    void cleanUpDB() {
-        trainingRepository.deleteAll();
-        userRepository.deleteAll();
+    void cleanUp() {
+        cleanDatabase();
 
     }
 
-    @Before
-    public void setUp() {
+    private void cleanDatabase() {
         trainingRepository.deleteAll();
         userRepository.deleteAll();
+    }
+
+    @BeforeEach
+    public void setUp() {
+
+        cleanDatabase();
 
     }
 

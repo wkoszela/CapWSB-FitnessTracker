@@ -1,7 +1,9 @@
 # LABORATORIUM 03
 
 ## Kontynuacja LABORATORIUM 02
+
 Termin upływa po 14 dniach od rozpoczęciu laboratorium.
+
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na Training (bez użycia rekordów) (OCENA: 4.0)
 
 ### Potrzeba biznesowa
@@ -44,11 +46,13 @@ Stworzone API powinno pozwalać na:
 
 Jako użytkownik systemu, chcę mieć możliwość otrzymywania wiadomości e-mailowych z podsumowaniem treningów w każdym
 miesiącu.
+
 ### Wymagania funkcjonalne
 
 - [ ] w oparciu o ustalony zdefiniowany czas (co miesiąc) generowany jest raport z treningami dla każdego użytkownika z
   danego miesiąca
-- [ ] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych łącznie
+- [ ] raport wysyłany jest za pomocą e-mail z podsumowaniem do każdego użytkownika, ile treningów ma zarejestrowanych
+  łącznie
 
 ## ZADANIE 3 (opcjonalne). Sieciowe API do operacji typu CRUD na Statistics (bez użycia rekordów)
 
@@ -64,7 +68,6 @@ Stworzone API powinno pozwalać na:
 - [ ] pobranie szczegółów dotyczących statystyk dla danego użytkownika
 - [ ] usunięcie statystyk
 - [ ] wyszukiwanie wszystkich statystyk gdzie ilość kalorii jest większa niż zdefiniowana
-
 
 ### Wymagania techniczne
 

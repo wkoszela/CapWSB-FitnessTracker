@@ -1,8 +1,8 @@
 package pl.wsb.fitnesstracker.statistics.api;
 
-import pl.wsb.fitnesstracker.user.api.User;
 import jakarta.persistence.*;
 import lombok.*;
+import pl.wsb.fitnesstracker.user.api.User;
 
 @Entity
 @Table(name = "statistics")
