@@ -10,3 +10,5 @@ spring:
     console:
       enabled: true
       path: /h2-console
+server:
+  port: 8069
