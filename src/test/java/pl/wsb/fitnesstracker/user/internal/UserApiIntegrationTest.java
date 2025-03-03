@@ -67,9 +67,11 @@ class UserApiIntegrationTest extends IntegrationTestBase {
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].id").value(user1.getId()))
                 .andExpect(jsonPath("$[0].firstName").value(user1.getFirstName()))
                 .andExpect(jsonPath("$[0].lastName").value(user1.getLastName()))
 
+                .andExpect(jsonPath("$[1].id").value(user2.getId()))
                 .andExpect(jsonPath("$[1].firstName").value(user2.getFirstName()))
                 .andExpect(jsonPath("$[1].lastName").value(user2.getLastName()))
 
@@ -89,6 +91,13 @@ class UserApiIntegrationTest extends IntegrationTestBase {
                 .andExpect(jsonPath("$.birthdate").value(ISO_DATE.format(user1.getBirthdate())))
                 .andExpect(jsonPath("$.email").value(user1.getEmail()));
 
+    }
+
+    @Test
+    void shouldReturnNotFound_whenGettingUserById() throws Exception {
+        mockMvc.perform(get("/v1/users/{id}", 123).contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isNotFound());
     }
 
     @Test
