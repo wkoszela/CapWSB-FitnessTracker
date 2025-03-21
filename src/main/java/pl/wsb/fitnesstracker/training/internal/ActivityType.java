@@ -1,6 +1,11 @@
 package pl.wsb.fitnesstracker.training.internal;
 
-// TODO : JavaDoc
+import lombok.Getter;
+
+/**
+ * Denotes a type of activity such as sports
+ */
+@Getter
 public enum ActivityType {
 
     RUNNING("Running"),
@@ -14,9 +19,4 @@ public enum ActivityType {
     ActivityType(String displayName) {
         this.displayName = displayName;
     }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
 }
