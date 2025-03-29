@@ -9,5 +9,7 @@ spring:
       enabled: true
   profiles:
     active: "loadInitialData"
+    mail:
+      host: "mail.example.local"
 server:
   port: 8008
