@@ -2,10 +2,10 @@
 
 Zadania proszę realizować zgodnie z własnym tempem. Zadania mają pomóc w przygotowaniu do Egzaminu oraz zrozumieniu
 Frameworka Spring.
-Termin upływa po 7 dniach od rozpoczęciu laboratorium. Po przesłaniu zadania proszę o zaznaczenie na Moodle wykonanie
+Termin upływa po 14 dniach od rozpoczęciu laboratorium. Po przesłaniu zadania proszę o zaznaczenie na Moodle wykonanie
 zadania.
 
-## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
+## ZADANIE 1. Sieciowe API do operacji typu CRUD na użytkownikach
 
 ### Potrzeba biznesowa
 

@@ -19,4 +19,4 @@ Frameworka Spring.
 10. Znajdź i uruchom testy jednostkowe
 11. Udostępnij prowadzącemu link do repozytorium (wrzuć link do Excela, jedna osoba z pary).
 
-Termin upływa po 7 dniach od rozpoczęciu laboratorium.
+Termin upływa po 14 dniach od rozpoczęciu laboratorium.
