@@ -2,6 +2,7 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.user.api.UserDto;
 
 import java.util.List;
 
@@ -22,12 +23,12 @@ class UserController {
                 .toList();
     }
 
+
     @PostMapping
     public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         // TODO: Implement the method to add a new user.
         //  You can use the @RequestBody annotation to map the request body to the UserDto object.
-
 
         return null;
     }
