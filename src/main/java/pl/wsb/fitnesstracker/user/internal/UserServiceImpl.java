@@ -7,6 +7,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,19 +27,36 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(user);
     }
 
-    @Override
-    public Optional<User> getUser(final Long userId) {
-        return userRepository.findById(userId);
-    }
-
-    @Override
-    public Optional<User> getUserByEmail(final String email) {
-        return userRepository.findByEmail(email);
-    }
 
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> getUser(Long userId) {
+        return findById(userId);
+    }
+
+
+
+
+    @Override
+    public List<User> searchUsers(String firstName, String lastName, LocalDate birthdate) {
+        return userRepository.findAll().stream()
+                .filter(u -> firstName == null || u.getFirstName().equalsIgnoreCase(firstName))
+                .filter(u -> lastName == null || u.getLastName().equalsIgnoreCase(lastName))
+                .filter(u -> birthdate == null || u.getBirthdate().equals(birthdate))
+                .toList();
+    }
 }
