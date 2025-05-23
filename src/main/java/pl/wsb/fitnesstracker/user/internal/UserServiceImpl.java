@@ -7,13 +7,14 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class UserServiceImpl implements UserService, UserProvider {
+public class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
@@ -27,18 +28,35 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    public User updateUser(final User user, final Long id) {
+        user.setId(id);
+        log.info("Updating User {}", user);
+        return userRepository.save(user);
+    }
+
+    @Override
     public Optional<User> getUser(final Long userId) {
         return userRepository.findById(userId);
     }
 
     @Override
-    public Optional<User> getUserByEmail(final String email) {
+    public List<User> getUsersByEmail(final String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> getUsersOlderThan(final LocalDate date) {
+        return userRepository.getUsersOlderThan(date);
     }
 
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void deleteUser(final Long id) {
+        userRepository.deleteById(id);
     }
 
 }
