@@ -11,18 +11,19 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service implementation for managing Users.
+ * Serwis implementujący logikę zarządzania użytkownikami.
+ * Obejmuje operacje CRUD oraz dodatkowe wyszukiwania.
  */
 @Service
 @RequiredArgsConstructor
 @Slf4j
-class UserServiceImpl implements UserService, UserProvider {
+public class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
     @Override
     public User createUser(User user) {
-        log.info("Creating User {}", user);
+        log.info("Creating user: {}", user);
         if (user.getId() != null) {
             throw new IllegalArgumentException("User already has an ID.");
         }
@@ -35,13 +36,14 @@ class UserServiceImpl implements UserService, UserProvider {
 
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id)
-                .map(user -> {
-                    user.setFirstName(updatedUser.getFirstName());
-                    user.setLastName(updatedUser.getLastName());
-                    user.setEmail(updatedUser.getEmail());
-                    user.setBirthdate(updatedUser.getBirthdate());
-                    return userRepository.save(user);
-                }).orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .map(existing -> {
+                    existing.setFirstName(updatedUser.getFirstName());
+                    existing.setLastName(updatedUser.getLastName());
+                    existing.setEmail(updatedUser.getEmail());
+                    existing.setBirthdate(updatedUser.getBirthdate());
+                    return userRepository.save(existing);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     @Override

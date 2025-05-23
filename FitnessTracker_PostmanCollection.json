@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "FitnessTracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search Users By Email Fragment",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users/search/email?fragment=test",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users",
+            "search",
+            "email"
+          ],
+          "query": [
+            {
+              "key": "fragment",
+              "value": "test"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Users Older Than",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users/search/older-than?age=30",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users",
+            "search",
+            "older-than"
+          ],
+          "query": [
+            {
+              "key": "age",
+              "value": "30"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"firstName\": \"John\", \"lastName\": \"Doe\", \"birthdate\": \"1990-01-01\", \"email\": \"john.doe@example.com\"}"
+        },
+        "url": {
+          "raw": "http://localhost:9090/v1/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "v1",
+            "users",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}

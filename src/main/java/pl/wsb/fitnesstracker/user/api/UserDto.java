@@ -6,7 +6,8 @@ import jakarta.annotation.Nullable;
 import java.time.LocalDate;
 
 /**
- * Data Transfer Object representing a User in the system.
+ * Rekord reprezentujący DTO użytkownika.
+ * Służy do transferu danych użytkownika przez API.
  */
 public record UserDto(
         @Nullable Long id,

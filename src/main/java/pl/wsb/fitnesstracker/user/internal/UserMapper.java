@@ -5,7 +5,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 
 /**
- * Mapper class for converting between User and UserDto.
+ * Komponent mapujący encję {@link User} na {@link UserDto} i odwrotnie.
  */
 @Component
 public class UserMapper {

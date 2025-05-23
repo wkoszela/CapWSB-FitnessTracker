@@ -8,12 +8,13 @@ import pl.wsb.fitnesstracker.user.api.UserDto;
 import java.util.List;
 
 /**
- * REST controller for managing User resources.
+ * REST API kontroler dla operacji na użytkownikach.
+ * Umożliwia operacje CRUD i wyszukiwania.
  */
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
-class UserController {
+public class UserController {
 
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
@@ -21,7 +22,9 @@ class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
-                .stream().map(userMapper::toDto).toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
@@ -35,18 +38,23 @@ class UserController {
     @GetMapping("/search/email")
     public List<UserDto> searchByEmailFragment(@RequestParam String fragment) {
         return userService.findByPartialEmail(fragment)
-                .stream().map(userMapper::toDto).toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/search/older-than")
     public List<UserDto> findOlderThan(@RequestParam int age) {
         return userService.findOlderThan(age)
-                .stream().map(userMapper::toDto).toList();
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
     }
 
     @PostMapping
-    public UserDto addUser(@RequestBody UserDto userDto) {
-        return userMapper.toDto(userService.createUser(userMapper.toEntity(userDto)));
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
+        var created = userService.createUser(userMapper.toEntity(userDto));
+        return ResponseEntity.status(201).body(userMapper.toDto(created));
     }
 
     @DeleteMapping("/{id}")
@@ -57,8 +65,7 @@ class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        return ResponseEntity.ok(userMapper.toDto(
-                userService.updateUser(id, userMapper.toEntity(userDto))
-        ));
+        var updated = userService.updateUser(id, userMapper.toEntity(userDto));
+        return ResponseEntity.ok(userMapper.toDto(updated));
     }
 }
