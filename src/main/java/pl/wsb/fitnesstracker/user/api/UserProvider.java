@@ -31,7 +31,6 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
-
     /**
      * @param firstName
      * @param lastName

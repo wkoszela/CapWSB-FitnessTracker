@@ -14,6 +14,9 @@ public interface UserService {
     List<User> findAllUsers();
     Optional<User> findById(Long id);
     Optional<User> getUserByEmail(String email);
-
     List<User> searchUsers(String firstName, String lastName, LocalDate birthdate);
+    User deleteUserById(Long userId);
+    List<User> findUsersByEmailFragment(String fragment);
+    List<User> findAllUsersOlderThan(int ageThreshold);
+    User updateUserAttribute(Long userId, String attribute, String value);
 }
