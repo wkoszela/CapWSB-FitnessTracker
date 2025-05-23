@@ -2,16 +2,17 @@ package pl.wsb.fitnesstracker.user.api;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
+/**
+ * Entity representing a User in the system.
+ */
 @Entity
 @Table(name = "users")
 @Getter
+@Setter // <--- Dodaje wszystkie wymagane settery
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
@@ -33,6 +34,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    /**
+     * All-args constructor (used for creating new users).
+     */
     public User(
             final String firstName,
             final String lastName,
@@ -44,6 +48,4 @@ public class User {
         this.birthdate = birthdate;
         this.email = email;
     }
-
 }
-
