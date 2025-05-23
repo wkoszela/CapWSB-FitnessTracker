@@ -7,12 +7,13 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Serwis implementujący logikę zarządzania użytkownikami.
- * Obejmuje operacje CRUD oraz dodatkowe wyszukiwania.
+ * Service implementation for managing {@link User} entities.
+ * Provides create, update, delete, and query operations.
  */
 @Service
 @RequiredArgsConstructor
@@ -30,10 +31,12 @@ public class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(user);
     }
 
+    @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
+    @Override
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id)
                 .map(existing -> {
@@ -61,11 +64,13 @@ public class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    @Override
     public List<User> findByPartialEmail(String fragment) {
         return userRepository.findByEmailContainingIgnoreCase(fragment);
     }
 
-    public List<User> findOlderThan(int age) {
-        return userRepository.findOlderThan(age);
+    @Override
+    public List<User> findOlderThan(LocalDate ageThreshold) {
+        return userRepository.findOlderThan(ageThreshold);
     }
 }

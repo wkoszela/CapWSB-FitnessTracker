@@ -3,8 +3,10 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.user.api.SimpleUserDto;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,6 +33,14 @@ public class UserController {
                 .toList();
     }
 
+    @GetMapping("/simple")
+    public List<SimpleUserDto> getSimpleUsers() {
+        return userService.findAllUsers().stream()
+                .map(userMapper::toSimpleDto)
+                .toList();
+    }
+
+
     /**
      * Pobiera użytkownika po ID.
      * @param id identyfikator użytkownika
@@ -46,25 +56,31 @@ public class UserController {
 
     /**
      * Wyszukuje użytkowników po fragmencie emaila (bez rozróżniania wielkości liter).
-     * @param fragment fragment emaila
+     * @param email fragment adres email
      * @return pasujący użytkownicy
      */
-    @GetMapping("/search/email")
-    public List<UserDto> searchByEmailFragment(@RequestParam String fragment) {
-        return userService.findByPartialEmail(fragment)
-                .stream()
+    @GetMapping("/email")
+    public ResponseEntity<List<UserDto>> getUserByEmail(@RequestParam String email) {
+        var users = userService.findByPartialEmail(email).stream()
                 .map(userMapper::toDto)
                 .toList();
+
+        if (users.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(users);
+        }
     }
+
 
     /**
      * Wyszukuje użytkowników starszych niż podany wiek.
-     * @param age wiek minimalny
+     * @param date wiek minimalny
      * @return pasujący użytkownicy
      */
-    @GetMapping("/search/older-than")
-    public List<UserDto> findOlderThan(@RequestParam int age) {
-        return userService.findOlderThan(age)
+    @GetMapping("/older/{date}")
+    public List<UserDto> findOlderThanDate(@PathVariable("date") LocalDate date) {
+        return userService.findOlderThan(date)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
