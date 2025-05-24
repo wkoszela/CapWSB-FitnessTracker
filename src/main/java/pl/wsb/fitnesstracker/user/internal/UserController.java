@@ -5,11 +5,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.server.ResponseStatusException;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserEmailDto;
 import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 import pl.wsb.fitnesstracker.user.api.UserService;
+=======
+import pl.wsb.fitnesstracker.user.api.UserDto;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -88,6 +92,7 @@ class UserController {
                 .toList();
     }
 
+
     /**
      * Retrieves a single user by their unique system-generated ID.
      *
@@ -144,6 +149,11 @@ class UserController {
                 .toList();
     }
 
+
+    @PostMapping
+    public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
+
+
     /**
      * Handles HTTP DELETE requests to remove a user by their ID.
      *
@@ -164,6 +174,7 @@ class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
     }
+
 
     /**
      * Handles HTTP GET requests to find users whose email addresses contain the specified fragment,
@@ -198,6 +209,9 @@ class UserController {
     {
         return ResponseEntity.status(HttpStatus.OK).
                 body(userService.findAllUsersOlderThan(ageThreshold).stream().map(userMapper::toDto).toList());
+
+        return null;
+
     }
 
     /**
