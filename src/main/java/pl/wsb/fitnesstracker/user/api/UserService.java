@@ -23,9 +23,11 @@ public interface UserService {
     User createUser(User user);
 
     /**
-     * Deletes a user by their unique identifier.
+     * Deletes the user with the given ID.
+     * Also deletes all trainings associated with the user.
      *
      * @param id the ID of the user to delete
+     * @throws IllegalArgumentException if no user with the given ID exists
      */
     void deleteUser(Long id);
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * Repository for managing User persistence.
  */
-interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmailIgnoreCase(String email);
 
     default List<User> findByEmailContainingIgnoreCase(String fragment) {

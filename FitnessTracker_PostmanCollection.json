@@ -12,14 +12,23 @@
         "url": {
           "raw": "http://localhost:9090/v1/users",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users"
-          ]
+          "path": ["v1", "users"]
+        }
+      }
+    },
+    {
+      "name": "Get All Simple Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/v1/users/simple",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9090",
+          "path": ["v1", "users", "simple"]
         }
       }
     },
@@ -29,17 +38,11 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:9090/v1/users/1",
+          "raw": "http://localhost:9090/v1/users/2",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users",
-            "1"
-          ]
+          "path": ["v1", "users", "2"]
         }
       }
     },
@@ -49,51 +52,31 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:9090/v1/users/search/email?fragment=test",
+          "raw": "http://localhost:9090/v1/users/email?email=domain",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users",
-            "search",
-            "email"
-          ],
+          "path": ["v1", "users", "email"],
           "query": [
             {
-              "key": "fragment",
-              "value": "test"
+              "key": "email",
+              "value": "domain"
             }
           ]
         }
       }
     },
     {
-      "name": "Get Users Older Than",
+      "name": "Get Users Older Than Date",
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:9090/v1/users/search/older-than?age=30",
+          "raw": "http://localhost:9090/v1/users/older/2000-01-01",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users",
-            "search",
-            "older-than"
-          ],
-          "query": [
-            {
-              "key": "age",
-              "value": "30"
-            }
-          ]
+          "path": ["v1", "users", "older", "2000-01-01"]
         }
       }
     },
@@ -109,19 +92,37 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"firstName\": \"John\", \"lastName\": \"Doe\", \"birthdate\": \"1990-01-01\", \"email\": \"john.doe@example.com\"}"
+          "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"birthdate\": \"1990-01-01\",\n  \"email\": \"john.doe@example.com\"\n}"
         },
         "url": {
           "raw": "http://localhost:9090/v1/users",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users"
-          ]
+          "path": ["v1", "users"]
+        }
+      }
+    },
+    {
+      "name": "Update User",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Mike\",\n  \"lastName\": \"Scott\",\n  \"birthdate\": \"1999-09-29\",\n  \"email\": \"mike.scott@example.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:9090/v1/users/2",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9090",
+          "path": ["v1", "users", "2"]
         }
       }
     },
@@ -133,15 +134,9 @@
         "url": {
           "raw": "http://localhost:9090/v1/users/1",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "9090",
-          "path": [
-            "v1",
-            "users",
-            "1"
-          ]
+          "path": ["v1", "users", "1"]
         }
       }
     }
