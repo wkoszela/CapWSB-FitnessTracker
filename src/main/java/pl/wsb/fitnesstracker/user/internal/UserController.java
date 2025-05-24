@@ -29,12 +29,41 @@ class UserController {
         this.userMapper = userMapper;
     }
 
+    /**
+     * Creates and persists a new user in the system.
+     * <p>
+     * The email must be unique and not already used. The client does not provide the ID — it is auto-generated.
+     * </p>
+     *
+     * <h4>Example request:</h4>
+     * <pre>
+     * POST /v1/users
+     * {
+     *   "firstName": "Anna",
+     *   "lastName": "Nowak",
+     *   "birthdate": "1995-05-05",
+     *   "email": "anna@example.com"
+     * }
+     * </pre>
+     *
+     * @param userDto JSON payload representing the new user (excluding ID)
+     * @return {@link ResponseEntity} with created user and status {@code 201 Created}
+     * @throws IllegalArgumentException if ID is provided in the payload
+     */
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User savedUser = userService.createUser(userMapper.toEntity(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toDto(savedUser));
     }
 
+    /**
+     * Retrieves the full list of users in the system.
+     * <p>
+     * The response includes complete user information (ID, names, birthdate, email).
+     * </p>
+     *
+     * @return list of all {@link UserDto} objects, wrapped in HTTP {@code 200 OK}
+     */
     @GetMapping
     public List<UserDto> getAllUsersFull() {
         return userService.findAllUsers()
@@ -43,6 +72,14 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Returns a simplified list of users for use in UI components such as dropdowns.
+     * <p>
+     * Only the user ID, first name, and last name are included in the response.
+     * </p>
+     *
+     * @return list of maps with minimal user information, wrapped in HTTP {@code 200 OK}
+     */
     @GetMapping("/simple")
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
@@ -51,6 +88,12 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Retrieves a single user by their unique system-generated ID.
+     *
+     * @param id the unique user ID
+     * @return {@link ResponseEntity} with user data and HTTP {@code 200 OK}, or {@code 404 Not Found} if not found
+     */
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return userService.findById(id)
@@ -58,7 +101,18 @@ class UserController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    /**
+     * Handles HTTP GET requests to find users whose email addresses contain the specified fragment (case-insensitive).
+     *
+     * <p>This endpoint accepts a query parameter {@code fragment} and returns a list of users whose email addresses
+     * contain that substring, ignoring case sensitivity. The response contains a list of {@link UserEmailDto}
+     * objects, each containing only the user ID and email address.</p>
+     *
+     * <p>Example request: <code>/v1/users/email/fragment?fragment=gmail</code></p>
+     *
+     * @param email the partial email string to match (e.g. "gmail")
+     * @return a {@link ResponseEntity} containing a list of matching {@link UserEmailDto} objects and HTTP 200 (OK)
+     */
     @GetMapping("/email")
     public ResponseEntity<List<UserDto>> getUserByEmailAsList(@RequestParam String email) {
         return userService.getUserByEmail(email)
@@ -67,6 +121,18 @@ class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Searches for users using flexible criteria: first name, last name and/or birthdate.
+     * <p>
+     * All parameters are optional. Matching is case-insensitive for names, and birthdate must be exact.
+     * Useful for user filtering in administrative interfaces.
+     * </p>
+     *
+     * @param firstName optional first name filter (case-insensitive)
+     * @param lastName optional last name filter (case-insensitive)
+     * @param birthdate optional birthdate filter in ISO format
+     * @return list of matching {@link UserDto} objects, or empty list if no matches found
+     */
     @GetMapping("/search")
     public List<UserDto> searchUsers(
             @RequestParam(required = false) String firstName,
