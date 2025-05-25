@@ -18,10 +18,6 @@ class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
-//    UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-
     /**
      * Creates a new user and persists it in the database.
      *

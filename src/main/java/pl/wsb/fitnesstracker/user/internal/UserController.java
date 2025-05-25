@@ -142,10 +142,6 @@ class UserController {
     }
 
 
-    @PostMapping
-    public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
-
-
     /**
      * Handles HTTP DELETE requests to remove a user by their ID.
      *
@@ -201,9 +197,6 @@ class UserController {
     {
         return ResponseEntity.status(HttpStatus.OK).
                 body(userService.findAllUsersOlderThan(ageThreshold).stream().map(userMapper::toDto).toList());
-
-        return null;
-
     }
 
     /**
