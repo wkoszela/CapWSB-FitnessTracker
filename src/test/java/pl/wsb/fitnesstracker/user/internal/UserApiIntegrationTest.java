@@ -3,12 +3,14 @@ package pl.wsb.fitnesstracker.user.internal;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import pl.wsb.fitnesstracker.IntegrationTest;
 import pl.wsb.fitnesstracker.IntegrationTestBase;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.api.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +31,12 @@ class UserApiIntegrationTest extends IntegrationTestBase {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private UserMapper userMapper;
 
     public static User generateUser() {
         return new User(randomUUID().toString(), randomUUID().toString(), LocalDate.now(), randomUUID().toString());
@@ -211,5 +219,132 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         assertThat(user.getEmail()).isEqualTo(USER_EMAIL);
     }
 
+//    @Test
+//    void testDeleteUser_ShouldReturnDeletedUser() throws Exception {
+//        Long userId = 1L;
+//
+//        User deletedUser = new User(userId, "John", "Doe", "john@example.com", 30);
+//        UserDto deletedUserDto = new UserDto(userId, "John", "Doe", "john@example.com", 30);
+//
+//        when(userService.deleteUserById(userId)).thenReturn(deletedUser);
+//        when(userMapper.toDto(deletedUser)).thenReturn(deletedUserDto);
+//
+//        mockMvc.perform(delete("/delete/{userId}", userId))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.id").value(userId))
+//                .andExpect(jsonPath("$.firstName").value("John"))
+//                .andExpect(jsonPath("$.email").value("john@example.com"));
+//
+//        verify(userService).deleteUserById(userId);
+//    }
+//
+//    @Test
+//    void testFindUsersByEmailFragment_ShouldReturnMatchingUsers() throws Exception {
+//        String fragment = "example";
+//
+//        User user1 = new User(1L, "Alice", "Smith", "alice@example.com", 25);
+//        User user2 = new User(2L, "Bob", "Brown", "bob@example.com", 30);
+//
+//        UserEmailDto dto1 = new UserEmailDto(1L, "alice@example.com");
+//        UserEmailDto dto2 = new UserEmailDto(2L, "bob@example.com");
+//
+//        List<User> users = List.of(user1, user2);
+//        List<UserEmailDto> expectedDtos = List.of(dto1, dto2);
+//
+//        when(userService.findUsersByEmailFragment(fragment)).thenReturn(users);
+//        when(userMapper.toEmailDto(user1)).thenReturn(dto1);
+//        when(userMapper.toEmailDto(user2)).thenReturn(dto2);
+//
+//        mockMvc.perform(get("/email/fragment").param("fragment", fragment))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.length()").value(2))
+//                .andExpect(jsonPath("$[0].id").value(1L))
+//                .andExpect(jsonPath("$[0].email").value("alice@example.com"))
+//                .andExpect(jsonPath("$[1].id").value(2L))
+//                .andExpect(jsonPath("$[1].email").value("bob@example.com"));
+//
+//        verify(userService).findUsersByEmailFragment(fragment);
+//    }
+//
+//    @Test
+//    void testFindUsersOlderThan_ShouldReturnUserList() throws Exception {
+//        int ageThreshold = 30;
+//        User mockUser = new User(1L, "John", "Doe", "john@example.com", 35);
+//        UserDto mockDto = new UserDto(1L, "John", "Doe", "john@example.com", 35);
+//
+//        when(userService.findAllUsersOlderThan(ageThreshold)).thenReturn(List.of(mockUser));
+//        when(userMapper.toDto(mockUser)).thenReturn(mockDto);
+//
+//        mockMvc.perform(get("/olderThan/{ageThreshold}", ageThreshold))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$[0].id").value(1L))
+//                .andExpect(jsonPath("$[0].firstName").value("John"))
+//                .andExpect(jsonPath("$[0].email").value("john@example.com"));
+//
+//        verify(userService).findAllUsersOlderThan(ageThreshold);
+//    }
+//
+//    @Test
+//    void testUpdateUserAttribute_ShouldReturnUpdatedUser() throws Exception {
+//        Long userId = 1L;
+//        String attribute = "firstName";
+//        String newValue = "Jane";
+//
+//        User updatedUser = new User(userId, "Jane", "Doe", "jane@example.com", 30);
+//        UserDto updatedDto = new UserDto(userId, "Jane", "Doe", "jane@example.com", 30);
+//
+//        when(userService.updateUserAttribute(userId, attribute, newValue)).thenReturn(updatedUser);
+//        when(userMapper.toDto(updatedUser)).thenReturn(updatedDto);
+//
+//        mockMvc.perform(patch("/" + userId)
+//                        .param("attribute", attribute)
+//                        .param("value", newValue))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(jsonPath("$.id").value(userId))
+//                .andExpect(jsonPath("$.firstName").value("Jane"))
+//                .andExpect(jsonPath("$.email").value("jane@example.com"));
+//
+//        verify(userService).updateUserAttribute(userId, attribute, newValue);
+//    }
+//
+//    @Test
+//    void testUpdateUserAttribute_ShouldReturnBadRequest_WhenUserNotFound() throws Exception {
+//        Long userId = 99L;
+//        String attribute = "email";
+//        String value = "missing@example.com";
+//
+//        when(userService.updateUserAttribute(userId, attribute, value))
+//                .thenThrow(new UserNotFoundException("User not found"));
+//
+//        mockMvc.perform(patch("/" + userId)
+//                        .param("attribute", attribute)
+//                        .param("value", value))
+//                .andExpect(status().isBadRequest())
+//                .andExpect(status().reason("User not found"));
+//
+//        verify(userService).updateUserAttribute(userId, attribute, value);
+//    }
+//
+//    @Test
+//    void testUpdateUserAttribute_ShouldReturnBadRequest_WhenAttributeIsInvalid() throws Exception {
+//        Long userId = 1L;
+//        String attribute = "invalidField";
+//        String value = "value";
+//
+//        when(userService.updateUserAttribute(userId, attribute, value))
+//                .thenThrow(new IllegalArgumentException("Invalid attribute"));
+//
+//        mockMvc.perform(patch("/" + userId)
+//                        .param("attribute", attribute)
+//                        .param("value", value))
+//                .andExpect(status().isBadRequest())
+//                .andExpect(status().reason("Invalid attribute"));
+//
+//        verify(userService).updateUserAttribute(userId, attribute, value);
+//    }
 
 }
