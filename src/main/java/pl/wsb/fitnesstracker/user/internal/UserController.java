@@ -24,11 +24,6 @@ class UserController {
 
     private final UserMapper userMapper;
 
-    public UserController(UserServiceImpl userService, UserMapper userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
-    }
-
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User savedUser = userService.createUser(userMapper.toEntity(userDto));

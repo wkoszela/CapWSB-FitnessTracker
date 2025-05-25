@@ -18,9 +18,9 @@ class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
 
-    UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+//    UserServiceImpl(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public User createUser(final User user) {
