@@ -6,6 +6,12 @@ package pl.wsb.fitnesstracker.user.api;
  */
 public interface UserService {
 
+    /**
+     * Creates a new user.
+     *
+     * @param user The user to be created
+     * @return The created user
+     */
     User createUser(User user);
 
 }
