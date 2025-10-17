@@ -1,9 +1,17 @@
 spring:
   datasource:
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
     url: "jdbc:h2:mem:testdb"
     driver-class-name: "org.h2.Driver"
     username: "sa"
     password: "password"
+    # For PostgreSQL configuration, uncomment the following lines and comment out the H2 configuration above
+  #        url: jdbc:postgresql://localhost:3306/postgres
+  #        driver-class-name: org.postgresql.Driver
+  #        username: "postgres"
+  #        password: "password"
   h2:
     console:
       enabled: true
