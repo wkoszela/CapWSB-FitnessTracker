@@ -4,6 +4,12 @@ spring:
     driver-class-name: "org.h2.Driver"
     username: "sa"
     password: "password"
-  h2:
-    console:
-      enabled: true
+    # For PostgreSQL configuration, uncomment the following lines and comment out the H2 configuration above
+    #    url: jdbc:postgresql://localhost:3306/fitnesstracker
+    #    driver-class-name: org.postgresql.Driver
+    #    username: "postgres"
+    #    password: "password"
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
+      show-sql: true
