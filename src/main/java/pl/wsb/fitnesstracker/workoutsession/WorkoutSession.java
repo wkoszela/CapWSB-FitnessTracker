@@ -3,6 +3,7 @@ package pl.wsb.fitnesstracker.workoutsession;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+// TODO: Define the Event entity with appropriate fields and annotations
 @Entity
 public class WorkoutSession {
 
@@ -15,4 +16,4 @@ public class WorkoutSession {
     private double endLatitude;
     private double endLongitude;
     private double altitude;
-    }
+}

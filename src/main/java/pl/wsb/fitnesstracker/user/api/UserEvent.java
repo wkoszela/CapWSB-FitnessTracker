@@ -11,7 +11,9 @@ import pl.wsb.fitnesstracker.event.Event;
 @Getter
 @Table(name="user_event")
 @Entity
+// TODO: Define the Event entity with appropriate fields and annotations
 public class UserEvent {
+
     @Id
     private Long id;
 
