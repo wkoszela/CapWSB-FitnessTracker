@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.user.api.User;
+
 
 @Entity
 @Table(name = "Statistics")
@@ -18,6 +20,10 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
