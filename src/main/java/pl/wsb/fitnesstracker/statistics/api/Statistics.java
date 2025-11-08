@@ -19,6 +19,9 @@ public class Statistics {
     @Nullable
     private Long id;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
@@ -28,7 +31,13 @@ public class Statistics {
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    public Statistics(int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+    public Statistics(
+        final Long userId,
+        final int totalTrainings,
+        final double totalDistance,
+        final int totalCaloriesBurned
+    ) {
+        this.userId = userId;
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;
