@@ -26,7 +26,7 @@ Laboratorium II - Relacje w JPA - stan na 8.11.2025
    Github.
 9. Zgłoś prowadzącemu wykonanie zadanie, celem uzyskania oceny.
 
-10. (*) Opcjonalnie można przygotować plik data.sql z danymi (komendy INSERT) w odpowiedniej kolejności, potwierdzając
+10. (\*) Opcjonalnie można przygotować plik data.sql z danymi (komendy INSERT) w odpowiedniej kolejności, potwierdzając
     poprawność modelu.
     Przydadzą się na kolejnych zajęciach.
 
