@@ -6,8 +6,12 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.healthmetrics.HealthMetrics;
+import pl.wsb.fitnesstracker.statistics.api.Statistics;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -33,12 +37,20 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private Statistics statistics;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private List<HealthMetrics> healthMetrics = new ArrayList<>();
+
     public User(
             final String firstName,
             final String lastName,
             final LocalDate birthdate,
-            final String email) {
-
+            final String email
+        ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;

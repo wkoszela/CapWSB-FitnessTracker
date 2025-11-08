@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.user.api.User;
 
 
 @Entity
@@ -35,6 +36,10 @@ public class HealthMetrics {
 
     @Column(name = "heartRate", nullable = false)
     private int heartRate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
     
     public HealthMetrics(
         final long userId,
