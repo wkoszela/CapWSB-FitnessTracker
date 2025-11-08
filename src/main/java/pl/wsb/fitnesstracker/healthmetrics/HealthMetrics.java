@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "health_metrics")
 @Getter
@@ -24,14 +26,23 @@ public class HealthMetrics {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "total_trainings", nullable = false)
-    private int totalTrainings;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
-    @Column(name = "total_distance")
-    private double totalDistance;
+    @Column(name = "weight")
+    private Double weight;
 
-    @Column(name = "total_calories_burned")
-    private int totalCaloriesBurned;
+    @Column(name = "height")
+    private Double height;
 
+    @Column(name = "heartRate")
+    private int heartRate;
 
+    public HealthMetrics(final User user, final LocalDate date, final Double weight, final Double height, final int heartRate) {
+        this.user = user;
+        this.date = date;
+        this.weight = weight;
+        this.height = height;
+        this.heartRate = heartRate;
+    }
 }
