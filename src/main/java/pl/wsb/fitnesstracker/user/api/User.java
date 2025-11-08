@@ -45,5 +45,9 @@ public class User {
         this.email = email;
     }
 
+    @Nullable
+    public Long getId() {
+        return id;
+    }
 }
 
