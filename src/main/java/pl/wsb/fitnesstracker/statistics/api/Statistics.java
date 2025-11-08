@@ -1,5 +1,6 @@
 package pl.wsb.fitnesstracker.statistics.api;
 
+import pl.wsb.fitnesstracker.user.api.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -18,6 +19,10 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
     private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
 
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
