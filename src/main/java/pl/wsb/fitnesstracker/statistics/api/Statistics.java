@@ -9,7 +9,7 @@ import lombok.ToString;
 import pl.wsb.fitnesstracker.user.api.User;
 
 @Entity
-@Table(name = "Statistics")
+@Table(name = "statistics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
