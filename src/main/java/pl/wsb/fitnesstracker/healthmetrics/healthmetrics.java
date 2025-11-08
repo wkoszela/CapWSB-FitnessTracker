@@ -10,7 +10,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "heath_metrics")
+@Table(name = "health_metrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
