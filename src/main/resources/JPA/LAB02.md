@@ -4,15 +4,14 @@ Laboratorium II - Relacje w JPA - stan na 8.11.2025
 
 1. Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
    wykonać to bezpośrednio w GitHubie lub lokalnie.
-2. Do projektu dodaj plik github-ci-cd.yml. Plik ten znajduje się w katalogu resources/general/github-ci-cd.yml.
+2. Do projektu dodaj plik github-ci-cd.yml. Plik ten znajduje się w katalogu resources/JPA/LAB02/github-ci-cd.yml.
    Plik powinien zostać umieszczony pod .github/workflows/github-ci-cd.yml
 3. Scommituj zmiany i wyślij je do swojego repozytorium. Zweryfikuj czy projekt poprawnie się buduje na Github (zakładka
    Actions)
 4. Przenieś klasę DatabaseSchemaTest.java z folderu resources/JPA/LAB02/DatabaseSchemaTest do katalogu testowego (
-   src/test/java/test/java/pl/wsb/fitnesstracker).
-5. Scommituj zmiany i wyślij je do swojego repozytorium. Zweryfikuj czy projekt poprawnie się buduje na Github. Testy
-   powinny nie przechodzić
-6. Zweryfikuj, czy projekt poprawnie się buduje i przechodzi build w CI (GitHub Actions). Zwróć uwagę na Build.
+   src/test/java/pl/wsb/fitnesstracker).
+5. Scommituj zmiany i wyślij je do swojego repozytorium.
+6. Zweryfikuj czy projekt poprawnie się buduje na Github. Test nie powinny poprawnie przechodzić
 7. Zapoznaj się z poniższym schematem relacyjnym bazy danych. Korzystając z wiedzy przekazanej na wykładzie, literatury
    oraz internetu, uzupełnij brakujące tabele i relacje w aktualnej definicji encji (zwróć uwagę także na nazwy tabel
    oraz brakujące kolumny).
