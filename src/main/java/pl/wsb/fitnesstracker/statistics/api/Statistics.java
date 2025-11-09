@@ -22,7 +22,7 @@ public class Statistics {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, updatable = false,
-    foreignKey = @ForeignKey(name="fk_statistics_user"))
+    foreignKey = @ForeignKey(name="fk_statistics_User"))
     private User user;
 
     @Column(name = "total_trainings", nullable = false)
@@ -34,7 +34,8 @@ public class Statistics {
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    public Statistics(int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+    public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+        this.user = user;
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;

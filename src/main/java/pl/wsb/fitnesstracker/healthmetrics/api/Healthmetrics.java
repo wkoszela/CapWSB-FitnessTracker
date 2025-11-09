@@ -11,7 +11,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.util.Date;
 
 @Entity
-@Table(name = "health_metrics")
+@Table(name = "Health_Metrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -22,12 +22,12 @@ public class Healthmetrics {
     @Nullable
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, updatable = false,
-    foreignKey = @ForeignKey(name="fk_healthmetrics_user"))
+    foreignKey = @ForeignKey(name="fk_Health_Metrics_User"))
     private User user;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @Column(name = "weight")
