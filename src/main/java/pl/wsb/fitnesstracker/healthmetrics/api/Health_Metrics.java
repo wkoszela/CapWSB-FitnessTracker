@@ -12,7 +12,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Health_Metrics")
+@Table(name = "health_metrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -23,7 +23,7 @@ public class Health_Metrics {
     @Nullable
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -39,5 +39,12 @@ public class Health_Metrics {
     @Column(name = "heartRate")
     private int heart_Rate;
 
+    public Health_Metrics(LocalDate localDate, User user, Double weight, Double height, int heart_Rate) {
+        this.localDate = localDate;
+        this.user = user;
+        this.weight = weight;
+        this.height = height;
+        this.heart_Rate = heart_Rate;
 
+    }
 }
