@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.user.api;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,11 +17,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Long id;
 
-    @Column(name = "birthdate", nullable = false)
-    private LocalDate birthdate;
+    @Column(name = "firstName", nullable = false)
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false)
+    private String lastName;
+
+    @Column(name = "birthday", nullable = false)
+    private LocalDate birthday;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -33,7 +37,9 @@ public class User {
             final LocalDate birthdate,
             final String email) {
 
-        this.birthdate = birthdate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthdate;
         this.email = email;
     }
 
