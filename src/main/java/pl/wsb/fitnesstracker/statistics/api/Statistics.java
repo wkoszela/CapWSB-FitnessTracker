@@ -12,7 +12,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 @Table(name = "Statistics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(exclude = {"user"}) // <-- Good practice to prevent infinite loops
+@ToString(exclude = {"user"})
 public class Statistics {
 
     @Id
@@ -33,9 +33,8 @@ public class Statistics {
     @Column(name = "totalCaloriesBurned")
     private int totalCaloriesBurned;
 
-    // --- THIS CONSTRUCTOR IS NOW FIXED ---
     public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
-        this.user = user; // <-- You were missing this
+        this.user = user;
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;
