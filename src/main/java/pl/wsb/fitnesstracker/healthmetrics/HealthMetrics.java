@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.cglib.core.Local;
+import pl.wsb.fitnesstracker.user.api.User;
 
 import java.time.LocalDate;
 
@@ -42,12 +43,18 @@ public class HealthMetrics {
     @Column(nullable = false)
     private LocalDate date;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public HealthMetrics(
+            final User user,
             final LocalDate date,
             final Float weight,
             final Float height,
             final Float heartRate) {
 
+        this.user = user;
         this.weight = weight;
         this.height = height;
         this.heartRate = heartRate;
