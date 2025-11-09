@@ -31,7 +31,7 @@ public class HealthMetrics {
     @Column(name = "height")
     private double height;
 
-    @Column(name = "heartRate", nullable = false)
+    @Column(name = "heartRate")
     private int heartRate;
 
     public HealthMetrics(User user_id, LocalDate date, double weight, double height, int heartRate) {
