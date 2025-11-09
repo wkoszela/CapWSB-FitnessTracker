@@ -14,6 +14,11 @@ import lombok.ToString;
 @ToString
 public class Statistics {
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Statistics stats;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Nullable
