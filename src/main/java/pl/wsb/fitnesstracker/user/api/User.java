@@ -6,8 +6,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -27,6 +28,13 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(name = "firstName", nullable = false)
+    private String firstName;
+
+    @Column(name = "lastName", nullable = false)
+    private String lastName;
+   
+     
     public User(
             final String firstName,
             final String lastName,
@@ -35,7 +43,11 @@ public class User {
 
         this.birthdate = birthdate;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
+  
+
 
 }
 
