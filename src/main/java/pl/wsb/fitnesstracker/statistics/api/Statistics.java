@@ -18,7 +18,7 @@ public class Statistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Nullable
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

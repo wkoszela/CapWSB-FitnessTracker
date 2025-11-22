@@ -20,7 +20,7 @@ public class HealthMetrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Nullable
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
