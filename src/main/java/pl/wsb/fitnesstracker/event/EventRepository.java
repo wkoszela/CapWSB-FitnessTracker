@@ -11,10 +11,6 @@ public class EventRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    /**
-     * Wyszukuje wydarzenia (Event) o podanej nazwie.
-     * Używa zapytania JPQL.
-     */
     public List<Event> findByName(String name) {
         String jpql = "SELECT e FROM Event e WHERE e.name = :name";
 
