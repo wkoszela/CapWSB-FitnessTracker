@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date; // Używamy Date dla spójności z Training
+import java.util.Date;
 
 @Entity
-@Table(name = "workout_session") // Wymagane przez test
+@Table(name = "workout_session")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -19,16 +19,15 @@ public class WorkoutSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Zmieniamy int na Long (standard w JPA)
+    private Long id;
 
-    // Zamiast 'int trainingId', robimy relację do obiektu Training
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "training_id", nullable = false) // To stworzy kolumnę 'training_id'
+    @JoinColumn(name = "training_id", nullable = false)
     private Training training;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp; // Zmieniamy String na Date
+    private Date timestamp;
 
     @Column(name = "start_latitude")
     private double startLatitude;
@@ -45,7 +44,6 @@ public class WorkoutSession {
     @Column(name = "altitude")
     private double altitude;
 
-    // Konstruktor
     public WorkoutSession(Training training, Date timestamp, double startLatitude, double startLongitude, double endLatitude, double endLongitude, double altitude) {
         this.training = training;
         this.timestamp = timestamp;

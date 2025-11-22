@@ -9,7 +9,7 @@ import lombok.ToString;
 import java.util.Date;
 
 @Entity
-@Table(name = "event") // Test 'shouldHaveEventTable' wymaga tej nazwy (liczba pojedyncza)
+@Table(name = "event")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -25,11 +25,11 @@ public class Event {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "start_time", nullable = false) // Mapowanie na snake_case
-    @Temporal(TemporalType.TIMESTAMP) // Obsługa daty i godziny
+    @Column(name = "start_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Column(name = "end_time", nullable = false) // Mapowanie na snake_case
+    @Column(name = "end_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
@@ -39,7 +39,6 @@ public class Event {
     @Column(nullable = false)
     private String city;
 
-    // Konstruktor
     public Event(String name, String description, Date startTime, Date endTime, String country, String city) {
         this.name = name;
         this.description = description;
