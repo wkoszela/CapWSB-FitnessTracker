@@ -12,8 +12,10 @@ public class EventRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<Event> findAllEvents() {
-        String jpql = "SELECT e FROM Event e";
-        return entityManager.createQuery(jpql, Event.class).getResultList();
+    public List<Event> findEventsByCountry(String country) {
+        String jpql = "SELECT e FROM Event e WHERE e.country = :country";
+        return entityManager.createQuery(jpql, Event.class)
+                .setParameter("country", country)
+                .getResultList();
     }
 }
