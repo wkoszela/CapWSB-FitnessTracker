@@ -50,4 +50,3 @@ public class HealthMetrics {
         this.date = date;
     }
 }
-s
