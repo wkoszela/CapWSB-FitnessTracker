@@ -51,8 +51,8 @@ public class Training {
     @Column(name = "distance")
     private double distance;
 
-    @Column(name = "avarage_speed")
-    private double avarage_speed;
+    @Column(name = "average_speed")
+    private double average_speed;
 
     public Training(
             final User user,
@@ -66,6 +66,6 @@ public class Training {
         this.endTime = endTime;
         this.activityType = activityType;
         this.distance = distance;
-        this.avarage_speed = avarage_speed;
+        this.average_speed = average_speed;
     }
 }
