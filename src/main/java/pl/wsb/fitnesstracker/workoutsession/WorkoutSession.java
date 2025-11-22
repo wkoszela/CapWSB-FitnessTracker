@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Getter
 @Entity
-@Table(name = "trainings")
+@Table(name = "workout_session")
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WorkoutSession {
