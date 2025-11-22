@@ -2,7 +2,10 @@ package pl.wsb.fitnesstracker.training.api;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
@@ -11,6 +14,8 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name = "trainings")
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Training {
 
     @Id

@@ -2,7 +2,10 @@ package pl.wsb.fitnesstracker.userEvent;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.wsb.fitnesstracker.event.Event;
 import pl.wsb.fitnesstracker.user.api.User;
 
@@ -11,6 +14,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "UserEvent")
 @Getter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
