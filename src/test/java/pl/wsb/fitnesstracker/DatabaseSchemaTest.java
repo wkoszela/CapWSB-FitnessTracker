@@ -163,4 +163,3 @@ class DatabaseSchemaTest {
         return cols;
     }
 }
-s
