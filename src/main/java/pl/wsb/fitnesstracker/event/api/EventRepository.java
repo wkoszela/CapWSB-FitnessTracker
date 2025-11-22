@@ -12,10 +12,14 @@ import pl.wsb.fitnesstracker.event.Event;
 public class EventRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
+    public EventRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    
     List<Event> findByName(String name) {
-        String query = "SELECT e FROM Event e WHERE e.name = :name"; // Event to nazwa klasy encji, nie tabeli!
+        String query = "SELECT e FROM Event e WHERE e.name = :name";
 
         return entityManager.createQuery(
                 query, Event.class)
