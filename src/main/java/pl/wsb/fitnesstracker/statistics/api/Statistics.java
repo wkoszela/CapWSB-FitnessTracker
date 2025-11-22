@@ -5,7 +5,7 @@ import lombok.*;
 import pl.wsb.fitnesstracker.user.api.User;
 
 @Entity
-@Table(name = "statistics") // Zmieniono na małe litery zgodnie z konwencją i testami
+@Table(name = "statistics")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +17,6 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TO JEST KLUCZOWE: Relacja OneToOne do użytkownika
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -31,8 +30,6 @@ public class Statistics {
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    // Opcjonalny konstruktor, jeśli chcesz go używać ręcznie, 
-    // ale @AllArgsConstructor załatwia sprawę
     public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
         this.user = user;
         this.totalTrainings = totalTrainings;
