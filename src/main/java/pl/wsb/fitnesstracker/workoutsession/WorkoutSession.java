@@ -4,24 +4,23 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.wsb.fitnesstracker.training.api.Training;
-
 import java.util.Date;
 
 @Entity
-@Table(name = "workout_sessions") // Zmiana na liczbę mnogą, by pasowało do testów
+@Table(name = "workout_sessions")
 @Getter
 @NoArgsConstructor
 public class WorkoutSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Zmieniono int na Long (standard JPA)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "training_id")
-    private Training training; // Zmieniono nazwę zmiennej na małą literę
+    private Training training;
 
-    private Date timestamp; // Zmieniono String na Date
+    private Date timestamp;
 
     @Column(name = "start_latitude")
     private double startLatitude;
@@ -37,12 +36,8 @@ public class WorkoutSession {
 
     private double altitude;
 
-    // Usunąłem ręczny konstruktor, który powodował błędy kompilacji.
-    // Dzięki @NoArgsConstructor Hibernate poradzi sobie z tworzeniem obiektu.
-    // Jeśli potrzebujesz konstruktora do testów, możesz użyć @AllArgsConstructor z Lomboka
-    // lub stworzyć taki, który przyjmuje obiekt Training, a nie int trainingId.
     public WorkoutSession(Training training, Date timestamp, double startLatitude, double startLongitude, double endLatitude, double endLongitude, double altitude) {
-        this.training = training;
+        this.training = training; // tutaj przypisujemy obiekt
         this.timestamp = timestamp;
         this.startLatitude = startLatitude;
         this.startLongitude = startLongitude;
