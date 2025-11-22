@@ -22,9 +22,9 @@ public class HealthMetrics {
     @Nullable
     private long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -39,7 +39,7 @@ public class HealthMetrics {
     private Double heartRate;
 
     public HealthMetrics(User user, LocalDate date, Double weight, Double height, Double heartRate) {
-//        this.user = user;
+        this.user = user;
         this.date = date;
         this.weight = weight;
         this.height = height;
