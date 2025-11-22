@@ -1,38 +1,51 @@
 package pl.wsb.fitnesstracker.training.api;
 
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
-@Getter
+@Entity
+@Table(name = "trainings")
+@Data
+@NoArgsConstructor
 public class Training {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    private Date startTime;
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
 
-    private Date endTime;
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "activity_type")
     private ActivityType activityType;
 
+    @Column(name = "distance")
     private double distance;
 
+    @Column(name = "average_speed")
     private double averageSpeed;
 
-    public Training(
-            final User user,
-            final Date startTime,
-            final Date endTime,
-            final ActivityType activityType,
-            final double distance,
-            final double averageSpeed) {
+
+    public Training(User user, Date startTime, Date endTime, ActivityType activityType, double distance, double averageSpeed) {
         this.user = user;
-        this.startTime = startTime;
-        this.endTime = endTime;
+
+        this.startTime = startTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.endTime = endTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         this.activityType = activityType;
         this.distance = distance;
         this.averageSpeed = averageSpeed;
