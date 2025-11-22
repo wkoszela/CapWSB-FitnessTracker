@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
@@ -25,7 +26,7 @@ public class WorkoutSession {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "training_id")
-    private int trainingId;
+    private Training training;
 
     @Column(name = "timestamp", nullable = false)
     private String timestamp;
@@ -53,7 +54,7 @@ public class WorkoutSession {
             final double endLatitude,
             final double endLongitude,
             final double altitude) {
-        this.trainingId = trainingId;
+        this.training = training;
         this.timestamp = timestamp;
         this.startLatitude = startLatitude;
         this.startLongitude = startLongitude;

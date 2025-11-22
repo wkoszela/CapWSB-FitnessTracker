@@ -10,7 +10,7 @@ import lombok.ToString;
 import java.util.Date;
 
 @Entity
-@Table(name = "UserEvent")
+@Table(name = "Event")
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
