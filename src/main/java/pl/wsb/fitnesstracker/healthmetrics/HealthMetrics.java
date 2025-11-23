@@ -10,7 +10,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "health_metrics") // Zgodnie ze schematem i testem
+@Table(name = "health_metrics")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,29 +20,30 @@ public class HealthMetrics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Pola zgodne ze schematem db_schema.png
     @Column(nullable = false)
     private LocalDate date;
 
     @Column(nullable = false)
     private double weight;
 
+    // --- DODANE POLE ---
+    @Column(nullable = false)
+    private double height;
+    // -------------------
+
     @Column(nullable = false)
     private int heartRate;
 
-    // --- NOWA RELACJA (ManyToOne) ---
-    // Realizuje polecenie i jest zgodna ze schematem (user_id)
-    // Wiele wpisów "HealthMetrics" może należeć do jednego "Usera"
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    // @JoinColumn tworzy kolumnę `user_id`, której wymaga test
     private User user;
-    // --- KONIEC NOWEJ RELACJI ---
 
-    public HealthMetrics(LocalDate date, double weight, int heartRate, User user) {
-        this.date = date;
-        this.weight = weight;
-        this.heartRate = heartRate;
+    // Zaktualizowany konstruktor (dodany parametr height)
+    public HealthMetrics(User user, double weight, double height, int heartRate, LocalDate date) {
         this.user = user;
+        this.weight = weight;
+        this.height = height;
+        this.heartRate = heartRate;
+        this.date = date;
     }
 }
