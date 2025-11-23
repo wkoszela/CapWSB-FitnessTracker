@@ -7,10 +7,17 @@ import pl.wsb.fitnesstracker.statistics.api.Statistics;
 
 @Repository
 public class StatisticsRepository {
+
+    /**
+     * Klasa odpowiadająca za zapytania SQL do tabeli Statistics
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
     public Statistics findByUserId(Long userId) {
+        /**
+         * Zapytanie o statystyki danego usera
+         */
         return entityManager.createQuery(
                         "SELECT s FROM Statistics s WHERE s.user.id = :userId",
                         Statistics.class

@@ -9,10 +9,17 @@ import java.util.List;
 
 @Repository
 public class TrainingRepository {
+
+    /**
+     * Klasa odpowiadająca za zapytania SQL do Traning
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<Training> findByDistanceGreaterThan(double distance) {
+        /**
+         * Zapytanie o treningi z dystansem wiekszym od podanego
+         */
         return entityManager.createQuery(
                         "SELECT t FROM Training t WHERE t.distance > :distance",
                         Training.class

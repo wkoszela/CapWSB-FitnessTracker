@@ -16,6 +16,10 @@ import java.time.LocalDate;
 @ToString
 public class HealthMetrics {
 
+    /**
+     * Klasa przechowujaca dane tabeli HealthMetrics
+     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

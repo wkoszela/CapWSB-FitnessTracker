@@ -14,6 +14,9 @@ import pl.wsb.fitnesstracker.training.api.Training;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class WorkoutSession {
+    /**
+     * Klasa przechowująca dane tabeli workoutsession z relacją jeden do jednego z tabela tranings
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

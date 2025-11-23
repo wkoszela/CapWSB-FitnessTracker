@@ -13,6 +13,9 @@ import pl.wsb.fitnesstracker.user.api.User;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Statistics {
+    /**
+     * Klasa przechowująca statystyki usera
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

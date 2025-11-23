@@ -8,10 +8,17 @@ import java.util.List;
 
 @Repository
 public class EventRepository {
+
+    /**
+     * Klasa odpowiadająca za zapytania SQL do
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<Event> findEventsInPoland() {
+        /**
+         * Zapytanie o eventy z Polski
+         */
         return entityManager.createQuery(
                         "SELECT e FROM Event e WHERE e.country = :country",
                         Event.class

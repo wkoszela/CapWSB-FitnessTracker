@@ -10,10 +10,17 @@ import java.util.List;
 
 @Repository
 public class UserEntityRepository {
+
+    /**
+     * Klasa odpowiadająca za zapytania SQL do User
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<User> findUsersWithEmailEndingWith(LocalDate date) {
+        /**
+        Zapytanie o userów młodszych od daty
+         */
         return entityManager.createQuery(
                         "SELECT u FROM User u WHERE u.birthday > :date",
                         User.class

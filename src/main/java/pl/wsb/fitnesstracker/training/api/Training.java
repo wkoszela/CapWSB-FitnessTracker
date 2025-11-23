@@ -16,6 +16,9 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Training {
+    /**
+     * Klasa przechowująca dane odnośnie treningu
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

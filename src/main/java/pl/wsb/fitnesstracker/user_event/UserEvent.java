@@ -14,6 +14,9 @@ import pl.wsb.fitnesstracker.user.api.User;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class UserEvent {
+    /**
+     * Klasa łącząca usera z eventem
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

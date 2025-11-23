@@ -15,6 +15,10 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Event {
+    /**
+     * Klasa przechowująca dane tabeli event
+     * Składa się z nazwy eventu, opisu, momentu startu oraz końca, kraju i miasta
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

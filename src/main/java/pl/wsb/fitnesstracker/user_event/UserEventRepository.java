@@ -9,10 +9,17 @@ import java.util.List;
 
 @Repository
 public class UserEventRepository {
+
+    /**
+     * Klasa odpowiadająca za zapytania SQL do  tabeli UserEvent
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
     List<UserEvent> findByUserId(Long userId){
+        /**
+        Zapytanie o userevent danego usera
+         */
         return entityManager.createQuery(
                         "SELECT ue FROM UserEvent ue WHERE ue.user.id = :userId",
                         UserEvent.class
