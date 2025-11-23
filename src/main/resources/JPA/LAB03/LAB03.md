@@ -2,15 +2,15 @@ Laboratorium III - Relacje w JPA - stan na 22.11.2025 11:00
 
 **Uwaga - Przed przystapieniem do zadania proszę o wykonanie zadania LAB01/LAB02 (poprzednie zajęcia).**
 
-1. Zweryfikuj czy projekt poprawnie się buduje lokalnie (mvn clean install) oraz na Github (zakładka Actions).
+1. [x] Zweryfikuj czy projekt poprawnie się buduje lokalnie (mvn clean install) oraz na Github (zakładka Actions).
    Pipeline przed przystąpieniem powinien być zielony (poprawny build). Otwórz projekt w Intelij. Zweryfikuj czy jesteś
    zalogowany do Github (z poziomu Intelij)
-2. Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego).
+2. [x] Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego).
    Można wykonać to bezpośrednio w GitHubie lub lokalnie. Uwaga, zmiany dotyczą tylko : LAB03.md oraz klasy z testami.
    Proszę przekopiować plik DatabaseSchemaTest z src/main/resources/JPA/LAB03 do pakietu testowego w swoim projekcie (
    src/test/pl.wsb.fitnesstracker/)
    Można klasę nadpisać.
-3. Dokończ schemat bazy danych (plik db_schema.png) zgodnie z poniższymi wytycznymi:
+3. [x] Dokończ schemat bazy danych (plik db_schema.png) zgodnie z poniższymi wytycznymi:
    ** Pracujemy nad następującymi Encjami : Trainings, Workout_Session, Event, UserEvent**.
    Uwaga 1: ActivityType proszę potraktować jako zwykły Enum Javowy (nie encję JPA).
    Uwaga 2: Tabela UserEvent ma być tabelą, która będzie przechowywać klucze obce do tabel User oraz Event (z
@@ -19,7 +19,7 @@ Laboratorium III - Relacje w JPA - stan na 22.11.2025 11:00
 
 ![](db_schema.png)
 
-4. Wprowadzone zmiany prześlij na swoje repozytorium. Testy powinny poprawnie się wykonać na platformie
+4. [x] Wprowadzone zmiany prześlij na swoje repozytorium. Testy powinny poprawnie się wykonać na platformie
    Github.
 5. Dodaj przynajmniej jedno @Repository dla encji JPA (do ustelania w trakcje zajęć). Użyj adnotacji @Repository oraz
    skorzystaj z Entity Managera (również pamiętaj o adnoacji @ @PersistenceContext).
