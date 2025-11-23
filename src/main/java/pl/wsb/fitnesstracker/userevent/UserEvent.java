@@ -19,10 +19,12 @@ public class UserEvent {
     @Nullable
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "event_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "event_id", nullable = false)
     private Long eventId;
 
     @Column(name = "status", nullable = false)

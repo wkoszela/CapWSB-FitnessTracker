@@ -19,7 +19,8 @@ public class WorkoutSession {
     @Nullable
     private Integer id;
 
-    @Column(name = "training_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "training_id", nullable = false)
     private Integer trainingId;
 
     @Column(name = "timestamp", nullable = false)
