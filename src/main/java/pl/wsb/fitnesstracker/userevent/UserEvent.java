@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.event.Event;
+
 @Entity
 @Table(name = "user_event")
 @Getter
@@ -21,22 +24,22 @@ public class UserEvent {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Long userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
-    private Long eventId;
+    private Event event;
 
     @Column(name = "status", nullable = false)
     private String status;
 
     public UserEvent(
-            final Long userId,
-            final Long eventId,
+            final User user,
+            final Event event,
             final String status
     ) {
-        this.userId = userId;
-        this.eventId = eventId;
+        this.user = user;
+        this.event = event;
         this.status = status;
     }
 }

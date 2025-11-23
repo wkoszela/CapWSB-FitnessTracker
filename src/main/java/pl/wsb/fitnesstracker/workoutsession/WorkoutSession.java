@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import pl.wsb.fitnesstracker.training.api.Training;
+
 @Entity
 @Table(name = "workout_session")
 @Getter
@@ -21,7 +23,7 @@ public class WorkoutSession {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "training_id", nullable = false)
-    private Integer trainingId;
+    private Training training;
 
     @Column(name = "timestamp", nullable = false)
     private String timestamp;
@@ -42,7 +44,7 @@ public class WorkoutSession {
     private double altitude;
 
     public WorkoutSession(
-            final Integer trainingId,
+            final Training training,
             final String timestamp,
             final double startLatitude,
             final double startLongitude,
@@ -50,7 +52,7 @@ public class WorkoutSession {
             final double endLongitude,
             final double altitude
     ) {
-        this.trainingId = trainingId;
+        this.training = training;
         this.timestamp = timestamp;
         this.startLatitude = startLatitude;
         this.startLongitude = startLongitude;
