@@ -20,7 +20,6 @@ public class Statistics {
     @Nullable
     private Long id;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
