@@ -23,22 +23,22 @@ public class Event {
     @Nullable
     private Long id;
 
-    @Column(name ="name")
+    @Column(name ="name", nullable = false)
     private String name;
 
-    @Column(name ="description")
+    @Column(name ="description", nullable = false)
     private String description;
 
-    @Column(name ="StartTime")
+    @Column(name ="StartTime", nullable = false)
     private LocalDate StartTime;
 
-    @Column(name ="EndTime")
+    @Column(name ="EndTime", nullable = false)
     private LocalDate EndTime;
 
-    @Column(name ="Country")
+    @Column(name ="Country", nullable = false)
     private String Country;
 
-    @Column(name ="City")
+    @Column(name ="City", nullable = false)
     private String City;
 
 

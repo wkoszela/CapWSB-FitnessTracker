@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
+import pl.wsb.fitnesstracker.user.api.User;
+
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,13 +26,14 @@ public class Trainings {
     @Nullable
     private Long id;
 
-    @Column(name ="user_id")
-    private int user_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name ="startTime")
+    @Column(name ="startTime", nullable = false)
     private Date startTime;
 
-    @Column(name ="endTime")
+    @Column(name ="endTime", nullable = false)
     private Date endTime;
 
     @Column(name ="activityType")
@@ -42,9 +45,9 @@ public class Trainings {
     @Column(name ="averageSpeed")
     private float averageSpeed;
 
-    public Trainings(@Nullable Long id, int user_id, Date startTime, Date endTime, ActivityType activityType, float distance, float averageSpeed) {
+    public Trainings(@Nullable Long id, User user_id, Date startTime, Date endTime, ActivityType activityType, float distance, float averageSpeed) {
         this.id = id;
-        this.user_id = user_id;
+        this.user = user_id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.activityType = activityType;
