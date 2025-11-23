@@ -1,4 +1,4 @@
-package pl.wsb.fitnesstracker.training.internal;
+package pl.wsb.fitnesstracker.trainings.internal;
 
 // TODO : JavaDoc
 public enum ActivityType {

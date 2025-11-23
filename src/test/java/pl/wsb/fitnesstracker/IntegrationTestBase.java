@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.wsb.fitnesstracker.training.api.Training;
+import pl.wsb.fitnesstracker.trainings.api.Trainings;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public abstract class IntegrationTestBase {
     private JpaRepository<User, Long> userRepository;
 
     @Autowired
-    private JpaRepository<Training, Long> trainingRepository;
+    private JpaRepository<Trainings, Long> trainingsRepository;
 
     @AfterEach
     void cleanUp() {
@@ -28,7 +28,7 @@ public abstract class IntegrationTestBase {
     }
 
     private void cleanDatabase() {
-        trainingRepository.deleteAll();
+        trainingsRepository.deleteAll();
         userRepository.deleteAll();
     }
 
@@ -39,8 +39,8 @@ public abstract class IntegrationTestBase {
 
     }
 
-    protected Training persistTraining(Training training) {
-        return trainingRepository.save(training);
+    protected Trainings persistTraining(Trainings trainings) {
+        return trainingsRepository.save(trainings);
     }
 
     protected User existingUser(User user) {
@@ -52,14 +52,14 @@ public abstract class IntegrationTestBase {
         return userRepository.findAll();
     }
 
-    protected List<Training> createAllTrainings(List<Training> trainings) {
+    protected List<Trainings> createAllTrainings(List<Trainings> trainings) {
 
-        trainings.forEach(training -> trainingRepository.save(training));
+        trainings.forEach(training -> trainingsRepository.save(training));
         return trainings;
     }
 
-    protected List<Training> getAllTrainings() {
-        return trainingRepository.findAll();
+    protected List<Trainings> getAllTrainings() {
+        return trainingsRepository.findAll();
     }
 
 
