@@ -19,7 +19,7 @@ Laboratorium II - Relacje w JPA - stan na 8.11.2025
    jednostronna (OneToOne)
    oraz ManyToOne. **Pracujemy nad 3 Encjami Statistics, HealthMetrics, User.**
 
-   ![](db_schema.png)
+   ![](../db_schema.png)
 
 8. Wprowadzone zmiany prześlij na swoje repozytorium. Testy powinny poprawnie się wykonać lokalnie oraz platformie
    Github.
