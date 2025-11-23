@@ -16,6 +16,7 @@ public class EventRepository {
         this.en = en;
     }
 
+    // ważny komentarz
     private List<Event> getEventByName(String name) {
         String jpql = "SELECT * FROM Event e WHERE e.name = :name";
 
