@@ -1,15 +1,18 @@
 package pl.wsb.fitnesstracker.event;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "events")
+@Table(name = "event")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Event {
 
     @Id
@@ -19,15 +22,29 @@ public class Event {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String description;
 
-    private String city;
-
-    private String country;
-
-    @Column(name = "start_time")
+    @Column(name = "start_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Column(name = "end_time")
+    @Column(name = "end_time", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
+
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String city;
+
+    public Event(String name, String description, Date startTime, Date endTime, String country, String city) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.country = country;
+        this.city = city;
+    }
 }

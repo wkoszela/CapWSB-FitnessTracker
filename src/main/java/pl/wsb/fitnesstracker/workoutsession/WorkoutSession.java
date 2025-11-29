@@ -1,25 +1,32 @@
 package pl.wsb.fitnesstracker.workoutsession;
 
+import pl.wsb.fitnesstracker.training.api.Training;
+
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.wsb.fitnesstracker.training.api.Training;
+import lombok.ToString;
+
 import java.util.Date;
 
 @Entity
-@Table(name = "workout_sessions")
+@Table(name = "workout_session")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class WorkoutSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "training_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "training_id", nullable = false)
     private Training training;
 
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
     @Column(name = "start_latitude")
@@ -34,10 +41,11 @@ public class WorkoutSession {
     @Column(name = "end_longitude")
     private double endLongitude;
 
+    @Column(name = "altitude")
     private double altitude;
 
     public WorkoutSession(Training training, Date timestamp, double startLatitude, double startLongitude, double endLatitude, double endLongitude, double altitude) {
-        this.training = training; // tutaj przypisujemy obiekt
+        this.training = training;
         this.timestamp = timestamp;
         this.startLatitude = startLatitude;
         this.startLongitude = startLongitude;
