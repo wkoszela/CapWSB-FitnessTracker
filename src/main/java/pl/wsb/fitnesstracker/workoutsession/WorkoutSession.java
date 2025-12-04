@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.wsb.fitnesstracker.training.Trainings;
+import pl.wsb.fitnesstracker.training.api.Training;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +20,7 @@ public class WorkoutSession {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_id", nullable = false)
-    private Trainings training;
+    private Training training;
 
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
