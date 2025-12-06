@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 @Getter
-@Setter // <--- TO JEST KLUCZOWE (Naprawia błędy w updateUserFromDto)
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
