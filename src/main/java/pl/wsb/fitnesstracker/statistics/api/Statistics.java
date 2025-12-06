@@ -20,6 +20,10 @@ public class Statistics {
     @Nullable
     private Long id;
 
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
@@ -33,13 +37,9 @@ public class Statistics {
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    public Statistics(
-        
-        int totalTrainings, 
-        double totalDistance, 
-        int totalCaloriesBurned,
-        final User userid
-        ) {
+    public Statistics(@Nullable Long id, User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
+        this.id = id;
+        this.user = user;
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;

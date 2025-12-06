@@ -1,5 +1,6 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,50 +10,36 @@ import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
-import org.hibernate.annotations.ManyToAny;
-
-import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import pl.wsb.fitnesstracker.user.api.User;
-
-@Getter
 @Entity
-@Table(name = "Trainings")
+@Table(name = "trainings")
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-
 public class Training {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Long id;
-
-
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-
-    
-    @Column(name = "startTime")
+    @Column(name = "start_time", nullable = false)
     private Date startTime;
 
-    @Column(name = "endTime")
+    @Column(name = "end_time", nullable = false)
     private Date endTime;
 
-    @Column(name = "ActivityType")
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
     @Column(name = "distance")
     private double distance;
 
     @Column(name = "average_speed")
-    private double average_speed;
+    private double averageSpeed;
 
     public Training(
             final User user,
@@ -68,4 +55,5 @@ public class Training {
         this.distance = distance;
         this.average_speed = average_speed;
     }
+
 }
