@@ -36,9 +36,17 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findByEmail(email);
     }
 
+    public List<User> getUsersByFirstName(final String firstName) {
+        return userRepository.findAllByFirstName(firstName);
+    }
+
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
     }
 
 }
