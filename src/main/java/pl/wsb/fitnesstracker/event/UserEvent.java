@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.event;
 
-
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

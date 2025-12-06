@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserBasicDto;
 
 import java.util.List;
 
@@ -26,6 +27,14 @@ class UserController {
         return userService.findAllUsers()
                 .stream()
                 .map(userMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/basic")
+    public List<UserBasicDto> getAllUsersBasic() {
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toBasicDto)
                 .toList();
     }
 }
