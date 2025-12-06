@@ -53,7 +53,7 @@ public class Training {
         this.endTime = endTime;
         this.activityType = activityType;
         this.distance = distance;
-        this.average_speed = average_speed;
+        this.averageSpeed = averageSpeed;
     }
 
 }
