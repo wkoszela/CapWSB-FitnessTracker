@@ -72,6 +72,7 @@ class InitialDataLoader {
         users.add(generateUser("Noah", "Miller", 39));
         users.add(generateUser("Grace", "Anderson", 33));
         users.add(generateUser("Oliver", "Swift", 29));
+        users.add(generateUser("Mikołaj", "Święty", 1755));
 
         return users;
     }

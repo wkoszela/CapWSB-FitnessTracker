@@ -20,4 +20,11 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .findFirst();
     }
 
+    default Optional<User> findByFirstNameAndLastName(String firstName, String lastName) {
+        return findAll().stream()
+                .filter(user -> Objects.equals(user.getFirstName(), firstName)
+                        && Objects.equals(user.getLastName(), lastName))
+                .findFirst();
+    }
+
 }

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
