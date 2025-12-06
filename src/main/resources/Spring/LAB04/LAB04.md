@@ -39,7 +39,8 @@ Stworzone API powinno pozwalać na:
 - [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   użytkownika - imię i nazwisko)
 - http://localhost:8080/v1/users/basic
-- [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/ imię & nazwisko/ e-mail)
+- [x] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/ imię & nazwisko/ e-mail)
+- http://localhost:8080/v1/users/11
 - [ ] utworzenie nowego użytkownika
 - [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
