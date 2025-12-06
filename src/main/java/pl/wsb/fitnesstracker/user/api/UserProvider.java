@@ -30,4 +30,7 @@ public interface UserProvider {
      */
     List<User> findAllUsers();
 
+
+    Optional<User> getUserByFirstNameAndLastName(String firstName, String lastName);
+
 }
