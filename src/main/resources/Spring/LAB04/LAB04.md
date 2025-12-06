@@ -1,6 +1,10 @@
 # LABORATORIUM 04 - Spring Boot - Tworzenie sieciowego API CRUD
 
+Stan: 16:00
+
 **Uwaga - Przed przystapieniem do zadania proszę o wykonanie zadania LAB01/02/03 (poprzednie zajęcia).**
+Zanim zsynchronizujesz repozytorium proszę o przesłanie swojego pliku w formie .zip na Moodle (główna strona).
+
 Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
 wykonać to bezpośrednio w GitHubie lub lokalnie.
 
