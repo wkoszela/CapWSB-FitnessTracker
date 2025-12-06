@@ -50,6 +50,7 @@ class UserController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody UserDto userDto) {
        return userService.createUser(userDto);
     }
@@ -64,7 +65,6 @@ class UserController {
     public List<UserIdEmail> findUsersByEmail(@RequestParam String email) {
         return userService.findUserByEmail(email);
     }
-
 
 }
 
