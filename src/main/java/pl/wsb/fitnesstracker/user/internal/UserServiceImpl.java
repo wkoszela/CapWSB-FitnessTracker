@@ -7,6 +7,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +20,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public User createUser(final User user) {
-        log.info("Creating User {}", user);
-        if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
-        }
+        log.info("Creating new user: {}", user);
         return userRepository.save(user);
     }
 
@@ -41,4 +39,23 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    public void deleteUser(final Long id) {
+        log.info("Deleting user with id: {}", id);
+        userRepository.deleteById(id);
+    }
+
+    public User updateUser(final User user) {
+        log.info("Updating user: {}", user);
+        return userRepository.save(user);
+    }
+
+    /**
+     * Zwraca użytkowników urodzonych PRZED podaną datą.
+     */
+    public List<User> findAllUsersOlderThan(LocalDate date) {
+        log.info("Searching users born before: {}", date);
+        return userRepository.findAll().stream()
+                .filter(user -> user.getBirthdate().isBefore(date))
+                .toList();
+    }
 }

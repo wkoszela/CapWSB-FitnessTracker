@@ -1,12 +1,14 @@
 package pl.wsb.fitnesstracker.user.api;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Nullable;
-
 import java.time.LocalDate;
 
-public record UserDto(@Nullable Long id, String firstName, String lastName,
-                      @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
-                      String email, Integer age) {
-
+// Usuwamy pole "Integer age", wracamy do standardu
+public record UserDto(
+        @Nullable Long id,
+        String firstName,
+        String lastName,
+        LocalDate birthdate,
+        String email
+) {
 }
