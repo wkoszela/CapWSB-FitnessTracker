@@ -4,6 +4,8 @@
 Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
 wykonać to bezpośrednio w GitHubie lub lokalnie.
 
+W przypadku kontynuacji pracy z własnym projektem, proszę o przekopiowanie LAB04 oraz testu UserApiIntegrationTest.java
+
 ## ZADANIE 0 - Konfiguracja środowiska, wdrożenie do projektu.
 
 Zapoznaj się z Profilem loadInitialData. Włącz ten profile w pliku application.properties, aby podczas uruchamiania
