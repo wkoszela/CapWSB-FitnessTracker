@@ -1,13 +1,12 @@
 package pl.wsb.fitnesstracker.training.api;
 
-import pl.wsb.fitnesstracker.training.internal.ActivityType;
-import pl.wsb.fitnesstracker.user.api.User;
-
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pl.wsb.fitnesstracker.training.internal.ActivityType;
+import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
@@ -22,21 +21,19 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "activity_type", nullable = false)
-    private ActivityType activityType;
-
     @Column(name = "start_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
     @Column(name = "end_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "activity_type", nullable = false)
+    private ActivityType activityType;
 
     @Column(name = "distance")
     private double distance;
@@ -58,4 +55,5 @@ public class Training {
         this.distance = distance;
         this.averageSpeed = averageSpeed;
     }
+
 }
