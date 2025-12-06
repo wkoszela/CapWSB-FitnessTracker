@@ -4,6 +4,20 @@
 Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
 wykonać to bezpośrednio w GitHubie lub lokalnie.
 
+## ZADANIE 0 - Konfiguracja środowiska, wdrożenie do projektu.
+
+Zapoznaj się z Profilem loadInitialData. Włącz ten profile w pliku application.properties, aby podczas uruchamiania
+aplikacji
+były ładowane dane startowe.
+
+Dodaj do projektu użytkownika św. Mikołaja z następującymi danymi:
+
+- imię: Mikołaj
+- nazwisko: Święty
+- wiek: ("do zweryfikowania")
+
+Zweryfikuj czy dane są w bazie danych.
+
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
 ### Potrzeba biznesowa
