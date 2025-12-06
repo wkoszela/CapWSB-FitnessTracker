@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.training.api;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,11 +19,10 @@ public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "start_time", nullable = false)
@@ -33,16 +31,15 @@ public class Training {
     @Column(name = "end_time", nullable = false)
     private Date endTime;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
-    @Column(name = "distance", nullable = false)
+    @Column(name = "distance")
     private double distance;
 
     @Column(name = "average_speed")
-    @Nullable
-    private Double averageSpeed;
+    private double averageSpeed;
 
     public Training(User user, Date startTime, Date endTime,
                    ActivityType activityType, double distance, Double averageSpeed) {
@@ -53,4 +50,5 @@ public class Training {
         this.distance = distance;
         this.averageSpeed = averageSpeed;
     }
+
 }
