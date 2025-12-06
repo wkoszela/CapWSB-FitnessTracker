@@ -23,6 +23,7 @@ public class Training {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+
     private User user;
 
     @Column(name = "start_time", nullable = false)

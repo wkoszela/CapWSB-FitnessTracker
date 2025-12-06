@@ -1,8 +1,11 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import pl.wsb.fitnesstracker.user.api.BasicUserDto;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,4 +23,11 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .findFirst();
     }
 
+
+    @Query(value = "SELECT * FROM users", nativeQuery = true)
+    List<User> findAllUsersWithBasicData();
+
+    User findUserById(Long id);
+
+    List<User> findUsersByEmailContainingIgnoreCase(String email);
 }
