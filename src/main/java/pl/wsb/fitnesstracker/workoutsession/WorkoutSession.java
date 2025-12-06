@@ -15,7 +15,12 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 
-// TODO: Define the Event entity with appropriate fields and annotations
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "workout_session")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WorkoutSession {
 
     @Id

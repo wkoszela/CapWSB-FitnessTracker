@@ -68,4 +68,5 @@ public class Training {
         this.distance = distance;
         this.average_speed = average_speed;
     }
+
 }
