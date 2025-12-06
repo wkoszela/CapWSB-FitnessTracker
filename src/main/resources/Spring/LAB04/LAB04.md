@@ -36,8 +36,9 @@ serwisu FitnessTracker:
 
 Stworzone API powinno pozwalać na:
 
-- [ ] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
+- [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   użytkownika - imię i nazwisko)
+- http://localhost:8080/v1/users/basic
 - [ ] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/ imię & nazwisko/ e-mail)
 - [ ] utworzenie nowego użytkownika
 - [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
@@ -45,6 +46,8 @@ Stworzone API powinno pozwalać na:
   tylko ID oraz e-mail użytkowników)
 - [ ] wyszukiwanie użytkowników po wieku starszym niż zdefiniowany
 - [ ] aktualizowanie użytkowników w systemie (dowolnie wybrany atrybut)
+
+Stworzyć zapytania w postmanie i też zapisać
 
 ### Wymagania techniczne
 
