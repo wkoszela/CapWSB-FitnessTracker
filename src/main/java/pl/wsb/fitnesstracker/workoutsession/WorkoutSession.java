@@ -22,22 +22,26 @@ public class WorkoutSession {
     @JoinColumn(name = "training_id", nullable = false)
     private Training training;
 
-    @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(name = "start_latitude", nullable = false)
+    @Column(name = "start_latitude")
     private double startLatitude;
 
-    @Column(name = "start_longitude", nullable = false)
+    @Column(name = "start_longitude")
     private double startLongitude;
 
     @Column(name = "end_latitude")
-    private Double endLatitude;
+    private double endLatitude;
 
     @Column(name = "end_longitude")
-    private Double endLongitude;
+    private double endLongitude;
 
-    @Column(name = "altitude")
-    private Double altitude;
+    private double altitude;
 
+    public WorkoutSession(Training training, LocalDateTime timestamp, double startLatitude, double startLongitude) {
+        this.training = training;
+        this.timestamp = timestamp;
+        this.startLatitude = startLatitude;
+        this.startLongitude = startLongitude;
+    }
 }
