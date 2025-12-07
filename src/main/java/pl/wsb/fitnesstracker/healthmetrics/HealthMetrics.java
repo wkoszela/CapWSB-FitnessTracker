@@ -1,21 +1,31 @@
 package pl.wsb.fitnesstracker.healthmetrics;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import pl.wsb.fitnesstracker.user.api.User;
-
 import java.time.LocalDate;
 
-/* Entity class representing health metrics.
- * To be implemented with appropriate fields and methods.
- */
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import pl.wsb.fitnesstracker.user.api.User;
+
 @Entity
 @Table(name = "Health_Metrics")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class HealthMetrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nullable
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,9 +44,7 @@ public class HealthMetrics {
     @Column(name = "heart_rate")
     private Integer heartRate;
 
-    public HealthMetrics() {
-    }
-
+    @SuppressWarnings("null")
     public HealthMetrics(User user, LocalDate date, Double weight, Double height, Integer heartRate) {
         this.user = user;
         this.date = date;
@@ -44,6 +52,5 @@ public class HealthMetrics {
         this.height = height;
         this.heartRate = heartRate;
     }
-
 
 }
