@@ -1,10 +1,19 @@
 package pl.wsb.fitnesstracker.workoutsession;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.wsb.fitnesstracker.training.api.Training;
+import lombok.ToString;
+
+
+
+@Entity
+@Table(name = "WorkoutSession")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 
 import java.time.LocalDateTime;
 
@@ -15,29 +24,49 @@ import java.time.LocalDateTime;
 public class WorkoutSession {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "training_id", nullable = false)
-    private Training training;
-
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
-
-    @Column(name = "start_latitude", nullable = false)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "trainingId")
+    private int trainingId;
+    @Column(name = "timestamp")
+    private String timestamp;
+    @Column(name = "startLatitude")
     private double startLatitude;
-
-    @Column(name = "start_longitude", nullable = false)
+    @Column(name = "startLongitude")
     private double startLongitude;
-
-    @Column(name = "end_latitude")
-    private Double endLatitude;
-
-    @Column(name = "end_longitude")
-    private Double endLongitude;
-
+    @Column(name = "endLatitude")
+    private double endLatitude;
+    @Column(name = "endLongitude")
+    private double endLongitude;
     @Column(name = "altitude")
-    private Double altitude;
+    private double altitude;
+
+    public WorkoutSession(
+        
+
+
+
+        int id,
+        int trainingId,
+        String timestamp,
+        double startLatitude,
+        double startLongitude,
+        double endLatitude,
+        double endLongitude,
+        double altitude
+        ) {
+        this.id = id;
+        this.trainingId = trainingId; 
+        this.timestamp = timestamp;
+        this.startLatitude = startLatitude;
+        this.startLongitude = startLongitude;
+        this.endLatitude = endLatitude;
+        this.endLongitude = endLongitude;
+        this.altitude = altitude;
+        
+    }
+
+
 
 }
