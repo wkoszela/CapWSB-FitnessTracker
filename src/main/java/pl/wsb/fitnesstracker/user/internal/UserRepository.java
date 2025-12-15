@@ -2,22 +2,51 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.api.UserByMailDTO;
+import pl.wsb.fitnesstracker.user.api.UserDetailDTO;
+import pl.wsb.fitnesstracker.user.api.UserSumDTO;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 interface UserRepository extends JpaRepository<User, Long> {
 
+
+
+    default List<User> findAllSummary() {
+        return findAll().stream()
+                .toList();
+    }
+
+    default Optional<User> findByID(Long id) {
+        return findAll().stream()
+                .filter(user -> Objects.equals(user.getId(), id))
+                .findFirst();
+    }
     /**
      * Query searching users by email address. It matches by exact match.
      *
      * @param email email of the user to search
      * @return {@link Optional} containing found user or {@link Optional#empty()} if none matched
      */
-    default Optional<User> findByEmail(String email) {
+
+    default List<User> findByEmail(String email) {
         return findAll().stream()
-                .filter(user -> Objects.equals(user.getEmail(), email))
-                .findFirst();
+                .filter(user -> user.getEmail() != null)
+                .filter(user -> user.getEmail().toLowerCase().contains(email.toLowerCase()))
+                .toList();
+    }
+
+    default List<User> findOlderThan(int age) {
+        return findAll().stream()
+                .filter(user -> user.getBirthdate() != null)
+                .filter(user ->
+                        Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age
+                )
+                .toList();
     }
 
 }

@@ -22,7 +22,7 @@ public class UserEntityRepository {
         Zapytanie o userów młodszych od daty
          */
         return entityManager.createQuery(
-                        "SELECT u FROM User u WHERE u.birthday > :date",
+                        "SELECT u FROM User u WHERE u.birthdate > :date",
                         User.class
                 ).setParameter("date", date)
                 .getResultList();

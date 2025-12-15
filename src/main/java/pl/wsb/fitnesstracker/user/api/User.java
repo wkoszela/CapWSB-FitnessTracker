@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 
@@ -26,7 +27,7 @@ public class User {
     private String lastName;
 
     @Column(name = "birthday", nullable = false)
-    private LocalDate birthday;
+    private LocalDate birthdate;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -39,9 +40,49 @@ public class User {
 
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthdate;
+        this.birthdate = birthdate;
         this.email = email;
     }
+    @Nullable
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Long id) {
+        this.id = id;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
 }
 
