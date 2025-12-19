@@ -11,6 +11,7 @@ import pl.wsb.fitnesstracker.user.api.UserIdEmail;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,6 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Transactional
     public User createUser(final UserDto user) {
-        log.info("Creating User {}", user);
         User entity = new User(user.firstName(), user.lastName(), user.birthdate(), user.email());
         return userRepository.save(entity);
     }
@@ -76,8 +76,27 @@ class UserServiceImpl implements UserService, UserProvider {
         userRepository.deleteById(id);
     }
 
+    @Transactional
+    public void updateUser(Long id, UserDto userDto) {
+        User user = new User(id, userDto.firstName(), userDto.lastName(), userDto.birthdate(), userDto.email());
+        userRepository.save(user);
+    }
+
     public List<UserIdEmail> findUserByEmail(String email){
         List<User> users = userRepository.findUsersByEmailContainingIgnoreCase(email);
         return users.stream().map(user -> new UserIdEmail(user.getId(), user.getEmail())).toList();
+    }
+
+    public List<UserDto> findAllUsersOlderThan(LocalDate time) {
+        return userRepository.findByBirthdateGreaterThan(time).stream()
+                .map(
+                        user ->
+                                new UserDto(
+                                        user.getId(),
+                                        user.getFirstName(),
+                                        user.getLastName(),
+                                        user.getBirthdate(),
+                                        user.getEmail()))
+                .toList();
     }
 }

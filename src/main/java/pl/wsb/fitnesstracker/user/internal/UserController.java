@@ -2,20 +2,13 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.BasicUserDto;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserIdEmail;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -65,6 +58,18 @@ class UserController {
     public List<UserIdEmail> findUsersByEmail(@RequestParam String email) {
         return userService.findUserByEmail(email);
     }
+
+    @PutMapping("/{userId}")
+    public void updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        userService.updateUser(userId, userDto);
+
+    }
+
+    @GetMapping("/older/{time}")
+    public List<UserDto> findAllUserOlderThan(@PathVariable LocalDate time){
+        return userService.findAllUsersOlderThan(time);
+    }
+
 
 }
 

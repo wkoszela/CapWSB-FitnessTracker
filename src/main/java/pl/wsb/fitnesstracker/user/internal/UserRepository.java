@@ -2,8 +2,9 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pl.wsb.fitnesstracker.user.api.BasicUserDto;
 import pl.wsb.fitnesstracker.user.api.User;
+
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,4 +31,7 @@ interface UserRepository extends JpaRepository<User, Long> {
     User findUserById(Long id);
 
     List<User> findUsersByEmailContainingIgnoreCase(String email);
+
+    @Query("SELECT u FROM User u WHERE u.birthdate < :birthdate")
+    List<User> findByBirthdateGreaterThan(LocalDate birthdate);
 }
