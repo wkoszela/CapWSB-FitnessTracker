@@ -6,9 +6,18 @@ import pl.wsb.fitnesstracker.training.api.TrainingDto;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 
+/**
+ * Mapper for converting between {@link Training} entities and {@link TrainingDto} DTOs.
+ */
 @Component
 class TrainingMapper {
 
+    /**
+     * Converts a {@link Training} entity to a {@link TrainingDto}.
+     *
+     * @param training the training entity
+     * @return the training DTO
+     */
     TrainingDto toDto(Training training) {
         return new TrainingDto(
                 training.getId(),

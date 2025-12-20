@@ -10,6 +10,9 @@ import pl.wsb.fitnesstracker.training.api.TrainingRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of {@link TrainingProvider} for managing training data.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
