@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "Health_Metrics")
 @Getter
-public class HealthMetrics {
+public class healthmetrics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class HealthMetrics {
     @Column(name = "heart_rate")
     private Integer heartRate;
 
-    public HealthMetrics() {
+    public healthmetrics() {
     }
 
-    public HealthMetrics(User user, LocalDate date, Double weight, Double height, Integer heartRate) {
+    public healthmetrics    (User user, LocalDate date, Double weight, Double height, Integer heartRate) {
         this.user = user;
         this.date = date;
         this.weight = weight;
