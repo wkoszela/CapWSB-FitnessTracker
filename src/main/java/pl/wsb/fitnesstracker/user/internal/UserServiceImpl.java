@@ -3,9 +3,11 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,35 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllUsersOlderThan(LocalDate time) {
+        return userRepository.findByBirthdateBefore(time);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        log.info("Deleting User with ID {}", id);
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User updateUser(Long id, User user) {
+        log.info("Updating User with ID {}", id);
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        
+        // Update fields
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setBirthdate(user.getBirthdate());
+        existingUser.setEmail(user.getEmail());
+        
+        return userRepository.save(existingUser);
     }
 
 }
