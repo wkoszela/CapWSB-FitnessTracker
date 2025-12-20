@@ -11,6 +11,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service implementation that encapsulates business logic for user
+ * management.  It implements both {@link UserService} (public API) and
+ * {@link UserProvider} (internal provider interface).
+ *
+ * <p>All methods perform minimal validation and delegate persistence
+ * to {@link UserRepository}.  The service is annotated with
+ * {@code @Slf4j} for structured logging.</p>
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -22,7 +31,8 @@ class UserServiceImpl implements UserService, UserProvider {
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
+            throw new IllegalArgumentException(
+                    "User has already DB ID, update is not permitted!");
         }
         return userRepository.save(user);
     }
@@ -56,9 +66,9 @@ class UserServiceImpl implements UserService, UserProvider {
 
     public User updateUser(User user) {
         if (user.getId() == null) {
-            throw new IllegalArgumentException("User has no ID, update is not permitted!");
+            throw new IllegalArgumentException(
+                    "User has no ID, update is not permitted!");
         }
-        
         return userRepository.save(user);
     }
 
