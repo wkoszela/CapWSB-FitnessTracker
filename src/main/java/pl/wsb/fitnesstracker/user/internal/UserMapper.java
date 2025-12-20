@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserBasicDto;
 import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserEmailDto;
 
 @Component
 class UserMapper {
@@ -18,6 +19,10 @@ class UserMapper {
 
     UserBasicDto toBasicDto(User user) {
         return new UserBasicDto(user.getId(), user.getFirstName(), user.getLastName());
+    }
+
+    UserEmailDto toEmailDto(User user) {
+        return new UserEmailDto(user.getId(), user.getEmail());
     }
 
     User toEntity(UserDto userDto) {

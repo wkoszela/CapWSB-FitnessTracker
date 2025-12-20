@@ -3,6 +3,7 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
@@ -20,6 +21,7 @@ class UserServiceImpl implements UserService, UserProvider {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public User createUser(final User user) {
         log.info("Creating User {}", user);
         if (user.getId() != null) {
@@ -49,6 +51,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         log.info("Deleting User with ID {}", id);
         if (!userRepository.existsById(id)) {
@@ -58,6 +61,7 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
+    @Transactional
     public User updateUser(Long id, User user) {
         log.info("Updating User with ID {}", id);
         User existingUser = userRepository.findById(id)
@@ -70,6 +74,11 @@ class UserServiceImpl implements UserService, UserProvider {
         existingUser.setEmail(user.getEmail());
         
         return userRepository.save(existingUser);
+    }
+
+    @Override
+    public List<User> findAllUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailContainingIgnoreCase(emailFragment);
     }
 
 }

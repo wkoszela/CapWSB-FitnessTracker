@@ -24,4 +24,6 @@ interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByBirthdateBefore(LocalDate date);
 
+    List<User> findByEmailContainingIgnoreCase(String emailFragment);
+
 }

@@ -1,18 +1,15 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserBasicDto;
-import pl.wsb.fitnesstracker.user.api.UserDto;
-import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,15 +49,15 @@ class UserController {
     }
 
     @GetMapping("/email")
-    public List<UserDto> getUserByEmail(@RequestParam String email) {
-        return userService.getUserByEmail(email)
-                .map(userMapper::toDto)
-                .map(List::of)
-                .orElse(Collections.emptyList());
+    public List<UserEmailDto> getUserByEmail(@RequestParam String email) {
+        return userService.findAllUsersByEmailFragment(email)
+                .stream()
+                .map(userMapper::toEmailDto)
+                .toList();
     }
 
     @GetMapping("/older/{time}")
-    public List<UserDto> getAllUsersOlderThan(@PathVariable LocalDate time) {
+    public List<UserDto> getAllUsersOlderThan(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate time) {
         return userService.findAllUsersOlderThan(time)
                 .stream()
                 .map(userMapper::toDto)

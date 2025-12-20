@@ -48,4 +48,12 @@ public interface UserService {
      */
     User updateUser(Long id, User user);
 
+    /**
+     * Returns a list of users whose email contains the given fragment (case-insensitive).
+     *
+     * @param emailFragment The fragment of the email to search for
+     * @return A list of matching users
+     */
+    List<User> findAllUsersByEmailFragment(String emailFragment);
+
 }
