@@ -1,6 +1,5 @@
 package pl.wsb.fitnesstracker.user.internal;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.wsb.fitnesstracker.user.api.User;
@@ -12,11 +11,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+
+    UserServiceImpl(final UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User createUser(final User user) {
