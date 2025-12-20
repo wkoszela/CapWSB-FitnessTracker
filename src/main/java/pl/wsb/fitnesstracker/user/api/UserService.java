@@ -2,6 +2,7 @@ package pl.wsb.fitnesstracker.user.api;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface (API) for modifying operations on {@link User} entities through the API.
@@ -47,5 +48,9 @@ public interface UserService {
      * @return The updated user
      */
     User updateUser(Long id, User user);
+
+    List<User> findUsersByEmailFragment(String emailFragment);
+
+    Optional<User> getUserByFirstNameAndLastName(String firstName, String lastName);
 
 }

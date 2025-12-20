@@ -73,4 +73,13 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.save(existingUser);
     }
 
+    @Override
+    public List<User> findUsersByEmailFragment(String emailFragment) {
+        return userRepository.findByEmailContainingIgnoreCase(emailFragment);
+    }
+
+    @Override
+    public Optional<User> getUserByFirstNameAndLastName(String firstName, String lastName) {
+        return userRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
 }

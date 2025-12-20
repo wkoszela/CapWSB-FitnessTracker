@@ -211,5 +211,33 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         assertThat(user.getEmail()).isEqualTo(USER_EMAIL);
     }
 
+    @Test
+    void shouldReturnUserWithMatchingEmailFragment_whenSearchingByEmailFragment() throws Exception {
+        User user1 = existingUser(new User("Jan", "Kowalski", LocalDate.now(), "jan.kowalski@example.com"));
+        existingUser(new User("Anna", "Nowak", LocalDate.now(), "anna.nowak@example.com"));
 
+        mockMvc.perform(get("/v1/users/search/by-email").param("email", "Kowal").contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$[0].email").value(user1.getEmail()))
+                .andExpect(jsonPath("$[0].firstName").doesNotExist());
+    }
+
+    @Test
+    void shouldReturnUserWithMatchingName_whenSearchingByName() throws Exception {
+        User user1 = existingUser(new User("Jan", "Kowalski", LocalDate.now(), "jan.kowalski@example.com"));
+        existingUser(new User("Anna", "Nowak", LocalDate.now(), "anna.nowak@example.com"));
+
+        mockMvc.perform(get("/v1/users/by-name")
+                        .param("firstName", "Jan")
+                        .param("lastName", "Kowalski")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(log())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(user1.getId().intValue()))
+                .andExpect(jsonPath("$.firstName").value("Jan"))
+                .andExpect(jsonPath("$.lastName").value("Kowalski"));
+    }
 }

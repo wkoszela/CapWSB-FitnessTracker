@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserBasicDto;
-import pl.wsb.fitnesstracker.user.api.UserDto;
-import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -89,5 +86,20 @@ class UserController {
         User user = userMapper.toEntity(userDto);
         User updatedUser = userService.updateUser(id, user);
         return userMapper.toDto(updatedUser);
+    }
+
+    @GetMapping("/search/by-email")
+    public List<UserEmailDto> findUsersByEmailFragment(@RequestParam String email) {
+        return userService.findUsersByEmailFragment(email)
+                .stream()
+                .map(userMapper::toEmailDto)
+                .toList();
+    }
+
+    @GetMapping("/by-name")
+    public UserDto getUserByName(@RequestParam String firstName, @RequestParam String lastName) {
+        return userService.getUserByFirstNameAndLastName(firstName, lastName)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new UserNotFoundException(firstName, lastName));
     }
 }
