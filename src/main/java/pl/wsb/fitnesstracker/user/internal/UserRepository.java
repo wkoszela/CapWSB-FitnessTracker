@@ -6,6 +6,15 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * JPA Repository dla encji User.
+ * <p>
+ * Dostarcza metody dostępu do danych użytkowników w bazie danych.
+ * Dziedziczy standardowe operacje CRUD z JpaRepository oraz definiuje custom metody.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ */
 interface UserRepository extends JpaRepository<User, Long> {
 
     /**

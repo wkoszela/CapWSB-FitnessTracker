@@ -10,6 +10,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementacja serwisu do obsługi operacji na użytkownikach.
+ * <p>
+ * Komponenta serwisowa implementująca interfejsy {@link UserService} i {@link UserProvider}.
+ * Odpowiada za obsługę logiki biznesowej związanej z użytkownikami,
+ * w tym utworzenie, pobranie, aktualizację i usunięcie użytkowników.
+ * </p>
+ * <p>
+ * Wszystkie operacje są logowane i posiadają dostęp do UserRepository
+ * dla operacji na bazie danych.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ */
 @Service
 @Slf4j
 class UserServiceImpl implements UserService, UserProvider {

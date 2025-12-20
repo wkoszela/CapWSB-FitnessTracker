@@ -52,14 +52,14 @@ class TrainingController {
     }
 
     /**
-     * GET /v1/trainings/{id}
+     * GET /v1/trainings/details/{id}
      * Pobiera szczegóły konkretnego treningu.
      *
      * @param id ID treningu
      * @return TrainingDto z danymi treningu
      * @throws TrainingNotFoundException Jeśli trening nie istnieje
      */
-    @GetMapping("/{id}")
+    @GetMapping("/details/{id}")
     public TrainingDto getTrainingById(@PathVariable Long id) {
         return trainingService.getTraining(id)
                 .map(trainingMapper::toDto)
@@ -67,14 +67,14 @@ class TrainingController {
     }
 
     /**
-     * GET /v1/trainings/user/{userId}
+     * GET /v1/trainings/{userId}
      * Pobiera treningi konkretnego użytkownika.
      *
      * @param userId ID użytkownika
      * @return Lista treningów użytkownika w formie TrainingDto
      * @throws pl.wsb.fitnesstracker.user.api.UserNotFoundException Jeśli użytkownik nie istnieje
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public List<TrainingDto> getTrainingsByUserId(@PathVariable Long userId) {
         return trainingService.getTrainingsByUserId(userId).stream()
                 .map(trainingMapper::toDto)

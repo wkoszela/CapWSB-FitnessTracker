@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
 import pl.wsb.fitnesstracker.user.api.User;
+import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
+import pl.wsb.fitnesstracker.user.internal.UserMapper;
 
 /**
  * Mapper do konwersji między encją Training a DTOs.
@@ -15,17 +17,20 @@ import pl.wsb.fitnesstracker.user.api.UserProvider;
  * @author Fitness Tracker Team
  */
 @Component
-class TrainingMapper {
+public class TrainingMapper {
 
     private final UserProvider userProvider;
+    private final UserMapper userMapper;
 
     /**
-     * Konstruktor ze wstrzykiwaniem UserProvider.
+     * Konstruktor ze wstrzykiwaniem UserProvider i UserMapper.
      *
      * @param userProvider Dostawca danych użytkownika
+     * @param userMapper Mapper dla User
      */
-    TrainingMapper(UserProvider userProvider) {
+    public TrainingMapper(UserProvider userProvider, UserMapper userMapper) {
         this.userProvider = userProvider;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -34,14 +39,14 @@ class TrainingMapper {
      * @param training Encja treningu
      * @return TrainingDto zawierający wszystkie dane
      */
-    TrainingDto toDto(Training training) {
+    public TrainingDto toDto(Training training) {
         if (training == null) {
             return null;
         }
 
         return new TrainingDto(
                 training.getId(),
-                training.getUser().getId(),
+                userMapper.toDto(training.getUser()),
                 training.getStartTime(),
                 training.getEndTime(),
                 training.getActivityType(),
@@ -57,14 +62,14 @@ class TrainingMapper {
      * @return Encja treningu
      * @throws IllegalArgumentException Jeśli użytkownik nie istnieje
      */
-    Training toEntity(TrainingDto trainingDto) {
+    public Training toEntity(TrainingDto trainingDto) {
         if (trainingDto == null) {
             return null;
         }
 
-        User user = userProvider.getUser(trainingDto.getUserId())
+        User user = userProvider.getUser(trainingDto.getUser().id())
                 .orElseThrow(() -> new IllegalArgumentException(
-                    "User with ID=" + trainingDto.getUserId() + " not found"));
+                    "User with ID=" + trainingDto.getUser().id() + " not found"));
 
         return new Training(
                 user,
@@ -82,7 +87,7 @@ class TrainingMapper {
      * @param training Encja treningu
      * @return Uproszczony DTO
      */
-    TrainingSimpleDto toSimpleDto(Training training) {
+    public TrainingSimpleDto toSimpleDto(Training training) {
         if (training == null) {
             return null;
         }
@@ -103,7 +108,7 @@ class TrainingMapper {
      * @param training Encja do aktualizacji
      * @param trainingDto DTO ze zmianami
      */
-    void updateTrainingFromDto(Training training, TrainingDto trainingDto) {
+    public void updateTrainingFromDto(Training training, TrainingDto trainingDto) {
         if (training == null || trainingDto == null) {
             return;
         }

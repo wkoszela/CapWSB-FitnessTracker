@@ -9,6 +9,18 @@ import pl.wsb.fitnesstracker.user.api.UserDto;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * REST Controller dla API użytkowników.
+ * <p>
+ * Mapuje HTTP żądania na operacje biznesowe obsługiwane przez UserServiceImpl.
+ * Base path: /v1/users
+ * </p>
+ * <p>
+ * Obsługuje operacje CRUD na użytkownikach oraz wyszukiwanie po email i dacie urodzenia.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ */
 @RestController
 @RequestMapping("/v1/users")
 @RequiredArgsConstructor
@@ -68,16 +80,16 @@ class UserController {
     }
 
     // Test: shouldRemoveUserFromRepository_whenDeletingClient
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
     }
 
     // Test: shouldUpdateUser_whenUpdatingUser
-    @PutMapping("/{id}")
-    public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        User user = userService.getUser(id)
+    @PutMapping("/{userId}")
+    public UserDto updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        User user = userService.getUser(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         userMapper.updateUserFromDto(user, userDto);
         return userMapper.toDto(userService.updateUser(user));

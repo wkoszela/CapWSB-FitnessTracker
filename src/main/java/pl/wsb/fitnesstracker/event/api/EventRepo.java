@@ -5,6 +5,16 @@ import pl.wsb.fitnesstracker.event.Event;
 
 import java.util.List;
 
+/**
+ * DAO (Data Access Object) Repository dla encji Event.
+ * <p>
+ * Dostarcza custom metody dostępu do danych wydarzeń w bazie danych.
+ * Dziedziczy wspólną funkcjonalność z AbstractDao, wykorzystując EntityManager
+ * do wykonywania JPQL queries.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ */
 @Repository
 public class EventRepo extends AbstractDao {
 

@@ -2,6 +2,17 @@ package pl.wsb.fitnesstracker.statistics.api;
 
 import java.util.Optional;
 
+/**
+ * Interface (API) dla operacji czytających dane statystyk treningów.
+ * <p>
+ * Definiuje publiczny interfejs dostawcy (provider) danych statystyk.
+ * Dostarcza metody do pobierania statystyk treningów użytkownika z bazy danych
+ * bez możliwości modyfikacji danych.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ * @see Statistics
+ */
 public interface StatisticsProvider {
 
     /**
