@@ -1,6 +1,7 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -10,6 +11,8 @@ import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,6 +51,22 @@ class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @GetMapping("/email")
+    public List<UserDto> getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email)
+                .map(userMapper::toDto)
+                .map(List::of)
+                .orElse(Collections.emptyList());
+    }
+
+    @GetMapping("/older/{time}")
+    public List<UserDto> getAllUsersOlderThan(@PathVariable LocalDate time) {
+        return userService.findAllUsersOlderThan(time)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         User user = userMapper.toEntity(userDto);
@@ -57,5 +76,18 @@ class UserController {
                 .buildAndExpand(createdUser.getId())
                 .toUri();
         return ResponseEntity.created(location).body(userMapper.toDto(createdUser));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+    }
+
+    @PutMapping("/{id}")
+    public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        User updatedUser = userService.updateUser(id, user);
+        return userMapper.toDto(updatedUser);
     }
 }

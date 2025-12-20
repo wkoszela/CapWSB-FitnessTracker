@@ -1,5 +1,6 @@
 package pl.wsb.fitnesstracker.user.api;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -22,5 +23,29 @@ public interface UserService {
      * @return A list of all users
      */
     List<User> findAllUsers();
+
+    /**
+     * Returns a list of all users older than the specified date.
+     *
+     * @param time The date to compare with
+     * @return A list of users older than the specified date
+     */
+    List<User> findAllUsersOlderThan(LocalDate time);
+
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id The ID of the user to delete
+     */
+    void deleteUser(Long id);
+
+    /**
+     * Updates a user.
+     *
+     * @param id The ID of the user to update
+     * @param user The user data to update
+     * @return The updated user
+     */
+    User updateUser(Long id, User user);
 
 }
