@@ -12,12 +12,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users",
+                    "raw": "http://localhost:8091/v1/users",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users"
@@ -31,12 +31,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/simple",
+                    "raw": "http://localhost:8091/v1/users/simple",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -51,12 +51,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/{{userId}}",
+                    "raw": "http://localhost:8091/v1/users/{{userId}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -71,12 +71,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/email?email={{email}}",
+                    "raw": "http://localhost:8091/v1/users/email?email={{email}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -97,12 +97,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/search/email?fragment={{fragment}}",
+                    "raw": "http://localhost:8091/v1/users/search/email?fragment={{fragment}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -124,12 +124,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/olderThan?age={{age}}",
+                    "raw": "http://localhost:8091/v1/users/olderThan?age={{age}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -150,12 +150,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/older/{{date}}",
+                    "raw": "http://localhost:8091/v1/users/older/{{date}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -180,12 +180,12 @@
                     "raw": "{\n  \"firstName\": \"Jan\",\n  \"lastName\": \"Kowalski\",\n  \"birthdate\": \"1990-05-15\",\n  \"email\": \"jan.kowalski@example.com\"\n}"
                 },
                 "url": {
-                    "raw": "http://localhost:8080/v1/users",
+                    "raw": "http://localhost:8091/v1/users",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users"
@@ -208,12 +208,12 @@
                     "raw": "{\n  \"firstName\": \"Janusz\",\n  \"lastName\": \"Kowalski\",\n  \"birthdate\": \"1989-12-10\",\n  \"email\": \"janusz.kowalski@example.com\"\n}"
                 },
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/{{userId}}",
+                    "raw": "http://localhost:8091/v1/users/{{userId}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",
@@ -228,12 +228,12 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/users/{{userId}}",
+                    "raw": "http://localhost:8091/v1/users/{{userId}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "users",

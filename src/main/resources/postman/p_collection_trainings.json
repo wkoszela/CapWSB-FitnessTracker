@@ -12,12 +12,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/trainings",
+                    "raw": "http://localhost:8091/v1/trainings",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "trainings"
@@ -31,12 +31,12 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "http://localhost:8080/v1/trainings/{{userId}}",
+                    "raw": "http://localhost:8091/v1/trainings/{{userId}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "trainings",
@@ -60,12 +60,12 @@
                     "raw": "{\n  \"startTime\": \"2025-12-20T08:00:00.000+00:00\",\n  \"endTime\": \"2025-12-20T09:30:00.000+00:00\",\n  \"activityType\": \"RUNNING\",\n  \"distance\": 10.5,\n  \"averageSpeed\": 8.2\n}"
                 },
                 "url": {
-                    "raw": "http://localhost:8080/v1/trainings/user/{{userId}}",
+                    "raw": "http://localhost:8091/v1/trainings/user/{{userId}}",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "8080",
+                    "port": "8091",
                     "path": [
                         "v1",
                         "trainings",
