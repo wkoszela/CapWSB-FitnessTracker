@@ -1,6 +1,6 @@
 package pl.wsb.fitnesstracker.statistics.api;
 
-import jakarta.annotation.Nullable;
+import org.springframework.lang.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

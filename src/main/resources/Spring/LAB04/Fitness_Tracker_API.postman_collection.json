@@ -1,0 +1,273 @@
+{
+  "info": {
+    "_postman_id": "fitness-tracker-api-2024",
+    "name": "Fitness Tracker API - LAB04 & LAB05",
+    "description": "Complete API collection for User Management (LAB04) and Training Management (LAB05)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Management (LAB04)",
+      "item": [
+        {
+          "name": "1. Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users"]
+            },
+            "description": "Retrieves a list of all users with complete details (id, firstName, lastName, birthdate, email)"
+          }
+        },
+        {
+          "name": "2. Get All Users - Simple",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users/simple",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "simple"]
+            },
+            "description": "Retrieves a simplified list of users (id, firstName, lastName only)"
+          }
+        },
+        {
+          "name": "3. Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "1"]
+            },
+            "description": "Retrieves detailed information about a specific user by their ID. Returns 400 if user not found."
+          }
+        },
+        {
+          "name": "4. Search User by Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users/email?email=jan.kowalski@example.com",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "email"],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "jan.kowalski@example.com"
+                }
+              ]
+            },
+            "description": "Searches for users by email address. Returns a list containing user id and email."
+          }
+        },
+        {
+          "name": "5. Get Users Older Than Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users/older/1995-01-01",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "older", "1995-01-01"]
+            },
+            "description": "Retrieves all users born BEFORE the specified date (older than the date)"
+          }
+        },
+        {
+          "name": "6. Create New User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Adam\",\n  \"lastName\": \"Nowak\",\n  \"birthdate\": \"1995-06-20\",\n  \"email\": \"adam.nowak@example.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users"]
+            },
+            "description": "Creates a new user. Returns 201 Created with the newly created user including generated ID."
+          }
+        },
+        {
+          "name": "7. Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Janusz\",\n  \"lastName\": \"Kowalski\",\n  \"email\": \"janusz.kowalski@example.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "1"]
+            },
+            "description": "Updates an existing user. Only fields provided in the request body will be updated. Returns 200 OK with updated user."
+          }
+        },
+        {
+          "name": "8. Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/users/2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "users", "2"]
+            },
+            "description": "Deletes a user by their ID. Returns 204 No Content on success."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Training Management (LAB05)",
+      "item": [
+        {
+          "name": "1. Get All Trainings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings"]
+            },
+            "description": "Retrieves a list of ALL trainings from all users. Returns complete training details (id, userId, startTime, endTime, activityType, distance, averageSpeed)"
+          }
+        },
+        {
+          "name": "2. Get Trainings by User ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings/user/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings", "user", "1"]
+            },
+            "description": "Retrieves all trainings for a specific user by userId. Returns filtered list of trainings belonging to that user only."
+          }
+        },
+        {
+          "name": "3. Get Training by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings", "1"]
+            },
+            "description": "Retrieves detailed information about a specific training by its ID."
+          }
+        },
+        {
+          "name": "4. Create New Training",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"startTime\": \"2024-12-20T08:00:00\",\n  \"endTime\": \"2024-12-20T09:30:00\",\n  \"activityType\": \"RUNNING\",\n  \"distance\": 10.5,\n  \"averageSpeed\": 15.2\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings"]
+            },
+            "description": "Creates a new training for a user. Returns 201 Created with the newly created training including generated ID.\n\nActivity Types: RUNNING, CYCLING, WALKING, SWIMMING, TENNIS"
+          }
+        },
+        {
+          "name": "5. Update Training",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"distance\": 12.0,\n  \"averageSpeed\": 16.5\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings", "1"]
+            },
+            "description": "Updates an existing training. Only fields provided will be updated. Returns 200 OK with updated training."
+          }
+        },
+        {
+          "name": "6. Delete Training",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v1/trainings/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v1", "trainings", "1"]
+            },
+            "description": "Deletes a training by its ID. Returns 204 No Content on success."
+          }
+        }
+      ]
+    }
+  ]
+}
+
