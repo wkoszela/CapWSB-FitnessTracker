@@ -1,14 +1,15 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserBasicDto;
 import pl.wsb.fitnesstracker.user.api.UserDto;
 import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ class UserController {
                 .toList();
     }
 
-    @GetMapping("/basic")
+    @GetMapping("/simple")
     public List<UserBasicDto> getAllUsersBasic() {
         return userService.findAllUsers()
                 .stream()
@@ -45,5 +46,16 @@ class UserController {
         return userService.getUser(id)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        User createdUser = userService.createUser(user);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(createdUser.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(userMapper.toDto(createdUser));
     }
 }
