@@ -10,5 +10,5 @@ import jakarta.annotation.Nullable;
  * @param firstName imię użytkownika
  * @param lastName  nazwisko użytkownika
  */
-public record UserSimpleDto(@Nullable Long id, String firstName, String lastName) {
+public record UserSimpleDto(@Nullable Long id, String firstName, String lastName, String email) {
 }

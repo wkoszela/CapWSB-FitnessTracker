@@ -31,7 +31,8 @@ class TrainingMapper {
             dto.setUser(new UserSimpleDto(
                     training.getUser().getId(),
                     training.getUser().getFirstName(),
-                    training.getUser().getLastName()));
+                    training.getUser().getLastName(),
+                    training.getUser().getEmail()));
         }
         return dto;
     }
