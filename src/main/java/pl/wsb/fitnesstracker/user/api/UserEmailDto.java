@@ -1,7 +1,6 @@
 package pl.wsb.fitnesstracker.user.api;
 
-/**
- * Record used for returning minimal user information during email search.
- */
-public record UserEmailDto(Long id, String email) {
+import jakarta.annotation.Nullable;
+
+public record UserEmailDto(@Nullable Long id, String email) {
 }
