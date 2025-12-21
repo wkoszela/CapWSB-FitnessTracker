@@ -3,7 +3,7 @@ package pl.wsb.fitnesstracker.user.api;
 import pl.wsb.fitnesstracker.exception.api.NotFoundException;
 
 /**
- * Exception indicating that the {@link User} was not found.
+ * Wyjątek informujący o tym, że {@link User} nie został znaleziony.
  */
 @SuppressWarnings("squid:S110")
 public class UserNotFoundException extends NotFoundException {
@@ -12,8 +12,13 @@ public class UserNotFoundException extends NotFoundException {
         super(message);
     }
 
+    /**
+     * Konstruktor wyjątku przyjmujący ID użytkownika.
+     *
+     * @param id identyfikator użytkownika
+     */
     public UserNotFoundException(Long id) {
-        this("User with ID=%s was not found".formatted(id));
+        this("Użytkownik o ID=%s nie został znaleziony".formatted(id));
     }
 
 }

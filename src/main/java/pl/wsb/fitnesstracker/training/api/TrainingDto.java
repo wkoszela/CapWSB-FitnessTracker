@@ -6,6 +6,9 @@ import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
 import java.util.Date;
 
+/**
+ * Obiekt DTO (Data Transfer Object) reprezentujący trening.
+ */
 @Data
 public class TrainingDto {
     private Long id;

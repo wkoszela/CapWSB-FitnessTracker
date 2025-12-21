@@ -1,14 +1,16 @@
 package pl.wsb.fitnesstracker.mail.api;
 
 /**
- * API interface for component responsible for sending emails.
+ * Interfejs (API) dla komponentu odpowiedzialnego za wysyłanie wiadomości
+ * email.
  */
 public interface EmailSender {
 
     /**
-     * Sends the email message to the recipient from the provided {@link EmailDto}.
+     * Wysyła wiadomość email do odbiorcy na podstawie danych z obiektu
+     * {@link EmailDto}.
      *
-     * @param email information on email to be sent
+     * @param email informacje o wiadomości email do wysłania
      */
     void send(EmailDto email);
 

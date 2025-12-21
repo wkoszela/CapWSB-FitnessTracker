@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.wsb.fitnesstracker.user.api.User; // Musisz zaimportować User
 
+/**
+ * Encja reprezentująca statystyki użytkownika.
+ */
 @Entity
-@Table(name = "statistics") // POPRAWIONA NAZWA TABELI (zgodnie z testem i schematem)
+@Table(name = "statistics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -29,19 +32,22 @@ public class Statistics {
     @Column(name = "totalCaloriesBurned")
     private int totalCaloriesBurned;
 
-    // --- NOWA RELACJA (Jednostronna OneToOne) ---
-    // Realizuje polecenie i jest zgodna ze schematem (user_id)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
-    // @JoinColumn tworzy kolumnę `user_id`, której wymaga test
-    // `unique = true` zapewnia, że jest to relacja 1-do-1 (jeden user ma jedne statystyki)
     private User user;
-    // --- KONIEC NOWEJ RELACJI ---
 
+    /**
+     * Konstruktor tworzący statystyki.
+     *
+     * @param totalTrainings      całkowita liczba treningów
+     * @param totalDistance       całkowity dystans
+     * @param totalCaloriesBurned całkowita liczba spalonych kalorii
+     * @param user                użytkownik, do którego należą statystyki
+     */
     public Statistics(int totalTrainings, double totalDistance, int totalCaloriesBurned, User user) {
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;
-        this.user = user; // Zaktualizowany konstruktor
+        this.user = user;
     }
 }

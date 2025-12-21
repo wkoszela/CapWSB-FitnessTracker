@@ -10,6 +10,9 @@ import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Date;
 
+/**
+ * Encja reprezentująca pojedynczy trening użytkownika.
+ */
 @Entity
 @Table(name = "trainings")
 @Getter
@@ -41,6 +44,16 @@ public class Training {
     @Column(name = "average_speed")
     private double averageSpeed;
 
+    /**
+     * Konstruktor tworzący nowy trening.
+     *
+     * @param user         użytkownik wykonujący trening
+     * @param startTime    czas rozpoczęcia treningu
+     * @param endTime      czas zakończenia treningu
+     * @param activityType rodzaj aktywności
+     * @param distance     dystans przebyty podczas treningu
+     * @param averageSpeed średnia prędkość podczas treningu
+     */
     public Training(
             final User user,
             final Date startTime,

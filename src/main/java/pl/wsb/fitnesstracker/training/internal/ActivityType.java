@@ -1,7 +1,7 @@
 package pl.wsb.fitnesstracker.training.internal;
 
 /**
- * Enumeration representing different types of physical activities.
+ * Wyliczenie reprezentujące różne rodzaje aktywności fizycznej.
  */
 public enum ActivityType {
 
@@ -17,6 +17,11 @@ public enum ActivityType {
         this.displayName = displayName;
     }
 
+    /**
+     * Pobiera nazwę wyświetlaną aktywności.
+     *
+     * @return nazwa wyświetlana
+     */
     public String getDisplayName() {
         return displayName;
     }

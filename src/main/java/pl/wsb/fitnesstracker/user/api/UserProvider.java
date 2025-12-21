@@ -3,50 +3,55 @@ package pl.wsb.fitnesstracker.user.api;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interfejs (API) dla operacji pobierania danych użytkowników.
+ */
 public interface UserProvider {
 
     /**
-     * Retrieves a user based on their ID.
-     * If the user with given ID is not found, then {@link Optional#empty()} will be
-     * returned.
+     * Pobiera użytkownika na podstawie jego ID.
+     * Jeśli użytkownik o podanym ID nie zostanie znaleziony, zwraca
+     * {@link Optional#empty()}.
      *
-     * @param userId id of the user to be searched
-     * @return An {@link Optional} containing the located user, or
-     *         {@link Optional#empty()} if not found
+     * @param userId ID szukanego użytkownika
+     * @return {@link Optional} zawierający użytkownika lub pusty, jeśli nie
+     *         znaleziono
      */
     Optional<User> getUser(Long userId);
 
     /**
-     * Retrieves a user based on their email.
-     * If the user with given email is not found, then {@link Optional#empty()} will
-     * be returned.
+     * Pobiera użytkownika na podstawie jego adresu email.
+     * Jeśli użytkownik o podanym adresie email nie zostanie znaleziony, zwraca
+     * {@link Optional#empty()}.
      *
-     * @param email The email of the user to be searched
-     * @return An {@link Optional} containing the located user, or
-     *         {@link Optional#empty()} if not found
+     * @param email adres email szukanego użytkownika
+     * @return {@link Optional} zawierający użytkownika lub pusty, jeśli nie
+     *         znaleziono
      */
     Optional<User> getUserByEmail(String email);
 
     /**
-     * Retrieves all users.
+     * Pobiera wszystkich użytkowników.
      *
-     * @return List of all users
+     * @return lista wszystkich użytkowników
      */
     List<User> findAllUsers();
 
     /**
-     * Finds users whose email contains the given fragment (case-insensitive).
+     * Znajduje użytkowników, których email zawiera podany fragment (ignorując
+     * wielkość liter).
      *
-     * @param emailFragment The fragment of the email to search for
-     * @return List of matching users
+     * @param emailFragment fragment adresu email do wyszukania
+     * @return lista pasujących użytkowników
      */
     List<User> findUsersByEmailFragment(String emailFragment);
 
     /**
-     * Finds users older than the specified age.
+     * Znajduje użytkowników starszych niż określona data (urodzonych przed podaną
+     * datą).
      *
-     * @param time The date threshold
-     * @return List of users older than 'time'
+     * @param time data graniczna
+     * @return lista użytkowników urodzonych przed podaną datą
      */
     List<User> findUsersOlderThan(java.time.LocalDate time);
 

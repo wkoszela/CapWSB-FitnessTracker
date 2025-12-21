@@ -2,14 +2,18 @@ package pl.wsb.fitnesstracker.training.api;
 
 import java.util.Optional;
 
+/**
+ * Interfejs (API) dla operacji pobierania danych treningów.
+ */
 public interface TrainingProvider {
 
     /**
-     * Retrieves a training based on their ID.
-     * If the user with given ID is not found, then {@link Optional#empty()} will be returned.
+     * Pobiera trening na podstawie jego ID.
+     * Jeśli trening o podanym ID nie zostanie znaleziony, zwraca
+     * {@link Optional#empty()}.
      *
-     * @param trainingId id of the training to be searched
-     * @return An {@link Optional} containing the located Training, or {@link Optional#empty()} if not found
+     * @param trainingId ID szukanego treningu
+     * @return {@link Optional} zawierający trening lub pusty, jeśli nie znaleziono
      */
     Optional<Training> getTraining(Long trainingId);
 

@@ -4,12 +4,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Generic exception for business related errors.
- * Will resolve to the {@link HttpStatus#BAD_REQUEST} if handled by the Spring's exception handler.
+ * Generyczny wyjątek dla błędów biznesowych.
+ * Zostanie rozwiązany do {@link HttpStatus#BAD_REQUEST}, jeśli zostanie
+ * obsłużony przez program obsługi wyjątków Springa.
  */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BusinessException extends RuntimeException {
 
+    /**
+     * Konstruktor wyjątku biznesowego.
+     *
+     * @param message wiadomość błędu
+     */
     public BusinessException(String message) {
         super(message);
     }

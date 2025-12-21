@@ -5,9 +5,19 @@ import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
 import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
+/**
+ * Komponent odpowiedzialny za mapowanie encji {@link Training} na obiekt DTO
+ * {@link TrainingDto}.
+ */
 @Component
 class TrainingMapper {
 
+    /**
+     * Mapuje encję treningu na obiekt DTO.
+     *
+     * @param training encja treningu
+     * @return obiekt DTO treningu
+     */
     TrainingDto toDto(Training training) {
         TrainingDto dto = new TrainingDto();
         dto.setId(training.getId());

@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Encja reprezentująca użytkownika systemu.
+ */
 @Entity
 @Table(name = "users")
 @Getter
@@ -41,6 +44,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<HealthMetrics> healthMetrics = new HashSet<>();
 
+    /**
+     * Konstruktor tworzący nowego użytkownika.
+     *
+     * @param firstName imię użytkownika
+     * @param lastName  nazwisko użytkownika
+     * @param birthdate data urodzenia użytkownika
+     * @param email     adres email użytkownika
+     */
     public User(
             final String firstName,
             final String lastName,
@@ -52,6 +63,11 @@ public class User {
         this.email = email;
     }
 
+    /**
+     * Dodaje metrykę zdrowotną do użytkownika.
+     *
+     * @param metric metryka zdrowotna do dodania
+     */
     public void addHealthMetrics(HealthMetrics metric) {
         this.healthMetrics.add(metric);
         metric.setUser(this);

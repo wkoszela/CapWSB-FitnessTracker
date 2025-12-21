@@ -9,6 +9,9 @@ import pl.wsb.fitnesstracker.user.api.User;
 
 import java.time.LocalDate;
 
+/**
+ * Encja reprezentująca metryki zdrowotne użytkownika (waga, wzrost, tętno).
+ */
 @Entity
 @Table(name = "health_metrics")
 @Getter
@@ -26,10 +29,8 @@ public class HealthMetrics {
     @Column(nullable = false)
     private double weight;
 
-    // --- DODANE POLE ---
     @Column(nullable = false)
     private double height;
-    // -------------------
 
     @Column(nullable = false)
     private int heartRate;
@@ -38,7 +39,15 @@ public class HealthMetrics {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Zaktualizowany konstruktor (dodany parametr height)
+    /**
+     * Konstruktor tworzący nową metrykę zdrowotną.
+     *
+     * @param user      użytkownik, do którego należą metryki
+     * @param weight    waga użytkownika
+     * @param height    wzrost użytkownika
+     * @param heartRate tętno użytkownika
+     * @param date      data pomiaru
+     */
     public HealthMetrics(User user, double weight, double height, int heartRate, LocalDate date) {
         this.user = user;
         this.weight = weight;

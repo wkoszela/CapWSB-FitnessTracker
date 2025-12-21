@@ -2,14 +2,19 @@ package pl.wsb.fitnesstracker.statistics.api;
 
 import java.util.Optional;
 
+/**
+ * Interfejs (API) dla operacji pobierania danych statystyk.
+ */
 public interface StatisticsProvider {
 
     /**
-     * Retrieves a statistics based on their ID.
-     * If the user with given ID is not found, then {@link Optional#empty()} will be returned.
+     * Pobiera statystyki na podstawie ich ID.
+     * Jeśli statystyki o podanym ID nie zostaną znalezione, zwraca
+     * {@link Optional#empty()}.
      *
-     * @param statisticsId id of the statistics to be searched
-     * @return An {@link Optional} containing the located Statistics, or {@link Optional#empty()} if not found
+     * @param statisticsId ID szukanych statystyk
+     * @return {@link Optional} zawierający statystyki lub pusty, jeśli nie
+     *         znaleziono
      */
     Optional<Statistics> getStatistics(Long statisticsId);
 
