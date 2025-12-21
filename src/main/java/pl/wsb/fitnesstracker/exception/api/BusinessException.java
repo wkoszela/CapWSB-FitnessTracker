@@ -1,3 +1,7 @@
+/**
+ * The BusinessException class is a generic exception for business-related errors in a Java Spring
+ * application that resolves to HttpStatus.BAD_REQUEST when handled by the Spring exception handler.
+ */
 package pl.wsb.fitnesstracker.exception.api;
 
 import org.springframework.http.HttpStatus;

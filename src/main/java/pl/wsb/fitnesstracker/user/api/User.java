@@ -1,3 +1,7 @@
+/**
+ * The User class represents a user entity with properties such as first name, last name, birthdate,
+ * and email.
+ */
 package pl.wsb.fitnesstracker.user.api;
 
 import jakarta.annotation.Nullable;
@@ -36,7 +40,8 @@ public class User {
             final String lastName,
             final LocalDate birthdate,
             final String email) {
-
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthdate = birthdate;
         this.email = email;
     }
@@ -81,5 +86,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
 

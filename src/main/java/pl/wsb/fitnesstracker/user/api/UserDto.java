@@ -1,3 +1,5 @@
+// This code snippet is defining a Java record class named `UserDto` in the package
+// `pl.wsb.fitnesstracker.user.api`.
 package pl.wsb.fitnesstracker.user.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

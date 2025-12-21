@@ -1,3 +1,7 @@
+/**
+ * The class `MyBean` is a Spring service component with lifecycle methods annotated for initialization
+ * and destruction, intended for use with a specific profile.
+ */
 package pl.wsb.fitnesstracker.livecoding.bean;
 
 import jakarta.annotation.PostConstruct;

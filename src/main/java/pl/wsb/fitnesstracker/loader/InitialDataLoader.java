@@ -1,5 +1,10 @@
+/**
+ * The `InitialDataLoader` class in Java is responsible for loading dummy data into the database upon
+ * application startup when run with the `loadInitialData` profile.
+ */
 package pl.wsb.fitnesstracker.loader;
 
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
@@ -73,8 +78,10 @@ class InitialDataLoader {
         users.add(generateUser("Grace", "Anderson", 33));
         users.add(generateUser("Oliver", "Swift", 29));
 
-        return users;
-    }
+                // Dodanie Św. Mikołaja
+                users.add(generateUser("Mikołaj", "Święty", 60));
+                return users;
+        }
 
     private List<Training> generateTrainingData(List<User> users) {
         List<Training> trainingData = new ArrayList<>();

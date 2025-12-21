@@ -1,3 +1,7 @@
+/**
+ * The `Training` class represents a training session with details such as user, start and end time,
+ * activity type, distance, and average speed.
+ */
 package pl.wsb.fitnesstracker.training.api;
 
 import jakarta.persistence.*;
@@ -21,7 +25,7 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -31,7 +35,7 @@ public class Training {
     @Column(name = "end_time", nullable = false)
     private Date endTime;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "activity_type", nullable = false)
     private ActivityType activityType;
 
@@ -55,5 +59,4 @@ public class Training {
         this.distance = distance;
         this.averageSpeed = averageSpeed;
     }
-
 }

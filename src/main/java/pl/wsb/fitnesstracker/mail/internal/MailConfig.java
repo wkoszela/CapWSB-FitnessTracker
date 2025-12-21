@@ -1,3 +1,6 @@
+/**
+ * The MailConfig class in Java is used for configuring mail properties with Spring Boot.
+ */
 package pl.wsb.fitnesstracker.mail.internal;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

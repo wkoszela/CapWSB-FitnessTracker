@@ -1,3 +1,7 @@
+/**
+ * The FitnessTracker class is a Spring Boot application that manages fitness tracking data using JPA
+ * repositories.
+ */
 package pl.wsb;
 
 import org.springframework.boot.SpringApplication;
