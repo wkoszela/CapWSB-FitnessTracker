@@ -7,7 +7,7 @@ import pl.wsb.fitnesstracker.training.api.Training;
 
 import java.util.List;
 
-@Repository
+
 public class TrainingRepo {
 
     /**

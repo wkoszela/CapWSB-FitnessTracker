@@ -2,12 +2,8 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserByMailDTO;
-import pl.wsb.fitnesstracker.user.api.UserDetailDTO;
-import pl.wsb.fitnesstracker.user.api.UserSumDTO;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,12 +36,11 @@ interface UserRepository extends JpaRepository<User, Long> {
                 .toList();
     }
 
-    default List<User> findOlderThan(int age) {
+    default List<User> findOlderThan(LocalDate date) {
         return findAll().stream()
                 .filter(user -> user.getBirthdate() != null)
                 .filter(user ->
-                        Period.between(user.getBirthdate(), LocalDate.now()).getYears() > age
-                )
+                        user.getBirthdate().isBefore(date))
                 .toList();
     }
 
