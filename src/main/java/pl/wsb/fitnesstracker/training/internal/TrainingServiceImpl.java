@@ -3,6 +3,7 @@ package pl.wsb.fitnesstracker.training.internal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.wsb.fitnesstracker.training.api.Training;
+import pl.wsb.fitnesstracker.training.api.TrainingDto;
 import pl.wsb.fitnesstracker.training.api.TrainingProvider;
 
 import java.util.List;
@@ -14,27 +15,32 @@ import java.util.Optional;
 public class TrainingServiceImpl implements TrainingProvider {
 
     private final TrainingRepository trainingRepository;
+    private final TrainingMapper trainingMapper;
 
-    @Override
-    public Optional<Training> getTraining(final Long trainingId) {
-        throw new UnsupportedOperationException("Not finished yet");
-    }
+
 
     /**
      * szuka wszystkich treningów
-     * @return
+     * @return lista wszystkich TrainingDto
      */
-    List<Training> findAll() {
-        return trainingRepository.findAll();
+    @Override
+    public List<TrainingDto> findAll() {
+        return trainingRepository.findAll()
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
     }
 
     /**
      * szuka treningow usera
      * @param userId
-     * @return
+     * @return lista wszystkich TrainingDto dla danego usera
      */
-    List<Training> findByUserId(Long userId) {
-        return trainingRepository.findByUserId(userId);
+    List<TrainingDto> findByUserId(Long userId) {
+        return trainingRepository.findByUserId(userId)
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
     }
 
 }

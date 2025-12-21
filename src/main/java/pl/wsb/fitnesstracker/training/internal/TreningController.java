@@ -14,29 +14,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TreningController {
     private final TrainingServiceImpl trainingService;
-    private final TrainingMapper trainingMapper;
 
     /**
      * szuka i pobiera dane wszystkich treningów
-     * @return
+     * @return lista wszystkich TrainingDto
      */
     @GetMapping
     List<TrainingDto> getAll() {
-        return trainingService.findAll()
-                .stream()
-                .map(trainingMapper::toDto)
-                .toList();
+        return trainingService.findAll();
     }
 
     /**
      * szuka i pobiera dane wszystkich treningów danego Usera po jego id
-     * @return
+     * @return lista wszystkich TrainingDto dla userId
      */
     @GetMapping("/{userId}")
     List<TrainingDto> getByUser(@PathVariable Long userId) {
-        return trainingService.findByUserId(userId)
-                .stream()
-                .map(trainingMapper::toDto)
-                .toList();
+        return trainingService.findByUserId(userId);
     }
 }
