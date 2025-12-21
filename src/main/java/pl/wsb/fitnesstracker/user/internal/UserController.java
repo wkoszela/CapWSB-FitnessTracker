@@ -3,11 +3,7 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserDto;
-import pl.wsb.fitnesstracker.user.api.UserEmailDto;
-import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
-import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
+    private final UserProvider userProvider;
     private final UserMapper userMapper;
 
     /**
@@ -30,7 +27,7 @@ class UserController {
      */
     @GetMapping
     public List<UserDto> getAllUsers() {
-        return userService.findAllUsers()
+        return userProvider.findAllUsers()
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
@@ -43,7 +40,7 @@ class UserController {
      */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllBasicUsers() {
-        return userService.findAllUsers()
+        return userProvider.findAllUsers()
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
@@ -57,7 +54,7 @@ class UserController {
      */
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable Long userId) {
-        return userService.getUser(userId)
+        return userProvider.getUser(userId)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
@@ -94,7 +91,7 @@ class UserController {
      */
     @GetMapping("/email")
     public List<UserEmailDto> getUsersByEmailFragment(@RequestParam String email) {
-        return userService.findUsersByEmailFragment(email)
+        return userProvider.findUsersByEmailFragment(email)
                 .stream()
                 .map(userMapper::toEmailDto)
                 .toList();
@@ -108,7 +105,7 @@ class UserController {
      */
     @GetMapping("/older/{time}")
     public List<UserDto> getUsersOlderThan(@PathVariable LocalDate time) {
-        return userService.findUsersOlderThan(time)
+        return userProvider.findUsersOlderThan(time)
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
@@ -123,7 +120,7 @@ class UserController {
      */
     @PutMapping("/{userId}")
     public UserDto updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
-        User user = userService.getUser(userId)
+        User user = userProvider.getUser(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
         user.setFirstName(userDto.firstName());

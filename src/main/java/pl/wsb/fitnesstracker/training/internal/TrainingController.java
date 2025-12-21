@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.training.api.TrainingDto;
+import pl.wsb.fitnesstracker.training.api.TrainingProvider;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 class TrainingController {
 
-    private final TrainingServiceImpl trainingService;
+    private final TrainingProvider trainingProvider;
     private final TrainingMapper trainingMapper;
 
     /**
@@ -26,7 +27,7 @@ class TrainingController {
      */
     @GetMapping
     public List<TrainingDto> getAllTrainings() {
-        return trainingService.getAllTrainings().stream()
+        return trainingProvider.getAllTrainings().stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
@@ -39,7 +40,7 @@ class TrainingController {
      */
     @GetMapping("/{userId}")
     public List<TrainingDto> getTrainingsByUser(@PathVariable Long userId) {
-        return trainingService.getTrainingsByUserId(userId).stream()
+        return trainingProvider.getTrainingsByUserId(userId).stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
@@ -53,7 +54,7 @@ class TrainingController {
     @GetMapping("/finished/{afterTime}")
     public List<TrainingDto> getFinishedTrainings(
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date afterTime) {
-        return trainingService.getFinishedTrainingsAfter(afterTime).stream()
+        return trainingProvider.getFinishedTrainingsAfter(afterTime).stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
@@ -66,7 +67,7 @@ class TrainingController {
      */
     @GetMapping("/activityType")
     public List<TrainingDto> getTrainingsByActivityType(@RequestParam ActivityType activityType) {
-        return trainingService.getTrainingsByActivityType(activityType).stream()
+        return trainingProvider.getTrainingsByActivityType(activityType).stream()
                 .map(trainingMapper::toDto)
                 .toList();
     }
