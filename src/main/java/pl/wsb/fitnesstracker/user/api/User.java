@@ -1,3 +1,7 @@
+/**
+ * The User class represents a user entity with properties such as first name, last name, birthdate,
+ * and email.
+ */
 package pl.wsb.fitnesstracker.user.api;
 
 import jakarta.annotation.Nullable;

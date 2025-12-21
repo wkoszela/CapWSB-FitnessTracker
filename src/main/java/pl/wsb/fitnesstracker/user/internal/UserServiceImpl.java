@@ -1,3 +1,7 @@
+/**
+ * The UserServiceImpl class implements UserService and UserProvider interfaces to provide CRUD
+ * operations for User entities in a fitness tracker application.
+ */
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.extern.slf4j.Slf4j;

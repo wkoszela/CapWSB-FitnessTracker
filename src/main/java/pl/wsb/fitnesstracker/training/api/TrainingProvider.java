@@ -1,3 +1,5 @@
+// This code snippet is defining a Java interface named `TrainingProvider` in the package
+// `pl.wsb.fitnesstracker.training.api`.
 package pl.wsb.fitnesstracker.training.api;
 
 import java.util.Optional;

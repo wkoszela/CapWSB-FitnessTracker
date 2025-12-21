@@ -1,3 +1,7 @@
+/**
+ * The `UserEvent` class represents the relationship between a user and an event in a fitness tracker
+ * application.
+ */
 package pl.wsb.fitnesstracker.userevent;
 
 import jakarta.persistence.*;

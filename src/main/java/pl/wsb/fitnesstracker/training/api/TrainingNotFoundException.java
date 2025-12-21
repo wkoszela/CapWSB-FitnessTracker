@@ -1,3 +1,7 @@
+/**
+ * The `TrainingNotFoundException` class in the `pl.wsb.fitnesstracker.training.api` package is used to
+ * indicate that a specific training was not found.
+ */
 package pl.wsb.fitnesstracker.training.api;
 
 import pl.wsb.fitnesstracker.exception.api.NotFoundException;

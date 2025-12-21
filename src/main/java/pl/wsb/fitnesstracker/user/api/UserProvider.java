@@ -1,3 +1,6 @@
+// This code snippet defines an interface named `UserProvider` in the package
+// `pl.wsb.fitnesstracker.user.api`. The interface declares several methods for retrieving and
+// searching user information. Here is a summary of what each method does:
 package pl.wsb.fitnesstracker.user.api;
 
 import java.util.List;

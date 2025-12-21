@@ -1,3 +1,7 @@
+/**
+ * The `Statistics` class in the fitness tracker API represents user statistics including total
+ * trainings, distance, calories burned, and has a one-to-one relationship with the `User` class.
+ */
 package pl.wsb.fitnesstracker.statistics.api;
 
 import jakarta.annotation.Nullable;

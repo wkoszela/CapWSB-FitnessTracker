@@ -1,3 +1,5 @@
+// This code snippet is defining a Java interface named `StatisticsProvider` in the package
+// `pl.wsb.fitnesstracker.statistics.api`.
 package pl.wsb.fitnesstracker.statistics.api;
 
 import java.util.Optional;

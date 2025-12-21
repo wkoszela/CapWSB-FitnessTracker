@@ -1,3 +1,11 @@
+/**
+ * The `HealthMetrics` class represents health metrics data for a user including weight, height, heart
+ * rate, and date, with an updated constructor that includes the height parameter.
+ */
+/**
+ * The `HealthMetrics` class represents health metrics data for a user including weight, height, heart
+ * rate, and date.
+ */
 package pl.wsb.fitnesstracker.healthmetrics;
 
 import jakarta.persistence.*;

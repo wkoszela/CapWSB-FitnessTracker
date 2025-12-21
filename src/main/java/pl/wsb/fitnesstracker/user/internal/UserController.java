@@ -1,3 +1,7 @@
+/**
+ * The UserController class in Java is responsible for handling HTTP requests related to user
+ * operations, providing endpoints for retrieving, creating, updating, and deleting users.
+ */
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;

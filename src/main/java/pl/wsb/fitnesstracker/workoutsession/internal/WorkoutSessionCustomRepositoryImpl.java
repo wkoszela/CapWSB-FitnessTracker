@@ -1,3 +1,9 @@
+// This code snippet is defining a Java interface named `WorkoutSessionCustomRepository` in the package
+// `pl.wsb.fitnesstracker.workoutsession.internal`. The interface declares a method
+// `findSessionsByTrainingId` that is intended to execute a custom JPQL query to find workout sessions
+// related to a specific training identified by its ID. The method returns a list of `WorkoutSession`
+// objects. This interface is likely part of a larger system for managing workout sessions within a
+// fitness tracker application.
 package pl.wsb.fitnesstracker.workoutsession.internal;
 
 import jakarta.persistence.EntityManager;

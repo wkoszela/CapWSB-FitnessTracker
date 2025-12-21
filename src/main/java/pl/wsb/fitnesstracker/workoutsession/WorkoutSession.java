@@ -1,3 +1,7 @@
+/**
+ * The `WorkoutSession` class represents a workout session entity with details such as training,
+ * timestamp, location coordinates, and altitude.
+ */
 package pl.wsb.fitnesstracker.workoutsession;
 
 import jakarta.persistence.*;

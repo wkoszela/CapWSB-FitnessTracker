@@ -1,3 +1,7 @@
+/**
+ * The `MailProperties` class is a configuration class for the `EmailSender` with properties for the
+ * email address to send from.
+ */
 package pl.wsb.fitnesstracker.mail.internal;
 
 import lombok.Getter;

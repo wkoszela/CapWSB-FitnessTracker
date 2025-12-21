@@ -1,3 +1,7 @@
+/**
+ * The `InitialDataLoader` class in Java is responsible for loading dummy data into the database upon
+ * application startup when run with the `loadInitialData` profile.
+ */
 package pl.wsb.fitnesstracker.loader;
 
 import lombok.RequiredArgsConstructor;

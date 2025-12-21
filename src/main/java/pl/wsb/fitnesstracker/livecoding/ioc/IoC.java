@@ -1,3 +1,7 @@
+/**
+ * The IoC class demonstrates dependency injection by constructing an instance of Foo with an instance
+ * of Bar passed from outside.
+ */
 package pl.wsb.fitnesstracker.livecoding.ioc;
 
 public class IoC {

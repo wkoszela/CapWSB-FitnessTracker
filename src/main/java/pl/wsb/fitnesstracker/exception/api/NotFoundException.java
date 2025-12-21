@@ -1,3 +1,7 @@
+/**
+ * The NotFoundException class is a generic business exception in Java that indicates a resource could
+ * not be found and is annotated with @ResponseStatus(HttpStatus.NOT_FOUND).
+ */
 package pl.wsb.fitnesstracker.exception.api;
 
 import org.springframework.http.HttpStatus;

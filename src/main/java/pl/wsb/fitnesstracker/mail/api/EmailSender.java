@@ -1,3 +1,7 @@
+// The code snippet you provided is a Java class named `EmailDto` defined as a record. Records were
+// introduced in Java 14 as a concise way to declare classes that are simple data carriers. In this
+// case, the `EmailDto` record represents an email data transfer object with three fields: `toAddress`,
+// `subject`, and `content`.
 package pl.wsb.fitnesstracker.mail.api;
 
 /**

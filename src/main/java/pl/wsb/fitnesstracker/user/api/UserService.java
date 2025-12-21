@@ -1,3 +1,6 @@
+// This code snippet is defining an interface named `UserService` in the
+// `pl.wsb.fitnesstracker.user.api` package. The interface specifies methods for modifying operations
+// on `User` entities through an API. Here's a breakdown of what each method does:
 package pl.wsb.fitnesstracker.user.api;
 
 /**

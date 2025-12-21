@@ -1,3 +1,7 @@
+/**
+ * The SecurityConfig class in this Java code configures security settings for a Spring application,
+ * defining access rules based on user roles and providing user details for authentication.
+ */
 package pl.wsb.fitnesstracker.security;
 
 import org.springframework.context.annotation.Bean;

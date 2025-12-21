@@ -1,3 +1,7 @@
+/**
+ * The class WithoutIoC demonstrates a simple Java program with direct dependency instantiation,
+ * lacking Inversion of Control (IoC) principles.
+ */
 package pl.wsb.fitnesstracker.livecoding.ioc;
 
 public class WithoutIoC {

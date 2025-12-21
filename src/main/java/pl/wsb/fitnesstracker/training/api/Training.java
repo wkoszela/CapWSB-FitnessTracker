@@ -1,3 +1,7 @@
+/**
+ * The `Training` class represents a training session with details such as user, start and end time,
+ * activity type, distance, and average speed.
+ */
 package pl.wsb.fitnesstracker.training.api;
 
 import jakarta.persistence.*;

@@ -1,3 +1,7 @@
+/**
+ * The `UserMapper` class in the `pl.wsb.fitnesstracker.user.internal` package is responsible for
+ * mapping between different user-related data transfer objects and entities.
+ */
 package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.stereotype.Component;

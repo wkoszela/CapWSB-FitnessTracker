@@ -1,3 +1,6 @@
+// This Java code snippet defines an enumeration `ActivityType` representing different types of
+// physical activities. Each activity type is defined with a corresponding display name. The activities
+// included in this enumeration are RUNNING, CYCLING, WALKING, SWIMMING, and TENNIS.
 package pl.wsb.fitnesstracker.training.internal;
 
 /**

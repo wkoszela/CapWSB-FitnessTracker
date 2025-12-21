@@ -1,3 +1,7 @@
+// The line `package pl.wsb.fitnesstracker.event;` in Java is declaring the package name for the
+// `Event` class. In Java, packages are used to organize classes into namespaces, making it easier to
+// manage and locate related classes. In this case, the `Event` class is part of the
+// `pl.wsb.fitnesstracker.event` package, which indicates its location within the project structure.
 package pl.wsb.fitnesstracker.event;
 
 import jakarta.persistence.*;
