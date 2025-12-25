@@ -27,15 +27,23 @@ public class Statistics {
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User userid;
+
     @Column(name = "total_distance")
     private double totalDistance;
 
     @Column(name = "total_calories_burned")
     private int totalCaloriesBurned;
 
-    public Statistics(@Nullable Long id, User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
-        this.id = id;
-        this.user = user;
+    public Statistics(
+        
+        int totalTrainings, 
+        double totalDistance, 
+        int totalCaloriesBurned,
+        final User userid
+        ) {
         this.totalTrainings = totalTrainings;
         this.totalDistance = totalDistance;
         this.totalCaloriesBurned = totalCaloriesBurned;
