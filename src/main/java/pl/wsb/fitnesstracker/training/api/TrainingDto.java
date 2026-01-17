@@ -115,11 +115,7 @@ public class TrainingDto {
     public void setAverageSpeed(double averageSpeed) {
         this.averageSpeed = averageSpeed;
     }
-
-    /* --------------------------------------------------------------------- */
-    /*  Nested DTO – user information                                       */
-    /* --------------------------------------------------------------------- */
-
+    
     /**
      * Lightweight representation of a {@link pl.wsb.fitnesstracker.user.api.User}
      * that is sent to the client.  The full user entity is not required by
