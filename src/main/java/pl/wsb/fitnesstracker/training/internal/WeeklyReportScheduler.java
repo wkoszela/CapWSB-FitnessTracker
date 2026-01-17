@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import pl.wsb.fitnesstracker.mail.api.EmailDto; // DODAJ
+import pl.wsb.fitnesstracker.mail.api.EmailSender; // DODAJ
 import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingRepository;
 import pl.wsb.fitnesstracker.user.api.User;
@@ -20,18 +22,14 @@ public class WeeklyReportScheduler {
 
     private final UserRepository userRepository;
     private final TrainingRepository trainingRepository;
+    private final EmailSender emailSender; // DODAJ
 
-    /**
-     * Zadanie uruchamiane raz w tygodniu (w poniedziałek o północy).
-     * Używamy adnotacji @Scheduled zgodnie ze slajdem 91-92.
-     */
-    //@Scheduled(cron = "0 0 0 * * MON") //Co tydzień w poniedziałek o północy
-    @Scheduled(initialDelay = 5000, fixedRate = 10000) //Co 10 sekund po 5 sekundowym opóźnieniu (do testów)
-    // Alternatywnie można użyć makra: @Scheduled(cron = "@weekly")
+    //@Scheduled(cron = "0 0 0 * * MON") // Docelowo
+    @Scheduled(initialDelay = 5000, fixedRate = 60000) // Do testów
     public void generateWeeklyReports() {
-        log.info("Rozpoczynanie generowania cotygodniowych raportów treningowych...");
+        log.info("Rozpoczynanie generowania raportów...");
 
-        // Obliczamy datę sprzed 7 dni
+        // 1. Obliczamy datę dla raportu tygodniowego w konsoli
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_YEAR, -7);
         Date lastWeek = cal.getTime();
@@ -39,28 +37,42 @@ public class WeeklyReportScheduler {
         List<User> allUsers = userRepository.findAll();
 
         for (User user : allUsers) {
+            // --- RAPORT DO KONSOLI ---
             List<Training> weeklyTrainings = trainingRepository.findByUserIdAndStartTimeAfter(user.getId(), lastWeek);
-
             if (!weeklyTrainings.isEmpty()) {
                 printReport(user, weeklyTrainings);
-            } else {
-                log.info("Użytkownik {} {} nie odbył żadnych treningów w tym tygodniu.",
-                        user.getFirstName(), user.getLastName());
             }
+
+            // --- RAPORT E-MAIL (ŁĄCZNIE) ---
+            List<Training> allUserTrainings = trainingRepository.findByUserId(user.getId());
+            int totalTrainingsCount = allUserTrainings.size();
+
+            sendSummaryEmail(user, totalTrainingsCount);
         }
         log.info("Zakończono generowanie raportów.");
     }
 
+    private void sendSummaryEmail(User user, int totalCount) {
+        String subject = "Twoje podsumowanie treningowe";
+        String content = "Witaj " + user.getFirstName() + "!\n\n" +
+                "Łącznie zarejestrowałeś już " + totalCount + " treningów. Tak trzymaj!";
+
+        // Używamy Twojego interfejsu z EmailDto
+        EmailDto emailDto = new EmailDto(user.getEmail(), subject, content);
+
+        try {
+            emailSender.send(emailDto);
+            log.info("Wysłano e-mail do: {}", user.getEmail());
+        } catch (Exception e) {
+            log.error("Błąd wysyłki e-maila do {}: {}", user.getEmail(), e.getMessage());
+        }
+    }
+
     private void printReport(User user, List<Training> trainings) {
         double totalDistance = trainings.stream().mapToDouble(Training::getDistance).sum();
-        long count = trainings.size();
-
-        System.out.println("======= RAPORT TYGODNIOWY =======");
-        System.out.println("Użytkownik: " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        System.out.println("Liczba treningów: " + count);
-        System.out.println("Całkowity dystans: " + String.format("%.2f", totalDistance) + " km");
-        System.out.println("---------------------------------");
-        trainings.forEach(t -> System.out.println("- " + t.getActivityType() + ": " + t.getDistance() + " km"));
+        System.out.println("======= RAPORT KONSOLA: " + user.getFirstName() + " " + user.getLastName() + " =======");
+        System.out.println("Treningi w tym tygodniu: " + trainings.size());
+        System.out.println("Suma dystansu: " + String.format("%.2f", totalDistance) + " km");
         System.out.println("=================================");
     }
 }

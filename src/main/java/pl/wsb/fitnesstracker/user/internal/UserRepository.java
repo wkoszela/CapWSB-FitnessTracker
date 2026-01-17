@@ -11,6 +11,7 @@ import java.util.Optional;
  * JPA Repository dla encji User.
  * Musi być PUBLIC, aby scheduler z innego pakietu mógł z niego korzystać.
  */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
