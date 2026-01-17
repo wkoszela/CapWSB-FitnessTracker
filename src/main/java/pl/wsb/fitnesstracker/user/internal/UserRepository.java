@@ -1,6 +1,7 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import pl.wsb.fitnesstracker.user.api.User;
 
 import java.util.Objects;
@@ -8,20 +9,14 @@ import java.util.Optional;
 
 /**
  * JPA Repository dla encji User.
- * <p>
- * Dostarcza metody dostępu do danych użytkowników w bazie danych.
- * Dziedziczy standardowe operacje CRUD z JpaRepository oraz definiuje custom metody.
- * </p>
- *
- * @author Fitness Tracker Team
+ * Musi być PUBLIC, aby scheduler z innego pakietu mógł z niego korzystać.
  */
-interface UserRepository extends JpaRepository<User, Long> {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
-     * Query searching users by email address. It matches by exact match.
-     *
-     * @param email email of the user to search
-     * @return {@link Optional} containing found user or {@link Optional#empty()} if none matched
+     * Wyszukuje użytkownika po adresie email.
+     * Implementacja zgodna z Twoim poprzednim kodem.
      */
     default Optional<User> findByEmail(String email) {
         return findAll().stream()
