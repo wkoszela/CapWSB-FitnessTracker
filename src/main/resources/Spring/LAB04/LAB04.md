@@ -1,6 +1,10 @@
 # LABORATORIUM 04 - Spring Boot - Tworzenie sieciowego API CRUD
 
+Stan: 16:00
+
 **Uwaga - Przed przystapieniem do zadania proszę o wykonanie zadania LAB01/02/03 (poprzednie zajęcia).**
+Zanim zsynchronizujesz repozytorium proszę o przesłanie swojego pliku w formie .zip na Moodle (główna strona).
+
 Zsynchronizuj swoje repozytorium z repozytorium prowadzącego (Sync Fork bądź Pull z repozytorium prowadzącego). Można
 wykonać to bezpośrednio w GitHubie lub lokalnie.
 
@@ -9,16 +13,15 @@ W przypadku kontynuacji pracy z własnym projektem, proszę o przekopiowanie LAB
 ## ZADANIE 0 - Konfiguracja środowiska, wdrożenie do projektu.
 
 Zapoznaj się z Profilem loadInitialData. Włącz ten profile w pliku application.properties, aby podczas uruchamiania
-aplikacji
-były ładowane dane startowe.
+aplikacji były ładowane dane startowe.
 
 Dodaj do projektu użytkownika św. Mikołaja z następującymi danymi:
 
 - imię: Mikołaj
 - nazwisko: Święty
-- wiek: ("do zweryfikowania")
+- wiek: (67)
 
-Zweryfikuj czy dane są w bazie danych.
+Zweryfikuj czy dane są w bazie danych. Jeżeli będzie brakowało imienia i nazwiska zwróć uwagę na konsturktor klasy User.
 
 ## ZADANIE 1. Sieciowe API do operacji typu CRUD na klientach
 
@@ -38,10 +41,8 @@ Stworzone API powinno pozwalać na:
 
 - [x] wylistowanie podstawowych informacji o wszystkich użytkownikach zapisanych w systemie (tylko ID oraz nazwa
   użytkownika - imię i nazwisko)
-- http://localhost:8080/v1/users/simple
-- [x] pobranie szczegółów dotyczących wybranego użytkownika (dowolny parametr: ID/ imię & nazwisko/ e-mail)
-- http://localhost:8080/v1/users/11
-- [x] utworzenie nowego użytkownika
+- [ ] pobranie szczegółów dotyczących wybranego użytkownika (po ID)
+- [ ] utworzenie nowego użytkownika
 - [ ] usunięcie użytkownika (konkretny, np. konkretny ID danego uzytkownika)
 - [ ] wyszukiwanie użytkowników po e-mailu, bez rozróżniania wielkości liter, wyszukujące po fragmencie nazwy (zwracane
   tylko ID oraz e-mail użytkowników)
@@ -96,14 +97,14 @@ Zabezpieczenia, powinny zagwarantować:
 
 **Kryterium Akceptacji na ocenę 5:**
 
-- Poprawnie wykonane 5 wymagań funkcjonalnych zadania 1.
+- Poprawnie wykonane 3 wymagań funkcjonalnych zadania 1.
 - Poprawnie działające testy jednostkowe do napisanych wymagań funkcjonalnych (UserApiIntegrationTest) - również na
   Github Actions
 - Przesłanie zmian na swoje repozytorium.
 
 **Kryterium Akceptacji na ocenę 4:**
 
-- Poprawnie wykonane 3 wymagania funkcjonalne z zadania 1.
+- Poprawnie wykonane 1 wymagania funkcjonalne z zadania 1.
 - Poprawnie działające testy jednostkowe do napisanych wymagań funkcjonalnych (UserApiIntegrationTest) - również na
   Github Actions
 - Przesłanie zmian na swoje repozytorium.
@@ -111,7 +112,7 @@ Zabezpieczenia, powinny zagwarantować:
 **Kryterium Akceptacji na ocenę 3:**
 
 - Obecność na zajęciach i zgłoszenie wykonania zadania.
-- Poprawnie wykonane 1 wymaganie funkcjonalne z zadania 1.
+- Dodanie do systemu użytkownika św. Mikołaja z podanymi danymi.
 - Poprawnie działający test jednostkowe do napisanego wymagań funkcjonalnych (UserApiIntegrationTest) - również na
   Github Actions
 - Przesłanie zmian na swoje repozytorium.
