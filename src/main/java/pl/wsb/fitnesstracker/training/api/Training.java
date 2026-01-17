@@ -39,8 +39,6 @@ public class Training {
     @Column(name = "average_speed")
     private double averageSpeed;
 
-    // TEN KONSTRUKTOR JEST WYMAGANY PRZEZ InitialDataLoader!
-    // Pozwala na tworzenie obiektu bez podawania Long id, które jest generowane automatycznie.
     public Training(
             final User user,
             final Date startTime,

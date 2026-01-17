@@ -6,6 +6,8 @@ import pl.wsb.fitnesstracker.user.api.User;
 import java.util.Objects;
 import java.util.Optional;
 
+
+
 interface UserRepository extends JpaRepository<User, Long> {
 
     /**

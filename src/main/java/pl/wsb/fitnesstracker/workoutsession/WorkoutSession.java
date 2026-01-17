@@ -18,7 +18,6 @@ public class WorkoutSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Zmieniono int trainingId na obiekt Training (Relacja ManyToOne)
     @ManyToOne
     @JoinColumn(name = "training_id")
     private Training training;

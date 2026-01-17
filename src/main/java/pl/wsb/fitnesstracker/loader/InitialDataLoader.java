@@ -21,6 +21,8 @@ import java.util.List;
 import static java.time.LocalDate.now;
 import static java.util.Objects.isNull;
 
+
+
 /**
  * Sample init data loader. If the application is run with `loadInitialData` profile, then on application startup it will fill the database with dummy data,
  * for the manual testing purposes. Loader is triggered by {@link ContextRefreshedEvent } event
@@ -72,6 +74,7 @@ class InitialDataLoader {
         users.add(generateUser("Noah", "Miller", 39));
         users.add(generateUser("Grace", "Anderson", 33));
         users.add(generateUser("Oliver", "Swift", 29));
+        users.add(generateUser("Santa", "Claus", 67));
 
         return users;
     }
