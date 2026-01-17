@@ -17,7 +17,7 @@ import java.util.Optional;
  * suitable for small data sets or prototyping; in a production system
  * proper JPQL/Criteria queries should be used instead.</p>
  */
-interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * Finds a user by its exact e‑mail address.
