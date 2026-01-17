@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "WSB FitnessTracker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get all users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users"
+          }
+        },
+        {
+          "name": "Get simple users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/simple"
+          }
+        },
+        {
+          "name": "Get user by id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/1"
+          }
+        },
+        {
+          "name": "Find users by email fragment",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/v1/users/email?email=domain",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "users", "email"],
+              "query": [
+                {"key": "email", "value": "domain"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get users older than date",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/older/2000-01-01"
+          }
+        },
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jan\",\n  \"lastName\": \"Kowalski\",\n  \"birthdate\": \"1995-05-20\",\n  \"email\": \"jan.kowalski@domain.com\"\n}"
+            },
+            "url": "{{baseUrl}}/v1/users"
+          }
+        },
+        {
+          "name": "Update user",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jan\",\n  \"lastName\": \"Nowak\",\n  \"birthdate\": \"1995-05-20\",\n  \"email\": \"jan.nowak@domain.com\"\n}"
+            },
+            "url": "{{baseUrl}}/v1/users/1"
+          }
+        },
+        {
+          "name": "Delete user",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/users/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trainings",
+      "item": [
+        {
+          "name": "Get all trainings",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/trainings"
+          }
+        },
+        {
+          "name": "Get trainings by user",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/trainings/1"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
