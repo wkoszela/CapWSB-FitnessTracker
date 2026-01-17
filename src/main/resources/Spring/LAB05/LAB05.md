@@ -17,7 +17,7 @@ Jako użytkownik, chce mieć możliwość dostępu do panelu z treningami:
 Stworzone API powinno pozwalać na:
 
 - [ ] wyszukiwanie wszystkich treningów
-- [ ] wyszukiwanie treningów dla określonego Użytkownika:
+- [ ] wyszukiwanie treningów dla określonego Użytkownika
 
 ### Wymagania techniczne
 
@@ -32,6 +32,6 @@ Stworzone API powinno pozwalać na:
   stworzone API
 - [ ] rozwiązanie powinno wykorzystywać zwykłe klasy Javowe do definicji obiektów transferu danych (DTO)
 
-Ocena 3.0 - dokumentacja techniczna Encji/Interface/DTO/Mappery z poprzedniego LAB03
+Ocena 3.0 - dokumentacja techniczna Encji/Interface/DTO/Mappery z poprzedniego LAB04
 Ocena 4.0 - w pełni wykonane wymagania funkcjonalne oraz techniczne LAB04
 Ocena 5.0 - w pełni wykonane wymagania funkcjonalne oraz techniczne LAB04 oraz LAB05
