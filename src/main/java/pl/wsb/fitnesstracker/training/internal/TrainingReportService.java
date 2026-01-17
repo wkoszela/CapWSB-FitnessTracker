@@ -44,10 +44,7 @@ class TrainingReportService {
                     trainings.size());
             
             String subject = "Weekly Training Report";
-            String content = "Hello " + user.getFirstName() + ",\n\n" +
-                             "You have completed " + trainings.size() + " trainings in the last week.\n\n" +
-                             "Keep up the good work!\n" +
-                             "FitnessTracker Team";
+            String content = "Test mail";
                              
             emailSender.send(new EmailDto(user.getEmail(), subject, content));
         }
