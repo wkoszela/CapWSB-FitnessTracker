@@ -1,5 +1,6 @@
 package pl.wsb.fitnesstracker.training.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +29,14 @@ public interface TrainingProvider {
      * @return A list of trainings for the user
      */
     List<Training> findAllTrainingsForUser(Long userId);
+
+    /**
+     * Retrieves all trainings for a specific user ending after a specific date.
+     *
+     * @param userId id of the user
+     * @param date date after which trainings ended
+     * @return A list of trainings for the user
+     */
+    List<Training> findAllTrainingsForUserAfterDate(Long userId, Date date);
 
 }
