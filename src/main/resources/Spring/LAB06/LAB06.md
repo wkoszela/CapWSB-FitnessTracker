@@ -25,7 +25,7 @@ Wskazówka: Proszę skorzystać z biblioteki Spring E-Mail (przykładowe rozwią
 c809deea)
 W celu testowania wysyłania e-maili, można skorzystać z serwera SMTP emailtrap.io.
 
-## ZADANIE 3 (Obowiązkowe). Prześlij swoje zadanie do Gitlaba, spakuj paczkę zip oraz umieść ją na Moodle (każdy ze studentów zoobowiązany jest do umiejscowania kopii).
+## ZADANIE 3 (Obowiązkowe). Prześlij swoje zadanie do Githuba, spakuj paczkę zip oraz umieść ją na Moodle (każdy ze studentów zoobowiązany jest do umiejscowania kopii).
 
 Ocena 4.0 - Wykonane zadanie 1
 Ocena 5.0 - Wykonane zadanie 1 oraz zadanie 2
