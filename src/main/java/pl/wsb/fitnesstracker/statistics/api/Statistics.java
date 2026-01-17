@@ -1,33 +1,36 @@
 package pl.wsb.fitnesstracker.statistics.api;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.wsb.fitnesstracker.user.api.User;
 
 @Entity
-@Table(name = "statistics")
+@Table(name = "Statistics")
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Statistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Nullable
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
-    @Column(name = "total_distance")
+    @Column(name = "total_distance", nullable = false)
     private double totalDistance;
 
-    @Column(name = "total_calories_burned")
+    @Column(name = "total_calories_burned", nullable = false)
     private int totalCaloriesBurned;
 
     public Statistics(User user, int totalTrainings, double totalDistance, int totalCaloriesBurned) {
