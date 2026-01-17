@@ -24,6 +24,8 @@ Laboratorium III - Relacje w JPA - stan na 22.11.2025 11:00
 5. Dodaj przynajmniej jedno @Repository dla encji JPA (do ustelania w trakcje zajęć). Użyj adnotacji @Repository oraz
    skorzystaj z Entity Managera (również pamiętaj o adnoacji @ @PersistenceContext).
    Napisz przynajmniej jedno zapytanie JPQL lub w natywnym SQL w tym repozytorium (do ustalania w trakcie zajęć).
+
+   Piszemy repozytorium do eventu, obslugi eventu, piszemy query ktore szuka event po nazwie.
 6. Prześlij zmiany na swoje repozytorium.
 7. Zgłoś prowadzącemu wykonanie zadanie, celem uzyskania oceny.
 
