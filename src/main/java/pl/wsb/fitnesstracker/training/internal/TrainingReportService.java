@@ -25,7 +25,7 @@ class TrainingReportService {
     private final UserProvider userProvider;
     private final EmailSender emailSender;
 
-    // ZMIANA TYMCZASOWA: Uruchamianie co minutę w celu przetestowania
+    // Uruchamianie co minutę w celu przetestowania
     @Scheduled(cron = "0 * * * * *")
     public void generateWeeklyReport() {
         log.info("Starting weekly training report generation...");

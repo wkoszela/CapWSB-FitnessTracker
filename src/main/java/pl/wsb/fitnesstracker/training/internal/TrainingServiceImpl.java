@@ -7,7 +7,6 @@ import pl.wsb.fitnesstracker.training.api.Training;
 import pl.wsb.fitnesstracker.training.api.TrainingProvider;
 import pl.wsb.fitnesstracker.training.api.TrainingRepository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +30,6 @@ public class TrainingServiceImpl implements TrainingProvider {
     @Override
     public List<Training> findAllTrainingsForUser(Long userId) {
         return trainingRepository.findByUserId(userId);
-    }
-
-    @Override
-    public List<Training> findAllTrainingsForUserAfterDate(Long userId, Date date) {
-        return trainingRepository.findByUserIdAndEndTimeAfter(userId, date);
     }
 
 }
