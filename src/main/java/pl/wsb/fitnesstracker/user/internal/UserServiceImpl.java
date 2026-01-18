@@ -1,13 +1,9 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -40,6 +36,12 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllUsersNames() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAllUsersNames'");
     }
 
 }
