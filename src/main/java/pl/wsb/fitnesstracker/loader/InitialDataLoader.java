@@ -15,6 +15,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,11 +60,19 @@ class InitialDataLoader {
         return userRepository.save(user);
     }
 
+    private User generateUser(String name, String lastName, String mail, int age) {
+        User user = new User(name,
+                lastName,
+                now().minusYears(age),
+                "%s.%s@domain.com".formatted(name, lastName));
+        return userRepository.save(user);
+    }
+
     private List<User> generateSampleUsers() {
         List<User> users = new ArrayList<>();
-
         users.add(generateUser("Emma", "Johnson", 28));
         users.add(generateUser("Ethan", "Taylor", 51));
+        users.add(generateUser("Kacper", "Nowicz", "niczow@op.pl", 25));
         users.add(generateUser("Olivia", "Davis", 76));
         users.add(generateUser("Daniel", "Thomas", 34));
         users.add(generateUser("Sophia", "Baker", 49));
@@ -73,6 +82,7 @@ class InitialDataLoader {
         users.add(generateUser("Grace", "Anderson", 33));
         users.add(generateUser("Oliver", "Swift", 29));
         users.add(generateUser("Mikołaj", "Święty", 67));
+
 
         return users;
     }
@@ -90,56 +100,56 @@ class InitialDataLoader {
                     10.5,
                     8.2);
             Training training2 = new Training(users.get(1),
-                    sdf.parse("2024-01-18 15:30:00"),
-                    sdf.parse("2024-01-18 17:00:00"),
+                    sdf.parse("2025-01-18 15:30:00"),
+                    sdf.parse("2025-01-18 17:00:00"),
                     ActivityType.CYCLING,
                     25.0,
                     18.5);
             Training training3 = new Training(users.get(2),
-                    sdf.parse("2024-01-17 07:45:00"),
-                    sdf.parse("2024-01-17 09:00:00"),
+                    sdf.parse("2026-01-17 07:45:00"),
+                    sdf.parse("2026-01-17 09:00:00"),
                     ActivityType.WALKING,
                     5.2,
                     5.8);
             Training training4 = new Training(users.get(3),
-                    sdf.parse("2024-01-16 18:00:00"),
-                    sdf.parse("2024-01-16 19:30:00"),
+                    sdf.parse("2026-01-16 18:00:00"),
+                    sdf.parse("2026-01-16 19:30:00"),
                     ActivityType.RUNNING,
                     12.3,
                     9.0);
             Training training5 = new Training(users.get(4),
-                    sdf.parse("2024-01-15 12:30:00"),
-                    sdf.parse("2024-01-15 13:45:00"),
+                    sdf.parse("2026-01-15 12:30:00"),
+                    sdf.parse("2026-01-15 13:45:00"),
                     ActivityType.CYCLING,
                     18.7,
                     15.3);
             Training training6 = new Training(users.get(5),
-                    sdf.parse("2024-01-14 09:00:00"),
-                    sdf.parse("2024-01-14 10:15:00"),
+                    sdf.parse("2026-01-14 09:00:00"),
+                    sdf.parse("2026-01-14 10:15:00"),
                     ActivityType.WALKING,
                     3.5,
                     4.0);
             Training training7 = new Training(users.get(6),
-                    sdf.parse("2024-01-13 16:45:00"),
-                    sdf.parse("2024-01-13 18:30:00"),
+                    sdf.parse("2026-01-13 16:45:00"),
+                    sdf.parse("2026-01-13 18:30:00"),
                     ActivityType.RUNNING,
                     15.0,
                     10.8);
             Training training8 = new Training(users.get(7),
-                    sdf.parse("2024-01-12 11:30:00"),
-                    sdf.parse("2024-01-12 12:45:00"),
+                    sdf.parse("2026-01-12 14:00:00"),
+                    sdf.parse("2026-01-12 15:15:00"),
                     ActivityType.CYCLING,
                     22.5,
                     17.2);
-            Training training9 = new Training(users.get(8),
-                    sdf.parse("2024-01-11 07:15:00"),
-                    sdf.parse("2024-01-11 08:30:00"),
+            Training training9 = new Training(users.get(2),
+                    sdf.parse("2026-01-12 14:00:00"),
+                    sdf.parse("2026-01-12 15:15:00"),
                     ActivityType.WALKING,
                     4.2,
                     4.5);
             Training training10 = new Training(users.get(9),
-                    sdf.parse("2024-01-10 14:00:00"),
-                    sdf.parse("2024-01-10 15:15:00"),
+                    sdf.parse("2025-01-12 14:00:00"),
+                    sdf.parse("2025-01-12 15:15:00"),
                     ActivityType.RUNNING,
                     11.8,
                     8.5);

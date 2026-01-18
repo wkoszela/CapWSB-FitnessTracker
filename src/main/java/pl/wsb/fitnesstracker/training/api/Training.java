@@ -8,6 +8,7 @@ import lombok.ToString;
 import pl.wsb.fitnesstracker.training.internal.ActivityType;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -52,5 +53,28 @@ public class Training {
         this.activityType = activityType;
         this.distance = distance;
         this.averageSpeed = averageSpeed;
+    }
+
+    /**
+     * Tworzy string Traningu
+     * @return String Training
+     */
+    @Override
+    public String toString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        return """
+           StartTime: %s
+           EndTime: %s
+           ActivityType: %s
+           Distance: %.2f km
+           Avg. Speed: %.2f km/h
+           """.formatted(
+                sdf.format(startTime),
+                sdf.format(endTime),
+                activityType,
+                distance,
+                averageSpeed
+        );
     }
 }
