@@ -1,0 +1,202 @@
+{
+    "info": {
+        "_postman_id": "lab04-user-api-collection",
+        "name": "LAB04 - User API",
+        "description": "Kolekcja zapytań dla LAB04 - API do zarządzania użytkownikami",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Get All Users (Simple)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/simple",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "simple"
+                    ]
+                },
+                "description": "Pobiera uproszczoną listę wszystkich użytkowników (ID + imię i nazwisko)"
+            }
+        },
+        {
+            "name": "2. Get All Users (Full)",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users"
+                    ]
+                },
+                "description": "Pobiera pełną listę wszystkich użytkowników"
+            }
+        },
+        {
+            "name": "3. Get User by ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "1"
+                    ]
+                },
+                "description": "Pobiera szczegóły użytkownika o ID = 1"
+            }
+        },
+        {
+            "name": "4. Create New User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"firstName\": \"Mikołaj\",\n  \"lastName\": \"Święty\",\n  \"birthdate\": \"1270-12-06\",\n  \"email\": \"mikolaj.swiety@northpole.com\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/v1/users",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users"
+                    ]
+                },
+                "description": "Tworzy nowego użytkownika"
+            }
+        },
+        {
+            "name": "5. Update User",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"firstName\": \"Jan\",\n  \"lastName\": \"Kowalski\",\n  \"birthdate\": \"1990-01-01\",\n  \"email\": \"jan.kowalski@example.com\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "1"
+                    ]
+                },
+                "description": "Aktualizuje dane użytkownika o ID = 1"
+            }
+        },
+        {
+            "name": "6. Delete User",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "1"
+                    ]
+                },
+                "description": "Usuwa użytkownika o ID = 1"
+            }
+        },
+        {
+            "name": "7. Search Users by Email",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/email?email=gmail",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "email"
+                    ],
+                    "query": [
+                        {
+                            "key": "email",
+                            "value": "gmail",
+                            "description": "Fragment adresu email do wyszukania"
+                        }
+                    ]
+                },
+                "description": "Wyszukuje użytkowników zawierających 'gmail' w adresie email"
+            }
+        },
+        {
+            "name": "8. Search Users Older Than Date",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/users/older/1990-01-01",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "users",
+                        "older",
+                        "1990-01-01"
+                    ]
+                },
+                "description": "Wyszukuje użytkowników urodzonych przed 1990-01-01"
+            }
+        }
+    ]
+}

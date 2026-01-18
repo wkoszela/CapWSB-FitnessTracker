@@ -1,0 +1,101 @@
+{
+    "info": {
+        "_postman_id": "lab05-training-api-collection",
+        "name": "LAB05 - Training API",
+        "description": "Kolekcja zapytań dla LAB05 - API do zarządzania treningami",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Get All Trainings",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/trainings",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "trainings"
+                    ]
+                },
+                "description": "Pobiera listę wszystkich treningów"
+            }
+        },
+        {
+            "name": "2. Get Trainings by User ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/trainings/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "trainings",
+                        "1"
+                    ]
+                },
+                "description": "Pobiera treningi dla użytkownika o ID = 1"
+            }
+        },
+        {
+            "name": "BONUS: Get Finished Trainings After Date",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/trainings/finished/2024-01-01",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "trainings",
+                        "finished",
+                        "2024-01-01"
+                    ]
+                },
+                "description": "Pobiera treningi zakończone po 2024-01-01"
+            }
+        },
+        {
+            "name": "BONUS: Get Trainings by Activity Type",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/v1/trainings/activityType?activityType=RUNNING",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "v1",
+                        "trainings",
+                        "activityType"
+                    ],
+                    "query": [
+                        {
+                            "key": "activityType",
+                            "value": "RUNNING",
+                            "description": "Typ aktywności (np. RUNNING, CYCLING, TENNIS)"
+                        }
+                    ]
+                },
+                "description": "Pobiera treningi o określonym typie aktywności"
+            }
+        }
+    ]
+}
