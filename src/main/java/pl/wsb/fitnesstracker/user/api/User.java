@@ -19,14 +19,16 @@ public class User {
     @Nullable
     private Long id;
 
-    @Column
-    private String firstName;
-
-    @Column
-    private String lastName;
-
+    
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
+
+    @Column(name = "firstName", nullable = false)
+    private String firstName;
+    
+    @Column(name = "lastName", nullable = false)
+    private String lastName;
+
 
     @Column(nullable = false, unique = true)
     private String email;

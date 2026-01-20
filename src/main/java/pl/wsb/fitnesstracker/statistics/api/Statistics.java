@@ -27,6 +27,10 @@ public class Statistics {
     @Column(name = "total_trainings", nullable = false)
     private int totalTrainings;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User userid;
+
     @Column(name = "total_distance")
     private double totalDistance;
 
