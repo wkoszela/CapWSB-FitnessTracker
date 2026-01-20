@@ -3,6 +3,17 @@ package pl.wsb.fitnesstracker.user.api;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface (API) dla operacji czytających dane użytkowników.
+ * <p>
+ * Definiuje publiczny interfejs dostawcy (provider) danych użytkowników.
+ * Dostarcza metody do wyszukiwania i pobierania użytkowników z bazy danych
+ * bez możliwości modyfikacji danych.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ * @see User
+ */
 public interface UserProvider {
 
     /**

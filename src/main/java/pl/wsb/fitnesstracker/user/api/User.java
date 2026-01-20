@@ -1,85 +1,85 @@
 package pl.wsb.fitnesstracker.user.api;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
+/**
+ * Encja reprezentująca użytkownika aplikacji Fitness Tracker.
+ * <p>
+ * Zawiera podstawowe informacje o użytkowniku takie jak:
+ * imię, nazwisko, data urodzenia i adres email.
+ * </p>
+ * <p>
+ * Każdy użytkownik ma przypisane unikalne ID oraz unikalny email.
+ * Użytkownik może posiadać wiele szkoleń (Training), metryki zdrowotne (HealthMetrics),
+ * statystyki (Statistics) oraz uczestniczyć w wydarzeniach (Event).
+ * </p>
+ *
+ * @see pl.wsb.fitnesstracker.training.api.Training
+ * @see pl.wsb.fitnesstracker.healthmetrics.HealthMetrics
+ * @see pl.wsb.fitnesstracker.statistics.api.Statistics
+ * @see pl.wsb.fitnesstracker.event.UserEvent
+ *
+ * @author Fitness Tracker Team
+ */
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
 
+    /**
+     * Unikalny identyfikator użytkownika.
+     * Generowany automatycznie przez bazę danych.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
+    @Column(name = "id")
     private Long id;
 
-    @Column
+    /**
+     * Imię użytkownika.
+     */
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    /**
+     * Nazwisko użytkownika.
+     */
+    @Column(name = "last_name")
     private String lastName;
 
+    /**
+     * Data urodzenia użytkownika.
+     * Pole wymagane i nie może być puste.
+     */
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
-    @Column(nullable = false, unique = true)
+    /**
+     * Adres email użytkownika.
+     * Musi być unikalny w systemie i nie może być pusty.
+     * Używany do komunikacji i logowania.
+     */
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public User(
-            final String firstName,
-            final String lastName,
-            final LocalDate birthdate,
-            final String email) {
-
-        this.birthdate = birthdate;
-        this.email = email;
-    }
-
-    @Nullable
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(@Nullable Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    /**
+     * Konstruktor do tworzenia nowego użytkownika.
+     *
+     * @param firstName imię użytkownika
+     * @param lastName  nazwisko użytkownika
+     * @param birthdate data urodzenia
+     * @param email     adres email (musi być unikalny)
+     */
+    public User(String firstName, String lastName, LocalDate birthdate, String email) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
     }
 }
-

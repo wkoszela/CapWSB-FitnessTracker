@@ -1,0 +1,134 @@
+{
+  "info": {
+    "_postman_id": "fitness-tracker-training-api",
+    "name": "Fitness Tracker - Training API",
+    "description": "Training CRUD API - Pobieranie i zarządzanie treningami",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get All Trainings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings"]
+        },
+        "description": "Pobiera listę wszystkich treningów ze wszystkich użytkowników.\n\nResponse: 200 OK\n- Lista treningów z pełnymi danymi (id, userId, startTime, endTime, activityType, distance, averageSpeed)"
+      }
+    },
+    {
+      "name": "2. Get All Trainings - Simple",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/simple",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings", "simple"]
+        },
+        "description": "Pobiera uproszczoną listę wszystkich treningów (tylko ID, userId, activityType).\n\nResponse: 200 OK\n- Lista treningów w uproszczonej formie"
+      }
+    },
+    {
+      "name": "3. Get Training by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings", "1"]
+        },
+        "description": "Pobiera szczegóły konkretnego treningu po ID.\n\nResponse: 200 OK - Szczegóły treningu\nResponse: 400 Bad Request - Jeśli trening nie istnieje"
+      }
+    },
+    {
+      "name": "4. Get Trainings by User ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/user/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings", "user", "1"]
+        },
+        "description": "Pobiera wszystkie treningi konkretnego użytkownika.\n\n**WYMAGANE LAB05**\n\nResponse: 200 OK - Lista treningów użytkownika\nResponse: 400 Bad Request - Jeśli użytkownik nie istnieje"
+      }
+    },
+    {
+      "name": "5. Create New Training",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 1,\n  \"startTime\": \"2024-12-20T08:00:00\",\n  \"endTime\": \"2024-12-20T09:30:00\",\n  \"activityType\": \"RUNNING\",\n  \"distance\": 10.5,\n  \"averageSpeed\": 15.2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings"]
+        },
+        "description": "Tworzy nowy trening dla użytkownika.\n\nActivity Types: RUNNING, CYCLING, WALKING, SWIMMING, TENNIS\n\nResponse: 201 Created - Utworzony trening z wygenerowanym ID"
+      }
+    },
+    {
+      "name": "6. Update Training",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"distance\": 12.0,\n  \"averageSpeed\": 16.5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings", "1"]
+        },
+        "description": "Aktualizuje istniejący trening. Tylko podane pola zostaną zmienione.\n\nResponse: 200 OK - Zaktualizowany trening\nResponse: 400 Bad Request - Jeśli trening nie istnieje"
+      }
+    },
+    {
+      "name": "7. Delete Training",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["v1", "trainings", "1"]
+        },
+        "description": "Usuwa trening z systemu.\n\nResponse: 204 No Content - Trening został usunięty"
+      }
+    }
+  ]
+}
+

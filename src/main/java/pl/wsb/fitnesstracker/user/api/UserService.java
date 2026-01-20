@@ -1,8 +1,15 @@
 package pl.wsb.fitnesstracker.user.api;
 
 /**
- * Interface (API) for modifying operations on {@link User} entities through the API.
- * Implementing classes are responsible for executing changes within a database transaction, whether by continuing an existing transaction or creating a new one if required.
+ * Interface (API) dla operacji modyfikujących na encjach User poprzez API.
+ * <p>
+ * Definiuje publiczny interfejs serwisu do zarządzania użytkownikami.
+ * Implementujące klasy są odpowiedzialne za wykonanie zmian w transakcji bazodanowej,
+ * niezależnie od tego czy będzie to kontynuacja istniejącej transakcji czy nowa transakcja.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ * @see User
  */
 public interface UserService {
 

@@ -1,7 +1,21 @@
 package pl.wsb.fitnesstracker.training.internal;
 
 /**
- * Enumeration representing different types of physical activities.
+ * Enumeration reprezentująca różne typy aktywności fizycznych.
+ * <p>
+ * Definiuje dostępne rodzaje treningów, które mogą być wykonywane przez użytkowników.
+ * Każdy typ aktywności ma przypisaną anglojęzyczną nazwę wyświetlową (displayName).
+ * </p>
+ * <p>
+ * Dostępne typy:
+ * - RUNNING: Bieganie
+ * - CYCLING: Jazda na rowerze
+ * - WALKING: Chodzenie
+ * - SWIMMING: Pływanie
+ * - TENNIS: Tenis
+ * </p>
+ *
+ * @author Fitness Tracker Team
  */
 public enum ActivityType {
 

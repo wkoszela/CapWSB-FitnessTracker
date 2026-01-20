@@ -2,6 +2,17 @@ package pl.wsb.fitnesstracker.training.api;
 
 import java.util.Optional;
 
+/**
+ * Interface (API) dla operacji czytających dane treningów.
+ * <p>
+ * Definiuje publiczny interfejs dostawcy (provider) danych treningów.
+ * Dostarcza metody do pobierania treningów z bazy danych
+ * bez możliwości modyfikacji danych.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ * @see Training
+ */
 public interface TrainingProvider {
 
     /**

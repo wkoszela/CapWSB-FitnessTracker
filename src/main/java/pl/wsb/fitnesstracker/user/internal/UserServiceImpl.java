@@ -6,9 +6,24 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementacja serwisu do obsługi operacji na użytkownikach.
+ * <p>
+ * Komponenta serwisowa implementująca interfejsy {@link UserService} i {@link UserProvider}.
+ * Odpowiada za obsługę logiki biznesowej związanej z użytkownikami,
+ * w tym utworzenie, pobranie, aktualizację i usunięcie użytkowników.
+ * </p>
+ * <p>
+ * Wszystkie operacje są logowane i posiadają dostęp do UserRepository
+ * dla operacji na bazie danych.
+ * </p>
+ *
+ * @author Fitness Tracker Team
+ */
 @Service
 @Slf4j
 class UserServiceImpl implements UserService, UserProvider {
@@ -21,9 +36,7 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public User createUser(final User user) {
-        if (user.getId() != null) {
-            throw new IllegalArgumentException("User has already DB ID, update is not permitted!");
-        }
+        log.info("Creating new user: {}", user);
         return userRepository.save(user);
     }
 
@@ -42,4 +55,23 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    public void deleteUser(final Long id) {
+        log.info("Deleting user with id: {}", id);
+        userRepository.deleteById(id);
+    }
+
+    public User updateUser(final User user) {
+        log.info("Updating user: {}", user);
+        return userRepository.save(user);
+    }
+
+    /**
+     * Zwraca użytkowników urodzonych PRZED podaną datą.
+     */
+    public List<User> findAllUsersOlderThan(LocalDate date) {
+        log.info("Searching users born before: {}", date);
+        return userRepository.findAll().stream()
+                .filter(user -> user.getBirthdate().isBefore(date))
+                .toList();
+    }
 }

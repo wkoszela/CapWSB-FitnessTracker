@@ -1,12 +1,29 @@
 package pl.wsb.fitnesstracker.user.api;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.annotation.Nullable;
-
+import org.springframework.lang.Nullable;
 import java.time.LocalDate;
 
-public record UserDto(@Nullable Long id, String firstName, String lastName,
-                      @JsonFormat(pattern = "yyyy-MM-dd") LocalDate birthdate,
-                      String email) {
-
+/**
+ * Data Transfer Object (DTO) dla encji User.
+ * <p>
+ * Record klasa zawierająca wszystkie informacje o użytkowniku dla transferu danych HTTP.
+ * Używana do komunikacji pomiędzy controllerem a klientem (API).
+ * Zapewnia hermetyzację danych encji i umożliwia elastyczną serializację JSON.
+ * </p>
+ * <p>
+ * Pole {@code id} jest opcjonalne (marked as @Nullable) dla nowych użytkowników
+ * (przed zapisem do BD), gdzie ID jest generowany automatycznie przez bazę danych.
+ * </p>
+ *
+ * @see User
+ *
+ * @author Fitness Tracker Team
+ */
+public record UserDto(
+        @Nullable Long id,
+        String firstName,
+        String lastName,
+        LocalDate birthdate,
+        String email
+) {
 }
