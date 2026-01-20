@@ -6,6 +6,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,4 +43,7 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findAll();
     }
 
+    public void deleteUserById(User user){
+        userRepository.delete(user);
+    }
 }
