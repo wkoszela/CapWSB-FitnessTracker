@@ -14,8 +14,7 @@ import java.time.LocalDate;
 public class RaportShedule {
     private final RaportService raportService;
 
-    /*@Scheduled(cron = "0 59 11 * * SUN")*/
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "0 0 0 * * SUN")
     void generateWeeklyReport() {
 
         LocalDate now = LocalDate.now();
